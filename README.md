@@ -5,8 +5,8 @@ Stylish v2.0.* and up (not tested nor supported on older versions)
 * [Stylish-Custom Guide](https://choggi.org/wiki/stylish-custom)
 * [Forum Thread](https://forum.userstyles.org/discussion/2799/stylish-custom#latest)
 
+## Some features:
 ```
-Some features:
 Customizable edit dialog (drag n drop)
 Import/export styles and stylish-custom settings
 Style info listing with quick enable toggle (dbl-click to edit style, can also search within Styles, delete multiple styles)
@@ -27,7 +27,7 @@ There is also Stylish Editor Modified:
 https://addons.palemoon.org/extensions/appearance/stylish-editor-modified/
 You could try having them both installed, but you are on your own for any issues/bugs.
 ```
-# Current issue(s)
+## Current issue(s):
 
 ```
 when you update all styles from the manage window;
