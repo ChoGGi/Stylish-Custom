@@ -1,4 +1,5 @@
 # Stylish-Custom
+```
 
 Stylish v2.0.* and up (not tested nor supported on older versions)
 
@@ -34,6 +35,4 @@ you need to either close then reopen it or save a style to see changes.
 If you use new search and you hide the search bar in the customize window,
 then close the edit window, open it, and then re-add the search bar:
 it'll be hidden till you reopen the edit window.
-
-
-
+```
