@@ -23,9 +23,7 @@ Lots more...
 ```
 Stylish-Custom for Stylish v1.4.3:
 https://choggi.org/misc/Stylish-Custom/Stylish_v1.4.3
-```
 
-```
 There is also Stylish Editor Modified:
 https://addons.palemoon.org/extensions/appearance/stylish-editor-modified/
 You could try having them both installed, but you are on your own for any issues/bugs.
