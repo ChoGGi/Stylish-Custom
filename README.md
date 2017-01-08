@@ -1,5 +1,4 @@
 # Stylish-Custom
-custom additions to Stylish extension
 
 Stylish v2.0.* and up (not tested nor supported on older versions)
 
