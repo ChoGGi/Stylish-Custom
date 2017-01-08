@@ -20,8 +20,10 @@ Preview/unpreview style changes without closing dialog
 Lots more...
 ```
 
-```Stylish-Custom for Stylish v1.4.3:
+```
+Stylish-Custom for Stylish v1.4.3:
 https://choggi.org/misc/Stylish-Custom/Stylish_v1.4.3
+```
 
 ```
 There is also Stylish Editor Modified:
