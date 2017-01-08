@@ -1,0 +1,125 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url-prefix("chrome://browser/content/browser.xul"),
+url-prefix("chrome://navigator/content/navigator.xul"),
+url-prefix("chrome://messenger/content/messenger.xul"),
+url-prefix("chrome://messenger/content/mailWindowOverlay.xul"),
+url-prefix("about:addons"),
+url-prefix("chrome://mozapps/content/extensions/extensions.xul"){
+/*code from CuteMenus SVG*/
+[id^="StylishAppStyles"]>menupopup>menuitem,[id^="StylishEnabledStyles"]>menupopup>menuitem,[id^="StylishDisabledStyles"]>menupopup>menuitem,#stylish-write-style-menu>menupopup>menuitem,#stylish-write-style-menu>menupopup>arrowscrollbox>scrollbox>box>menuitem,menuitem[oncommand^="stylish"],menuitem[id^="Styles"],menuitem[id^="styles"],menuitem[id^="Stylish"],menuitem[id^="stylish"]:not(#stylish-view-sidebar){-moz-binding:url("chrome://global/content/bindings/menu.xml#menuitem-iconic")}
+menu[id^="Styles"],menu[id^="styles"],menu[id^="Stylish"],menu[id^="stylish"]{-moz-binding:url("chrome://global/content/bindings/menu.xml#menu-iconic")}
+/*fix for alignment of menus/menuitems*/
+#stylish-write-style-menu>menupopup>menuitem>.menu-iconic-left,#stylish-write-style-menu>menupopup>arrowscrollbox>scrollbox>box>menuitem>.menu-iconic-left,menuitem[oncommand^="stylish"]:not([style-type])>.menu-iconic-left,menuitem[id^="Styles"]>.menu-iconic-left,menuitem[id^="styles"]>.menu-iconic-left,menuitem[id^="Stylish"]>.menu-iconic-left,menuitem[id^="stylish"]:not(#stylish-view-sidebar)>.menu-iconic-left,menu[id^="Styles"]>.menu-iconic-left,menu[id^="styles"]>.menu-iconic-left,menu[id^="Stylish"]>.menu-iconic-left,menu[id^="stylish"]>.menu-iconic-left
+  {-moz-appearance:menuimage;padding-top:2px}
+/*add space between icon/label*/
+button[oncommand*="stylish"]>box>image,button[oncommand*="stylish"]>vbox>image,button[oncommand*="stylish"]>hbox>image,button[oncommand*="stylish"]>image
+  {margin-right:2pt}
+
+/*add icons*/
+#stylish-write-style-menu>menupopup>menuitem,[id^="StylishEnabledStyles"]>menupopup>.Style,[id^="StylishDisabledStyles"]>menupopup>.Style,#StylishGetStyleSheets,#stylish-manage,#new-style,#new-style>.button-box>.button-icon,#stylish-toolmenu{-moz-image-region:rect(16px 96px 32px 80px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylish-write-style-menu>menupopup>[oncommand^="stylishOverlay.addDomain"],
+#stylish-write-style-menu>menupopup>arrowscrollbox>scrollbox>box>[oncommand^="stylishOverlay.addDomain"],
+#stylish-write-style-menu>menupopup>[oncommand^="stylishOverlay.addSite"],
+#stylish-write-style-menu>menupopup>arrowscrollbox>scrollbox>box>[oncommand^="stylishOverlay.addSite"]{-moz-image-region:rect(0 80px 16px 64px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylish-write-style-menu>menupopup>[oncommand^="stylishOverlay.addCode"],
+#stylish-write-style-menu>menupopup>arrowscrollbox>scrollbox>box>[oncommand^="stylishOverlay.addCode"]{-moz-image-region:rect(48px 16px 64px 0);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylish-style-context-edit{-moz-image-region:rect(64px 80px 80px 64px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylish-style-context-uninstall{-moz-image-region:rect(0 96px 16px 80px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylish-find-styles{-moz-image-region:rect(64px 48px 80px 32px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylish-write-style-menu{-moz-image-region:rect(48px 96px 64px 80px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+[id^="StylishInfo"]{-moz-image-region:rect(48px 128px 64px 112px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylish-turn-on,#stylish-style-context-enable,menuitem[id^="StylesEnable"]{-moz-image-region:rect(0 16px 16px 0);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylish-turn-off,#stylish-style-context-disable,menuitem[id^="StylesDisable"]{-moz-image-region:rect(0 32px 16px 16px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+menuitem[id^="StylishExport"]{-moz-image-region:rect(16px 32px 32px 16px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+menuitem[id^="StylishImport"]{-moz-image-region:rect(0 160px 16px 144px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylish-add-file{-moz-image-region:rect(0 64px 16px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#StylishOptionsMain,#StylishOptions{-moz-image-region:rect(16px 64px 32px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#StylishGuide{-moz-image-region:rect(0 144px 16px 128px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#checkUpdatesAllButton{-moz-image-region:rect(48px 64px 64px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylishCustom_ClearSearchText{-moz-image-region:rect(16px 80px 32px 64px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#copy-style-info{-moz-image-region:rect(32px 64px 48px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+[id^="StylishAppStyles"]{-moz-image-region:rect(0 112px 16px 96px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+[id^="StylishAppStyles"]>menupopup>.Style[enabled="true"]{-moz-image-region:rect(48px 176px 64px 160px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+[id^="StylishAppStyles"]>menupopup>.Style[enabled="false"]{-moz-image-region:rect(32px 176px 48px 160px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+[id^="StylishEnabledStyles"]{-moz-image-region:rect(16px 176px 32px 160px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+[id^="StylishDisabledStyles"]{-moz-image-region:rect(0 176px 16px 160px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+}
+
+@-moz-document url-prefix("chrome://global/content/customizeToolbar.xul"),
+url-prefix("chrome://stylish/"),
+url-prefix("chrome://stylish-custom/"){
+/*code from CuteMenus SVG*/
+menuitem[label]:not(.searchbar-engine-menuitem)[label]:not([type="radio"])[label]:not([type="checkbox"]){-moz-binding:url("chrome://global/content/bindings/menu.xml#menuitem-iconic")}
+menupopup>menu[label],popup>menu[label]{-moz-binding:url("chrome://global/content/bindings/menu.xml#menu-iconic")}
+/*fix for alignment of menus/menuitems*/
+menuitem[label]:not(.searchbar-engine-menuitem)[label]:not([type="radio"])[label]:not([type="checkbox"])>.menu-iconic-left,menupopup>menu[label]>.menu-iconic-left,popup>menu[label]>.menu-iconic-left{-moz-appearance:menuimage;padding-top:2px}
+/*add space between icon/label*/
+tab>hbox>image,button>box>image,button>vbox>image,button>hbox>image,button>image{margin-right:2pt}
+
+/*add icons*/
+/*stylish*/
+#ExportStyle,#new-style>.button-box>.button-icon,#GeneralTab,#SelectEnabled{-moz-image-region:rect(16px 96px 32px 80px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*checkmark green*/
+button[dlgtype="accept"],#RestoreUndo,button[anonid="update-done"],button[anonid="enable"],menuitem[anonid="context-enable"],button[dlgtype="accept"],#Bottom_SaveEnabled{-moz-image-region:rect(0 16px 16px 0);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*red X*/
+button[anonid="disable"],menuitem[anonid="context-disable"],#Bottom_SaveDisabled{-moz-image-region:rect(0 32px 16px 16px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*grey X*/
+button[dlgtype="cancel"],#Close,button[dlgtype="cancel"],#Bottom_CloseStyle{-moz-image-region:rect(0 48px 16px 32px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*page*/
+menuitem[anonid="homepage"],#userstyles-page,#specifySites{-moz-image-region:rect(0 80px 16px 64px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*text*/
+#LineNumberSearchButton,#CommentGroup,#TextTab,[id^="insertTextPopup"]>menuitem,[id^="insertTextPopup"]>arrowscrollbox>scrollbox>box>menuitem{-moz-image-region:rect(16px 112px 32px 96px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*text doc*/
+menuitem[id^="RestoreUndoCompare"],#ExternalEdit,#ExternalEditorTab,#ReplaceOnce,#ReplaceAll,#ExternalEdit,#itsalltext{-moz-image-region:rect(48px 32px 64px 16px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*clear*/
+#ClearScratchPad,#stylishCustom_ClearSearchText,#Clear,#ClearSearch{-moz-image-region:rect(16px 80px 32px 64px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*save*/
+#ExportSettings,#save,#Bottom_SaveMenu,#Save,#Bottom_SaveButton,#Bottom_Save{-moz-image-region:rect(16px 32px 32px 16px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*folder*/
+#Browse,#ImportSettings,#LocationBrowse,#insert-data-uri{-moz-image-region:rect(0 160px 16px 144px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*add*/
+#UndoCompareAdd,#add,#AddStyles,#NewStyle,#CustomizeToolbarWindowStylish[onload="onLoad(); stylishCustom.customize.init();"]>vbox>box>button[oncommand="addNewToolbar();"]{-moz-image-region:rect(0 64px 16px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*delete*/
+#FlashbackDelete,#RemoveStyles,button[anonid="delete"],menuitem[anonid="context-delete"],menuitem[cmd="cmd_delete"],#delete,#RemoveCSS,#DeleteStyle{-moz-image-region:rect(0 96px 16px 80px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*help*/
+#Guide{-moz-image-region:rect(0 144px 16px 128px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*important*/
+#ImportantButton{-moz-image-region:rect(16px 16px 32px 0);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*edit*/
+button[dlgtype="extra1"],#CustomizeToolbars,#CustomizeToolbarsMobile,menuitem[anonid="context-change-tags"],button[anonid="edit"],menuitem[anonid="context-edit"],#customizeToolbarMenu{-moz-image-region:rect(64px 80px 80px 64px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*refresh*/
+#FlashbackRefresh,#Refresh,#RefreshStyleList{-moz-image-region:rect(16px 128px 32px 112px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+
+menuitem[cmd="cmd_paste"]{-moz-image-region:rect(32px 80px 48px 64px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+menuitem[cmd="cmd_cut"]{-moz-image-region:rect(32px 48px 48px 32px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#CloneStyle,#CopyCode,#RemoveDupes,menuitem[cmd="cmd_copy"],#copy-style-info{-moz-image-region:rect(32px 64px 48px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+button[anonid="update"],menuitem[anonid="find-update"],#update-all{-moz-image-region:rect(48px 80px 64px 64px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#ToggleBars,#ToggleScratchPad,#ToggleTab{-moz-image-region:rect(64px 16px 80px 0);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#ColoursTab{-moz-image-region:rect(48px 144px 64px 128px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#MenuItemsTab{-moz-image-region:rect(32px 112px 48px 96px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+menuitem[cmd="cmd_selectAll"],#SelectAll{-moz-image-region:rect(32px 96px 48px 80px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylishCustom_UpdateAllStyles,#UpdateAllStyles{-moz-image-region:rect(48px 64px 64px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#UndoCompare,#CustomizeToolbarWindowStylish[onload="onLoad(); stylishCustom.customize.init();"]>vbox>box>button[oncommand="restoreDefaultSet();"]{-moz-image-region:rect(64px 112px 80px 96px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+button[dlgtype="extra2"],#PreviewStyle{-moz-image-region:rect(32px 144px 48px 128px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#DisablePreview{-moz-image-region:rect(32px 16px 48px 0);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+menuitem[cmd="cmd_undo"],[id$="UndoLastSave"]{-moz-image-region:rect(16px 144px 32px 128px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+[id$="UndoAllSaves"]{-moz-image-region:rect(16px 160px 32px 144px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+[id$="SaveClose"]{-moz-image-region:rect(16px 48px 32px 32px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#Bottom_SwitchToInstall{-moz-image-region:rect(32px 160px 48px 144px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#FindNext{-moz-image-region:rect(32px 128px 48px 112px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#insert-html{-moz-image-region:rect(0 128px 16px 112px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#insert-xul{-moz-image-region:rect(0 112px 16px 96px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#insert-chrome-folder{-moz-image-region:rect(48px 48px 64px 32px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#pick-color{-moz-image-region:rect(64px 64px 80px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#Bracket,#CurlyBracket,[id$="InsertText"],#insertText{-moz-image-region:rect(48px 96px 64px 80px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#MergeLines{-moz-image-region:rect(48px 112px 64px 96px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#CommentText{-moz-image-region:rect(32px 32px 48px 16px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#InsertMenu{-moz-image-region:rect(48px 160px 64px 144px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#StyleIdButton,#ID{-moz-image-region:rect(64px 160px 80px 144px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#Class{-moz-image-region:rect(64px 144px 80px 128px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#Undo{-moz-image-region:rect(16px 144px 32px 128px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#Redo{-moz-image-region:rect(64px 128px 80px 112px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#RemoveXUL{-moz-image-region:rect(64px 176px 80px 160px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#pick-color-rainbowpicker,#RainbowPicker{-moz-image-region:rect(64px 96px 80px 80px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#pick-color-rainbowpicker[installed],#RainbowPicker[installed]{-moz-image-region:auto;list-style-image:url("chrome://rainbowpicker/skin/rainbowpickerSmall.png")}
+}

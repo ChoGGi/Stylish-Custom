@@ -1,0 +1,41 @@
+content stylish-custom content/
+skin stylish-custom classic/1.0 skin/
+
+#locales
+locale stylish-custom en-US  jar:content/locales.zip!/en-US/
+locale stylish-custom ko-KR  jar:content/locales.zip!/ko-KR/
+locale stylish-custom zh-CN  jar:content/locales.zip!/zh-CN/
+locale stylish-custom es     jar:content/locales.zip!/es/
+locale stylish-custom sv-SE  jar:content/locales.zip!/sv-SE/
+locale stylish-custom ja-JP  jar:content/locales.zip!/ja-JP/
+locale stylish-custom de     jar:content/locales.zip!/de/
+
+#main overlay.xul
+overlay chrome://browser/content/browser.xul              chrome://stylish-custom/content/overlay.xul
+overlay chrome://navigator/content/navigator.xul          chrome://stylish-custom/content/overlay.xul
+overlay chrome://messenger/content/messenger.xul          chrome://stylish-custom/content/overlay.xul
+overlay chrome://messenger/content/mailWindowOverlay.xul  chrome://stylish-custom/content/overlay.xul
+
+#DOMi menu
+overlay chrome://inspector/content/viewers/dom/dom.xul    chrome://stylish-custom/content/domi-overlay.xul
+
+#for icon styling buttons
+overlay chrome://stylish/content/install.xul              chrome://stylish-custom/content/install-overlay.xul
+
+#customize window for stylish edit
+overlay chrome://global/content/customizeToolbar.xul      chrome://stylish-custom/content/customizeToolbar-overlay.xul
+style chrome://global/content/customizeToolbar.xul        chrome://stylish-custom/skin/overlay.css
+
+#fix for OSX (hides the extra dropmarker icon)
+style chrome://stylish-custom/content/edit.xul            chrome://stylish-custom/skin/edit-OSX.css os=Darwin
+
+#icons
+style chrome://global/content/customizeToolbar.xul        chrome://stylish-custom/skin/icons.css
+style chrome://browser/content/browser.xul                chrome://stylish-custom/skin/icons.css
+style chrome://navigator/content/navigator.xul            chrome://stylish-custom/skin/icons.css
+style chrome://messenger/content/mailWindowOverlay.xul    chrome://stylish-custom/skin/icons.css
+style chrome://mozapps/content/extensions/extensions.xul  chrome://stylish-custom/skin/icons.css
+style about:addons                                        chrome://stylish-custom/skin/icons.css
+
+#songbird
+style chrome://stylish-custom/content/edit.xul            chrome://stylish-custom/skin/songbird.css application=songbird@songbirdnest.com

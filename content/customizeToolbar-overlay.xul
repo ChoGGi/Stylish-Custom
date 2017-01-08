@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/customize.css" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/icons.css" type="text/css"?>
+
+<overlay id="stylishCustomOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <!-- id is changed in js so this doesn't apply to the regular window -->
+  <window id="CustomizeToolbarWindowStylish" onload="onLoad(); scCustomize.init();" onunload="onUnload(); scCustomize.unLoad();">
+
+      <script type="application/x-javascript" src="chrome://stylish-custom/content/customize-onload.js"/>
+
+  </window>
+
+</overlay>

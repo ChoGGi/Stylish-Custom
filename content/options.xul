@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/icons.css" type="text/css"?>
+
+<!DOCTYPE dialog [
+  <!ENTITY % editDTD SYSTEM "chrome://stylish-custom/locale/edit-overlay.dtd">
+  <!ENTITY % optionsDTD SYSTEM "chrome://stylish-custom/locale/options.dtd">
+  <!ENTITY % commonDTD SYSTEM "chrome://stylish-custom/locale/common.dtd">
+  %editDTD;
+  %optionsDTD;
+  %commonDTD;
+]>
+
+<window
+  id="stylish-custom-options"
+  title="&StylishCustom; &Options;"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  onload="scOptions.init()"
+  windowtype="stylishCustomOptions"
+  buttons="accept"
+  ondialogaccept="return false"
+  style="padding:0"
+  persist="screenX screenY width height sizemode">
+
+    <script type="application/x-javascript" src="chrome://stylish-custom/content/options.js"/>
+
+  <tooltipset>
+    <tooltip id="reloadStylesTip" orient="vertical" style="opacity:.9">
+      <label value="&reloadStylesTip1;"/>
+      <label value="&reloadStylesTip2;"/>
+      <label value="&reloadStylesTip3;"/>
+    </tooltip>
+  </tooltipset>
+
+  <keyset>
+    <key id="key_manage" modifiers="control" key="M" oncommand="scCommon.openStyleManager(window)" />
+    <key id="key_closewin" keycode="VK_ESCAPE" oncommand="window.close()"/>
+  </keyset>
+
+  <tabbox id="tablist">
+    <tabs>
+      <tab id="GeneralTab" label="&General;"/>
+      <tab id="MenuItemsTab" label="&MenuItems;"/>
+      <tab id="ColoursTab" label="&Colours;"/>
+      <tab id="TextTab" label="&Text;"/>
+      <tab id="ExternalEditorTab" label="&ExternalEditor;"/>
+      <tab id="ToggleTab" label="&Toggle;"/>
+    </tabs>
+    <tabpanels flex="1">
+
+      <tabpanel id="GeneralPanel" flex="1" orient="vertical">
+
+        <groupbox>
+          <caption label="&Manageview;" tooltiptext="&ManageviewTip;"/>
+            <radiogroup id="ManageRadio" orient="horizontal" value="" tooltiptext="&ManageviewTip;">
+              <radio label="&Info;" value="1" onmousedown="scOptions.manage(1)"/>
+              <radio label="&Addons;" value="0" onmousedown="scOptions.manage(0)"/>
+              <radio label="&Addons; &Window;" value="2" onmousedown="scOptions.manage(2)"/>
+              <radio label="&Sidebar;" value="3" onmousedown="scOptions.manage(3)"/>
+            </radiogroup>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&AppTitle;" tooltiptext="&AppTitleTip;"/>
+            <radiogroup id="AppTitleRadio" orient="horizontal" value="" tooltiptext="&AppTitleTip;">
+              <radio label="&Nothing;" value="0" onmousedown="scOptions.apptitle(0)"/>
+              <radio label="&Initials;" value="1" onmousedown="scOptions.apptitle(1)"/>
+              <radio label="&FullTitle;" value="2" onmousedown="scOptions.apptitle(2)"/>
+            </radiogroup>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&AskToSave;" tooltiptext="&AskToSaveTip;"/>
+            <radiogroup id="AskToSaveRadio" orient="horizontal" value="" tooltiptext="&AskToSaveTip;">
+              <radio label="&True;" value="1" onmousedown="scOptions.asktosave(true);this.parentNode.selectedIndex = 0"/>
+              <radio label="&False;" value="0" onmousedown="scOptions.asktosave(false);this.parentNode.selectedIndex = 1"/>
+            </radiogroup>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&StatusBar;" tooltiptext="&StatusBarTip;"/>
+            <radiogroup id="StatusbarRadio" orient="horizontal" value="" tooltiptext="&StatusBarTip;">
+              <radio label="&Show;" value="1" onmousedown="scOptions.statusbar(true);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Hide;" value="0" onmousedown="scOptions.statusbar(false);this.parentNode.selectedIndex = 1"/>
+            </radiogroup>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&SearchBar;" tooltiptext="&SearchBarTip;"/>
+            <radiogroup id="SearchBarRadio" orient="horizontal" value="" tooltiptext="&SearchBarTip;">
+              <radio label="&New;" value="1" onmousedown="scOptions.newsearch(true);this.parentNode.selectedIndex = 1"/>
+              <radio label="&Old;" value="0" onmousedown="scOptions.newsearch(false);this.parentNode.selectedIndex = 0"/>
+            </radiogroup>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&ToggleIcons;" tooltiptext="&ToggleIconsTip;"/>
+            <radiogroup id="ToggleIconsRadio" orient="horizontal" value="" tooltiptext="&ToggleIconsTip;">
+              <radio label="&Show;" value="1" onmousedown="scOptions.toggleicons(true);this.parentNode.selectedIndex = 1"/>
+              <radio label="&Hide;" value="0" onmousedown="scOptions.toggleicons(false);this.parentNode.selectedIndex = 0"/>
+            </radiogroup>
+        </groupbox>
+
+        <separator flex="1"/>
+        <vbox flex="1">
+          <box>
+            <button id="Guide" label="&Guide;" tooltiptext="&GuideTip;" oncommand="scCommon.openChoGGiki()"/>
+            <button id="ExportSettings" label="&ExportSettings;" tooltiptext="&ExportSettingsTip;" oncommand="scOptions.exportSettings()"/>
+            <button id="ImportSettings" label="&ImportSettings;" tooltiptext="&ImportSettingsTip;" oncommand="scOptions.importSettings()"/>
+          </box>
+        </vbox>
+
+      </tabpanel>
+      <tabpanel id="MenuItemsPanel" flex="1" orient="vertical">
+
+        <groupbox>
+          <caption label="&ToolMenu;" tooltiptext="&ToolMenuTip;"/>
+            <radiogroup id="ToolMenuRadio" orient="horizontal" value="" tooltiptext="&ToolMenuTip;">
+              <radio label="&Show;" value="1" onmousedown="scOptions.toolmenu(true);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Hide;" value="0" onmousedown="scOptions.toolmenu(false);this.parentNode.selectedIndex = 1"/>
+            </radiogroup>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&GetStyleSheetsMenu;" tooltiptext="&GetStyleSheetsMenuTip;"/>
+            <radiogroup id="GetStyleSheetsRadio" orient="horizontal" value="" tooltiptext="&GetStyleSheetsMenuTip;">
+              <radio label="&Show;" value="1" onmousedown="scOptions.getStyleSheets(true);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Hide;" value="0" onmousedown="scOptions.getStyleSheets(false);this.parentNode.selectedIndex = 1"/>
+            </radiogroup>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&StyleMenu;" tooltiptext="&StyleMenuTip;"/>
+            <radiogroup id="StyleMenuRadio" orient="horizontal" value="" tooltiptext="&StyleMenuTip;">
+              <radio label="&Menu;" value="0" onmousedown="scOptions.styleMenu(0);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Edit;" value="1" onmousedown="scOptions.styleMenu(1);this.parentNode.selectedIndex = 1"/>
+            </radiogroup>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&StyleMenuOverride;" tooltiptext="&StyleMenuOverrideTip;"/>
+            <radiogroup id="StyleMenuOverrideRadio" orient="horizontal" value="" tooltiptext="&StyleMenuOverrideTip;">
+              <radio label="&StylishCustom;" value="1" onmousedown="scOptions.styleMenuOverride(true);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Stylish;" value="0" onmousedown="scOptions.styleMenuOverride(false);this.parentNode.selectedIndex = 1"/>
+            </radiogroup>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&MenuitemLocations;"/>
+
+          <groupbox>
+            <caption label="&StyleMenus;" tooltiptext="&StyleMenusTip;"/>
+              <radiogroup id="StyleMenusRadio" orient="horizontal" value="" tooltiptext="&StyleMenusTip;">
+                <radio label="&Stylish;" value="1" onmousedown="scOptions.styleMenus(1);this.parentNode.selectedIndex = 0"/>
+                <radio label="&StylishCustom;" value="0" onmousedown="scOptions.styleMenus(0);this.parentNode.selectedIndex = 1"/>
+              </radiogroup>
+          </groupbox>
+
+          <groupbox>
+            <caption label="&ExImportLocation;" tooltiptext="&ExImportLocationTip;"/>
+              <radiogroup id="ExImportRadio" orient="horizontal" value="" tooltiptext="&ExImportLocationTip;">
+                <radio label="&Stylish;" value="1" onmousedown="scOptions.exImport(1);this.parentNode.selectedIndex = 0"/>
+                <radio label="&StylishCustom;" value="0" onmousedown="scOptions.exImport(0);this.parentNode.selectedIndex = 1"/>
+              </radiogroup>
+          </groupbox>
+
+          <groupbox>
+            <caption label="&StyleInfoLocation;" tooltiptext="&StyleInfoLocationTip;"/>
+              <radiogroup id="StyleInfoRadio" orient="horizontal" value="" tooltiptext="&StyleInfoLocationTip;">
+                <radio label="&Stylish;" value="1" onmousedown="scOptions.styleInfo(1);this.parentNode.selectedIndex = 0"/>
+                <radio label="&StylishCustom;" value="0" onmousedown="scOptions.styleInfo(0);this.parentNode.selectedIndex = 1"/>
+              </radiogroup>
+          </groupbox>
+
+        </groupbox>
+
+      </tabpanel>
+      <tabpanel id="ColoursPanel" flex="1" orient="vertical">
+
+        <groupbox>
+          <caption label="&ChangeGlobalColour;" tooltiptext="&ChangeGlobalColourTip;"/>
+          <box>
+            <textbox id="ChangeGlobalColourText" flex="1" tooltiptext="&ChangeGlobalColourTip;" />
+            <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('GlobalColour')"/>
+          </box>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&ChangeSiteColour;" tooltiptext="&ChangeSiteColourTip;"/>
+          <box>
+            <textbox id="ChangeSiteColourText" flex="1" tooltiptext="&ChangeSiteColourTip;" />
+            <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('SiteColour')"/>
+          </box>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&ChangeGlobalSiteColour;" tooltiptext="&ChangeGlobalSiteColourTip;"/>
+          <box>
+            <textbox id="ChangeGlobalSiteColourText" flex="1" tooltiptext="&ChangeGlobalSiteColourTip;" />
+            <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('GlobalSiteColour')"/>
+          </box>
+        </groupbox>
+
+      </tabpanel>
+
+      <tabpanel id="TextPanel" flex="1" orient="vertical">
+
+        <groupbox>
+          <caption label="&AutoImportantCaption;" tooltiptext="&AutoImportantTip;"/>
+          <box>
+            <textbox id="AutoImportantText" flex="1" tooltiptext="&AutoImportantTip;" />
+            <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('AutoImportant')"/>
+          </box>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&changedomains;" tooltiptext="&changedomainsTip;"/>
+          <box>
+            <textbox id="ChangeDomainsText" flex="1" tooltiptext="&changedomainsTip;" />
+            <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('Domains')"/>
+          </box>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&ChangeFontCaption;" tooltiptext="&ChangeFontTip;"/>
+          <box>
+            <textbox id="ChangeFontText" flex="1" tooltiptext="&ChangeFontTip;" />
+            <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('Font')"/>
+          </box>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&InsertTextCaption;" tooltiptext="&InsertTextTip;"/>
+          <box>
+            <textbox id="InsertTextText" flex="1" tooltiptext="&InsertTextTip;" multiline="true" rows="5"/>
+            <vbox>
+              <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('InsertText')"/>
+            </vbox>
+          </box>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&ChangeInsertSepCaption;" tooltiptext="&ChangeInsertSepTip;"/>
+          <box>
+            <textbox id="ChangeInsertSepText" flex="1" tooltiptext="&ChangeInsertSepTip;" />
+            <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('InsertSep')"/>
+          </box>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&SaveText;" tooltiptext="&SaveTextTip;"/>
+            <radiogroup id="SaveTextRadio" orient="horizontal" value="" tooltiptext="&SaveTextTip;">
+              <radio label="&True;" value="1" onmousedown="scOptions.saveText(true);this.parentNode.selectedIndex = 0"/>
+              <radio label="&False;" value="0" onmousedown="scOptions.saveText(false);this.parentNode.selectedIndex = 1"/>
+            </radiogroup>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&ScratchpadHeightCaption;" tooltiptext="&ScratchpadHeightTip;"/>
+          <box>
+            <textbox id="ScratchpadHeightText" flex="1" tooltiptext="&ScratchpadHeightTip;" />
+            <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('ScratchpadHeight')"/>
+          </box>
+        </groupbox>
+
+      </tabpanel>
+      <tabpanel id="ExternalEditorPanel" flex="1" orient="vertical">
+
+        <groupbox>
+          <caption label="&WhichEditor;" tooltiptext="&WhichEditorTip;"/>
+            <radiogroup id="WhichEditorRadio" orient="horizontal" value="" tooltiptext="&WhichEditorTip;">
+              <radio label="&StylishCustom;" value="1" onmousedown="scOptions.whichEditor(1);this.parentNode.selectedIndex = 0"/>
+              <radio label="&IAT;" value="0" onmousedown="scOptions.whichEditor(0);this.parentNode.selectedIndex = 1"/>
+            </radiogroup>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&ExternalEditor;" tooltiptext="&ExternalEditorTip;"/>
+          <box>
+            <textbox id="ExternalEditorText" flex="1" tooltiptext="&ExternalEditorTip;" />
+            <button id="Browse" label="&Browse;" oncommand="scOptions.browse()"/>
+            <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('ExternalEditor')"/>
+          </box>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&EditorTime;" tooltiptext="&EditorTimeTip;"/>
+          <box>
+            <textbox id="EditorTimeText" flex="1" tooltiptext="&EditorTimeTip;" type="number" increment="500" />
+            <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('EditorTime')"/>
+          </box>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&RemoveCSS;" tooltiptext="&RemoveCSSTip;"/>
+          <vbox>
+            <box>
+              <button id="RemoveCSS" label="&Remove;" tooltiptext="&RemoveCSSTip;" disabled="true" oncommand="scOptions.removeStaleCSS()"/>
+            </box>
+            <groupbox>
+              <caption label="&RemoveCSSAuto;" tooltiptext="&RemoveCSSAutoTip;"/>
+              <radiogroup id="RemoveCSSRadio" orient="horizontal" value="" tooltiptext="&RemoveCSSAutoTip;">
+                <radio label="&Enable;" value="1" onmousedown="scOptions.removeCSSWhich(true);this.parentNode.selectedIndex = 0"/>
+                <radio label="&Disable;" value="0" onmousedown="scOptions.removeCSSWhich(false);this.parentNode.selectedIndex = 1"/>
+              </radiogroup>
+            </groupbox>
+          </vbox>
+        </groupbox>
+
+      </tabpanel>
+      <tabpanel id="Toggle" flex="1" orient="vertical">
+
+        <groupbox>
+          <caption label="&StyleToggle;" tooltiptext="&StyleToggleTip;"/>
+            <radiogroup id="StyleToggleRadio" orient="vertical" value="" tooltiptext="&StyleToggleTip;">
+                <radio label="&StyleToggle0;" value="0" onmousedown="scOptions.styletoggle(0);this.parentNode.selectedIndex = 0"/>
+                <radio label="&StyleToggle1;" value="1" onmousedown="scOptions.styletoggle(1);this.parentNode.selectedIndex = 1"/>
+                <radio label="&StyleToggle2;" value="2" onmousedown="scOptions.styletoggle(2);this.parentNode.selectedIndex = 2"/>
+                <radio label="&StyleToggle3;" value="3" onmousedown="scOptions.styletoggle(3);this.parentNode.selectedIndex = 3"/>
+            </radiogroup>
+        </groupbox>
+        <caption label="&StyleToggleHelp1;"/>
+        <box>
+          <caption label="&StyleToggleHelp2;"/>
+          <textbox flex="1" value="&quot;*|enable maps.google.|disable google.com/maps|disable&quot;"/>
+        </box>
+
+        <spacer style="margin-top:2em"/>
+
+        <groupbox>
+          <caption label="&ToolbarToggle;" tooltiptext="&ToolbarToggleTip;"/>
+          <box>
+            <textbox id="ToolbarToggleText" flex="1" tooltiptext="&ToolbarToggleTip;" />
+            <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('ToolbarToggle')"/>
+          </box>
+          <box>
+            <caption label="&StyleToggleHelp2;"/>
+            <textbox flex="1" id="ToolbarToggleHintText" value="InsertToolbar,PageToolbar,NameToolbar,TextToolbar,ScratchPadToolbar,CodeToolbar,BottomToolbar"/>
+          </box>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&reloadStyles;" tooltip="reloadStylesTip"/>
+          <groupbox>
+            <caption label="&reloadStyles;" tooltip="reloadStylesTip"/>
+            <box>
+              <textbox id="reloadStylesText" emptytext="435,325,12,4" flex="1" tooltip="reloadStylesTip" />
+              <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('reloadStyles')"/>
+            </box>
+          </groupbox>
+          <groupbox>
+            <caption label="&reloadStylesKey;" tooltiptext="&reloadStylesKeyTip;"/>
+            <box>
+              <textbox id="reloadStylesKeyText" flex="1" tooltiptext="&reloadStylesKeyTip;" />
+              <button id="Save" label="&Save;" onmousedown="scOptions.saveOption('reloadStylesKey')"/>
+            </box>
+          </groupbox>
+        </groupbox>
+
+        <groupbox>
+          <caption label="&MoveErrorBox;" tooltiptext="&MoveErrorBoxTip;"/>
+            <radiogroup id="MoveErrorBoxRadio" orient="horizontal" value="" tooltiptext="&MoveErrorBoxTip;">
+              <radio label="&Code;" value="0" onmousedown="scOptions.MoveErrorBox(0);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Bottom;" value="1" onmousedown="scOptions.MoveErrorBox(1);this.parentNode.selectedIndex = 1"/>
+            </radiogroup>
+        </groupbox>
+
+
+      </tabpanel>
+
+    </tabpanels>
+  </tabbox>
+
+</window>

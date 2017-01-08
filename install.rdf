@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description rdf:about="urn:mozilla:install-manifest">
+
+    <em:id>Stylish-Custom@ChoGGi</em:id>
+    <em:name>Stylish-Custom</em:name>
+    <em:version>0.8.8</em:version>
+<!--
+    <em:name>Stylish-Custom_TEST</em:name>
+    <em:id>Stylish-Custom@ChoGGi_TEST</em:id>
+    <em:version>0.8.8.0</em:version>
+-->
+    <em:creator>ChoGGi</em:creator>
+    <em:homepageURL>https://choggi.org/misc/Stylish-Custom/</em:homepageURL>
+    <em:iconURL>chrome://stylish-custom/skin/icon-32.png</em:iconURL>
+    <em:icon64URL>chrome://stylish-custom/skin/icon-64.png</em:icon64URL>
+    <em:optionsURL>chrome://stylish-custom/content/options.xul</em:optionsURL>
+    <em:unpack>true</em:unpack>
+    <em:type>2</em:type>
+    <em:bootstrap>false</em:bootstrap>
+    <em:multiprocessCompatible>true</em:multiprocessCompatible>
+<!--
+    <em:updateURL>http://choggi.org/misc/Stylish-Custom/update.rdf</em:updateURL>
+    <em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDHdrd4Q0SZTuoR3JqgaHiHkBNzaOSfcz2ZRvZjxd4LUH8URC3HHFKEwIjjTxVH3VSHyddzjnK+PSS5nEwvGK3qFXd51+CXNr7QjYZK8PDIiK1z5w5+9XxPgQP3Ap3SeRE1H/GexbiUGq99c47GFyI0dUvMXzuCheHWFi66vm9i+wIDAQAB</em:updateKey>
+-->
+    <em:contributor>Wouldn't be a Stylish-Custom without Stylish:</em:contributor>
+    <em:contributor>Jason Barnabe (np)</em:contributor>
+    <em:contributor>-</em:contributor>
+    <em:contributor>Helped style the Stylish(-Custom)</em:contributor>
+    <em:contributor>Mikado</em:contributor>
+    <em:contributor>BoffinbraiN</em:contributor>
+    <em:contributor>makondo</em:contributor>
+    <em:contributor>Izzy</em:contributor>
+    <em:contributor>Barbiegirl</em:contributor>
+    <em:contributor>DMCrimson</em:contributor>
+    <em:contributor>+</em:contributor>
+    <em:contributor>Honorable Mentions:</em:contributor>
+    <em:contributor>Alois</em:contributor>
+    <em:contributor>purpler</em:contributor>
+    <em:contributor>Azrock</em:contributor>
+    <em:contributor>Wai Wai</em:contributor>
+    <em:contributor>streetwolf</em:contributor>
+    <em:contributor>Everaldo Coelho (Crystal Icon set)</em:contributor>
+    <em:translator>maybee, surefx: ko-KR</em:translator>
+    <em:translator>BruceH: zh-CN</em:translator>
+    <em:translator>Ninnetyer: es</em:translator>
+    <em:translator>Mikael Hiort af Ornäs: sv-SE</em:translator>
+    <em:translator>k2jp, shirayuki: ja-JP</em:translator>
+    <em:translator>milupo, ReinekeFux, Team erweiterungen.de: de</em:translator>
+
+
+<!--
+https://addons.mozilla.org/pages/appversions
+-->
+
+<!-- Stylish
+        <em:requires>
+            <Description>
+                <em:id>{46551EC9-40F0-4e47-8E18-8E5CF550CFB8}</em:id>
+                <em:minVersion>1.0.1</em:minVersion>
+                <em:maxVersion>1.4.3</em:maxVersion>
+            </Description>
+        </em:requires>
+ -->
+<!-- Pale Moon -->
+      <em:targetApplication>
+        <Description>
+          <em:id>{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}</em:id>
+          <em:minVersion>1.0</em:minVersion>
+          <em:maxVersion>26.*</em:maxVersion>
+        </Description>
+      </em:targetApplication>
+
+<!-- Firefox -->
+      <em:targetApplication>
+        <Description>
+          <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+          <em:minVersion>4.0</em:minVersion>
+          <em:maxVersion>52.0</em:maxVersion>
+        </Description>
+      </em:targetApplication>
+
+<!-- Thunderbird -->
+      <em:targetApplication>
+        <Description>
+          <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
+          <em:minVersion>3.3a1pre</em:minVersion>
+          <em:maxVersion>52.0</em:maxVersion>
+        </Description>
+      </em:targetApplication>
+
+<!-- SeaMonkey -->
+      <em:targetApplication>
+        <Description>
+          <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
+          <em:minVersion>2.1</em:minVersion>
+          <em:maxVersion>2.49</em:maxVersion>
+        </Description>
+      </em:targetApplication>
+
+<!-- Mozilla -->
+      <em:targetApplication>
+        <Description>
+          <em:id>{86c18b42-e466-45a9-ae7a-9b95ba6f5640}</em:id>
+          <em:minVersion>1.0</em:minVersion>
+          <em:maxVersion>1.8+</em:maxVersion>
+        </Description>
+      </em:targetApplication>
+
+<!-- Toolkit -->
+      <em:targetApplication>
+        <Description>
+          <em:id>toolkit@mozilla.org</em:id>
+          <em:minVersion>1.9</em:minVersion>
+          <em:maxVersion>2.0.*</em:maxVersion>
+        </Description>
+      </em:targetApplication>
+
+    </Description>
+</RDF>

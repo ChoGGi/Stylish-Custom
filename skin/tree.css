@@ -1,0 +1,20 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url-prefix("chrome://stylish-custom/"){
+/*checkbox icon*/
+treechildren:-moz-tree-checkbox{-moz-image-region:rect(0 32px 16px 16px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+treechildren:-moz-tree-checkbox(checked){-moz-image-region:rect(0 16px 16px 0);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+/*resize for 16px icons*/
+treechildren:-moz-tree-row{height:1.4em;min-height:0}
+/*good question (space on the leftside?)*/
+treechildren:-moz-tree-indentation{width:1em}
+/*add border*/
+treechildren:-moz-tree-cell,treechildren:-moz-tree-row,treechildren:-moz-tree-column{border:solid .1pt #BBB}
+/*added too much border*/
+treechildren:-moz-tree-cell,treechildren:-moz-tree-column{border-width:0 .1pt 0 0}
+/*add bg and selected colours*/
+treechildren:-moz-tree-row(even){background-color:#DDD}
+treechildren:-moz-tree-row(odd){background-color:#FFF}
+treechildren:-moz-tree-row(selected){background-color:#C0C0C0}
+/*less whitespace*/
+dialog{padding:0}
+}

@@ -1,0 +1,7 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url-prefix("chrome://stylish-custom/content/edit.xul"){
+/*fix appearance of edit dialog*/
+toolbarbutton{-moz-appearance:toolbarbutton}
+/*opacity:.9 hid text on the tooltips*/
+tooltip{opacity:1}
+}
