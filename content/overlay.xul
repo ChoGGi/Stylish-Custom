@@ -99,7 +99,7 @@
 
   <!-- added above -->
   <menu id="stylish-toolmenu" label="&Stylish;" hidden="true" onclick="scOverlay.toggleToolsPopup(this,event)"/>
-  <toolbarbutton id="stylish-custom-toolbar-button" class="toolbarbutton-1" label="&StylishCustom;" onclick="event.preventDefault();scOverlay.clickHandler(event)" type="menu-button"/>
+  <toolbarbutton id="stylish-custom-toolbar-button" class="toolbarbutton-1" label="&StylishCustom;" onclick="event.preventDefault();scOverlay.clickHandler(event)" type="menu-button" context=""/>
   <toolbarbutton id="stylish-custom-toolbar-manage" class="toolbarbutton-1" label="&StylishManage;" onclick="event.preventDefault();scOverlay.clickHandlerManage(event.button)" tooltiptext="&StylishManageTip;" orient="vertical"/>
   <key id="key_stylishCustom-openManage" modifiers="accel,shift" key="m" oncommand="scCommon.openStyleManager(window)"/>
   <key id="key_stylishCustom-reloadStyles" modifiers="accel,alt" key="s" oncommand="scOverlay.reloadStyles()"/>
