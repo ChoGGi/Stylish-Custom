@@ -1,0 +1,8 @@
+<!ENTITY urltype "Übereinstimmend">
+<!ENTITY urlprefixtype "Beginnend mit">
+<!ENTITY domaintype "Nach Domain">
+<!ENTITY add "Hinzufügen">
+<!ENTITY delete "Löschen">
+<!ENTITY type "Typ">
+<!ENTITY site "Webseite">
+<!ENTITY specifySites "Websites festlegen">

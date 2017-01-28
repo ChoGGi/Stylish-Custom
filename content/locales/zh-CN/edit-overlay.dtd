@@ -1,0 +1,115 @@
+<!ENTITY PageTip1 "左击转到样式页面">
+<!ENTITY PageTip2 "中击转到/编辑页面">
+<!ENTITY PageTip3 "右击转到/编辑页面并粘贴代码">
+<!ENTITY AutoImportant "自动!important">
+<!ENTITY AutoImportantTextTip "为自动!important 输入一个快捷键">
+<!ENTITY AutoImportantToggleTip "切换自动!important 快捷键">
+<!ENTITY Important "!important">
+<!ENTITY ImportantTip "自动神奇的插入 !important">
+<!ENTITY SiteRules "站点规则...">
+<!ENTITY SiteRulesTip "插入 @-moz-doc 区段">
+<!ENTITY SiteRules.ak "S">
+<!ENTITY CommentText "注释">
+<!ENTITY CommentTextTip "选择一些文本并按下这个来添加或移除它周围的注释：/* */">
+<!ENTITY MergeLines "合并">
+<!ENTITY MergeLinesTip "合并代码行到一行通过移除换行符（ctrl+z 撤销）">
+<!ENTITY ExternalEditTip1 "在外表编辑器中作为 css 文件编辑样式">
+<!ENTITY ExternalEditTip2 "右击停止检查文件">
+<!ENTITY DisablePreview "不预览">
+<!ENTITY DisablePreviewTip "放弃预览并返回到先前的状态">
+<!ENTITY SaveClose "保存 &amp; 关闭">
+<!ENTITY SaveCloseTip "保存并关闭对话框">
+<!ENTITY SaveTip "保存但不关闭对话框">
+<!ENTITY MenuSaveTip "保存或还原">
+<!ENTITY PreviewTip "预览样式但不保存">
+<!ENTITY SearchToggleTip "用来切换搜索/替换区域 (ctrl+f / ctrl+r)">
+<!ENTITY CommentGroup "注释组">
+<!ENTITY CommentGroupTip "移除注释然后重新注释所选文本">
+<!ENTITY insertText "插入文本">
+<!ENTITY insertTextTip1 "样式中插入文本">
+<!ENTITY insertTextTip2 "选项 &gt; 文本来改变">
+<!ENTITY UndoLast "恢复（最后保存）">
+<!ENTITY UndoLastTip "恢复样式到最后保存的状态">
+<!ENTITY UndoAll "恢复（原始）">
+<!ENTITY UndoAllTip "恢复样式到原始状态">
+<!ENTITY CloseTip "关闭但不保存样式">
+<!ENTITY ColorTip "插入颜色到样式中">
+<!ENTITY UpdateCheck "更新">
+<!ENTITY UpdateCheckTip "允许此样式检查更新">
+<!ENTITY SaveEnabled "保存已启用">
+<!ENTITY SaveDisabled "保存已禁用">
+<!ENTITY EnableTip "当您保存样式时启用或禁用它">
+<!ENTITY EnableCloseTip "启用，保存，并关闭样式">
+<!ENTITY DisableCloseTip "禁用，保存，并关闭样式">
+<!ENTITY Customize "定制...">
+<!ENTITY ReplaceTip "文本来替换 &quot;搜索&quot; 文本">
+<!ENTITY Replace "替换...">
+<!ENTITY ReplaceOnce "一次">
+<!ENTITY ReplaceAll "所有">
+<!ENTITY ReplaceOnceTip "替换首先出现的 &quot;搜索&quot; 文本">
+<!ENTITY ReplaceAllTip "替换所有出现的 &quot;搜索&quot; 文本">
+<!ENTITY Find "查找">
+<!ENTITY Color "插入颜色">
+<!ENTITY pickcolorrainbowpicker "彩虹选择器">
+<!ENTITY Bottom "底部">
+<!ENTITY ToggleScratchPad "切换便条簿(ScratchPad)">
+<!ENTITY ToggleScratchPadTip "切换便条簿(ScratchPad)">
+<!ENTITY ScratchPadTip "放置保存的文本，关闭对话框时清除">
+<!ENTITY ScratchPad "便条簿(ScratchPad)">
+<!ENTITY ClearSearch "清理搜索">
+<!ENTITY ClearSearchTip "清理搜索文本">
+<!ENTITY ClearScratchPad "清理便条簿">
+<!ENTITY ClearScratchPadTip "清理便条簿">
+<!ENTITY LineNumber "行号：">
+<!ENTITY LineNumberTip "当代码被单击时显示行号">
+<!ENTITY LineNumberSearch "Line#">
+<!ENTITY LineNumberSearchTip "转到行号 (5) 或列 (5:12),您可以拖拽">
+<!ENTITY ExportStyle "导出样式">
+<!ENTITY ExportStyleTip "导出样式到文件">
+<!ENTITY CloneStyle "克隆样式">
+<!ENTITY CloneStyleTip "用相同的代码创建一个新样式">
+<!ENTITY Url "网址">
+<!ENTITY Url.k "U">
+<!ENTITY Tags "标签">
+<!ENTITY Tags.k "T">
+<!ENTITY Name.k "N">
+<!ENTITY wraplines "折行">
+<!ENTITY wraplinesTip "折叠长行">
+<!ENTITY switchtoinstall "切换到安装">
+<!ENTITY switchtoinstallTip "在编辑和安装对话框之间切换">
+<!ENTITY Insert "插入">
+<!ENTITY InsertTip "允许您插入文本，颜色，等等...">
+<!ENTITY Insert.k "I">
+<!ENTITY dataURI "Data URI...">
+<!ENTITY dataURITip "选择一个文件并将它作为 data URI 插入到插入符号(caret)">
+<!ENTITY dataURI.ak "D">
+<!ENTITY chromefolder "Chrome 文件夹路径">
+<!ENTITY chromefolderTip "插入 chrome 文件夹路径到插入符号(caret)">
+<!ENTITY chromefolder.ak "C">
+<!ENTITY htmlnamespace "默认 HTML 命名空间">
+<!ENTITY htmlnamespaceTip "插入 HTML 命名空间到插入符号(caret)">
+<!ENTITY htmlnamespace.ak "H">
+<!ENTITY xulnamespace "默认 XUL 命名空间">
+<!ENTITY xulnamespaceTip "插入 XUL 命名空间到插入符号(caret)">
+<!ENTITY xulnamespace.ak "X">
+<!ENTITY openintexternaleditor "外部的">
+<!ENTITY openintexternaleditorTip "在外表编辑器中作为 css 文件编辑样式">
+<!ENTITY openintexternaleditor.ak "O">
+<!ENTITY Bracket "括号">
+<!ENTITY BracketTip "添加或移除所选文本外侧的 []">
+<!ENTITY CurlyBracket "大括号">
+<!ENTITY CurlyBracketTip "添加或移除所选文本外侧的 {}">
+<!ENTITY Undo "撤销">
+<!ENTITY UndoTip "撤销最后更改">
+<!ENTITY Redo "恢复">
+<!ENTITY RedoTip "恢复最后撤销">
+<!ENTITY Class "Class">
+<!ENTITY ClassTip "[class=&quot;example&quot;] to .example (or back)">
+<!ENTITY ID "ID">
+<!ENTITY IDTip "[id=&quot;example&quot;] to #example (or back)">
+<!ENTITY ToggleBars "切换按钮">
+<!ENTITY ToggleBarsTip "切换工具栏 (在 选项&gt;切换&gt;工具栏切换 选取)">
+<!ENTITY StyleId "样式 ID">
+<!ENTITY StyleIdTip "显示来自 stylish.sqlite 数据库的样式 id">
+<!ENTITY RemoveXUL "删除XUL：">
+<!ENTITY RemoveXULTip "删除xul：从复制的代码  (&quot;xul:hbox &gt; xul:scrollbox&quot; to &quot;hbox &gt; scrollbox&quot;)">

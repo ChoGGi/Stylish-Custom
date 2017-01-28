@@ -1,0 +1,94 @@
+<!ENTITY Options "Einstellungen">
+<!ENTITY OptionsTip "Einstellungsdialog öffnen">
+<!ENTITY StylishCustom "Stylish-Custom">
+<!ENTITY Styles "Stile">
+<!ENTITY Stylish "Stylish">
+<!ENTITY Manage "Verwalten">
+<!ENTITY StylishManage "Stile verwalten">
+<!ENTITY StylishManageTip "Linksklick öffnet in eigenem Fenster, Mittelklick im Add-ons-Manager, Rechtsklick in der Sidebar">
+<!ENTITY StylishInfo "Stil-Informationen">
+<!ENTITY StylishInfoTip "Stil-Informationen anzeigen">
+<!ENTITY New "Neu">
+<!ENTITY Old "Alt">
+<!ENTITY NewStyle "Neuer Stil">
+<!ENTITY Save "Speichern">
+<!ENTITY Colours "Farben">
+<!ENTITY Info "Informationen">
+<!ENTITY Guide "Anleitung">
+<!ENTITY GuideTip "Anleitung zur Benutzung von &StylishCustom; lesen">
+<!ENTITY Remove "Enfernen">
+<!ENTITY Delete "Löschen">
+<!ENTITY Preview "Vorschau">
+<!ENTITY Cancel "Abbrechen">
+<!ENTITY Close "Schließen">
+<!ENTITY CloseTip "Fenster schließen">
+<!ENTITY Refresh "Neu laden">
+<!ENTITY RefreshTip "Liste neu laden">
+<!ENTITY UpdateAllStyles "Updates für alle Stile suchen">
+<!ENTITY UpdateAllStylesTip "Updates für alle Stile ohne Nachfrage suchen">
+<!ENTITY Tools "Extras">
+<!ENTITY Tags "Schlagwörter">
+<!ENTITY Code "Code">
+<!ENTITY True "Ja">
+<!ENTITY False "Nein">
+<!ENTITY Domain "Domain">
+<!ENTITY Url "URL">
+<!ENTITY UrlPrefix "URL-Präfix">
+<!ENTITY Clear "Leeren">
+<!ENTITY ClearTip "Suchfeld leeren">
+<!ENTITY Type "Typ">
+<!ENTITY Text "Text">
+<!ENTITY Name "Name">
+<!ENTITY Menu "Menü">
+<!ENTITY Edit "Bearbeiten">
+<!ENTITY Enabled "Aktiviert">
+<!ENTITY ID "ID">
+<!ENTITY IDColumnTip "Zeigt die interne ID des Stils">
+<!ENTITY Toggle "Umschalten">
+<!ENTITY Toolbar "Werkzeugleiste">
+<!ENTITY Page "Seite">
+<!ENTITY WriteNewStyle "Neuer Stil">
+<!ENTITY Disable "Deaktivieren">
+<!ENTITY DeleteStyle "Stil löschen">
+<!ENTITY Enable "Aktivieren">
+<!ENTITY Browse "Durchsuchen">
+<!ENTITY Search "Suchen...">
+<!ENTITY SearchTip "Eingabetaste drücken für Suchen, F3 für nächstes Vorkommen finden und STRG+F, um den Cursor ins Suchfeld zu setzen">
+<!ENTITY SearchStylesTip "Stile suchen (verwendet reguläre Ausdrücke)">
+<!ENTITY SearchStylesMenuTip "Eine andere Suchkategorie auswählen">
+<!ENTITY Show "Anzeigen">
+<!ENTITY Hide "Verbergen">
+<!ENTITY ExportStyles "Stile exportieren">
+<!ENTITY ExportStylesTip "Stile in Dateien exportieren">
+<!ENTITY ImportStyles "Stile importieren">
+<!ENTITY ImportStylesTip "Dateien in Stile importieren">
+<!ENTITY RemoveDupes "Duplikate entfernen">
+<!ENTITY RemoveDupesTip "Zeigt eine Liste doppelter Stile und erlaubt es, sie zu entfernen">
+<!ENTITY Import "Importieren">
+<!ENTITY Export "Exportieren">
+<!ENTITY SelectAll "Alle auswählen">
+<!ENTITY SelectAllTip "Alle Stile auswählen (umschalten)">
+<!ENTITY SelectEnabled "Aktivierte auswählen">
+<!ENTITY SelectEnabledTip "Aktivierte Stile auswählen (umschalten)">
+<!ENTITY GetStyleSheets "Stilvorlagen laden">
+<!ENTITY GetStyleSheetsTip "Ruft eine Liste von Stilen für die aktuelle Seite ab und fügt sie in eine neue Stilvorlage ein">
+<!ENTITY sBy "Suchen nach">
+<!ENTITY SearchStyle "In Stilen suchen">
+<!ENTITY SearchName "&sBy;Name">
+<!ENTITY SearchTags "&sBy;Tags">
+<!ENTITY SearchType "&sBy;Typ">
+<!ENTITY SearchUrl "&sBy;URL">
+<!ENTITY SearchUrlPrefix "&sBy;URL-Präfix">
+<!ENTITY SearchDomain "&sBy;Domain">
+<!ENTITY AppStyles "Anwendungsstile">
+<!ENTITY EnabledStyles "Aktivierte Stile">
+<!ENTITY DisabledStyles "Deaktivierte Stile">
+<!ENTITY Width "Breite">
+<!ENTITY Height "Höhe">
+<!ENTITY Selectable "Wählbar">
+<!ENTITY Clickable "Klickbar">
+<!ENTITY Default "Standard">
+<!ENTITY Window "Fenster">
+<!ENTITY CopySelectorComma "Kopieren Selector (,)">
+<!ENTITY Ask "Fragen">
+<!ENTITY AskTip "Jeder Stil löschen">

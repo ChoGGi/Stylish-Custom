@@ -1,0 +1,5 @@
+<!ENTITY DeleteStyle "Stile löschen">
+<!ENTITY DeleteStyleTip "Einen Stil auswählen oder eine Liste der Stil-IDs eingeben, dann die Schaltfläche betätigen">
+<!ENTITY DeleteStyleText "Beispiel: 24,443,12">
+<!ENTITY RefreshStyleList "Stil-Liste neu laden">
+<!ENTITY RefreshStyleListTip "Stil-Liste neu laden und Suchergebnisse beibehalten">

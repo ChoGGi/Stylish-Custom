@@ -1,0 +1,115 @@
+<!ENTITY PageTip1 "click izquierdo para ir a pagina de estilos">
+<!ENTITY PageTip2 "click del medio para ir a /editar pagina">
+<!ENTITY PageTip3 "click derecho para ir a /editar pagina y pegar código">
+<!ENTITY AutoImportant "auto!importante">
+<!ENTITY AutoImportantTextTip "Escribir una tecla a usar para auto!importante">
+<!ENTITY AutoImportantToggleTip "Cambiar tecla auto!importante">
+<!ENTITY Important "!importante">
+<!ENTITY ImportantTip "Automáticamente insertar !importante">
+<!ENTITY SiteRules "Reclas del Sitio...">
+<!ENTITY SiteRulesTip "Insertar sección @-moz-doc">
+<!ENTITY SiteRules.ak "I">
+<!ENTITY CommentText "Comentar">
+<!ENTITY CommentTextTip "Seleccionar algún texto y presionar esto para agregar o quitar comentarios alrededor del mismo: /* */">
+<!ENTITY MergeLines "Combinar">
+<!ENTITY MergeLinesTip "Combinar lineas del código en una quitando las lineas rotas (ctrl+z para deshacer)">
+<!ENTITY ExternalEditTip1 "Editar estilos como archivo css en un editor externo">
+<!ENTITY ExternalEditTip2 "Click-Drecho para detener la comprobación de archivo">
+<!ENTITY DisablePreview "No-Previsualizar">
+<!ENTITY DisablePreviewTip "Descartar la previsualización y regresar al estado anterior">
+<!ENTITY SaveClose "Guardar y Cerrar">
+<!ENTITY SaveCloseTip "Guardar y cerra dialogo">
+<!ENTITY SaveTip "Guardar sin cerrar dialogo">
+<!ENTITY MenuSaveTip "Guardar o Revertir">
+<!ENTITY PreviewTip "Previsualizar el estilo sin guardarlo">
+<!ENTITY SearchToggleTip "Usado para cambiar búsqueda/reemplazar área (ctrl+f/ctrl+r)">
+<!ENTITY CommentGroup "Grupo de Comentarios">
+<!ENTITY CommentGroupTip "Quitar comentarios y re-comentar textos seleccionados">
+<!ENTITY insertText "Instertar Texto">
+<!ENTITY insertTextTip1 "Instertar texto a estilo">
+<!ENTITY insertTextTip2 "Opciones&gt;Texto a cambiar">
+<!ENTITY UndoLast "Revertir (Ultimo Guardado">
+<!ENTITY UndoLastTip "Reiniciar el estilo al ultimo estado guardado">
+<!ENTITY UndoAll "Revertir (a Original)">
+<!ENTITY UndoAllTip "Reiniciar el estilo al estado original">
+<!ENTITY CloseTip "Cerrar sin guardar estilo">
+<!ENTITY ColorTip "Insertar un colo al estilo">
+<!ENTITY UpdateCheck "Actualizar">
+<!ENTITY UpdateCheckTip "Permitir este estilo comprobar actualizaciones">
+<!ENTITY SaveEnabled "Guardar Activado">
+<!ENTITY SaveDisabled "Guardar Desactivado">
+<!ENTITY EnableTip "Activar o Desactivar el estilo cuando lo guarde">
+<!ENTITY EnableCloseTip "ACtivar, guardar y cerrar el estilo">
+<!ENTITY DisableCloseTip "Desactivar, guardar y cerrar el estilo">
+<!ENTITY Customize "Personalizar...">
+<!ENTITY ReplaceTip "Texto a reemplazar &quot;Buscar&quot; texto">
+<!ENTITY Replace "Reemplazar...">
+<!ENTITY ReplaceOnce "Una vez">
+<!ENTITY ReplaceAll "Todo">
+<!ENTITY ReplaceOnceTip "Reemplazar primer acontecimiento de &quot;Buscar&quot; texto">
+<!ENTITY ReplaceAllTip "Reemplazar todas los acontecimientos de &quot;Buscar&quot; texto">
+<!ENTITY Find "Buscar">
+<!ENTITY Color "Insertar Color">
+<!ENTITY pickcolorrainbowpicker "Selector en Arco Iris">
+<!ENTITY Bottom "Abajo">
+<!ENTITY ToggleScratchPad "Cambiar Bloc de Garabatos">
+<!ENTITY ToggleScratchPadTip "Cambiar el Bloc de Garabatos">
+<!ENTITY ScratchPadTip "Lugar para almacenar texto, se limpia cuando cierra el dialogo">
+<!ENTITY ScratchPad "Bloc de Garabatos">
+<!ENTITY ClearSearch "Limpiar Búsqueda">
+<!ENTITY ClearSearchTip "Limpiar texto de búsqueda">
+<!ENTITY ClearScratchPad "Limpiar Bloc de Garabatos">
+<!ENTITY ClearScratchPadTip "Limpiar los Bloc de Garabatos">
+<!ENTITY LineNumber "Numero de Lineas">
+<!ENTITY LineNumberTip "Muestra numero de lineas cuando se clicke el código">
+<!ENTITY LineNumberSearch "Linea#">
+<!ENTITY LineNumberSearchTip "Ir al numero de linea (5) o columna (5:12), puede arrastrar y soltar">
+<!ENTITY ExportStyle "Exportar Estilo">
+<!ENTITY ExportStyleTip "Exportar el estilo a un archivo">
+<!ENTITY CloneStyle "Clonar Estilo">
+<!ENTITY CloneStyleTip "Crear un nuevo estilo con el mismo código">
+<!ENTITY Url "URL">
+<!ENTITY Url.k "U">
+<!ENTITY Tags "Etiquetas">
+<!ENTITY Tags.k "E">
+<!ENTITY Name.k "N">
+<!ENTITY wraplines "Lineas envueltas">
+<!ENTITY wraplinesTip "Envolver lineas largas">
+<!ENTITY switchtoinstall "Cambiar a instalar">
+<!ENTITY switchtoinstallTip "Cambiar entre editor y instalador de dialogos">
+<!ENTITY Insert "Insertar">
+<!ENTITY InsertTip "Permitir seleccionar texto a insertar, colores,etc...">
+<!ENTITY Insert.k "I">
+<!ENTITY dataURI "Datos de URL...">
+<!ENTITY dataURITip "Seleccionar un archivo y insertar como dato URL intercalado">
+<!ENTITY dataURI.ak "D">
+<!ENTITY chromefolder "Ruta a directorio Cromo">
+<!ENTITY chromefolderTip "Insertar ruta de directorio de cromo intercalar">
+<!ENTITY chromefolder.ak "C">
+<!ENTITY htmlnamespace "nombrar espacios HTML por defecto">
+<!ENTITY htmlnamespaceTip "Insertar HTML. intercalar en espacio de nombres">
+<!ENTITY htmlnamespace.ak "H">
+<!ENTITY xulnamespace "nombrar espacios XUL por defecto">
+<!ENTITY xulnamespaceTip "Insertar XUL. intercalar en espacio de nombres">
+<!ENTITY xulnamespace.ak "X">
+<!ENTITY openintexternaleditor "Externo">
+<!ENTITY openintexternaleditorTip "Editar estilo como archivo css en un editor externo">
+<!ENTITY openintexternaleditor.ak "r">
+<!ENTITY Bracket "Corchete">
+<!ENTITY BracketTip "Agregar o quitar [] desde fuera del texto seleccionado">
+<!ENTITY CurlyBracket "Paréntesis">
+<!ENTITY CurlyBracketTip "Agregar o quitar {} desde fuera del texto seleccionado">
+<!ENTITY Undo "Deshacer">
+<!ENTITY UndoTip "Deshacer ultimo cambio">
+<!ENTITY Redo "Rehacer">
+<!ENTITY RedoTip "Rehacer ultima acción">
+<!ENTITY Class "Clase">
+<!ENTITY ClassTip "[class=&quot;example&quot;] to .example (o en la espalda)">
+<!ENTITY ID "ID">
+<!ENTITY IDTip "[id=&quot;example&quot;] to #example (o en la espalda)">
+<!ENTITY ToggleBars "Cambiar Barras">
+<!ENTITY ToggleBarsTip "Cambiar barra de herramientas (escojalas en Opcione&gt;Cambiar&gt;Barra de herramientas Cambiar)">
+<!ENTITY StyleId "ID de Estilo">
+<!ENTITY StyleIdTip "Muestra el ID del Estilo desde la base de datos de stylish.sqlite">
+<!ENTITY RemoveXUL "Retire XUL:">
+<!ENTITY RemoveXULTip "Eliminar xul: de código copiado (&quot;xul:hbox &gt; xul:scrollbox&quot; to &quot;hbox &gt; scrollbox&quot;)">

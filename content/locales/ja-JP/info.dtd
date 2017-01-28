@@ -1,0 +1,5 @@
+<!ENTITY DeleteStyle "スタイルを削除">
+<!ENTITY DeleteStyleTip "スタイルを選択、もしくは羅列したスタイル ID を入力する">
+<!ENTITY DeleteStyleText "例:24,443,122">
+<!ENTITY RefreshStyleList "スタイル一覧をリフレッシュ">
+<!ENTITY RefreshStyleListTip "検索結果を保持したままスタイル一覧をリフレッシュ">

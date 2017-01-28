@@ -1,0 +1,17 @@
+<!ENTITY ExportStyles "スタイルをエクスポート">
+<!ENTITY ImportStyles "スタイルをインポート">
+<!ENTITY StyleInfo "スタイル情報">
+<!ENTITY Export "エクスポート">
+<!ENTITY Import "インポート">
+<!ENTITY LocationTip "使用するパスとして保存／パス選択を無効（保存パスをリセット）">
+<!ENTITY BrowseTip "パスを選択する">
+<!ENTITY overWrite "上書き">
+<!ENTITY OverwriteStyles "スタイルを上書き">
+<!ENTITY OverwriteFiles "ファイルを上書き">
+<!ENTITY ExportXML "XML としてエクスポート">
+<!ENTITY ExampleXML "XML ファイル名">
+<!ENTITY ExampleXMLTip "スタイルファイル名を選択">
+<!ENTITY ExportXMLTip "XML ファイルにスタイルを保存する（オリジナル名／URL／有効状態を保持）">
+<!ENTITY GroupXML "グループ">
+<!ENTITY GroupXMLTip "グループスタイルを１つの XML ファイルにする">
+<!ENTITY xmlBrowseTip "ファイルを選択">

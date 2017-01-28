@@ -1,0 +1,5 @@
+<!ENTITY DeleteStyle "Borrar Estilo(s)">
+<!ENTITY DeleteStyleTip "Seleccionar un estilo o escribir una lista de ids de estilos; luego presione el boton">
+<!ENTITY DeleteStyleText "Ejemplo: 24,443,122">
+<!ENTITY RefreshStyleList "Actualizar Lista de Estilos">
+<!ENTITY RefreshStyleListTip "Actualizar lista y mantener resultados de búsqueda">

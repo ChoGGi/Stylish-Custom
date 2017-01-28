@@ -1,0 +1,8 @@
+<!ENTITY urltype "Exactly">
+<!ENTITY urlprefixtype "Starts with">
+<!ENTITY domaintype "In domain">
+<!ENTITY add "Add">
+<!ENTITY delete "Delete">
+<!ENTITY type "type">
+<!ENTITY site "site">
+<!ENTITY specifySites "Specify Sites">

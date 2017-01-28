@@ -1,0 +1,104 @@
+<!ENTITY changedomains "改变允许的域名">
+<!ENTITY changedomainsTip "输入允许安装样式的域名列表（空格分隔）">
+<!ENTITY Sidebar "侧边栏">
+<!ENTITY Standalone "独立的">
+<!ENTITY Addons "附加组件">
+<!ENTITY Manageview "管理视图">
+<!ENTITY ManageviewTip "允许您选择以哪种窗口管理风格打开">
+<!ENTITY General "常规">
+<!ENTITY Text "文本">
+<!ENTITY MenuItems "菜单项">
+<!ENTITY Toggle "切换">
+<!ENTITY Buttons "按钮">
+<!ENTITY BottomArea "底部样式编辑区域">
+<!ENTITY BottomAreaTip "为底部样式编辑区域选择按钮">
+<!ENTITY StyleMenu "为样式菜单项改变右击功能">
+<!ENTITY StyleMenuTip "在显示的菜单中选择一个并编辑它">
+<!ENTITY SaveMenu "保存菜单">
+<!ENTITY SaveMenuTip "保存&amp;恢复菜单">
+<!ENTITY SaveButton "保存菜单（按钮）">
+<!ENTITY SaveButtonTip "有一个按钮来保存，一个菜单来中止。">
+<!ENTITY switchtoinstallTip "为新样式显示安装开关">
+<!ENTITY ExportSettings "导出设置">
+<!ENTITY ExportSettingsTip "导出 Stylish-Custom 设置到一个文件">
+<!ENTITY ImportSettings "导入设置">
+<!ENTITY ImportSettingsTip "从文件中导入 Stylish-Custom 设置">
+<!ENTITY StyleToggle0 "切换已载入的页面/已改变的标签页">
+<!ENTITY StyleToggle1 "仅已改变的标签页">
+<!ENTITY StyleToggle2 "仅已载入的页面">
+<!ENTITY StyleToggle3 "无（忽略标签）">
+<!ENTITY StyleToggle "样式正在切换">
+<!ENTITY StyleToggleTip "选择怎样切换样式">
+<!ENTITY StyleToggleHelp1 "您可以使用标签来切换样式（查看 向导\Edit Dialog\#15 来获得更多帮助）">
+<!ENTITY StyleToggleHelp2 "例如：">
+<!ENTITY ExternalEditor "外部编辑器">
+<!ENTITY ExternalEditorTip "可执行文件路径">
+<!ENTITY WhichEditor "使用那个方式">
+<!ENTITY WhichEditorTip "选取方式来使用外部编辑器">
+<!ENTITY EditorTime "样式上传间的延迟(毫秒)">
+<!ENTITY EditorTimeTip "在 Stylish-Custom 检查文件改变前的时间长短">
+<!ENTITY RemoveCSS "移除 CSS 文件（查看提示）">
+<!ENTITY RemoveCSSTip "这将移除任何打开文件！">
+<!ENTITY RemoveCSSAuto "自动移除旧的 css 文件">
+<!ENTITY RemoveCSSAutoTip "当 firefox 启动时自动从临时文件目录移除 stylishCustom*.css">
+<!ENTITY ChangeGlobalColour "全局样式颜色">
+<!ENTITY ChangeGlobalColourTip "在 Stylish 菜单中改变全局样式颜色">
+<!ENTITY ChangeSiteColour "站点样式颜色">
+<!ENTITY ChangeSiteColourTip "在 Stylish 菜单中改变站点样式颜色">
+<!ENTITY ChangeGlobalSiteColour "全局/站点样式颜色">
+<!ENTITY ChangeGlobalSiteColourTip "在 Stylish 菜单中改变全局/站点样式颜色">
+<!ENTITY StatusBar "状态栏图标">
+<!ENTITY StatusBarTip "显示/隐藏 stylish-custom 状态栏图标">
+<!ENTITY SearchBar "使用哪个搜索栏？">
+<!ENTITY SearchBarTip "从新的及原始的搜索栏中选择一个">
+<!ENTITY ToggleIcons "切换图标">
+<!ENTITY ToggleIconsTip "如果您想隐藏菜单/按钮图标">
+<!ENTITY ToolMenu "工具菜单项">
+<!ENTITY ToolMenuTip "在工具菜单中显示/隐藏样式管理">
+<!ENTITY AskToSave "询问保存样式">
+<!ENTITY AskToSaveTip "如果您还没有保存样式，它将询问您是否想保存">
+<!ENTITY AppTitleTip "显示（ff,tb）在样式编辑器标题栏中的应用程序">
+<!ENTITY InsertTextCaption "插入文本">
+<!ENTITY InsertTextTip "在插入菜单&gt;插入文本出现的内容 (,, 来区分)">
+<!ENTITY AutoImportantCaption "自动!important 文本">
+<!ENTITY AutoImportantTip "当您按下自动!important  快捷键后填充的内容">
+<!ENTITY ChangeFontCaption "改变编辑区域字体">
+<!ENTITY ChangeFontTip "用来选取 font-family/font-size/color">
+<!ENTITY ExImportLocation "导出/导入菜单项位置">
+<!ENTITY ExImportLocationTip "在 stylish 或 stylish-custom 中显示导出/导入菜单项">
+<!ENTITY ToggleRulesLocation "切换样式菜单项位置">
+<!ENTITY ToggleRulesLocationTip "在 stylish 或 stylish-custom 中显示禁用/启用样式菜单项">
+<!ENTITY StyleInfoLocation "样式信息菜单项位置">
+<!ENTITY StyleInfoLocationTip "在 stylish 或 stylish-custom 中显示样式信息菜单项">
+<!ENTITY ChangeInsertSepCaption "改变插入文本分隔符">
+<!ENTITY ChangeInsertSepTip "允许您选取不同的分隔符 (,,) 来使用">
+<!ENTITY ToolbarToggle "工具栏切换">
+<!ENTITY ToolbarToggleTip "在编辑对话框中切换工具栏">
+<!ENTITY IAT "它的所有文字！ (IAT)">
+<!ENTITY AppTitle "应用程序标题">
+<!ENTITY Nothing "无">
+<!ENTITY Initials "缩写">
+<!ENTITY FullTitle "完整标题">
+<!ENTITY reloadStyles "重新载入样式">
+<!ENTITY reloadStylesTip1 "禁用然后启用样式 (为了更新 @import 指令)">
+<!ENTITY reloadStylesTip2 "使用空格 (,) 来分隔样式 (34,28,115) 留下空白来重新载入所有">
+<!ENTITY reloadStylesTip3 "在主窗口中按Ctrl + Alt+ S">
+<!ENTITY reloadStylesKey "重新载入样式快捷键">
+<!ENTITY reloadStylesKeyTip "默认是 s (ctrl+alt+s) 或您想更改的字母">
+<!ENTITY StyleMenus "StyleList 菜单位置">
+<!ENTITY StyleMenusTip "显示拥有不同样式列表的菜单 (应用/启用的/禁用的)">
+<!ENTITY GetStyleSheetsMenu "&quot;获取样式表&quot; 菜单项">
+<!ENTITY GetStyleSheetsMenuTip "在上下文菜单中显示 &quot;获取样式表&quot;">
+<!ENTITY ShowAppStyles "&quot;应用&quot; 样式位于主菜单">
+<!ENTITY ShowAppStylesTip "您能在 &quot;应用样式&quot; 子菜单中看到它们">
+<!ENTITY SaveText "保存搜索文本">
+<!ENTITY SaveTextTip "当关闭样式对话框时保存搜索框内的文本">
+<!ENTITY ResizeStyleDialog "调整样式对话框大小">
+<!ENTITY ResizeStyleDialogTip "设置从附加组件管理器中打开的对话框的大小">
+<!ENTITY ScratchpadHeightCaption "设置便签簿(scratchpad)的高度">
+<!ENTITY ScratchpadHeightTip "允许您调整样式编辑器中的便签簿(scratchpad)的高度">
+<!ENTITY MenuitemLocations "菜单项的位置">
+<!ENTITY MoveErrorBox "移动错误框">
+<!ENTITY MoveErrorBoxTip "错误报告区域：代码区域的下方（默认）或以下的一切">
+<!ENTITY StyleMenuOverride "切换时尚工具栏按钮的覆盖菜单项">
+<!ENTITY StyleMenuOverrideTip "选择“时尚 - 定制”或“时尚”">

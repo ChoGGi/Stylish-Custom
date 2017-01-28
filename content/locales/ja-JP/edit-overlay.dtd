@@ -1,0 +1,115 @@
+<!ENTITY PageTip1 "左クリックでスタイルのページに移動">
+<!ENTITY PageTip2 "中クリックで編集ページに移動">
+<!ENTITY PageTip3 "右クリックで編集ページに移動しペースト">
+<!ENTITY AutoImportant "自動!important">
+<!ENTITY AutoImportantTextTip "自動!important を使うためのキーを入力">
+<!ENTITY AutoImportantToggleTip "自動!important 切り替え用のキー">
+<!ENTITY Important "!important">
+<!ENTITY ImportantTip "自動で !important を挿入">
+<!ENTITY SiteRules "サイト制限…">
+<!ENTITY SiteRulesTip "@-moz-doc セクションを挿入">
+<!ENTITY SiteRules.ak "S">
+<!ENTITY CommentText "コメント">
+<!ENTITY CommentTextTip "テキスト選択後に押してコメントアウトする／戻す： /* */">
+<!ENTITY MergeLines "マージ">
+<!ENTITY MergeLinesTip "改行を削除することで複数行を１行にまとめる（CTRL + Z でアンドゥ）">
+<!ENTITY ExternalEditTip1 "CSS ファイルとして外部エディタで編集">
+<!ENTITY ExternalEditTip2 "右クリックでファイルのチェックを中止">
+<!ENTITY DisablePreview "プレビュー前に戻す">
+<!ENTITY DisablePreviewTip "プレビューを破棄して以前の状態に戻す">
+<!ENTITY SaveClose "保存して閉じる">
+<!ENTITY SaveCloseTip "保存してダイアログを閉じる">
+<!ENTITY SaveTip "ダイアログを閉じずに保存">
+<!ENTITY MenuSaveTip "保存もしくは元に戻す">
+<!ENTITY PreviewTip "スタイルを保存せずプレビューする">
+<!ENTITY SearchToggleTip "検索／置換の切り替えに使用（CTRL + F／CTRL + R）">
+<!ENTITY CommentGroup "コメントグループ">
+<!ENTITY CommentGroupTip "選択テキストのコメントアウトを外して再度コメントアウト">
+<!ENTITY insertText "テキストを挿入">
+<!ENTITY insertTextTip1 "スタイルにテキストを挿入">
+<!ENTITY insertTextTip2 "変更は 設定 &gt; テキスト">
+<!ENTITY UndoLast "戻す（保存した状態に）">
+<!ENTITY UndoLastTip "最後に保存した状態にスタイルをリセット">
+<!ENTITY UndoAll "戻す（オリジナルに）">
+<!ENTITY UndoAllTip "オリジナルの状態にリセット">
+<!ENTITY CloseTip "保存せずに閉じる">
+<!ENTITY ColorTip "スタイルに色を挿入">
+<!ENTITY UpdateCheck "更新">
+<!ENTITY UpdateCheckTip "このスタイルで更新をチェックする">
+<!ENTITY SaveEnabled "有効にして保存">
+<!ENTITY SaveDisabled "無効にして保存">
+<!ENTITY EnableTip "保存時に有効／無効にする">
+<!ENTITY EnableCloseTip "有効にして保存してから閉じる">
+<!ENTITY DisableCloseTip "無効にして保存してから閉じる">
+<!ENTITY Customize "カスタマイズ…">
+<!ENTITY ReplaceTip "&quot;Search&quot; と置換するテキスト">
+<!ENTITY Replace "置換…">
+<!ENTITY ReplaceOnce "一回だけ置換">
+<!ENTITY ReplaceAll "全部置換">
+<!ENTITY ReplaceOnceTip "最初に遭遇した &quot;Search&quot; のみを置換">
+<!ENTITY ReplaceAllTip "全ての &quot;Search&quot; を置換">
+<!ENTITY Find "検索">
+<!ENTITY Color "色を挿入">
+<!ENTITY pickcolorrainbowpicker "カラーピッカー">
+<!ENTITY Bottom "ボトム">
+<!ENTITY ToggleScratchPad "メモ帳の切り替え">
+<!ENTITY ToggleScratchPadTip "メモ帳を切り替える">
+<!ENTITY ScratchPadTip "テキストを保持する場所、ダイアログを閉じるとクリアされる">
+<!ENTITY ScratchPad "メモ帳">
+<!ENTITY ClearSearch "検索をクリア">
+<!ENTITY ClearSearchTip "検索文字をクリアする">
+<!ENTITY ClearScratchPad "メモ帳をクリア">
+<!ENTITY ClearScratchPadTip "メモ帳をクリアする">
+<!ENTITY LineNumber "行番号:">
+<!ENTITY LineNumberTip "コードがクリックされたときに行番号を表示する">
+<!ENTITY LineNumberSearch "行#">
+<!ENTITY LineNumberSearchTip "行番号 (5) または列 (5:12) に移動する、ドラッグドロップ可能です">
+<!ENTITY ExportStyle "スタイルをエクスポート">
+<!ENTITY ExportStyleTip "ファイルにスタイルをエクスポートする">
+<!ENTITY CloneStyle "スタイルを複製">
+<!ENTITY CloneStyleTip "同じコードでスタイルを新規作成する">
+<!ENTITY Url "URL">
+<!ENTITY Url.k "U">
+<!ENTITY Tags "タグ">
+<!ENTITY Tags.k "T">
+<!ENTITY Name.k "N">
+<!ENTITY wraplines "行をラップ">
+<!ENTITY wraplinesTip "長い行をラップする">
+<!ENTITY switchtoinstall "インストールに切り替え">
+<!ENTITY switchtoinstallTip "ダイアログの編集／インストーラを切り替える">
+<!ENTITY Insert "挿入">
+<!ENTITY InsertTip "テキスト、色等を挿入">
+<!ENTITY Insert.k "I">
+<!ENTITY dataURI "データ URI…">
+<!ENTITY dataURITip "ファイルを選択してデータ URI をカーソル位置に挿入">
+<!ENTITY dataURI.ak "D">
+<!ENTITY chromefolder "Chrome フォルダーのパス">
+<!ENTITY chromefolderTip "Chrome フォルダーのパスをカーソル位置に挿入">
+<!ENTITY chromefolder.ak "C">
+<!ENTITY htmlnamespace "デフォルト HTML 名前空間">
+<!ENTITY htmlnamespaceTip "HTML 名前空間をカーソル位置に挿入">
+<!ENTITY htmlnamespace.ak "H">
+<!ENTITY xulnamespace "デフォルト XUL 名前空間">
+<!ENTITY xulnamespaceTip "XUL 名前空間をカーソル位置に挿入">
+<!ENTITY xulnamespace.ak "X">
+<!ENTITY openintexternaleditor "外部エディタ">
+<!ENTITY openintexternaleditorTip "外部エディタで CSS ファイルとして編集">
+<!ENTITY openintexternaleditor.ak "O">
+<!ENTITY Bracket "括弧">
+<!ENTITY BracketTip "選択テキスト外側の [] を追加／削除">
+<!ENTITY CurlyBracket "中括弧">
+<!ENTITY CurlyBracketTip "選択テキスト外側に {} を追加／削除">
+<!ENTITY Undo "アンドゥ">
+<!ENTITY UndoTip "最後の変更をアンドゥ">
+<!ENTITY Redo "リドゥ">
+<!ENTITY RedoTip "最後のアンドゥをリドゥ">
+<!ENTITY Class "クラス">
+<!ENTITY ClassTip "[class=&quot;example&quot;] を .example に（またはその逆）">
+<!ENTITY ID "ID">
+<!ENTITY IDTip "[id=&quot;example&quot;] を #example に（またはその逆）">
+<!ENTITY ToggleBars "ツールバー切り替え">
+<!ENTITY ToggleBarsTip "ツールバーを切り替える（設定 &gt; 切り替え &gt; ツールバー切り替え）">
+<!ENTITY StyleId "スタイル ID">
+<!ENTITY StyleIdTip "stylish.sqlite データベースから Style ID を表示">
+<!ENTITY RemoveXUL "XUL:を削除">
+<!ENTITY RemoveXULTip "xul：を削除しコピーしたコードから (&quot;xul:hbox &gt; xul:scrollbox&quot; to &quot;hbox &gt; scrollbox&quot;)">

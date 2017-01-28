@@ -1,0 +1,104 @@
+<!ENTITY changedomains "Cambiar dominios permitidos">
+<!ENTITY changedomainsTip "Escribir una lista de dominios permitidos para instalar estilos (deje un espacio para múltiples)">
+<!ENTITY Sidebar "Barra lateral">
+<!ENTITY Standalone "Independiente">
+<!ENTITY Addons "Complementos">
+<!ENTITY Manageview "Manejar Vista">
+<!ENTITY ManageviewTip "Le permite escojer que ventana, Manejar Estilos la abrirá">
+<!ENTITY General "General">
+<!ENTITY Text "Texto">
+<!ENTITY MenuItems "Elementos de Menú">
+<!ENTITY Toggle "Cambiar">
+<!ENTITY Buttons "Botones">
+<!ENTITY BottomArea "Editar Areas de Estilo Inferior">
+<!ENTITY BottomAreaTip "Seleccionar botones para el area de estilo inferior">
+<!ENTITY StyleMenu "Cambiar acción del clic derecho para elementos de menú de estilos.">
+<!ENTITY StyleMenuTip "Escoger entre mostrar el menú y editarlo">
+<!ENTITY SaveMenu "Guardar Menú">
+<!ENTITY SaveMenuTip "Un menú con guardar&amp;Revertir">
+<!ENTITY SaveButton "Guardar Menú (Botón)">
+<!ENTITY SaveButtonTip "Tener un botón para guardar y un menú para el resto">
+<!ENTITY switchtoinstallTip "Mostrar cambiar a instalar para nuevos estilos">
+<!ENTITY ExportSettings "Exportar configuración">
+<!ENTITY ExportSettingsTip "Exportar Configuracion personalizar de Stylish a un archivo">
+<!ENTITY ImportSettings "Importar Configuración">
+<!ENTITY ImportSettingsTip "Importar Configuracion personalizar desde archivo de Stylish">
+<!ENTITY StyleToggle0 "Cambiar por pagina cargar/intercambiar pestaña">
+<!ENTITY StyleToggle1 "Solo pestañas Intercambiadas">
+<!ENTITY StyleToggle2 "Solo pagina cargada">
+<!ENTITY StyleToggle3 "Ninguno (ignorar etiquetas)">
+<!ENTITY StyleToggle "Cambiar Estilo">
+<!ENTITY StyleToggleTip "Escoger como cambiar estilos">
+<!ENTITY StyleToggleHelp1 "Puede usar etiquetas para cambiar estilos (vea la Guia/Editar Dialogos/#15 para mayor ayuda)">
+<!ENTITY StyleToggleHelp2 "ejemplo:">
+<!ENTITY ExternalEditor "Editor Externo">
+<!ENTITY ExternalEditorTip "Ruta al ejecutable a usar">
+<!ENTITY WhichEditor "Que método usar">
+<!ENTITY WhichEditorTip "Escoger metodo a usar para el editor externo">
+<!ENTITY EditorTime "Tiempo de Espera entre actualizar estilos (ms)">
+<!ENTITY EditorTimeTip "Longitud de tiempo antes que Personalizar-Stylish compruebe el archivo por cambios">
+<!ENTITY RemoveCSS "Quitar archivos CSS (vea tips de herramientas)">
+<!ENTITY RemoveCSSTip "Esto quitar cualquier archivo abierto!">
+<!ENTITY RemoveCSSAuto "Auto quitar archivos css viejos">
+<!ENTITY RemoveCSSAutoTip "Automáticamente quitar Stylish personalizados*.css del directorio temporal cuando firefox comience">
+<!ENTITY ChangeGlobalColour "Color para Estilos Globales">
+<!ENTITY ChangeGlobalColourTip "Cambiar color de estilos globales en el Menú de Stylish">
+<!ENTITY ChangeSiteColour "Color de estilos del sitio">
+<!ENTITY ChangeSiteColourTip "Cambia los colores del estilo del sitio en el Menu de Stylish">
+<!ENTITY ChangeGlobalSiteColour "Color de estilos Global/Sitios">
+<!ENTITY ChangeGlobalSiteColourTip "Cambia color del estilo global/sitio en el Menu de Stylish">
+<!ENTITY StatusBar "Icono de barra de estado">
+<!ENTITY StatusBarTip "Mostrar/Ocultar iconos personalizados de barra de estado de Stylish">
+<!ENTITY ToggleIcons "Cambiar iconos">
+<!ENTITY ToggleIconsTip "Si desea ocultar iconos de botones/menú">
+<!ENTITY ToolMenu "Herramientas Menú de elementos">
+<!ENTITY ToolMenuTip "Mostrar/Ocultar gestor de herramientas en el menú de herramientas Stylish">
+<!ENTITY AskToSave "Preguntar por Guardado de Estilo">
+<!ENTITY AskToSaveTip "Si no ha guardado el estilo se le preguntara si desea hacerlo">
+<!ENTITY AppTitleTip "Mostrar la App (if,tb,sb) en la barra del editor de estilos">
+<!ENTITY InsertTextCaption "Insertar texto">
+<!ENTITY InsertTextTip "Lo que se muestra en el menú&gt;insertar texto (.. a diferenciar)">
+<!ENTITY AutoImportantCaption "Auto!importante Texto">
+<!ENTITY AutoImportantTip "Lo que se rellena después de presionar la tecla auto!importante">
+<!ENTITY ChangeFontCaption "Cambiar editar fuente de area">
+<!ENTITY ChangeFontTip "Usado para escoger familia-fuentes/tamaño-fuente/color">
+<!ENTITY ExImportLocation "Ex/Importar localización de elemento de menú">
+<!ENTITY ExImportLocationTip "Mostrar ex/importar elementos de menú en Stylish o Personalizar Stylish">
+<!ENTITY ToggleRulesLocation "cambiar localización de estilos de elementos de menú">
+<!ENTITY ToggleRulesLocationTip "Mostrar des/activar estilos de elementos de menu en Stylish o Stylish personalizado">
+<!ENTITY StyleInfoLocation "Localización de información de elemento de menú de estilo">
+<!ENTITY StyleInfoLocationTip "Mostrar información de estilo de elemento de menú en stylish o stylish personalizado">
+<!ENTITY ChangeInsertSepCaption "Cambiar separador de insertar texto">
+<!ENTITY ChangeInsertSepTip "Permitir escoger otro separado (...) para usar">
+<!ENTITY ToolbarToggle "Cambiar barra de Herramientas">
+<!ENTITY ToolbarToggleTip "Barra de Herramientas para cambiar en editor de dialogos">
+<!ENTITY IAT "Todo Es Texto!">
+<!ENTITY AppTitle "Titulo de Aplicación (app)">
+<!ENTITY StyleMenusTip "Muestra los menús con diferentes listas de estilos (App/Enabled/Disabled)">
+<!ENTITY GetStyleSheetsMenu "&quot;Get StyleSheets&quot; menuitem">
+<!ENTITY GetStyleSheetsMenuTip "Show &quot;Get StyleSheets&quot; in content menu">
+<!ENTITY ShowAppStyles "Estilos aplicación en el menú principal">
+<!ENTITY ShowAppStylesTip "Puedes verlos en el submenú Estilos App">
+<!ENTITY SaveText "Guardar texto de búsqueda">
+<!ENTITY SaveTextTip "Al cerrar de diálogo estilo guardar mensajes de texto en la casilla de búsqueda">
+<!ENTITY ResizeStyleDialog "Redimensionar dialogo de estilo">
+<!ENTITY ResizeStyleDialogTip "Establecer el tamaño de dialogos abiertos desde el Administrador de Addons">
+<!ENTITY ScratchpadHeightCaption "Establecer la altura del block de notas">
+<!ENTITY ScratchpadHeightTip "Te permite ajustar la altura del block de notas en el editr de estilo">
+<!ENTITY Nothing "Nada">
+<!ENTITY Initials "Iniciales">
+<!ENTITY FullTitle "Titulo completo">
+<!ENTITY reloadStyles "Actualizar Estilos">
+<!ENTITY reloadStylesTip1 "Movilidad estilos continuación habilitados (para la actualización de las directivas @import)">
+<!ENTITY reloadStylesTip2 "Use comas (,) para separar estilos (34,28,115) o dejar en blanco para recargar todo">
+<!ENTITY reloadStylesTip3 "en la ventana principal de prensa ctrl+alt+s">
+<!ENTITY reloadStylesKey "Estilos Actualizar Key">
+<!ENTITY reloadStylesKeyTip "El valor predeterminado es s (ctrl + alt + s) o si desea cambiar la letra">
+<!ENTITY StyleMenus "Ubicación del menú StyleList">
+<!ENTITY MenuitemLocations "Lugares Menú Elemento">
+<!ENTITY MoveErrorBox "Cuadro de error Move">
+<!ENTITY MoveErrorBoxTip "Zona de notificación de error: por debajo del área de código (por defecto) o por debajo de todo">
+<!ENTITY SearchBar "Que búsqueda usar ?">
+<!ENTITY SearchBarTip "Escoja entre nueva búsqueda y la original">
+<!ENTITY StyleMenuOverride "Sustitución de elementos del menú de palanca para el botón de la barra de herramientas con estilo">
+<!ENTITY StyleMenuOverrideTip "Elija entre la apertura en &quot;Stylish-Custom&quot; o con &quot;Stylish&quot;">

@@ -1,0 +1,17 @@
+<!ENTITY ExportStyles "Exportera formatmallar">
+<!ENTITY ImportStyles "Importera formatmallar">
+<!ENTITY StyleInfo "Formatmallsinfo">
+<!ENTITY Export "Exportera">
+<!ENTITY Import "Importera">
+<!ENTITY LocationTip "Spara för att använda sökväg / inaktivera för att välja sökväg (och återställa sparad sökväg)">
+<!ENTITY BrowseTip "Välj en sökväg att använda">
+<!ENTITY overWrite "Ersätt">
+<!ENTITY OverwriteStyles "Ersätt formatmallar">
+<!ENTITY OverwriteFiles "Ersätt filer">
+<!ENTITY ExportXML "Exportera som XML">
+<!ENTITY ExampleXML "Namn på XML-fil">
+<!ENTITY ExampleXMLTip "Välj ett namn för formatmallsfilen">
+<!ENTITY ExportXMLTip "Använd XML för att lagra formatmallar (behåller originalnamnet, URL, aktiverad)">
+<!ENTITY GroupXML "Gruppera">
+<!ENTITY GroupXMLTip "Gruppera formatmallar i en enda XML-fil">
+<!ENTITY xmlBrowseTip "Välj en fil att använda">

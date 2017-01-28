@@ -1,0 +1,94 @@
+<!ENTITY Options "Inställningar">
+<!ENTITY OptionsTip "Visa dialogen Inställningar">
+<!ENTITY StylishCustom "Stylish-Custom">
+<!ENTITY Styles "Formatmallar">
+<!ENTITY Stylish "Stylish">
+<!ENTITY Manage "Hantera">
+<!ENTITY StylishManage "Stylish-hantering">
+<!ENTITY StylishManageTip "Vänsterklick: Fristående fönster. Mittenklick: Tilläggshanteraren. Högerklick: Sidopanelen.">
+<!ENTITY StylishInfo "Stylish-info">
+<!ENTITY StylishInfoTip "Visa formatmallsinformation">
+<!ENTITY New "Ny">
+<!ENTITY Old "Gammal">
+<!ENTITY NewStyle "Ny formatmall">
+<!ENTITY Save "Spara">
+<!ENTITY Colours "Färger">
+<!ENTITY Info "Info">
+<!ENTITY Guide "Handbok">
+<!ENTITY GuideTip "Läs handboken innan du börjar använda &StylishCustom;">
+<!ENTITY Remove "Ta bort">
+<!ENTITY Delete "Ta bort">
+<!ENTITY Preview "Förhandsgranska">
+<!ENTITY Cancel "Avbryt">
+<!ENTITY Close "Stäng">
+<!ENTITY CloseTip "Stäng fönster">
+<!ENTITY Refresh "Uppdatera">
+<!ENTITY RefreshTip "Uppdatera lista">
+<!ENTITY UpdateAllStyles "Uppdatera alla">
+<!ENTITY UpdateAllStylesTip "Uppdatera alla formatmallar utan att fråga">
+<!ENTITY Tools "Verktyg">
+<!ENTITY Tags "Taggar">
+<!ENTITY Code "Kod">
+<!ENTITY True "Sant">
+<!ENTITY False "Falskt">
+<!ENTITY Domain "Domän">
+<!ENTITY Url "URL">
+<!ENTITY UrlPrefix "URL-prefix">
+<!ENTITY Clear "Rensa">
+<!ENTITY ClearTip "Rensa sökresultat">
+<!ENTITY Type "Typ">
+<!ENTITY Text "Text">
+<!ENTITY Name "Namn">
+<!ENTITY Menu "Meny">
+<!ENTITY Edit "Redigera">
+<!ENTITY Enabled "Aktiverade">
+<!ENTITY ID "ID">
+<!ENTITY IDColumnTip "Visar internt formatmalls-ID">
+<!ENTITY Toggle "Växling">
+<!ENTITY Toolbar "Verktygsfält">
+<!ENTITY Page "Sida">
+<!ENTITY WriteNewStyle "Ny formatmall">
+<!ENTITY Disable "Inaktivera">
+<!ENTITY DeleteStyle "Ta bort formatmall">
+<!ENTITY Enable "Aktivera">
+<!ENTITY Browse "Bläddra">
+<!ENTITY Search "Sök...">
+<!ENTITY SearchTip "Retur-tangenten för att söka, F3 för att söka nästa träff, och Ctrl+F för att fokusera på sökrutan">
+<!ENTITY SearchStylesTip "Sök formatmallar (använder RegExp)">
+<!ENTITY SearchStylesMenuTip "Välj en annan kategori att söka inom">
+<!ENTITY Show "Visa">
+<!ENTITY Hide "Dölj">
+<!ENTITY ExportStyles "Exportera formatmallar">
+<!ENTITY ExportStylesTip "Exportera formatmall(ar) till fil(er)">
+<!ENTITY ImportStyles "Importera formatmallar">
+<!ENTITY ImportStylesTip "Importera fil(er) till formatmall(ar)">
+<!ENTITY RemoveDupes "Ta bort dubbletter">
+<!ENTITY RemoveDupesTip "Visar en lista över formatmallsdubbletter och och låter dig ta bort dem">
+<!ENTITY Import "Importera">
+<!ENTITY Export "Exportera">
+<!ENTITY SelectAll "Markera alla">
+<!ENTITY SelectAllTip "Markera alla formatmallar (växla)">
+<!ENTITY SelectEnabled "Markera aktiverade">
+<!ENTITY SelectEnabledTip "Markera aktiverade formatmallar (växla)">
+<!ENTITY GetStyleSheets "Hämta formatmallar">
+<!ENTITY GetStyleSheetsTip "Hämtar en lista över formatmallar för den aktuella sidan och infogar dem i en ny formatmall">
+<!ENTITY sBy "Sök på ">
+<!ENTITY SearchStyle "Sök inom formatmallar">
+<!ENTITY SearchName "&sBy;namn">
+<!ENTITY SearchTags "&sBy;taggar">
+<!ENTITY SearchType "&sBy;typ">
+<!ENTITY SearchUrl "&sBy;URL">
+<!ENTITY SearchUrlPrefix "&sBy;URL-prefix">
+<!ENTITY SearchDomain "&sBy;domän">
+<!ENTITY AppStyles "Formatmallar för program">
+<!ENTITY EnabledStyles "Aktiverade formatmallar">
+<!ENTITY DisabledStyles "Inaktiverade formatmallar">
+<!ENTITY Width "Bredd">
+<!ENTITY Height "Höjd">
+<!ENTITY Selectable "Valbara">
+<!ENTITY Clickable "Klickbar">
+<!ENTITY Default "Default">
+<!ENTITY Window "Fönster">
+<!ENTITY CopySelectorComma "Kopiera Väljare (,)">
+<!ENTITY Ask "Fråga">
+<!ENTITY AskTip "Be att radera varje stil">

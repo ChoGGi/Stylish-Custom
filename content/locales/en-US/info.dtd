@@ -1,0 +1,5 @@
+<!ENTITY DeleteStyle "Delete Style(s)">
+<!ENTITY DeleteStyleTip "Select a style or enter a list of style ids; then press the button">
+<!ENTITY DeleteStyleText "Example: 24,443,122">
+<!ENTITY RefreshStyleList "Refresh Style List">
+<!ENTITY RefreshStyleListTip "Refresh list and keep search results">

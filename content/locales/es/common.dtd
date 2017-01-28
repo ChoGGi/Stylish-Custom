@@ -1,0 +1,94 @@
+<!ENTITY Options "Opciones">
+<!ENTITY OptionsTip "Mostrar dialogo de opciones">
+<!ENTITY StylishCustom "Stylish-Personalizar">
+<!ENTITY Styles "Estilos">
+<!ENTITY Stylish "Stylish">
+<!ENTITY Manage "Administrar">
+<!ENTITY StylishManage "Administrar Stylish">
+<!ENTITY StylishManageTip "Click izquierdo para independiente, medio para addons, y derecho para barra lateral">
+<!ENTITY StylishInfo "Info de Stylish">
+<!ENTITY StylishInfoTip "Mostrar información de estilo">
+<!ENTITY New "Nuevo">
+<!ENTITY Old "Antiguo">
+<!ENTITY NewStyle "Nuevo Estilo">
+<!ENTITY Save "Guardar">
+<!ENTITY Colours "Colores">
+<!ENTITY Info "Info">
+<!ENTITY Guide "Guía">
+<!ENTITY GuideTip "Leer la guía antes de usar y personalizar Stylish;">
+<!ENTITY Remove "Quitar">
+<!ENTITY Delete "Borrar">
+<!ENTITY Preview "Pre-visualizar">
+<!ENTITY Cancel "Cancelar">
+<!ENTITY Close "Cerrar">
+<!ENTITY CloseTip "Cerrar ventana">
+<!ENTITY Refresh "Actualizar">
+<!ENTITY RefreshTip "Actualizar Lista">
+<!ENTITY UpdateAllStyles "Actualizar Todo">
+<!ENTITY UpdateAllStylesTip "Actualizar todos los estilos sin preguntar">
+<!ENTITY Tools "Herramientas">
+<!ENTITY Tags "Etiquetas">
+<!ENTITY Code "Codigo">
+<!ENTITY True "Verdad">
+<!ENTITY False "Falso">
+<!ENTITY Domain "Dominio">
+<!ENTITY Url "Url">
+<!ENTITY UrlPrefix "Prefijo-Url">
+<!ENTITY Clear "Limpiar">
+<!ENTITY ClearTip "Limpiar resultado de busqueda">
+<!ENTITY Type "Tipo">
+<!ENTITY Text "Texto">
+<!ENTITY Name "Nombre">
+<!ENTITY Menu "Menú">
+<!ENTITY Edit "Editar">
+<!ENTITY Enabled "Activar">
+<!ENTITY ID "ID">
+<!ENTITY IDColumnTip "Mostrar id de estilo interna">
+<!ENTITY Toggle "Cambiar">
+<!ENTITY Toolbar "Barra de Herramientas">
+<!ENTITY Page "Pagina">
+<!ENTITY WriteNewStyle "Nuevo Estilo">
+<!ENTITY Disable "Desactivar">
+<!ENTITY DeleteStyle "Borrar Estilo">
+<!ENTITY Enable "Activar">
+<!ENTITY Browse "Explorar">
+<!ENTITY Search "Buscar...">
+<!ENTITY SearchTip "Entra para buscar, F3 para encontrar Texto, y CTRL+F para enfocar la caja de busqueda">
+<!ENTITY SearchStylesTip "Buscar estilos (que usen regexp)">
+<!ENTITY SearchStylesMenuTip "Seleccionar otra categoría a buscar">
+<!ENTITY Show "Mostrar">
+<!ENTITY Hide "Ocultar">
+<!ENTITY ExportStyles "Exportar Estilos">
+<!ENTITY ExportStylesTip "Exportar estilo(s) a archivo(s)">
+<!ENTITY ImportStyles "Importar Estilos">
+<!ENTITY ImportStylesTip "Importar archivo(s) a estilo(s)">
+<!ENTITY RemoveDupes "Quitar Dupes(timo)">
+<!ENTITY RemoveDupesTip "Mostrar una lista de estilos de dupe y permitir quitarlos">
+<!ENTITY Import "Importar">
+<!ENTITY Export "Exportar">
+<!ENTITY SelectAll "Seleccionar Todo">
+<!ENTITY SelectAllTip "Seleccionar todo los estilos (cambiar)">
+<!ENTITY SelectEnabled "Seleccionar Activado">
+<!ENTITY SelectEnabledTip "Seleccionar estilos activados (cambiar)">
+<!ENTITY GetStyleSheets "Obtener Sheets de Estilo">
+<!ENTITY GetStyleSheetsTip "recuperar una lista de estilos para la pagina actual e insertarla en un nuevo estilo">
+<!ENTITY sBy "Buscar por">
+<!ENTITY SearchStyle "Buscar dentro de estilos">
+<!ENTITY SearchName "&sBy;nombre">
+<!ENTITY SearchTags "&sBy;etiquetas">
+<!ENTITY SearchType "&sBy;escribe">
+<!ENTITY SearchUrl "&sBy;url">
+<!ENTITY SearchUrlPrefix "&sBy;url-prefijo">
+<!ENTITY SearchDomain "&sBy;dominio">
+<!ENTITY AppStyles "Estilos App">
+<!ENTITY EnabledStyles "Estilos Activado">
+<!ENTITY DisabledStyles "Estilos de movilidad">
+<!ENTITY Width "Ancho">
+<!ENTITY Height "Alto">
+<!ENTITY Selectable "Seleccionable">
+<!ENTITY Clickable "Con enlace">
+<!ENTITY Default "Defecto">
+<!ENTITY Window "Ventana">
+<!ENTITY CopySelectorComma "Copiar Selector (,)">
+<!ENTITY Ask "Pedir">
+<!ENTITY AskTip "Pregunta a eliminar cada estilo">

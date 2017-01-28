@@ -1,0 +1,8 @@
+<!ENTITY urltype "정확히">
+<!ENTITY urlprefixtype "다음으로 시작 :">
+<!ENTITY domaintype "도메인으로">
+<!ENTITY add "추가">
+<!ENTITY delete "삭제">
+<!ENTITY type "종류">
+<!ENTITY site "특정 사이트">
+<!ENTITY specifySites "사이트 지정">

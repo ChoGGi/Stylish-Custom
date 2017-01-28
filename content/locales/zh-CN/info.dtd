@@ -1,0 +1,5 @@
+<!ENTITY DeleteStyle "删除样式">
+<!ENTITY DeleteStyleTip "输入列表中的样式 id 以便删除（或选择一个）">
+<!ENTITY DeleteStyleText "例如：24,443,122">
+<!ENTITY RefreshStyleList "刷新样式列表">
+<!ENTITY RefreshStyleListTip "刷新列表并保持搜索结果">

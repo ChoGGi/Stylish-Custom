@@ -1,0 +1,8 @@
+<!ENTITY urltype "URL 完全一致">
+<!ENTITY urlprefixtype "URL 前方一致">
+<!ENTITY domaintype "ドメイン一致">
+<!ENTITY add "追加">
+<!ENTITY delete "削除">
+<!ENTITY type "タイプ">
+<!ENTITY site "サイト">
+<!ENTITY specifySites "対象サイトを指定">

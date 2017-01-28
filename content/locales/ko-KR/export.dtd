@@ -1,0 +1,17 @@
+<!ENTITY ExportStyles "스타일 내보내기">
+<!ENTITY ImportStyles "스타일 가져오기">
+<!ENTITY StyleInfo "스타일 정보">
+<!ENTITY Export "내보내기">
+<!ENTITY Import "가져오기">
+<!ENTITY LocationTip "저장 : 설정된 경로 사용 / 사용 안 함 : 경로 재설정">
+<!ENTITY BrowseTip "저장할 경로를 지정해 주십시오.">
+<!ENTITY overWrite "덮어쓰기">
+<!ENTITY OverwriteStyles "스타일 덮어쓰기">
+<!ENTITY OverwriteFiles "파일 덮어쓰기">
+<!ENTITY ExportXML "XML로 내보내기">
+<!ENTITY ExampleXML "XML 파일 이름">
+<!ENTITY ExampleXMLTip "스타일을 저장할 파일의 이름을 지정해 주십시오.">
+<!ENTITY ExportXMLTip "스타일을 저장하기 위해서 XML을 이용합니다. (원본의 이름, URL, 사용 여부가 저장됩니다.)">
+<!ENTITY GroupXML "묶음">
+<!ENTITY GroupXMLTip "모든 스타일을 하나의 XML로 묶습니다.">
+<!ENTITY xmlBrowseTip "사용하는 파일을 선택">

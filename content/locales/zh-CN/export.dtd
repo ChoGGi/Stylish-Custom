@@ -1,0 +1,17 @@
+<!ENTITY ExportStyles "导出样式">
+<!ENTITY ImportStyles "导入样式">
+<!ENTITY StyleInfo "样式信息">
+<!ENTITY Export "导出">
+<!ENTITY Import "导入">
+<!ENTITY LocationTip "保存到使用路径/禁用选择路径（并重设已保存路径）">
+<!ENTITY BrowseTip "选择一个路径">
+<!ENTITY overWrite "覆盖">
+<!ENTITY OverwriteStyles "覆盖样式">
+<!ENTITY OverwriteFiles "覆盖文件">
+<!ENTITY ExportXML "导出为 XML">
+<!ENTITY ExampleXML "XML 文件名称">
+<!ENTITY ExampleXMLTip "为样式文件挑选一个名称">
+<!ENTITY ExportXMLTip "使用 XML 来储存样式（保持原来的名称，网址，启用信息）">
+<!ENTITY GroupXML "组">
+<!ENTITY GroupXMLTip "打包样式组为单一的 XML 文件">
+<!ENTITY xmlBrowseTip "选择一个文件中使用">
