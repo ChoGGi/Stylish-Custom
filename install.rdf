@@ -6,7 +6,7 @@
 
     <em:id>Stylish-Custom@ChoGGi</em:id>
     <em:name>Stylish-Custom</em:name>
-    <em:version>0.8.8</em:version>
+    <em:version>0.8.9</em:version>
 <!--
     <em:name>Stylish-Custom_TEST</em:name>
     <em:id>Stylish-Custom@ChoGGi_TEST</em:id>
@@ -49,6 +49,7 @@
     <em:translator>Mikael Hiort af Ornäs: sv-SE</em:translator>
     <em:translator>k2jp, shirayuki: ja-JP</em:translator>
     <em:translator>milupo, ReinekeFux, Team erweiterungen.de: de</em:translator>
+    <em:translator>Shychara: ru</em:translator>
 
 
 <!--
