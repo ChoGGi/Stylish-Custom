@@ -1,0 +1,8 @@
+<!ENTITY urltype "В точку">
+<!ENTITY urlprefixtype "Начинается с">
+<!ENTITY domaintype "В домене">
+<!ENTITY add "Добавить">
+<!ENTITY delete "Удалить">
+<!ENTITY type "тип">
+<!ENTITY site "сайт">
+<!ENTITY specifySites "Укажите сайты">

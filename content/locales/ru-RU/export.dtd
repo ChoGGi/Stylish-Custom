@@ -1,0 +1,17 @@
+<!ENTITY ExportStyles "Экспорт стилей">
+<!ENTITY ImportStyles "Импорт стилей">
+<!ENTITY StyleInfo "Информация о стиле">
+<!ENTITY Export "Экспорт">
+<!ENTITY Import "Импорт">
+<!ENTITY LocationTip "Сохранить для использования пути / отключить выбор пути (и сброс сохраненного пути)">
+<!ENTITY BrowseTip "Выберите путь для использования">
+<!ENTITY overWrite "Перезаписать">
+<!ENTITY OverwriteStyles "Перезаписать стили">
+<!ENTITY OverwriteFiles "Перезаписать файлы">
+<!ENTITY ExportXML "Экспорт из XML">
+<!ENTITY ExampleXML "Имя для XML-файла">
+<!ENTITY ExampleXMLTip "Выберите имя для файла стилей">
+<!ENTITY ExportXMLTip "Использовать XML для хранения стилей (сохраняет исходное имя, URL-адрес, включено)">
+<!ENTITY GroupXML "Групповой">
+<!ENTITY GroupXMLTip "Групповые стили в единый файл XML">
+<!ENTITY xmlBrowseTip "Выберите файл для использования">
