@@ -3,7 +3,7 @@ Stylish v2.0.* and up (not tested nor supported on older versions)
 
 * [Changelog](https://choggi.org/misc/Stylish-Custom/change.log)
 * [Stylish-Custom Guide](https://choggi.org/guide)
-* [Forum Thread](https://forum.userstyles.org/discussion/2799/stylish-custom#latest)
+* [Forum Thread](https://forum.userstyles.org/discussion/2799/stylish-custom/p1)
 * for a temporary signed extension see [here](https://choggi.org/misc/Stylish-Custom/) (this will have a different ID then the release versions)
 
 ### Some features:
@@ -37,4 +37,5 @@ you need to either close then reopen it or save a style to see changes.
 If you use new search and you hide the search bar in the customize window,
 then close the edit window, open it, and then re-add the search bar:
 it'll be hidden till you reopen the edit window.
+If you use replace once with the caret after the search text it just skips forward instead of wrapping
 ```
