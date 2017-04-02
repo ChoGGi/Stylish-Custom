@@ -1,13 +1,13 @@
+"use strict";
 //the below is (mostly) from Stylish v1.4.3/2.0.4, so different license applies
 
-"use strict";
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
 //cbCommon.dump();
 
-var saved = false,
+let saved = false,
 style = null,
 strings = null,
 codeE, nameE, tagsE, updateUrlE,
@@ -22,7 +22,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
 // Only do this if we're opened with openDialog, in which case window.opener is set
 /*
   if (window.opener) {
-    var windowPersist = JSON.parse(prefs.getCharPref("editorWindowPersist"));
+    let windowPersist = JSON.parse(prefs.getCharPref("editorWindowPersist"));
     window.moveTo(windowPersist.screenX, windowPersist.screenY);
     window.resizeTo(windowPersist.width, windowPersist.height);
     if (windowPersist.windowState == 1) {
@@ -39,7 +39,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
     window.addEventListener("unload", function()
     {
       // save windowState if it's maximized or normal - otherwise use value
-      var ws = (window.windowState == 1 || window.windowState == 3) ? window.windowState : windowPersist.windowState;
+      let ws = (window.windowState == 1 || window.windowState == 3) ? window.windowState : windowPersist.windowState;
       // save the other stuff if it's normal state, otherwise use previous
       if (ws == 3) {
         // width and height get read from document but set from document.documentElement
@@ -78,10 +78,10 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
 
   function initStyle()
   {
-    var service = scCommon.service;
+    let service = scCommon.service;
 
     // See if the ID is in the URL
-    var id,
+    let id,
     code = null,
     urlParts = location.href.split("?");
 
@@ -90,19 +90,18 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
       params = urlParts[1].split("&");
       params.forEach(function(param)
       {
-        var kv = param.split("=");
+        let kv = param.split("=");
         if (kv.length > 1) {
-          if (kv[0] == "id") {
+          if (kv[0] == "id")
             id = decodeURIComponent(kv[1]);
-          } else if (kv[0] == "code") {
+          else if (kv[0] == "code")
             code = decodeURIComponent(kv[1]);
-          }
         }
       });
     }
 
     if (id) {//probably never getting called
-Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting called");
+Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting called?");
       style = service.find(id, service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE);
       document.documentElement.setAttribute("windowtype", scCommon.getWindowName("stylishEdit", id));
       document.documentElement.setAttribute("styleId", id);
@@ -139,9 +138,9 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
   function init2()
   {
-    var wrapLines = prefs.getBoolPref("wrap_lines");
+    let wrapLines = prefs.getBoolPref("wrap_lines");
     refreshWordWrap(wrapLines);
-    var wrapLinesE = document.getElementById("wrap-lines");
+    let wrapLinesE = document.getElementById("wrap-lines");
     if (wrapLinesE) {
       wrapLinesE.checked = wrapLines;
       wrapLinesE.style.display = "";
@@ -164,7 +163,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
   }
 
 /*
-  var undoController = {
+  let undoController = {
     doCommand: function(command)
   {
       if (command == "stylish_cmd_undo")
@@ -199,7 +198,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
   function cancelDialog()
   {
     if (!saved && initialCode != codeElementWrapper.value) {
-      var ps = Services.prompt;
+      let ps = Services.prompt;
       switch (ps.confirmEx(window, strings.getString("unsavedchangestitle"), strings.getString("unsavedchanges"), ps.BUTTON_POS_0 * ps.BUTTON_TITLE_SAVE + ps.BUTTON_POS_1 * ps.BUTTON_TITLE_DONT_SAVE + ps.BUTTON_POS_2 * ps.BUTTON_TITLE_CANCEL, "", "", "", null, {})) {
       case 0:
         return save();
@@ -222,20 +221,20 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
   function checkForErrors()
   {
-    var errors = document.getElementById("errors"),
+    let errors = document.getElementById("errors"),
     errorsArea = document.getElementById("errorsArea");
 
     errorsArea.style.display = "none";
     while (errors.hasChildNodes()) {
       errors.removeChild(errors.lastChild);
     }
-    var currentMessages = [],
+    let currentMessages = [],
     errorListener = {
       QueryInterface: XPCOMUtils.generateQI([Ci.nsIConsoleListener, Ci.nsISupports]),
       observe: function(message) {
         if ("QueryInterface" in message) {
           errorsArea.style.display = "-moz-box";
-          var error = message.QueryInterface(Ci.nsIScriptError);
+          let error = message.QueryInterface(Ci.nsIScriptError);
 
           //Note to reviewer: Doesn't change behavior of new tab page
           if (error.category == "CSS Parser" && error.sourceName == "about:blank") {
@@ -243,9 +242,9 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
             // don't duplicate
             if (currentMessages.indexOf(message) == -1) {
               currentMessages.push(message);
-              var label = document.createElement("label");
+              let label = document.createElement("label");
               label.appendChild(document.createTextNode(message));
-              var mouseEventClick = function() {
+              let mouseEventClick = function() {
                 goToLine(error.lineNumber,error.columnNumber);
                 scEdit.errorCodeCopy(this);
               };
@@ -264,7 +263,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
   function goToLine(line, col)
   {
-    var index = 0,
+    let index = 0,
     currentLine = 1;
 
     while (currentLine < line) {
@@ -278,7 +277,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
   //Insert the snippet at the start of the code textbox or highlight it if it's already in there
   function insertCodeAtStart(snippet)
   {
-    var position = codeElementWrapper.value.indexOf(snippet);
+    let position = codeElementWrapper.value.indexOf(snippet);
     if (position == -1) {
       //insert the code
       //put some line breaks in if there's already code there
@@ -294,11 +293,11 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
   function insertCodeAtCaret(snippet)
   {
-    var selectionStart = codeElementWrapper.selectionStart,
+    let selectionStart = codeElementWrapper.selectionStart,
     selectionEnd = selectionStart + snippet.length;
 
     // sourceditor is good at keeping the scroll position, but others are not
-    var currentScrollTop = codeElementWrapper.scrollTop;
+    let currentScrollTop = codeElementWrapper.scrollTop;
     codeElementWrapper.value = codeElementWrapper.value.substring(0, codeElementWrapper.selectionStart) + snippet + codeElementWrapper.value.substring(codeElementWrapper.selectionEnd, codeElementWrapper.value.length);
     codeElementWrapper.focus();
     codeElementWrapper.scrollTop = currentScrollTop;
@@ -319,7 +318,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
   function insertChromePath()
   {
-    var fileHandler = Services.io.getProtocolHandler("file").QueryInterface(Ci.nsIFileProtocolHandler),
+    let fileHandler = Services.io.getProtocolHandler("file").QueryInterface(Ci.nsIFileProtocolHandler),
     chromePath = fileHandler.getURLSpecFromFile(Services.dirsvc.get("UChrm", Ci.nsIFile));
 
     insertCodeAtCaret(chromePath);
@@ -328,28 +327,28 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
   function insertDataURI()
   {
     const nsIFilePicker = Ci.nsIFilePicker;
-    var fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
+    let fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
     fp.init(window, strings.getString("dataURIDialogTitle"), nsIFilePicker.modeOpen);
     //if (fp.show() != nsIFilePicker.returnOK)
     if (fp.show() != nsIFilePicker.returnOK)
       return;
-    var file = fp.file,
+    let file = fp.file,
     contentType = Cc["@mozilla.org/mime;1"].getService(Ci.nsIMIMEService).getTypeFromFile(file),
     inputStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance(Ci.nsIFileInputStream);
 
     //inputStream.init(file, 0x01, 0600, 0);
     inputStream.init(file,parseInt("0x01",16),parseInt("0600",8),0);
 
-    var stream = Cc["@mozilla.org/binaryinputstream;1"].createInstance(Ci.nsIBinaryInputStream);
+    let stream = Cc["@mozilla.org/binaryinputstream;1"].createInstance(Ci.nsIBinaryInputStream);
     stream.setInputStream(inputStream);
-    var encoded = btoa(stream.readBytes(stream.available()));
+    let encoded = btoa(stream.readBytes(stream.available()));
     stream.close();
     inputStream.close();
     insertCodeAtCaret("data:" + contentType + ";base64," + encoded);
   }
 
   //fails badly on Pale Moon
-  var finderJsmStyle = null;
+  let finderJsmStyle = null;
   if (scCommon.appInfo.ID != "{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}") {
     // Firefox 27 changed this interface
     finderJsmStyle = false;
@@ -362,7 +361,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
     }
   }
 
-  var finder = null;
+  let finder = null;
   if (finderJsmStyle) {
     finder = {
       _listeners: [],
@@ -413,9 +412,9 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
       _findFromIndex: function(index, backwards)
       {
-        var start = backwards ? codeElementWrapper.value.substring(0, index).lastIndexOf(this.searchString) : codeElementWrapper.value.indexOf(this.searchString, index);
-        var result;
-        var iface = Ci.nsITypeAheadFind;
+        let start = backwards ? codeElementWrapper.value.substring(0, index).lastIndexOf(this.searchString) : codeElementWrapper.value.indexOf(this.searchString, index);
+        let result;
+        let iface = Ci.nsITypeAheadFind;
         if (start >= 0) {
           result = iface.FIND_FOUND;
         } else if (index == 0) {
@@ -461,7 +460,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
       findFromIndex: function(index, backwards)
       {
-        var start = backwards ? codeElementWrapper.value.substring(0, index).lastIndexOf(this.searchString) : codeElementWrapper.value.indexOf(this.searchString, index),
+        let start = backwards ? codeElementWrapper.value.substring(0, index).lastIndexOf(this.searchString) : codeElementWrapper.value.indexOf(this.searchString, index),
         result;
 
         if (start >= 0)
@@ -495,7 +494,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
     };
   }
 
-  var codeElementWrapper = {
+  let codeElementWrapper = {
     get value() {
       return codeE.value;
     },
@@ -538,15 +537,15 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
   function initFinder()
   {
-    var findBar = document.getElementById("findbar");
+    let findBar = document.getElementById("findbar");
     //if findbar gone or not using new search
-    var pref = scCommon.prefs.getBoolPref("custom.newsearch");
+    let pref = scCommon.prefs.getBoolPref("custom.newsearch");
     //don't add findbar unless using new search
     if (!findBar && pref == true){
-      var findTemp = document.createElement("findbar");
+      let findTemp = document.createElement("findbar");
       findTemp.setAttribute("id","findbar");
       findTemp.setAttribute("browserid","internal-code");
-      var searchArea = document.getElementById("SearchArea");
+      let searchArea = document.getElementById("SearchArea");
       if (searchArea)
         searchArea.appendChild(findTemp);
       findTemp.removeAttribute("hidden");
@@ -554,7 +553,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
     } else if (!findBar || pref == false)
       return;
     if (finderJsmStyle) {
-      var editor = document.getElementById("internal-code");
+      let editor = document.getElementById("internal-code");
       editor.finder = finder;
       try {
         findBar.browser = editor;
@@ -579,7 +578,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
   }
 
 // if the style we're editing has been changed, turn off preview
-var changeObserver = {
+let changeObserver = {
   observe: function(subject, topic, data)
   {
     if (subject.id == style.id) {
@@ -593,7 +592,7 @@ var changeObserver = {
 Services.obs.addObserver(changeObserver, "stylish-style-change", false);
 
 // if the style we're editing has been deleted, turn off preview and close the window
-var deleteObserver = {
+let deleteObserver = {
   observe: function(subject, topic, data)
   {
     if (subject.id == style.id) {

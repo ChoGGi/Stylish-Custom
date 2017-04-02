@@ -15,7 +15,7 @@ var scCommon = {
 
   tryService: function()
   {
-    var service = null;
+    let service = null;
     try {
       service = Cc["@userstyles.org/style;1"].getService(Ci.stylishStyle);
     } catch (e) {
@@ -55,7 +55,7 @@ var scCommon = {
     //convert a link to a uri
     if (link == true)
       uri = Services.io.newURI(uri,null,null);
-    var sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+    let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
 
     //AGENT_SHEET AUTHOR_SHEET USER_SHEET
     if (enable == true) {
@@ -116,7 +116,7 @@ var scCommon = {
 */
   getMainWindow: function()
   {
-    var wm = this.getWin,
+    let wm = this.getWin,
     mainWin = wm("navigator:browser");
     if (!mainWin)
       mainWin = wm("mail:3pane");//thunderbird
@@ -135,7 +135,7 @@ var scCommon = {
       document = this.getMainWindow().document;
 
     //"Edit" menuitem
-    var editContext = document.getElementById("stylish-style-context-edit"),
+    let editContext = document.getElementById("stylish-style-context-edit"),
     //write new style popup
     newStylePop = document.getElementById("stylish-write-style-menu").firstChild;
 
@@ -160,13 +160,13 @@ var scCommon = {
 
   editContextOverrideFunc: function(event)
   {
-    var document = scCommon.getMainWindow().document;
+    let document = scCommon.getMainWindow().document;
     scCommon.openEditForStyle(document.popupNode.stylishStyle);
   },
 
   updateAllStyles: function(what)
   {
-    var service = scCommon.service;
+    let service = scCommon.service;
     service.list(service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE,{}).forEach(
       function(style) {
         style.checkForUpdates(null);
@@ -204,7 +204,7 @@ var scCommon = {
     //be nice to makondo and stick it in the middle
     this.tooltipEl.openPopup(doc.getElementById(that),"overlap",doc.defaultView.innerWidth / 2,doc.defaultView.innerHeight / 4);
     //make the timer
-    var observer = {
+    let observer = {
       observe: function()
       {
         scCommon.tooltipEl.label = "";
@@ -219,13 +219,13 @@ var scCommon = {
 
   openStyleManager: function(win)
   {
-    var manageView = this.prefs.getIntPref("custom.manageview");
+    let manageView = this.prefs.getIntPref("custom.manageview");
     if (!win)
       win = this.getMainWindow();
 
     switch(manageView) {
     default: // info
-      var em = this.getWin("stylishCustomInfo");
+      let em = this.getWin("stylishCustomInfo");
       if (em)
         em.focus();
       else
@@ -273,7 +273,7 @@ var scCommon = {
     }
 
     //if it's hidden then show it, if something else is in sidebar then switch to sc, else hide it
-    var b = win.document.getElementById("sidebar-box");
+    let b = win.document.getElementById("sidebar-box");
     if (!b) {
       scCommon.dump("Sidebar is missing on this platform");
       return;
@@ -291,7 +291,7 @@ var scCommon = {
     if (!win)
       win = this.getMainWindow();
 
-    var addonWin = this.focusAddons();
+    let addonWin = this.focusAddons();
     if (!addonWin)
       win.openDialog("chrome://mozapps/content/extensions/extensions.xul?NoSidebar","","chrome,menubar,extra-chrome,toolbar,dialog=no,resizable,centerscreen,width=1000,height=500");
 
@@ -307,7 +307,7 @@ var scCommon = {
     if (!em)
       em = this.getWin("Addons:Manager");
     if (em) {
-      var us = em.document.getElementById("userstyles-view");
+      let us = em.document.getElementById("userstyles-view");
       if (!us)
         us = em.document.getElementById("category-userstyle");
       if (us)
@@ -321,7 +321,7 @@ var scCommon = {
   //check if dialog is opened already or open it
   openDialog: function(which,window)
   {
-    var whichWin;
+    let whichWin;
 
     switch(which) {
     case "Options":
@@ -370,7 +370,7 @@ var scCommon = {
   //used for import/export
   pathBrowse: function(which,doc,dialog)
   {
-    var locationE = doc.getElementById("Location"),
+    let locationE = doc.getElementById("Location"),
     winEl;
 
     if (which == "Export")
@@ -380,7 +380,7 @@ var scCommon = {
 
     //import/export?
     const nsIFilePicker = Ci.nsIFilePicker;
-    var fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
+    let fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 
     if (which == "Export")
       fp.init(winEl,this.getMsg("ExportTitle"),nsIFilePicker.modeGetFolder);
@@ -402,13 +402,13 @@ var scCommon = {
 
   selectAllStyles: function(doc)
   {
-    var styleListE = doc.getElementById("StyleList");
+    let styleListE = doc.getElementById("StyleList");
     if (!styleListE.hasChildNodes())
       return;
-    var children = styleListE.childNodes,
+    let children = styleListE.childNodes,
     treecell;
 
-    for (var i = 0; i < children.length; i++) {
+    for (let i = 0; i < children.length; i++) {
       treecell = children[i].firstChild.firstChild.nextSibling;
       if (!treecell.hasAttribute("value"))
         treecell.setAttribute("value",true);
@@ -424,7 +424,7 @@ var scCommon = {
   createStyleArray: function(treeList,sortBy)
   {
     if (!this.service){
-      var win = this.getMainWindow();
+      let win = this.getMainWindow();
       if (typeof win.SidebarUI === "undefined"){
         win.toggleSidebar("viewStylishSidebar");
         win.toggleSidebar("viewStylishSidebar");
@@ -442,7 +442,7 @@ var scCommon = {
     this.service.list(this.service.REGISTER_STYLE_ON_CHANGE,{}).forEach(
       function(style)
       {
-        var styleType = style.getMeta("type",{}).toString(),
+        let styleType = style.getMeta("type",{}).toString(),
         styleTags = style.getMeta("tag",{}).toString(),
         styleDomain = style.getMeta("domain",{}).toString(),
         styleUrl = style.getMeta("url",{}).toString(),
@@ -494,14 +494,14 @@ var scCommon = {
   //http://www.breakingpar.com/bkp/home.nsf/0/87256B280015193F87256C8D00514FA4
   sortByName: function(a,b)
   {
-    var x = a.name.toLowerCase(),
+    let x = a.name.toLowerCase(),
     y = b.name.toLowerCase();
     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
   },
 
   sortByEnabled: function(a,b)
   {
-    var x = a.enabled.toLowerCase(),
+    let x = a.enabled.toLowerCase(),
     y = b.enabled.toLowerCase();
     return ((x > y) ? -1 : ((x < y) ? 1 : 0));
   },
@@ -513,52 +513,52 @@ var scCommon = {
 
   sortByType: function(a,b)
   {
-    var x = a.type.toLowerCase(),
+    let x = a.type.toLowerCase(),
     y = b.type.toLowerCase();
     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
   },
 
   sortByTags: function(a,b)
   {
-    var x = a.tags.toLowerCase(),
+    let x = a.tags.toLowerCase(),
     y = b.tags.toLowerCase();
     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
   },
 
   sortByDomain: function(a,b)
   {
-    var x = a.domain.toLowerCase(),
+    let x = a.domain.toLowerCase(),
     y = b.domain.toLowerCase();
     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
   },
 
   sortByUrl: function(a,b)
   {
-    var x = a.url.toLowerCase(),
+    let x = a.url.toLowerCase(),
     y = b.url.toLowerCase();
     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
   },
 
   sortByUrlPrefix: function(a,b)
   {
-    var x = a.urlprefix.toLowerCase(),
+    let x = a.urlprefix.toLowerCase(),
     y = b.urlprefix.toLowerCase();
     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
   },
 
   sortByleafName: function(a,b)
   {
-    var x = a.leafName.toLowerCase(),
+    let x = a.leafName.toLowerCase(),
     y = b.leafName.toLowerCase();
     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
   },
 
   readFile: function(file,type,type2)
   {
-    var XMLHttpRequest = Components.Constructor("@mozilla.org/xmlextras/xmlhttprequest;1","nsIXMLHttpRequest");
+    let XMLHttpRequest = Components.Constructor("@mozilla.org/xmlextras/xmlhttprequest;1","nsIXMLHttpRequest");
     if (type2 !== "web")
       file = "file:///" + file;
-    var req = new XMLHttpRequest();
+    let req = new XMLHttpRequest();
     req.open("GET",file,false);
     if (type2 !== "web")
       file = file.toLowerCase();
@@ -594,7 +594,7 @@ var scCommon = {
   //the below is (mostly) from Stylish v1.4.3/2.0.6
   styleInit: function(styleUrl,idUrl,updateUrl,md5Url,name,code,enabled,origCode,origMd5,backgroundUpdates)
   {
-    var style = Cc["@userstyles.org/style;1"].createInstance(Ci.stylishStyle);
+    let style = Cc["@userstyles.org/style;1"].createInstance(Ci.stylishStyle);
     style.mode = style.CALCULATE_META | style.REGISTER_STYLE_ON_CHANGE;
 
     style.init(styleUrl,idUrl,updateUrl,md5Url,name,code,enabled,origCode,origMd5,backgroundUpdates);
@@ -603,13 +603,13 @@ var scCommon = {
 
 	addSite: function(stylishOverlay) {
 		stylishOverlay.getFromContent("stylish:page-info", function(message) {
-			var code = "@namespace url(" + message.data.namespace + ");\n@-moz-document url-prefix(\"" + message.data.url + "\") {\n\n}";
+			let code = "@namespace url(" + message.data.namespace + ");\n@-moz-document url-prefix(\"" + message.data.url + "\") {\n\n}";
 			scCommon.addCode(code,message.data.url);
 		});
 	},
 
 	addDomain: function(domain) {
-		var code = "@namespace url(http://www.w3.org/1999/xhtml);\n@-moz-document domain(\"" + domain + "\") {\n\n}";
+		let code = "@namespace url(http://www.w3.org/1999/xhtml);\n@-moz-document domain(\"" + domain + "\") {\n\n}";
 		scCommon.addCode(code,domain);
 	},
 
@@ -619,7 +619,7 @@ var scCommon = {
     if (!name)
       name = "";
 
-    var style = scCommon.styleInit(null,null,null,null,name,code,null,null,null);
+    let style = scCommon.styleInit(null,null,null,null,name,code,null,null,null);
     scCommon.openEdit(win,{style: style});
 	},
 
@@ -660,8 +660,8 @@ var scCommon = {
   {
     if (!code)
       return null;
-    //var nameComment = name ? "/*" + name.replace("*/", "") + "*/" : "";
-    var nameComment = name ? "/*" + name.replace(/\*\//g,"").replace(/#/g,"") + "*/" : "";
+    //let nameComment = name ? "/*" + name.replace("*/", "") + "*/" : "";
+    let nameComment = name ? "/*" + name.replace(/\*\//g,"").replace(/#/g,"") + "*/" : "";
     // this will strip new lines rather than escape - not what we want
     //return this.ios.newURI("data:text/css," + nameComment + this.code.replace(/\n/g, "%0A"), null, null);
     return Services.io.newURI("data:text/css," + nameComment + encodeURIComponent(code),null,null);
@@ -671,7 +671,7 @@ var scCommon = {
   cleanTags: function(tags)
   {
     tags = tags.split(/[\s,]+/);
-    var uniqueTags = [];
+    let uniqueTags = [];
     tags.filter(function(tag) {
       return !/^\s*$/.test(tag);
     }).forEach(function(tag) {

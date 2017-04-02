@@ -19,13 +19,13 @@ var scOverlay = {
 
     function dBox(name,enabled)
     {
-      var id = document.getElementById(name);
+      let id = document.getElementById(name);
       if (id)
         id.setAttribute("hidden",enabled);
     }
 
     //since Mozilla removed support for "requires" in install.rdf, this checks if Stylish is enabled
-    var service = scCommon.tryService();
+    let service = scCommon.tryService();
     if (!service) {
       //Stylish not installed
       dBox("stylish-toolmenu",true);
@@ -49,7 +49,7 @@ var scOverlay = {
 
     if (scCommon.prefs.getBoolPref("custom.removecss") == true) {
       //remove stale css files
-      var file,files = Services.dirsvc.get("TmpD",Ci.nsIFile).directoryEntries;
+      let file,files = Services.dirsvc.get("TmpD",Ci.nsIFile).directoryEntries;
 
       while (files.hasMoreElements()) {
         file = files.getNext();
@@ -94,20 +94,20 @@ var scOverlay = {
     }
 
     //load a style sheet to fix the style for nasa night launch / ft deepdark
-    var selectedSkin = Services.prefs.getCharPref("general.skins.selectedSkin"),
+    let selectedSkin = Services.prefs.getCharPref("general.skins.selectedSkin"),
     darkStyle = Services.prefs.getBoolPref("extensions.stylish.custom.dark");
     if (darkStyle == true || selectedSkin == "nasanightlaunch" || selectedSkin == "nightlaunchnext" || selectedSkin == "ftdeepdark")
       scCommon.applyStyle("chrome://stylish-custom/skin/dark.css",true,true);
 
     //from stylish v1.0.6 (for toggling styles)
-    var browser = document.getElementById("appcontent"); // browser
+    let browser = document.getElementById("appcontent"); // browser
     if (!browser)
       browser = document.getElementById("frame_main_pane"); // songbird
     if (browser)
       browser.addEventListener("DOMContentLoaded",scOverlay.onPageLoad,true);
 
     //change stylish manage to be able to open style info
-    var manage = document.getElementById("stylish-manage");
+    let manage = document.getElementById("stylish-manage");
     if (manage) {
       manage.removeAttribute("oncommand");
       manage.addEventListener("command",function(event) {
@@ -116,7 +116,7 @@ var scOverlay = {
     }
 
     //only show get stylesheets menuitem for main context
-    var contentAreaMenu = document.getElementById("contentAreaContextMenu");
+    let contentAreaMenu = document.getElementById("contentAreaContextMenu");
     if (contentAreaMenu) {
       contentAreaMenu.addEventListener("popupshowing",function() {
         scOverlay.styleSheetsMenu();
@@ -126,7 +126,7 @@ var scOverlay = {
       document.getElementById("StylishGetStyleSheets").hidden = true;
 
     //set the key for reloading styles
-    var reloadStyles = document.getElementById("key_stylishCustom-reloadStyles"),
+    let reloadStyles = document.getElementById("key_stylishCustom-reloadStyles"),
     reloadKey = scCommon.prefs.getCharPref("custom.reloadstyleskey");
     if (reloadStyles && reloadKey != "")
       reloadStyles.setAttribute("key",reloadKey);
@@ -144,36 +144,86 @@ var scOverlay = {
     try {
       gBrowser.tabContainer.addEventListener("TabSelect",scOverlay.onPageLoad,false);
     } catch(e) {/*don't care if it fails, probably just means fennec or Thunderbird*/}
+
+    //e10s toggling styles
+    if (window.messageManager) {
+      window.messageManager.loadFrameScript("chrome://stylish-custom/content/frame-script-load.js",true);
+      window.messageManager.addMessageListener("stylishCustom:pageload",scOverlay.onPageLoadE10s);
+    }
+
   },
 
   styleSheetsMenu: function()
   {
-    var hidden = gContextMenu.onLink || gContextMenu.isTextSelected || gContextMenu.onImage || gContextMenu.onTextInput;
+    let hidden = gContextMenu.onLink || gContextMenu.isTextSelected || gContextMenu.onImage || gContextMenu.onTextInput;
     document.getElementById("StylishGetStyleSheets").hidden = hidden;
   },
 
   getStyleSheets: function()
   {
-    var doc = gBrowser.contentDocument,
-    styleName = doc.URL,
+    let doc,
+    e10s,
     styleText = "",
-    styleArray = [];
+    styleArray = [],
+    styleName,
+    activeURL = document.getElementById("urlbar").value;
+
+    //are we using multiprocess fox (e10s)?
+    doc = gBrowser.contentDocument;
+    try {
+      styleName = doc.url;
+    } catch (e) {
+      e10s = true;
+    }
+
+    //load styles from e10s
+    function e10sData(message)
+    {
+      if (activeURL === message.data.url) {
+        doc = message.data;
+        while (doc.array.length != 0) {
+          let style = doc.array.pop();
+          if (style.type === 0) {
+            //inline styles
+            styleArray.push(scCommon.getMsg("InlineStyleSheet") + ": " + style.num + "|||" + style.data);
+            styleText = styleText + style.data;
+          } else if (style.type === 1) {
+            //linked styles
+            scCommon.dump(style.data);
+            styleArray.push(style.data + "|||" + scCommon.readFile(style.data,"Text","web"));
+            styleText = styleText + scCommon.readFile(style.data,"Text","web");
+          }
+        }
+        scOverlay.showStyleWin(doc,styleArray,styleText,doc.url);
+        window.messageManager.removeMessageListener("stylishCustom:callback",e10sData);
+      }
+    }
+    if (e10s) {
+      if (window.messageManager) {
+        window.messageManager.loadFrameScript("chrome://stylish-custom/content/frame-script.js",true);
+        window.messageManager.addMessageListener("stylishCustom:callback",e10sData);
+      }
+      return;
+    }
+
+    //below is ignored if e10s
 
     //nothing on a blank page
     if (!doc.documentElement.firstChild)
       return;
-    //get inline styles from head element
-    var styleSheet = doc.documentElement.firstChild.childNodes;
 
-    for (var i = 0; i < styleSheet.length; i++) {
-      var tag = styleSheet[i].tagName;
+    //get inline styles from head element
+    let styleSheet = doc.documentElement.firstChild.childNodes;
+    for (let i = 0; i < styleSheet.length; i++) {
+      let tag = styleSheet[i].tagName;
       if (tag && tag.search(/style/i) != -1) {
         styleArray.push(scCommon.getMsg("InlineStyleSheet") + ": " + i + "|||" + styleSheet[i].textContent);
         styleText = styleText + styleSheet[i].textContent;
       }
     }
+
     //get linked styles: <link href="somestyle.css"/>
-    for (i = 0; i < doc.styleSheets.length; i++) {
+    for (let i = 0; i < doc.styleSheets.length; i++) {
       styleSheet = doc.styleSheets[i];
       if (styleSheet.href && styleSheet.disabled == false) {//can't use inline styles for this. if href is null = inline | and not disabled styles
         styleArray.push(styleSheet.href + "|||" + scCommon.readFile(styleSheet.href,"Text","web"));
@@ -181,15 +231,20 @@ var scOverlay = {
       }
     }
 
+    this.showStyleWin(doc,styleArray,styleText,styleName);
+  },
+
+  showStyleWin: function(doc,styleArray,styleText,styleName)
+  {
     //read @import rules
-    var imports = styleText.split("@import");
-    for (i = 0; i < imports.length; i++) {
+    let imports = styleText.split("@import");
+    for (let i = 0; i < imports.length; i++) {
       //look for a line ending with .css";
-      var search = imports[i].search(/\.css\"\;$/mi);
+      let search = imports[i].search(/\.css\"\;$/mi);
       if (search == -1)
         continue;
       //2 being the start of the line excluding the space and the quote, and 4 being .css
-      var url = imports[i].substring(2,search+4),
+      let url = imports[i].substring(2,search+4),
       //maybe someone enjoys adding urls
       text;
       if (url.search(/http\:\/\//i) == -1)
@@ -205,7 +260,6 @@ var scOverlay = {
       return;
     //display a list of stylesheets to let user choose
     window.openDialog("chrome://stylish-custom/content/stylesheets.xul","","chrome,resizable,centerscreen",styleArray,styleName);
-
   },
 
   loadImportStyle: function(url,domain,which)
@@ -214,7 +268,7 @@ var scOverlay = {
       url = "http://" + domain + url;
     }
     //download and return; it
-    var req = new XMLHttpRequest();
+    let req = new XMLHttpRequest();
     req.open("GET",url,true);
     req.onreadystatechange = function() {
       if (req.readyState == 4) {
@@ -229,54 +283,78 @@ var scOverlay = {
     req.send(null);
   },
 
+  onPageLoadE10s: function(message)
+  {
+    let t = scCommon.prefs.getIntPref("custom.styletoggle");
+    if (t == 0 || t == 2) {
+      var fakeEvent = {href: message.data};
+      scOverlay.onPageLoadTask(fakeEvent);
+    }
+  },
+
   onPageLoad: function(event)
   {
-    var intp = scCommon.prefs.getIntPref("custom.styletoggle");
-
-    if (intp == 0 ||
-        intp == 1 && event.type == "TabSelect" ||
-        intp == 2 && event.type == "DOMContentLoaded")
+    let t = scCommon.prefs.getIntPref("custom.styletoggle");
+    if (t == 0 ||
+        t == 1 && event.type == "TabSelect" ||
+        t == 2 && event.type == "DOMContentLoaded") {
       scOverlay.onPageLoadTask(event);
+    }
   },
 
   onPageLoadTask: function(event)
   {
-    var href = "";
-    if (event.type != "TabSelect") {
-      if (event.originalTarget.location != null)
-        href = event.originalTarget.location.href;
-    } else if (content != null)
-      href = window.location.href;
+    let href,
+    currentTab,
+    xul = "chrome://browser/content/browser.xul";
 
-    if (content == null) {
+    if (window.location.href !== xul)
+      currentTab = window.location.href;
+    else if (window.location.href === xul)
+      currentTab = gBrowser.currentURI.spec;
+
+    if (event.href) {//e10s
+      href = event.href;
+    } else if (event.type !== "TabSelect") {//DOMContentLoaded
+      if (event.originalTarget && event.originalTarget.location)
+        href = event.originalTarget.location.href;
+    } else if (event.type === "TabSelect" || content) {//TabSelect
+      href = currentTab;
+    }
+/*
+    something for tabselect, so far doesn't seem to be needed...
+
+      if (!content) {
+        window.removeEventListener("TabSelect",scOverlay.onPageLoad,false);
+        return;
+      }
+    if (event.type == "TabSelect")
       window.removeEventListener("TabSelect",scOverlay.onPageLoad,false);
+*/
+    if (href !== currentTab){
       return;
     }
 
-    if (event.type == "TabSelect")
-      window.removeEventListener("TabSelect",scOverlay.onPageLoad,false);
-    if (href != window.location.href)
-      return;
-    var service = scCommon.service;
+    let service = scCommon.service;
     if (!service)//missing Stylish
       return;
 
     service.list(service.REGISTER_STYLE_ON_CHANGE,{}).forEach(
       function(style)
       {
-        var tags = style.getMeta("tag",{}).toString();
+        let tags = style.getMeta("tag",{}).toString();
         //no " or | means no toggle
-        if (tags.indexOf("\"") != -1 && tags.indexOf("|") != -1){
-          var tmpNumber = tags.indexOf("\"")+1,
+        if (tags.indexOf("\"") !== -1 && tags.indexOf("|") !== -1){
+          let tmpNumber = tags.indexOf("\"")+1,
           styleStatus = null;
           tags = tags.slice(tmpNumber,tags.indexOf("\"",tmpNumber)).split(",");
-          for (var i = 0; i < tags.length; i++) {
-            var tagsTmp = tags[i].split("|");
+          for (let i = 0; i < tags.length; i++) {
+            let tagsTmp = tags[i].split("|");
             //check if the href contains a tag url or if it's * (any site)
-            if (href.indexOf(tagsTmp[0]) != -1 || tagsTmp[0] == "*") {
-              if (tagsTmp[1] == "enable")
+            if (href.indexOf(tagsTmp[0]) !== -1 || tagsTmp[0] === "*") {
+              if (tagsTmp[1] === "enable")
                 styleStatus = true;
-              else if (tagsTmp[1] == "disable")
+              else if (tagsTmp[1] === "disable")
                 styleStatus = false;
             }
           }
@@ -287,12 +365,13 @@ var scOverlay = {
         }
       }
     );
+
   },
 
   //used to force styles with @import to check the css file
   reloadStyles: function()
   {
-    var service = scCommon.service,
+    let service = scCommon.service,
     list = scCommon.prefs.getCharPref("custom.reloadstyles");
     if (list == "") {
       service.list(service.REGISTER_STYLE_ON_CHANGE,{}).forEach(
@@ -304,8 +383,8 @@ var scOverlay = {
         });
     } else {
       list = list.split(",");
-      for (var i = 0; i < list.length; i++) {
-        var style = service.find(list[i],service.REGISTER_STYLE_ON_CHANGE);
+      for (let i = 0; i < list.length; i++) {
+        let style = service.find(list[i],service.REGISTER_STYLE_ON_CHANGE);
         if (style && style.enabled == true) {
           style.enabled = false;
           style.enabled = true;
@@ -322,7 +401,7 @@ var scOverlay = {
     //only toggle on left mouse
     if (e.button != 0)
       return;
-    var popup = document.getElementById("stylish-popup");
+    let popup = document.getElementById("stylish-popup");
     if (!this.toggleToolsPopupWhich) {
       popup.openPopup(that,"end_before",0,0,false,false);
       this.toggleToolsPopupWhich = true;
@@ -335,11 +414,11 @@ var scOverlay = {
   //creates the custom app styles menus for stylish popup
   createMenu: function(id,event)
   {
-    var service = scCommon.service,
+    let service = scCommon.service,
     popup = event.target,
     styleList = [];
     //clear the menu
-    for (var i = popup.childNodes.length - 1; i >= 0; i--) {
+    for (let i = popup.childNodes.length - 1; i >= 0; i--) {
       popup.removeChild(popup.childNodes[i]);
     }
 
@@ -349,32 +428,37 @@ var scOverlay = {
         styleList.push(style);
       });
     styleList.sort(scCommon.sortByName);
-    for (i = 0; i < styleList.length; i++) {
-      var style = styleList[i];
+    for (let i = 0; i < styleList.length; i++) {
+
+      let style = styleList[i];
+
       if (id == "StylishAppStyles" && style.getMeta("type",{}).join(" ")
-              .indexOf("app") != -1 || id == "StylishAppStylesMain" &&
-              style.getMeta("type",{}).join(" ").indexOf("app") != -1)
+        .indexOf("app") != -1 || id == "StylishAppStylesMain" &&
+        style.getMeta("type",{}).join(" ").indexOf("app") != -1) {
           scOverlay.appendMenuitem(scCommon,style,i,id);
-      else if (id == "StylishEnabledStyles" &&
-              style.enabled == 1 || id == "StylishEnabledStylesMain" &&
-              style.enabled == 1)
+      } else if (id == "StylishEnabledStyles" &&
+        style.enabled == 1 || id == "StylishEnabledStylesMain" &&
+        style.enabled == 1) {
           scOverlay.appendMenuitem(scCommon,style,i,id);
-      else if (id == "StylishDisabledStyles" &&
-              style.enabled == 0 || id == "StylishDisabledStylesMain" &&
-              style.enabled == 0)
+      } else if (id == "StylishDisabledStyles" &&
+        style.enabled == 0 || id == "StylishDisabledStylesMain" &&
+        style.enabled == 0) {
           scOverlay.appendMenuitem(scCommon,style,i,id);
+      }
+
     }
   },
 
   appendMenuitem: function(com,style,i,id)
   {
-    var menuitem = document.createElement("menuitem");
+    let menuitem = document.createElement("menuitem");
 
     document.getElementById(id).firstChild.appendChild(menuitem);
     menuitem.setAttribute("label",style.name);
-    var menuitemClickEvent = function(event) {
+    let menuitemClickEvent = function(event)
+      {
       scOverlay.clickHandlerSubMenu(style.id,event);
-    };
+      };
     menuitem.addEventListener("click",menuitemClickEvent,false);
     menuitem.setAttribute("class","Style");
     menuitem.id = "Style" + i;
@@ -404,7 +488,7 @@ var scOverlay = {
     if (!document)
       var document = scCommon.getMainWindow().document;
 
-		var popup = event.target,
+		let popup = event.target,
 		addSite = document.createElementNS(stylishCommon.XULNS, "menuitem");
 
 		addSite.setAttribute("label", stylishOverlay.STRINGS.getString("writeforsite"));
@@ -415,14 +499,14 @@ var scOverlay = {
     }, false);
 		popup.appendChild(addSite);
 
-		var domain = null;
+		let domain = null;
 		try {
 			domain = gBrowser.currentURI.host;
 		} catch (e) {}
 		if (domain) {
-			var domains = [];
+			let domains = [];
 			stylishOverlay.getDomainList(domain, domains);
-			for (var i = 0; i < domains.length; i++) {
+			for (let i = 0; i < domains.length; i++) {
 				popup.appendChild(this.getDomainMenuItem(domains[i]));
 			}
 		}
@@ -437,7 +521,7 @@ var scOverlay = {
 	},
 
 	getDomainMenuItem: function(domain) {
-		var addSite = document.createElementNS(stylishCommon.XULNS, "menuitem");
+		let addSite = document.createElementNS(stylishCommon.XULNS, "menuitem");
 		addSite.setAttribute("label", stylishOverlay.STRINGS.getFormattedString("writefordomain", [domain]));
 		addSite.addEventListener("command", function() {
       scCommon.addDomain(domain);
@@ -450,10 +534,10 @@ var scOverlay = {
   //popupshowing: function(event)
   popupshowing: function()
   {
-    var i;
+    let i;
     //change rightclick action
     if (scCommon.prefs.getIntPref("custom.stylemenuitem") == 1) {
-      var styleList = document.getElementById("stylish-popup").childNodes;
+      let styleList = document.getElementById("stylish-popup").childNodes;
       for (i = 0; i < styleList.length; i++) {
         if (styleList[i].getAttribute("context") == "stylish-style-context") {
           styleList[i].addEventListener("click",function(event) {// jshint ignore:line
@@ -465,9 +549,9 @@ var scOverlay = {
     }
 
     //change colour of global styles
-    var children = document.getElementById("stylish-find-styles").parentNode.childNodes;
+    let children = document.getElementById("stylish-find-styles").parentNode.childNodes;
     for (i = 0; i < children.length; i++) {
-      var styleType = children[i].getAttribute("style-type");
+      let styleType = children[i].getAttribute("style-type");
 
       if (scCommon.prefs.getBoolPref("custom.showappstyles") == false &&
           styleType.indexOf("app") != -1)
@@ -541,7 +625,7 @@ var scOverlay = {
 
     //addons
     default: //left
-      var em = scCommon.getWin("stylishCustomInfo");
+      let em = scCommon.getWin("stylishCustomInfo");
       if (em)
         em.focus();
       else
@@ -560,7 +644,7 @@ var scOverlay = {
       event.stopPropagation();
     break;
     default: //left
-      var service = scCommon.service;
+      let service = scCommon.service;
       stylishOverlay.toggleStyle(service.find(id,service.REGISTER_STYLE_ON_CHANGE));
     break;
     }

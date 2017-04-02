@@ -23,21 +23,21 @@ var scImport = {
 
   createStyleList: function()
   {
-    //var scrollPos = this.stylesTree.treeBoxObject.getFirstVisibleRow();
-    var styleAmount = 0;
+    //let scrollPos = this.stylesTree.treeBoxObject.getFirstVisibleRow();
+    let styleAmount = 0;
     styleList = [];
 
     //remove all children from element
     scCommon.removeChild(styleListE);
 
     //saved path or user choice
-    var PickOrUsePath = false,
+    let PickOrUsePath = false,
     fp;
     if (scCommon.prefs.prefHasUserValue("custom.importpath") ||
         locationE.value != "")//if location entered
       PickOrUsePath = "Path";
     else {
-      var importWin = scCommon.getWin("stylishCustomImport");
+      let importWin = scCommon.getWin("stylishCustomImport");
       const nsIFilePicker = Ci.nsIFilePicker;
       fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
       fp.init(importWin,scCommon.getMsg("ImportTitle"),nsIFilePicker.modeGetFolder);
@@ -47,7 +47,7 @@ var scImport = {
 
     if (PickOrUsePath != false) {
       //saved path or user choice
-      var file;
+      let file;
       if (PickOrUsePath == "FilePicker") {
         file = fp.file;
         locationE.value = file.path;
@@ -57,10 +57,10 @@ var scImport = {
       }
 
       //if no files abort
-      var entries = file.directoryEntries;
+      let entries = file.directoryEntries;
       //make an array of .css/.xml files
       while(entries.hasMoreElements()) {
-        var entry = entries.getNext();
+        let entry = entries.getNext();
         entry.QueryInterface(Ci.nsIFile);
         if (entry.leafName.search(/\.css$/i) != -1 || entry.leafName.search(/\.xml$/i) != -1)
           styleList.push(entry);
@@ -68,8 +68,8 @@ var scImport = {
       styleList.sort(scCommon.sortByleafName);
 
       //populate the list
-      for (var i = 0; i < styleList.length; i++) {
-        var d = document,
+      for (let i = 0; i < styleList.length; i++) {
+        let d = document,
         item = d.createElement("treeitem"),
         row = d.createElement("treerow"),
         nameCell = d.createElement("treecell"),
@@ -77,7 +77,7 @@ var scImport = {
         enableCell = d.createElement("treecell"),
         typeCell = d.createElement("treecell");
 
-        var styleName = styleList[i].leafName.replace(/\.css$/i,"").replace(/\.xml$/i,"");
+        let styleName = styleList[i].leafName.replace(/\.css$/i,"").replace(/\.xml$/i,"");
         nameCell.setAttribute("label",styleName);
         nameCell.setAttribute("class","nameCell");
         nameCell.setAttribute("stylename",styleList[i].leafName);
@@ -112,7 +112,7 @@ var scImport = {
 
   onSelect: function(event)
   {
-    var row = { },col = { },child = { };
+    let row = { },col = { },child = { };
     this.stylesTree.treeBoxObject.getCellAt(event.clientX,event.clientY,row,col,child);
     this.selected = row.value;
   },
@@ -122,7 +122,7 @@ var scImport = {
     //are there any styles to import
     if (!styleListE.hasChildNodes())
       return;
-    var importE = document.getElementById("save"),
+    let importE = document.getElementById("save"),
     styleReg = scCommon.prefs.getBoolPref("styleRegistrationEnabled");
     //disable the import button till we finish
     importE.setAttribute("disabled",true);
@@ -130,7 +130,7 @@ var scImport = {
     if (styleReg == true)
       scCommon.prefs.setBoolPref("styleRegistrationEnabled",false);
 
-    var children = styleListE.childNodes,
+    let children = styleListE.childNodes,
     oldStyleList = [];
     service.list(service.REGISTER_STYLE_ON_CHANGE,{}).forEach(function(style) {
         oldStyleList.push(style);
@@ -138,19 +138,19 @@ var scImport = {
 
     function importStylesLoop(styleEnabled,styleNameType,styleName)
       {
-      var name,enabled,code,styleUrl,updateUrl,md5Url,applyBackgroundUpdates;
+      let name,enabled,code,styleUrl,updateUrl,md5Url,applyBackgroundUpdates;
       for (i2 = 0; i2 < styleList.length; i2++) {
         if (styleNameType != styleList[i2].leafName)
           continue;
 
-        var overWrite = document.getElementById("overWriteStyles").checked,
+        let overWrite = document.getElementById("overWriteStyles").checked,
         fileData = scCommon.readFile(styleList[i2].path,"Text"),
         style = "";
 
         //CSS
         if (styleNameType.search(/\.css$/i) >= 0) {
           //overwrite?
-          var styleExists = null;
+          let styleExists = null;
           for (iT = 0; iT < oldStyleList.length; iT++) {
             if (styleName == oldStyleList[iT].name)
               styleExists = oldStyleList[iT].id;
@@ -172,11 +172,11 @@ var scImport = {
 
         //XML
         fileData = fileData.replace(/\n/g,"ChoGGisezNewLine");
-        var domParser = new DOMParser();
+        let domParser = new DOMParser();
         fileData = domParser.parseFromString(fileData,"text/xml").firstChild.childNodes;
         //fileData = scCommon.parseXML(fileData).firstChild.childNodes;
         //remove text nodes from xml and create style list
-        var styles = [];
+        let styles = [];
         for (iT = 0; iT < fileData.length; iT++) {
           if (fileData[iT] == "[object Element]" && fileData[iT].hasAttribute("name"))
             styles.push(fileData[iT]);
@@ -185,7 +185,7 @@ var scImport = {
         for (i3 = 0; i3 < styles.length; i3++) {
           name = styles[i3].getAttribute("name");
           //re-add line feeds/double quotes
-          var styleData = styles[i3].firstChild;
+          let styleData = styles[i3].firstChild;
           if (styleData == "[object Text]")
             styleData = styles[i3].firstChild.nextSibling;
 
@@ -220,16 +220,16 @@ var scImport = {
       }
     }
 
-    var i1,i2,i3,iT;
+    let i1,i2,i3,iT;
     for (i1 = 0; i1 < children.length; i1++) {
 
-      var StyleListItemImport = children[i1].firstChild.firstChild.nextSibling.getAttribute("value"),
+      let StyleListItemImport = children[i1].firstChild.firstChild.nextSibling.getAttribute("value"),
       StyleListItemEnabled = children[i1].firstChild.firstChild.nextSibling.nextSibling.getAttribute("value");
 
       if (StyleListItemImport !== "true")
         continue;
 
-      var styleNameType = children[i1].getAttribute("styleNameType"),
+      let styleNameType = children[i1].getAttribute("styleNameType"),
       styleName = children[i1].getAttribute("styleName");
 
       if (StyleListItemEnabled == "true")
@@ -250,7 +250,7 @@ var scImport = {
   //save path
   unload: function()
   {
-    var locValue = document.getElementById("Location").value;
+    let locValue = document.getElementById("Location").value;
     scCommon.prefs.setCharPref("custom.importpath",locValue);
   }
 

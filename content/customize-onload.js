@@ -4,7 +4,7 @@ if (typeof Ci === "undefined") var Ci = Components.interfaces;
 if (typeof Cu === "undefined") var Cu = Components.utils;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
-//cbCommon.dump();
+//scCommon.dump();
 
 var scCustomize = {
 
@@ -21,7 +21,7 @@ var scCustomize = {
   {
     function checkToolBox()
     {
-      var addE = scCustomize.addElements,
+      let addE = scCustomize.addElements,
       customizeWindow = document.getElementById("CustomizeToolbarWindow");
       if (customizeWindow)
         addE(customizeWindow);
@@ -29,14 +29,15 @@ var scCustomize = {
         addE(document.getElementById("CustomizeToolbarSheet"),true);
     }
 
-    if (window.parent.document.getElementById("stylishCustomToolbox"))//OSX
+    if (window.parent.document.getElementById("stylishCustomToolbox")) {//OSX
       checkToolBox();
-    else if ("arguments" in window && window.arguments[0] &&
-        window.arguments[0].id == "stylishCustomToolbox")//win/lin
+    } else if ("arguments" in window && window.arguments[0] &&
+        window.arguments[0].id == "stylishCustomToolbox") {//win/lin
       checkToolBox();
-    else if (window.frameElement && "toolbox" in window.frameElement &&
-        window.frameElement.toolbox.id == "stylishCustomToolbox")//also OSX?
+    } else if (window.frameElement && "toolbox" in window.frameElement &&
+        window.frameElement.toolbox.id == "stylishCustomToolbox") {//also OSX?
       checkToolBox();
+    }
   },
 
   addElements: function(customizeWindow,osx)
@@ -65,7 +66,7 @@ var scCustomize = {
     //persistent window position
     if (document.getElementById("CustomizeToolbarWindowStylish") &&
         "arguments" in window) {//not OSX (it uses a popup with no arguments)
-      var xy = scCommon.prefs.getCharPref("custom.customizexy").split(",");
+      let xy = scCommon.prefs.getCharPref("custom.customizexy").split(",");
       window.moveTo(xy[0],xy[1]);
     }
 
@@ -81,14 +82,14 @@ var scCustomize = {
       //and since we have the id then we'll change the title too
       customizeWindow.setAttribute("title",scCommon.getMsg("CustomizeToolbar"));
     }
-    var customizeWindow = document.getElementById("CustomizeToolbarWindowStylish");
+    let customizeWindow = document.getElementById("CustomizeToolbarWindowStylish");
     if (customizeWindow)
       eventlisteners(customizeWindow);
     else
       eventlisteners(document.getElementById("CustomizeToolbarSheet"));
 
     //which search to use (findbar has a tendency to **** up so just show oldsearchbar)
-    var searchCustomize = document.getElementById("SearchAreaOld");
+    let searchCustomize = document.getElementById("SearchAreaOld");
     if (searchCustomize && searchCustomize.style)
       searchCustomize.style.display = "-moz-box";
     if (scCustomize.SearchAreaOld.style)
@@ -99,7 +100,7 @@ var scCustomize = {
   {
     function setScreenPos(idTmp)
     {
-      var oldPos = scCommon.prefs.getCharPref("custom.customizexy").split(","),
+      let oldPos = scCommon.prefs.getCharPref("custom.customizexy").split(","),
       x = idTmp.boxObject.screenX-8,
       y = idTmp.boxObject.screenY-30;
 
@@ -110,7 +111,7 @@ var scCustomize = {
     function eventlisteners(el) {
       el.removeEventListener("drag",scCustomize.loadToolTips,true);
     }
-    var customizeWindow = document.getElementById("CustomizeToolbarWindowStylish");
+    let customizeWindow = document.getElementById("CustomizeToolbarWindowStylish");
     if (customizeWindow) {
       //remove eventlisteners
       eventlisteners(customizeWindow);
@@ -142,7 +143,7 @@ var scCustomize = {
     }
     function show(id,label)
     {
-      var element = document.getElementById(id);
+      let element = document.getElementById(id);
       if (element) {
         element.style.display = "-moz-box";
         if (label) {
@@ -209,6 +210,7 @@ var scCustomize = {
     set("StyleId","wrapper-StyleIdItem");
     set("RemoveXUL","wrapper-RemoveXUL");
     set("RainbowPicker","wrapper-RainbowPicker");
+    //set("ImportStyle","wrapper-ImportStyle");
 
     //show the buttons for customize
     show("RainbowPicker");

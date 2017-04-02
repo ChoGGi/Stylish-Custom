@@ -1,6 +1,6 @@
+"use strict";
 //the below is (mostly) from Stylish v0.5.9, so different license applies
 
-"use strict";
 const Cu = Components.utils;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
@@ -25,7 +25,7 @@ var scSpecifySites = {
 
   addSpecifySiteEntry: function()
   {
-    var typeGroup = document.getElementById("type").selectedItem,
+    let typeGroup = document.getElementById("type").selectedItem,
     url = this.urlE.value,
     uri,ios;
 
@@ -56,7 +56,7 @@ var scSpecifySites = {
     break;
     case "domain":
       //The user might have mistakenly included the protocol. Let's strip it.
-      var position = url.indexOf("://");
+      let position = url.indexOf("://");
       if (position > -1)
         url = url.substring(position + 3,url.length);
     break;
@@ -67,7 +67,7 @@ var scSpecifySites = {
     }
 
     //add it to the list
-    var d = document,
+    let d = document,
     item = d.createElement("treeitem"),
     row = d.createElement("treerow"),
     typeCell = d.createElement("treecell"),
@@ -88,8 +88,8 @@ var scSpecifySites = {
 
   close: function()
   {
-    var data = [],currentRow;
-    for (var i = 0; i < this.siteListE.childNodes.length; i++) {
+    let data = [],currentRow;
+    for (let i = 0; i < this.siteListE.childNodes.length; i++) {
       currentRow = this.siteListE.childNodes[i].firstChild;
       data[i] = {type: currentRow.firstChild.getAttribute("value"),site: currentRow.childNodes[1].getAttribute("label")};
     }
@@ -118,9 +118,9 @@ var scSpecifySites = {
 
   deleteSiteList: function()
   {
-    var itemsToRemove = this.getSelectedStyles();
+    let itemsToRemove = this.getSelectedStyles();
 
-    for (var i = 0; i < itemsToRemove.length; i++) {
+    for (let i = 0; i < itemsToRemove.length; i++) {
       itemsToRemove[i].parentNode.removeChild(itemsToRemove[i]);
     }
   },
@@ -132,14 +132,14 @@ var scSpecifySites = {
 
   getSelectedStyles: function()
   {
-    var selectedItems = [],
+    let selectedItems = [],
     rangeCount = this.siteListTreeE.view.selection.getRangeCount();
 
-    for (var i = 0; i < rangeCount; i++) {
-      var start = {};
-      var end = {};
+    for (let i = 0; i < rangeCount; i++) {
+      let start = {};
+      let end = {};
       this.siteListTreeE.view.selection.getRangeAt(i,start,end);
-      for (var c = start.value; c <= end.value; c++) {
+      for (let c = start.value; c <= end.value; c++) {
         selectedItems[selectedItems.length] = this.siteListTreeE.view.getItemAtIndex(c);
       }
     }

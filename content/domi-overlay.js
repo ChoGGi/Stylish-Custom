@@ -1,6 +1,6 @@
+"use strict";
 //the below is from Stylish v1.4.3/2.0.4, so different license applies
 
-"use strict";
 if (typeof Cu === "undefined") var Cu = Components.utils;
 Cu.import("chrome://stylish-custom/content/common.jsm");
 //cbCommon.dump();
@@ -19,7 +19,7 @@ var scDomi = {
 
   showSelectors: function(event)
   {
-    var selectors = this.generateSelectors(viewer.selectedNode),
+    let selectors = this.generateSelectors(viewer.selectedNode),
     popup = event.target;
     selectors.forEach(function(selector)
     {
@@ -29,7 +29,7 @@ var scDomi = {
 
   addSelectorMenuItem: function(popup,selector)
   {
-    var menuitem = document.createElement("menuitem");
+    let menuitem = document.createElement("menuitem");
     popup.appendChild(menuitem);
     menuitem.setAttribute("label",selector);
     menuitem.addEventListener("command",function(event) {scDomi.copySelectorToClipboard(event);},false);
@@ -46,7 +46,7 @@ var scDomi = {
     if (!(node instanceof Element))
       return;
 
-    var selectors = [];
+    let selectors = [];
     //element selector
     selectors.push(node.nodeName + ",");
     //id selector
@@ -54,14 +54,14 @@ var scDomi = {
       selectors.push("#" + node.getAttribute("id") + ",");
     //class selector
     if (node.hasAttribute("class")) {
-      var classes = node.getAttribute("class").split(/\s+/);
+      let classes = node.getAttribute("class").split(/\s+/);
       selectors.push("." + classes.join(".") + ",");
     }
     //attribute selectors. it's pointless to create a complicated attribute selector including an id or only a class
     //if (node.attributes.length > 1 || (node.attributes.length == 1 && node.attributes[0].name != "id" && node.attributes[0].name != "class")) {
     if (node.attributes.length > 1 || (node.attributes.length == 1 && node.attributes[0].name != "id" && node.attributes[0].name != "class")) {
-      var selector = node.nodeName;
-      for (var i = 0; i < node.attributes.length; i++) {
+      let selector = node.nodeName;
+      for (let i = 0; i < node.attributes.length; i++) {
         if (node.attributes[i].name != "id")
           selector += "[" + node.attributes[i].name + "=\"" + node.attributes[i].value + "\"]";
       }

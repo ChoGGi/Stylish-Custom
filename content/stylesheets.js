@@ -19,10 +19,10 @@ var scStylesheets = {
 
   createStyleSheetList: function(array)
   {
-    var styleList = document.getElementById("styleList"),
+    let styleList = document.getElementById("styleList"),
     checkbox,
     split;
-    for (var i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
       checkbox = document.createElement("checkbox");
       split = array[i].split("|||",2);
       checkbox.setAttribute("label",split[0]);
@@ -34,12 +34,12 @@ var scStylesheets = {
 
   exit: function()
   {
-    var styleList = document.getElementById("styleList").childNodes,
+    let styleList = document.getElementById("styleList").childNodes,
     styleText = "",
     count = 0;
     //loop through the checkboxes and grab the text
-    for (var i = 0; i < styleList.length; i++) {
-      var checkbox = styleList[i];
+    for (let i = 0; i < styleList.length; i++) {
+      let checkbox = styleList[i];
       if (checkbox.getAttribute("checked") == "true") {
         count++;
         styleText = "\n/*----- " +
@@ -60,13 +60,13 @@ var scStylesheets = {
     if (count == 0)
       return;
     //add an html namespace as i somewhat doubt everybody will (only slightly) and wrap it in an @-moz-doc-domain
-    //var domain = window.opener.gBrowser.selectedTab.linkedBrowser.documentURI.host;
-    var domain = window.opener.gBrowser.currentURI.host;
+    //let domain = window.opener.gBrowser.selectedTab.linkedBrowser.documentURI.host;
+    let domain = window.opener.gBrowser.currentURI.host;
     styleText = '@namespace url(http://www.w3.org/1999/xhtml);\n@-moz-document domain("' + domain + '"){\n' + styleText + "\n}";
     //load it into stylish
     scCommon.addCode(styleText,this.styleName);
     /*
-    var style = scCommon.styleInit(null,null,null,null,this.styleName,styleText,null,null,null),
+    let style = scCommon.styleInit(null,null,null,null,this.styleName,styleText,null,null,null),
     winName = scCommon.getWindowName("stylishEdit");
     scCommon.openEdit(winName,{style: style});
     */

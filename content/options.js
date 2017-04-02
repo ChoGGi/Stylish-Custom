@@ -10,7 +10,7 @@ var scOptions = {
 
   init: function()
   {
-    var win = this.mainWin;
+    let win = this.mainWin;
     //since Mozilla removed support for "requires" in install.rdf, this checks if Stylish is enabled
     if (!scCommon.tryService()){
       win.alert("Stylish not detected, please install/enable");
@@ -28,7 +28,7 @@ var scOptions = {
         document.getElementById(id).value = scCommon.prefs.getIntPref(pref);
       break;
       case "b":
-        var idTmp = document.getElementById(id);
+        let idTmp = document.getElementById(id);
         if (scCommon.prefs.getBoolPref(pref) == true)
           idTmp.value = 1;
         else
@@ -79,9 +79,9 @@ var scOptions = {
       document.getElementById("ManageRadio").lastChild.style.display = "none";
 
     //disable remove button if no css files
-    var files = Services.dirsvc.get("TmpD",Ci.nsIFile).directoryEntries;
+    let files = Services.dirsvc.get("TmpD",Ci.nsIFile).directoryEntries;
     while (files.hasMoreElements()) {
-      var entry = files.getNext();
+      let entry = files.getNext();
       entry.QueryInterface(Ci.nsIFile);
       if (entry.leafName.indexOf("Stylish-Custom") != -1 && entry.leafName.indexOf(".css") != -1)
         document.getElementById("RemoveCSS").disabled = false;
@@ -92,7 +92,7 @@ var scOptions = {
   browse: function()
   {
     const nsIFilePicker = Ci.nsIFilePicker;
-    var winEl = scCommon.getWin("stylishCustomOptions"),
+    let winEl = scCommon.getWin("stylishCustomOptions"),
     fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 
     fp.init(winEl,scCommon.getMsg("BrowseTitle"),nsIFilePicker.modeOpen);
@@ -103,10 +103,10 @@ var scOptions = {
 
   removeStaleCSS: function()
   {
-    var files = Services.dirsvc.get("TmpD",Ci.nsIFile).directoryEntries;
+    let files = Services.dirsvc.get("TmpD",Ci.nsIFile).directoryEntries;
 
     while(files.hasMoreElements()) {
-      var entry = files.getNext();
+      let entry = files.getNext();
       entry.QueryInterface(Ci.nsIFile);
       if (entry.leafName.indexOf("Stylish-Custom") != -1 && entry.leafName.indexOf(".css") != -1)
         entry.remove(false);
@@ -117,7 +117,7 @@ var scOptions = {
   //when you press a radio for statusbar icon
   statusbar: function(view)
   {
-    var StatusbarIcon = this.mainWin.document.getElementById("stylish-custom-panel");
+    let StatusbarIcon = this.mainWin.document.getElementById("stylish-custom-panel");
     scCommon.prefs.setBoolPref("custom.statusbaricon",view);
 
     if (view == true)
@@ -129,7 +129,7 @@ var scOptions = {
   //when you press a radio for tool menu
   toolmenu: function(view)
   {
-    var ToolMenu = this.mainWin.document.getElementById("stylish-toolmenu");
+    let ToolMenu = this.mainWin.document.getElementById("stylish-toolmenu");
     scCommon.prefs.setBoolPref("custom.toolbar",view);
 
     if (view == true)
@@ -173,7 +173,7 @@ var scOptions = {
   getStyleSheets: function(b)
   {
     scCommon.prefs.setBoolPref("custom.stylesheetmenuitem",b);
-    var getStyleSheets = this.mainWin.document.getElementById("StylishGetStyleSheets");
+    let getStyleSheets = this.mainWin.document.getElementById("StylishGetStyleSheets");
     if (!getStyleSheets)
       return;
 
@@ -212,7 +212,7 @@ var scOptions = {
   exImport: function(i)
   {
     scCommon.prefs.setIntPref("custom.eximportlocation",i);
-    var doc = this.mainWin.document,
+    let doc = this.mainWin.document,
     StylishImport = doc.getElementById("StylishImport"),
     StylishImportMain = doc.getElementById("StylishImportMain"),
     StylishExport = doc.getElementById("StylishExport"),
@@ -237,7 +237,7 @@ var scOptions = {
   styleMenus: function(i)
   {
     scCommon.prefs.setIntPref("custom.stylemenulocation",i);
-    var doc = this.mainWin.document,
+    let doc = this.mainWin.document,
     StylishAppStyles = doc.getElementById("StylishAppStyles"),
     StylishAppStylesMain = doc.getElementById("StylishAppStylesMain"),
     StylishEnabledStyles = doc.getElementById("StylishEnabledStyles"),
@@ -268,7 +268,7 @@ var scOptions = {
   styleInfo: function(i)
   {
     scCommon.prefs.setIntPref("custom.infolocation",i);
-    var doc = this.mainWin.document,
+    let doc = this.mainWin.document,
     StylishInfo = doc.getElementById("StylishInfo"),
     StylishInfoMain = doc.getElementById("StylishInfoMain");
     if (!StylishInfo)
@@ -332,7 +332,7 @@ var scOptions = {
       scCommon.prefs.setIntPref("custom.editortimeout",document.getElementById("EditorTimeText").value);
     break;
     case "ScratchpadHeight":
-      var height = document.getElementById("ScratchpadHeightText").inputField.value;
+      let height = document.getElementById("ScratchpadHeightText").inputField.value;
       scCommon.prefs.setIntPref("custom.scratchpadheight",height);
     break;
     }
@@ -341,22 +341,22 @@ var scOptions = {
   //text to dom tree
   parseXML: function(fileData)
   {
-    var domParser = new DOMParser();
+    let domParser = new DOMParser();
     return domParser.parseFromString(fileData,"text/xml");
   },
 
   exportSettings: function()
   {
-    var winEl = scCommon.getWin("stylishCustomOptions");
+    let winEl = scCommon.getWin("stylishCustomOptions");
 
     //make a file picker
     const nsIFilePicker = Ci.nsIFilePicker;
-    var fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
+    let fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
     fp.init(winEl,scCommon.getMsg("ExportSettings"),nsIFilePicker.modeSave);
     fp.appendFilter("XML (*.xml)","*.xml");
     if (fp.show() == nsIFilePicker.returnCancel)
       return;
-    var file = fp.file,
+    let file = fp.file,
 
     //create xml doc
     doc = document.implementation.createDocument("","",null),
@@ -366,7 +366,7 @@ var scOptions = {
 
     function createPrefs(prefs,array,path)
     {
-      for (var i = 0; i < array.length; i++) {
+      for (let i = 0; i < array.length; i++) {
         prefType = prefs.getPrefType(array[i]);
         switch(prefType) {
         case 32://char
@@ -396,7 +396,7 @@ var scOptions = {
 
     function makePref(prefsText,path)
     {
-      var prefs = Services.prefs.getBranch(prefsText),
+      let prefs = Services.prefs.getBranch(prefsText),
       array = prefs.getChildList("",{});
       createPrefs(prefs,array,path);
     }
@@ -405,7 +405,7 @@ var scOptions = {
 
     doc.appendChild(docRoot);
 
-    var oFOStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
+    let oFOStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
     oFOStream.init(file,parseInt("0x02",16)|parseInt("0x08",16)|parseInt("0x20",16),parseInt("0664",8),0); // write, create, truncate
     (new XMLSerializer()).serializeToStream(doc,oFOStream,""); // rememeber, doc is the DOM tree
     oFOStream.close();
@@ -415,35 +415,35 @@ var scOptions = {
   {
     //make a file picker
     const nsIFilePicker = Ci.nsIFilePicker;
-    var someWin = scCommon.getWin("stylishCustomOptions"),
+    let someWin = scCommon.getWin("stylishCustomOptions"),
     fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 
     fp.init(someWin,scCommon.getMsg("ImportSettings"),nsIFilePicker.modeOpen);
     fp.appendFilter("XML (*.xml)","*.xml");
     if (fp.show() == nsIFilePicker.returnCancel)
       return;
-    var prefsFile;
+    let prefsFile;
     if (!scCommon.getWin("main-window"))
       prefsFile = scCommon.readFile(fp.file.path);
     else {//fennec has one window
-      var str = {},
+      let str = {},
       charset = "UTF-8",
       is = Cc["@mozilla.org/intl/converter-input-stream;1"].createInstance(Ci.nsIConverterInputStream);
 
       const replacementChar = Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER;
       is.init(fp.file,charset,0,replacementChar);
-      //var tmp = is.readString(-1,str);
+      //let tmp = is.readString(-1,str);
       prefsFile = this.parseXML(str.value);
     }
 
     //loop through the prefs
-    var children = prefsFile.firstChild.childNodes;
+    let children = prefsFile.firstChild.childNodes;
 
-    for (var i = 0; i < children.length; i++) {
+    for (let i = 0; i < children.length; i++) {
       if (children[i] != "[object Element]" ||
           !children[i].hasAttribute("name"))
         continue;
-      var name = children[i].getAttribute("name"),
+      let name = children[i].getAttribute("name"),
       //is new settings
       prefs = Services.prefs.getBranch("extensions.stylish.");
       //or old
@@ -452,7 +452,7 @@ var scOptions = {
         prefs = Services.prefs.getBranch("extensions.stylish.custom.");
       if (prefs.getPrefType(name) < 1)
         continue;
-      var type = children[i].getAttribute("type"),
+      let type = children[i].getAttribute("type"),
       data = children[i].getAttribute("data");
       switch(type) {
       case "int":

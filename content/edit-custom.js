@@ -13,7 +13,7 @@ var scEdit = {
   {
     //remove findbar if it isn't being used
     if (scCommon.prefs.getBoolPref("custom.newsearch") == false) {
-      var findbar = document.getElementById("findbar");
+      let findbar = document.getElementById("findbar");
       if (findbar)
         findbar.parentNode.removeChild(findbar);
     }
@@ -22,12 +22,12 @@ var scEdit = {
   init: function()
   {
 
-    var service = scCommon.service;
+    let service = scCommon.service;
 
     //move error box below the save/close buttons
     if (scCommon.prefs.getIntPref("custom.errorboxplacement") == 1) {
       //clone and remove old error area
-      var toolbox = document.getElementById("stylishCustomToolbox"),
+      let toolbox = document.getElementById("stylishCustomToolbox"),
       errorsArea = document.getElementById("errorsArea"),
       clonedErrorArea = errorsArea.cloneNode(true);
       toolbox.appendChild(clonedErrorArea);
@@ -36,34 +36,43 @@ var scEdit = {
     }
 
     //set height of scratchpad
-    var scratchPad = document.getElementById("ScratchPad");
+    let scratchPad = document.getElementById("ScratchPad");
     if (scratchPad) {
-      var height = scCommon.prefs.getIntPref("custom.scratchpadheight");
+      let height = scCommon.prefs.getIntPref("custom.scratchpadheight");
       scratchPad.setAttribute("rows",height);
     }
 
     //move the cloned dialog down a bit
-    if ("arguments" in window && typeof window.arguments[1] != "undefined" && window.arguments[1] == "Cloned")
+    if ("arguments" in window &&
+        typeof window.arguments[1] != "undefined" &&
+        window.arguments[1] == "Cloned") {
       window.moveTo(window.arguments[4],window.arguments[3]+30);
       //window.moveBy(0,30);
+    }
 
     //auto-update the titlebar with the name
-    if (nameE)
+    if (nameE) {
       nameE.addEventListener("input",function() {
         scEdit.updateTitlebar(this.inputField.value);
       },false);
+    }
 
-    //make sure bottom bar isn't hidden if others are
+    //make sure bottom bar isn't hidden if others are, or else it's annoying to restore a working GUI
     function e(id)
       {
       if (document.getElementById(id).getAttribute("collapsed") == "true")
         return true;
-    }
-    if (e("InsertToolbar") && e("PageToolbar") && e("NameToolbar") && e("TextToolbar") && e("BottomToolbar"))
+      }
+    if (e("InsertToolbar") &&
+        e("PageToolbar") &&
+        e("NameToolbar") &&
+        e("TextToolbar") &&
+        e("BottomToolbar")) {
       document.getElementById("BottomToolbar").setAttribute("collapsed",false);
+      }
 
     //get key / enabled status from prefs
-    var ImportantKey = prefs.getCharPref("autoimportant.key"),
+    let ImportantKey = prefs.getCharPref("autoimportant.key"),
     ImportantStatus = prefs.getBoolPref("autoimportant.enabled"),
     importantText = document.getElementById("ImportantText"),
     importantEnabled = document.getElementById("ImportantEnabled");
@@ -88,12 +97,12 @@ var scEdit = {
     }
 
     //change font for edit area
-    var editfont = scCommon.prefs.getCharPref("custom.editfont").split(":");
+    let editfont = scCommon.prefs.getCharPref("custom.editfont").split(":");
     if (editfont[2]) {
       codeE.style.fontFamily = editfont[0];
       codeE.style.fontSize = editfont[1];
       codeE.style.color = editfont[2];
-      var scratchPadEl = document.getElementById("ScratchPad");
+      let scratchPadEl = document.getElementById("ScratchPad");
       if (scratchPadEl) {
         scratchPadEl.style.fontFamily = editfont[0];
         scratchPadEl.style.fontSize = editfont[1];
@@ -102,7 +111,7 @@ var scEdit = {
     }
 
     //set the update check status
-    var updateURL = null,
+    let updateURL = null,
     updateCheck = document.getElementById("UpdateCheck");
 
     if (updateCheck) {
@@ -112,13 +121,15 @@ var scEdit = {
       if (updateURL.value && updateURL.value != "") {
         if (updateURL.value.search(/ChoGGiSezNOUPDATE/) != -1)
           updateCheck.removeAttribute("checked");
-        else updateCheck.checked = true;
+        else
+          updateCheck.checked = true;
+      } else {
+        updateCheck.style.display = "none";
       }
-      else updateCheck.style.display = "none";
     }
 
     //for switch to install
-    var style;
+    let style;
     //from Stylish v1.0.2
     /*
     if (typeof window.arguments[0] != '"undefined"') {
@@ -132,7 +143,7 @@ var scEdit = {
       }
     }
     */
-    var styleId = scCommon.getStyleId(document),
+    let styleId = scCommon.getStyleId(document),
     toggleE = document.getElementById("ToggleEnabled");
 
     if (styleId)
@@ -145,7 +156,7 @@ var scEdit = {
     if (style.id == "0") {
       if (toggleE)
         toggleE.checked = true;
-      var bottom_SwitchToInstall = document.getElementById("Bottom_SwitchToInstall");
+      let bottom_SwitchToInstall = document.getElementById("Bottom_SwitchToInstall");
       if (bottom_SwitchToInstall) {
         if (style.url != null)
           bottom_SwitchToInstall.style.display = "-moz-box";
@@ -169,12 +180,12 @@ var scEdit = {
     scEdit.toggleRainbow();
 
     //some stuff needs a delay
-    var observer = {
+    let observer = {
       observe: function()
       {
 
         //toggle scratchpad
-        var scratchPad = document.getElementById("ScratchPad");
+        let scratchPad = document.getElementById("ScratchPad");
         if (scratchPad)
           scratchPad.setAttribute("collapsed",scCommon.prefs.getBoolPref("custom.editorscratchpad"));
         //change focus/move caret to start of code
@@ -186,17 +197,18 @@ var scEdit = {
         }
 
         //add app name to title
-        var whichTitle = scCommon.prefs.getIntPref("custom.editorapptitle");
+        let whichTitle = scCommon.prefs.getIntPref("custom.editorapptitle");
         function setTitle(appName)
         {
-          var nameEl = document.getElementById("name");
+          let nameEl = document.getElementById("name");
           if (nameEl && whichTitle == 0)
             document.title = nameEl.inputField.value;
           else if (!nameEl && whichTitle == 0)
             document.title = "";
           else if (nameEl)
             document.title = appName + " : " + nameEl.inputField.value;
-          else document.title = appName + " :";
+          else
+            document.title = appName + " :";
         }
         function setName(window,appInitials)
         {
@@ -212,20 +224,22 @@ var scEdit = {
         if (style.id == 0) {//new style
           if (document.title.indexOf(":") == -1)
             document.title = "!: " + document.title;
-          else document.title = "!" + document.title;
+          else
+            document.title = "!" + document.title;
         }
 
         //add saved search text
-        var searchText = scCommon.prefs.getCharPref("custom.searchtext"),
+        let searchText = scCommon.prefs.getCharPref("custom.searchtext"),
         newSearch = scCommon.prefs.getBoolPref("custom.newsearch"),
         saveSearch = scCommon.prefs.getBoolPref("custom.searchtextsave");
 
         if (saveSearch == true) {
           //which search box to use
-          var whichSearch;
-          if (newSearch == true) {
+          let whichSearch;
+          if (newSearch == true)
             whichSearch = document.getElementById("findbar");
-          } else whichSearch = document.getElementById("SearchBox");
+          else
+            whichSearch = document.getElementById("SearchBox");
 
           //if user removed search box
           if (whichSearch) {
@@ -239,7 +253,8 @@ var scEdit = {
                 whichSearch.getElement("find-previous").setAttribute("disabled",false);
               }
             }
-            else whichSearch.value = searchText; //old search
+            else
+              whichSearch.value = searchText; //old search
           }
         }
 
@@ -254,11 +269,11 @@ var scEdit = {
         timer.cancel();
       }
     };
-    var timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+    let timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
     timer.init(observer,100,Ci.nsITimer.TYPE_ONE_SHOT);
 
     //picking a seachbox  (findbar has a tendency to **** up so sticking this at the end)
-    var searchAreaOld = document.getElementById("SearchAreaOld"),
+    let searchAreaOld = document.getElementById("SearchAreaOld"),
     findbar = document.getElementById("findbar");
 
     if (scCommon.prefs.getBoolPref("custom.newsearch") == false) {
@@ -281,8 +296,9 @@ var scEdit = {
     //check if rainbowpicker is enabled
     AddonManager.getAddonByID("{9c1acee4-c567-4e71-8d1b-edf314afef97}",function(addon)
     {
-      var rain1 = document.getElementById("pick-color-rainbowpicker"),
+      let rain1 = document.getElementById("pick-color-rainbowpicker"),
       rain2 = document.getElementById("RainbowPicker");
+
       if (addon && addon.isActive == true) {
         if (rain1) {
           rain1.setAttribute("installed",1);
@@ -305,7 +321,7 @@ var scEdit = {
   {
     AddonManager.getAddonByID("itsalltext@docwhat.gerf.org",function(addon)
     {
-      var externalEdit = document.getElementById("ExternalEdit"),
+      let externalEdit = document.getElementById("ExternalEdit"),
       itsalltext = document.getElementById("itsalltext");
       if (addon && addon.isActive == false) {//not enabled, so hide IAT
         scEdit.externalEditButton(externalEdit);
@@ -331,7 +347,7 @@ var scEdit = {
     if (typeof FileUtils.File !== "undefined")
       return new FileUtils.File(file);
     else {
-      var temp = Cc["@mozilla.org/file/local;1"].createInstance(Ci.nsILocalFile);
+      let temp = Cc["@mozilla.org/file/local;1"].createInstance(Ci.nsILocalFile);
       temp.initWithPath(file);
       return temp;
     }
@@ -341,7 +357,7 @@ var scEdit = {
   {
     if (!button)
       return;
-    var fileName = scCommon.prefs.getCharPref("custom.editor");
+    let fileName = scCommon.prefs.getCharPref("custom.editor");
 
     //if no editor path then hide
     //if (fileName == "") {
@@ -382,7 +398,7 @@ var scEdit = {
     this.intervalID = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
     function timer()
     {
-      var observer = {
+      let observer = {
         observe: function()
         {
           scEdit.checkFile(scEdit.cssFile);
@@ -390,7 +406,7 @@ var scEdit = {
       };
       scEdit.intervalID.init(observer,scCommon.prefs.getIntPref("custom.editortimeout"),Ci.nsITimer.TYPE_REPEATING_SLACK);
     }
-    var editorPath = scCommon.prefs.getCharPref("custom.editor");
+    let editorPath = scCommon.prefs.getCharPref("custom.editor");
     //for OSX and .app: use /usr/bin/open -a /path/to/some.app
     if (Services.appinfo.OS == "Darwin" && editorPath.slice(editorPath.length-4) == ".app")
       scEdit.isOSX = true;
@@ -408,7 +424,7 @@ var scEdit = {
       return;
     }
     // get temp directory and create new file
-    var cssFile = Services.dirsvc.get("TmpD",Ci.nsIFile);
+    let cssFile = Services.dirsvc.get("TmpD",Ci.nsIFile);
     cssFile.append("Stylish-Custom.css");
     cssFile.createUnique(Ci.nsIFile.NORMAL_FILE_TYPE,parseInt("0666",8));
 
@@ -417,7 +433,7 @@ var scEdit = {
       style.code = codeE.value;
 
     //write style to css file
-    var foStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream),
+    let foStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream),
     converter = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
 
     foStream.init(cssFile,parseInt("0x02",16)|parseInt("0x08",16)|parseInt("0x20",16),parseInt("0664",8),0); // write, create, truncate
@@ -430,7 +446,7 @@ var scEdit = {
     this.lastModified = cssFile.lastModifiedTimeOfLink;
 
     //open file in editor
-    var exe;
+    let exe;
     if (scEdit.isOSX) {
       this.args=[];
       this.args.push("-a");
@@ -465,7 +481,7 @@ var scEdit = {
 
     this.beforeChange();
 
-    var file = scEdit.openFile(cssFile.path),
+    let file = scEdit.openFile(cssFile.path),
     data,
     callback; //needed for old fox
     NetUtil.asyncFetch(file, function(inputStream, status) {
@@ -489,11 +505,11 @@ var scEdit = {
 
     this.afterChange();
 /*
-    var str = {},
+    let str = {},
     is = Cc["@mozilla.org/intl/converter-input-stream;1"].createInstance(Ci.nsIConverterInputStream);
     const replacementChar = Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER;
     is.init(cssFile,"UTF-8",0,replacementChar);
-    var tmp = is.readString(-1,str);
+    let tmp = is.readString(-1,str);
 */
   },
 
@@ -563,7 +579,7 @@ var scEdit = {
     this.toolbarToggleEnabled = storeCheck("ToggleEnabled");
     this.toolbarUpdateCheck = storeCheck("UpdateCheck");
 
-    var findbar = document.getElementById("findbar");
+    let findbar = document.getElementById("findbar");
     if (findbar) {
       this.toolbarSearch2 = findbar.getElement("findbar-textbox").value;
       if (findbar.getElement("find-label")) //why did it now decide to be null?
@@ -573,7 +589,7 @@ var scEdit = {
     //unhide some buttons
     function unhide(name)
     {
-      var tmpEl = document.getElementById(name);
+      let tmpEl = document.getElementById(name);
       if (tmpEl)
         tmpEl.style.display = "-moz-box";
     }
@@ -582,7 +598,7 @@ var scEdit = {
     unhide("ExternalEdit");
     unhide("RainbowPicker");
 
-    var stylishElem = document.getElementById("stylish");
+    let stylishElem = document.getElementById("stylish");
 
     //addEventListener for dragndrop
     stylishElem.addEventListener("drag",scEdit.refreshToolStuff,true);
@@ -595,22 +611,21 @@ var scEdit = {
       this.customizeSheet = Services.prefs.getBoolPref("toolbar.customization.usesheet");
 
     //customize "done" function
-    var toolbox = document.getElementById("stylishCustomToolbox");
+    let toolbox = document.getElementById("stylishCustomToolbox");
     toolbox.customizeDone = scEdit.customizeToolbarDone;
 
     function getHeight(id)
     {
-      num = scCommon.getStyle(document.getElementById(id),window).height.replace(/px$/,"");
+      let num = scCommon.getStyle(document.getElementById(id),window).height.replace(/px$/,"");
       return Number(num);
     }
 
-    var customizeURL = "chrome://global/content/customizeToolbar.xul";
+    let customizeURL = "chrome://global/content/customizeToolbar.xul";
     if (Services.appinfo.OS != "Darwin") //WIN
       window.openDialog(customizeURL,null,"chrome,titlebar,toolbar,location,resizable,dependent",toolbox,window);
     else { //OSX
-      var sheetFrame = document.getElementById("customizeToolbarSheetIFrame"),
+      let sheetFrame = document.getElementById("customizeToolbarSheetIFrame"),
       sheetWidth,
-      num,
       height;
 
       sheetFrame.hidden = false;
@@ -632,10 +647,10 @@ var scEdit = {
       height = 414.5+getHeight("stylishCustomToolbox")-getHeight("CodeToolbar")-getHeight("BottomToolbar");
       //open 'er up
       document.getElementById("customizeToolbarSheetPopup").openPopup(toolbox,"before_start",(window.innerWidth - sheetWidth) / 2,height);
-      }
+    }
 
     //findbar has a tendency to disappear, so we'll just show old searchbar to give user something to move around
-    var searchAreaOld = document.getElementById("SearchAreaOld");
+    let searchAreaOld = document.getElementById("SearchAreaOld");
     if (searchAreaOld)
       searchAreaOld.style.display = "-moz-box";
   },
@@ -646,10 +661,10 @@ var scEdit = {
   //customizeToolbarDone: function(toolbarChanged)
   customizeToolbarDone: function()
   {
-    var service = scCommon.service,
+    let service = scCommon.service,
     styleId = scCommon.getStyleId(document),
     style = service.find(styleId,service.REGISTER_STYLE_ON_CHANGE);
-    //var removedE = document.getElementById("RemovedItems");
+    //let removedE = document.getElementById("RemovedItems");
 
     if (Services.appinfo.OS == "Darwin") {
       document.getElementById("customizeToolbarSheetIFrame").hidden = true;
@@ -683,7 +698,7 @@ var scEdit = {
     restoreValue("ScratchPad",scEdit.toolbarScratchPad);
     restoreValue("ReplaceBox",scEdit.toolbarReplace);
 
-    var importantText = document.getElementById("ImportantText");
+    let importantText = document.getElementById("ImportantText");
     if (importantText) {
       if (scEdit.toolbarAutoimportant)
         importantText.value = scEdit.toolbarAutoimportant;
@@ -692,12 +707,12 @@ var scEdit = {
     }
 
     //checkboxes
-    var searchToggle = document.getElementById("SearchToggle");
+    let searchToggle = document.getElementById("SearchToggle");
     if (searchToggle) {
       if (scEdit.toolbarSearchToggle)
         searchToggle.checked = scEdit.toolbarSearchToggle;
       else {
-        var replaceArea = document.getElementById("ReplaceArea");
+        let replaceArea = document.getElementById("ReplaceArea");
         if (replaceArea && replaceArea.style.display == "none")
           searchToggle.checked = false;
       }
@@ -716,7 +731,7 @@ var scEdit = {
     restoreCheck("wrap-lines",scEdit.toolbarWrapLines,"wrap_lines");
     restoreCheck("ImportantEnabled",scEdit.toolbarImportantEnabled,"autoimportant.enabled");
 
-    var toggleEnabled = document.getElementById("ToggleEnabled");
+    let toggleEnabled = document.getElementById("ToggleEnabled");
     if (toggleEnabled) {
       if (scEdit.toolbarToggleEnabled)
         toggleEnabled.checked = scEdit.toolbarToggleEnabled;
@@ -724,7 +739,7 @@ var scEdit = {
         toggleEnabled.checked = style.enabled;
     }
 
-    var updateCheck = document.getElementById("UpdateCheck");
+    let updateCheck = document.getElementById("UpdateCheck");
     if (updateCheck) {
       if (scEdit.toolbarUpdateCheck)
         updateCheck.checked = scEdit.toolbarUpdateCheck;
@@ -748,7 +763,7 @@ var scEdit = {
 
     //for switch to install
     //from Stylish v1.0.2
-    var bottomSwitchToInstall = document.getElementById("Bottom_SwitchToInstall");
+    let bottomSwitchToInstall = document.getElementById("Bottom_SwitchToInstall");
     if (bottomSwitchToInstall) {
       if (document.getElementById("stylish").getAttribute("windowtype").search(/tp/) > 0)
         bottomSwitchToInstall.style.display = "-moz-box";//new style
@@ -773,11 +788,11 @@ var scEdit = {
 
     //hide old search because we have to use it instead of findbar (findbar likes to randomly hide itself)
     //still don't know why hidden=false on findbar hides it or why something keeps adding it to findbar
-    var searchAreaOld = document.getElementById("SearchAreaOld");
+    let searchAreaOld = document.getElementById("SearchAreaOld");
     if (searchAreaOld)
       searchAreaOld.style.display = "none";
 
-    var findbar = document.getElementById("findbar");
+    let findbar = document.getElementById("findbar");
     // findbar has a tendency to fuck up so sticking this at the end
     if (!findbar)
       return;
@@ -799,27 +814,27 @@ var scEdit = {
   //build popup menuitems
   customizeToolbarPopup: function(aEvent)
   {
-    var toolbox = document.getElementById("stylishCustomToolbox"),
+    let toolbox = document.getElementById("stylishCustomToolbox"),
     popup = aEvent.target;
 
     // Empty the menu
-    for (var i = popup.childNodes.length-1; i >= 0; --i) {
-      var deadItem = popup.childNodes[i];
+    for (let i = popup.childNodes.length-1; i >= 0; --i) {
+      let deadItem = popup.childNodes[i];
       if (deadItem.hasAttribute("toolbarindex"))
         popup.removeChild(deadItem);
     }
 
     //push menuitems to an array
-    var array = [],
+    let array = [],
     toolbar;
-    for (i = 0; i < toolbox.childNodes.length; ++i) {
+    for (let i = 0; i < toolbox.childNodes.length; ++i) {
       toolbar = toolbox.childNodes[i];
       //if (toolbar.id == "NameToolbar")
         //continue;
-      var toolbarName = toolbar.getAttribute("toolbarname"),
+      let toolbarName = toolbar.getAttribute("toolbarname"),
       type = toolbar.getAttribute("type");
 
-      //var toolbarId = toolbar.getAttribute("id");
+      //let toolbarId = toolbar.getAttribute("id");
       if (toolbarName && type != "menubar")
         array.push({bar:toolbar,idx:i});
       //not sure why this is here...
@@ -828,7 +843,7 @@ var scEdit = {
     //build new menu
     while (array.length != 0) {
       toolbar = array.pop();
-      var menuitem = document.createElement("menuitem");
+      let menuitem = document.createElement("menuitem");
       menuitem.setAttribute("toolbarindex",toolbar.idx);
       menuitem.setAttribute("type","checkbox");
       menuitem.setAttribute("label",toolbar.bar.getAttribute("toolbarname"));
@@ -846,7 +861,7 @@ var scEdit = {
 
   onViewToolbarCommand: function(aEvent)
   {
-    var toolbox = document.getElementById("stylishCustomToolbox"),
+    let toolbox = document.getElementById("stylishCustomToolbox"),
     index = aEvent.originalTarget.getAttribute("toolbarindex"),
     toolbar = toolbox.childNodes[index];
 
@@ -857,7 +872,7 @@ var scEdit = {
 
   refreshToolStuffMouse: function()
   {
-    var e = scEdit;
+    let e = scEdit;
     document.getElementById("stylish").removeEventListener("mouseout",e.refreshToolStuffMouse,false);
     e.refreshToolStuff();
   },
@@ -865,14 +880,14 @@ var scEdit = {
   refreshToolStuff: function()
   {
     //show the buttons for customize
-    var bottom_SwitchToInstall = document.getElementById("Bottom_SwitchToInstall");
+    let bottom_SwitchToInstall = document.getElementById("Bottom_SwitchToInstall");
 
     if (bottom_SwitchToInstall)
       bottom_SwitchToInstall.style.display = "-moz-box";
 
     function unhideLabel(name1,name2)
     {
-      var name1Element = document.getElementById(name1);
+      let name1Element = document.getElementById(name1);
       if (name1Element) {
         name1Element.style.display = "-moz-box";
         name1Element.label = scCommon.getMsg(name2);
@@ -881,7 +896,7 @@ var scEdit = {
     unhideLabel("itsalltext","ExternalEditIAT");
     unhideLabel("ExternalEdit","ExternalEditSC");
 
-    var findbar = document.getElementById("findbar");
+    let findbar = document.getElementById("findbar");
     if (findbar) {
       if (findbar.getElement("find-label")) //why did it now decide to be null?
         findbar.getElement("find-label").setAttribute("value",scEdit.toolbarSearch3);
@@ -889,17 +904,17 @@ var scEdit = {
   },
 
   updateStyleId: function() {
-    var styleId = document.getElementById("StyleId");
+    let styleId = document.getElementById("StyleId");
     //set style id button text
     if (!styleId)
       return;
-    var id = scCommon.getStyleId(document);
+    let id = scCommon.getStyleId(document);
     styleId.inputField.value = id;
   },
 
   updateTitlebar: function(name)
   {
-    var changeTitle = scCommon.prefs.getIntPref("custom.editorapptitle");
+    let changeTitle = scCommon.prefs.getIntPref("custom.editorapptitle");
 
     function title(window,appName)
     {
@@ -917,35 +932,36 @@ var scEdit = {
     if (style.id == 0) {//new style
       if (document.title.indexOf(":") == -1)
         document.title = "!: " + document.title;
-      else document.title = "!" + document.title;
+      else
+        document.title = "!" + document.title;
     }
   },
 
   populateInsertTextMenu: function()
   {
-    var textList = prefs.getCharPref("custom.inserttext");
+    let textList = prefs.getCharPref("custom.inserttext");
 
     //create insert text menu
     //if (textList == "") {
     if (textList == "") {
-      var insertText = document.getElementById("insertText");
+      let insertText = document.getElementById("insertText");
       if (insertText)
         insertText.style.display = "none";
-      var Bottom_InsertText = document.getElementById("Bottom_InsertText");
+      let Bottom_InsertText = document.getElementById("Bottom_InsertText");
       if (Bottom_InsertText)
         Bottom_InsertText.style.display = "none";
       return;
     }
     textList = textList.split(scCommon.prefs.getCharPref("custom.inserttextsep"));
-    var popup = document.getElementById("insertTextPopup");
+    let popup = document.getElementById("insertTextPopup");
     if (!popup)
       return;
 
     //remove old menuitems
     scCommon.removeChild(popup);
     //add new
-    for (var i = 0; i < textList.length; i++) {
-      var menuitem = document.createElement("menuitem");
+    for (let i = 0; i < textList.length; i++) {
+      let menuitem = document.createElement("menuitem");
       popup.appendChild(menuitem);
       textList[i] = textList[i].replace(/\\\,/g,"\,");
       menuitem.setAttribute("label",textList[i]);
@@ -960,14 +976,14 @@ var scEdit = {
     }
     function addListeners(tmpPopup)
     {
-      for (i = 0; i < tmpPopup.childNodes.length; ++i) {
-        var menuitemClickEvent = addMenuitem();
+      for (let i = 0; i < tmpPopup.childNodes.length; ++i) {
+        let menuitemClickEvent = addMenuitem();
         tmpPopup.childNodes[i].addEventListener("click",menuitemClickEvent,false);
       }
     }
 
     //clone it so mouse over works (instead of having to click to open)
-    var menu = document.getElementById("insertText"),
+    let menu = document.getElementById("insertText"),
     menuBottom = document.getElementById("Bottom_InsertText");
     if (menu) {
       //clear old insert menuitems
@@ -985,13 +1001,13 @@ var scEdit = {
       addListeners(document.getElementById("insertTextPopup1"));
       if (menuBottom)
         addListeners(document.getElementById("insertTextPopup2"));
-    } else if (!menu)
+    } else if (!menu) {
       addListeners(popup);
-    else if (!menuBottom)
+    } else if (!menuBottom) {
       addListeners(popup);
-    else if (menuBottom)
+    } else if (menuBottom) {
       addListeners(popup);
-
+    }
   },
 
   insertText: function(text,event)
@@ -1000,7 +1016,7 @@ var scEdit = {
     this.beforeChange();
 
     insertCodeAtCaret(text);
-    var evt = document.createEvent("KeyboardEvent");
+    let evt = document.createEvent("KeyboardEvent");
     evt.initKeyEvent("keypress",false,false,null,false,false,false,false,25,0);
     codeE.inputField.dispatchEvent(evt);
     evt = document.createEvent("KeyboardEvent");
@@ -1052,7 +1068,7 @@ var scEdit = {
       return;
     }
     //ask to undo
-    var check = {value: false},
+    let check = {value: false},
       result = Services.prompt.confirmCheck(window,nameE.value,scCommon.getMsg("RevertPrompt"),
       scCommon.getMsg("DontAskAgain"),check);
     if (result == false)
@@ -1089,16 +1105,16 @@ var scEdit = {
   lineNumber: function(that)
   {
     //delay it for 50ms
-    var observer = {
+    let observer = {
       observe: function()
       {
         timer.cancel();
         //do stuff
-        var lineNumber = document.getElementById("LineNumber");
+        let lineNumber = document.getElementById("LineNumber");
         if (!lineNumber)
           return;
         //get text from start to caret position
-        var text = that.value.slice(0,that.selectionEnd),
+        let text = that.value.slice(0,that.selectionEnd),
         //split with new lines
         lines = text.split("\n");
         //add a 0 line
@@ -1107,16 +1123,16 @@ var scEdit = {
         lineNumber.value = lines.length-1 + ":" + lines[lines.length-1].length;
       }
     };
-    var timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+    let timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
     timer.init(observer,50,Ci.nsITimer.TYPE_ONE_SHOT);
   },
 
   lineNumberSearchChoice: function(button,num)
   {
-    if (button == 0)//left click
+    if (button == 0) {//left click
       this.lineNumberSearch(num,13);
-    else {
-      var lineNumberSearch = document.getElementById("LineNumberSearch");
+    } else {
+      let lineNumberSearch = document.getElementById("LineNumberSearch");
       if (!lineNumberSearch)
         return;
       lineNumberSearch.inputField.value = "";
@@ -1126,7 +1142,7 @@ var scEdit = {
   lineNumberSearchDrag: function(that,event)
   {
     //get text from drag event
-    var text = event.dataTransfer.getData("text/plain");
+    let text = event.dataTransfer.getData("text/plain");
     //call the search function
     this.lineNumberSearch(text,13);
     //remove old value from search box
@@ -1154,12 +1170,12 @@ var scEdit = {
       codeE.inputField.scrollTop = 0;
       return;
     }
-    var lines = codeE.value.split("\n");//split with new lines
+    let lines = codeE.value.split("\n");//split with new lines
 
     //add an item to the start of the array (we want to start with 1)
     lines.splice(0,0,0);
     //if we're using columns as well
-    var col = null,row = null;
+    let col = null,row = null;
     if (num.indexOf(":") != -1) {
       num = num.split(":");
       row = num[0];
@@ -1168,8 +1184,8 @@ var scEdit = {
       row = num;
 
     //which line to scroll to
-    var end = "",start = "",newLines,lastLine;
-    for (var i = 1; i < lines.length; i++) {
+    let end = "",start = "",newLines,lastLine;
+    for (let i = 1; i < lines.length; i++) {
       end += lines[i];
       start += lines[i];
       //skip last line for selection start num
@@ -1185,11 +1201,11 @@ var scEdit = {
 
     //need to focus on code area to highlight
     codeE.focus();
-    if (row == 1)//first line
+    if (row == 1) {//first line
       codeE.setSelectionRange(0,end.length);
-    else if (start == "")//it'll select too much if there's nothing on the line
+    } else if (start == "") {//it'll select too much if there's nothing on the line
       codeE.setSelectionRange(end.length+newLines,end.length+newLines);
-    else {//if we have text on the line
+    } else {//if we have text on the line
       if (col)
         codeE.setSelectionRange(start.length+newLines,end.length+newLines-lastLine+col++);
       else
@@ -1200,14 +1216,15 @@ var scEdit = {
     if (newLines > 4) {
       newLines = newLines-4;
       codeE.inputField.scrollTop = newLines*16;
-    } else
+    } else {
       codeE.inputField.scrollTop = 0;
+    }
   },
 
   //toggle update checkbox
   updateUrlCheck: function()
   {
-    var updateCheck = document.getElementById("UpdateCheck");
+    let updateCheck = document.getElementById("UpdateCheck");
     if (!updateCheck)
       return;
 
@@ -1220,6 +1237,7 @@ var scEdit = {
       updateCheck.checked = true;
     else
       updateCheck.checked = false;
+
     updateCheck.style.display = "-moz-box";
   },
 
@@ -1237,13 +1255,13 @@ var scEdit = {
   pageStyleUrl: null,
   userstylesPage: function(event)
   {
-    var mainWin = scCommon.getMainWindow(),
+    let mainWin = scCommon.getMainWindow(),
     content = mainWin.document.getElementById("content");
 
     if (!content)
       return;
 
-    var appContent = mainWin.document.getElementById("appcontent");
+    let appContent = mainWin.document.getElementById("appcontent");
     if (!appContent)// songbird
       appContent = mainWin.document.getElementById("frame_main_pane");
 
@@ -1264,7 +1282,7 @@ var scEdit = {
       return;
     }
 
-    var styleUrl = updateUrlE.value
+    let styleUrl = updateUrlE.value
       //so we can get to the /edit page
       .replace(/\.css$/i,"")
       //used to stop styles from updating
@@ -1293,7 +1311,7 @@ var scEdit = {
     if (typeof scCommon == "undefined")
       return;
 
-    var mainWin = scCommon.getMainWindow(),
+    let mainWin = scCommon.getMainWindow(),
     appContent = mainWin.document.getElementById("appcontent");
 
     if (!appContent)
@@ -1304,13 +1322,13 @@ var scEdit = {
     }
 
     //check if the edit window was closed
-    var editWin = scCommon.getWin(scEdit.pageStyleId);
+    let editWin = scCommon.getWin(scEdit.pageStyleId);
     if (!editWin) {
       removeEvent();
       return;
     }
 
-    var doc = event.originalTarget,// doc is document that triggered "onload" event
+    let doc = event.originalTarget,// doc is document that triggered "onload" event
     //check that we're on the right page
     oldStyle = doc.location.href.indexOf(scEdit.pageStyleUrl),
     newStyle = doc.location.href.indexOf("userstyles.org/styles/new");
@@ -1320,7 +1338,7 @@ var scEdit = {
       return;
 
     //get the name/code
-    var code = editWin.document.getElementById("internal-code").value,
+    let code = editWin.document.getElementById("internal-code").value,
     name = editWin.document.getElementById("name").value,
     //get elements on the page
     cssEl = doc.getElementById("css"),
@@ -1386,7 +1404,7 @@ var scEdit = {
     //insert Important
     insertCodeAtCaret(scCommon.prefs.getCharPref("autoimportant.text"));
     //send right arrow to move caret to the end of inserted text
-    var evt = document.createEvent("KeyboardEvent");
+    let evt = document.createEvent("KeyboardEvent");
     evt.initKeyEvent("keypress",true,true,null,false,false,false,false,39,0);
     codeE.inputField.dispatchEvent(evt);
 
@@ -1413,11 +1431,11 @@ var scEdit = {
   oldPreview: null,
   togglePreview: function(which)
   {
-    var unPreview = document.getElementById("DisablePreview");
+    let unPreview = document.getElementById("DisablePreview");
     if (!unPreview)
       return;
 
-    var errorsArea = document.getElementById("errorsArea"),
+    let errorsArea = document.getElementById("errorsArea"),
     styleReg = scCommon.prefs.getBoolPref("styleRegistrationEnabled"),
     uri;
 
@@ -1457,10 +1475,10 @@ var scEdit = {
 
       //for setting height of error box
       //1ms delay
-      var observer = {
+      let observer = {
         observe: function()
         {
-          var errorMaxH = errorsArea.maxHeight,
+          let errorMaxH = errorsArea.maxHeight,
           ErrorsLength = document.getElementById("errors").children.length;
           if (ErrorsLength == 0) {
               errorsArea.style.display = "none";
@@ -1486,17 +1504,17 @@ var scEdit = {
           timer.cancel();
         }
       };
-      var timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+      let timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
       timer.init(observer,1,Ci.nsITimer.TYPE_ONE_SHOT);
     }
   },
 
   searchToggle: function(checked,which)
   {
-    var replaceArea = document.getElementById("ReplaceArea");
+    let replaceArea = document.getElementById("ReplaceArea");
     if (!replaceArea)
       return;
-    var searchToggle = document.getElementById("SearchToggle"),
+    let searchToggle = document.getElementById("SearchToggle"),
     searchArea;
 
     if (scCommon.prefs.getBoolPref("custom.newsearch") == true) {
@@ -1529,7 +1547,7 @@ var scEdit = {
   exportStyle: function()
   {
     const nsIFilePicker = Ci.nsIFilePicker;
-    var fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
+    let fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 
     fp.init(window,scCommon.getMsg("ExportTitle"),nsIFilePicker.modeSave);
     //show filepicker and set path
@@ -1537,7 +1555,7 @@ var scEdit = {
     fp.appendFilters(nsIFilePicker.filterAll);
     if (fp.show() == nsIFilePicker.returnCancel)
       return;
-    var foStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream),
+    let foStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream),
     converter = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
 
     //init the file stream
@@ -1552,19 +1570,20 @@ var scEdit = {
 
   toggleScratchPad: function()
   {
-    var scratchPad = document.getElementById("ScratchPadToolbar");
+    let scratchPad = document.getElementById("ScratchPadToolbar");
     if (!scratchPad)
       return;
     if (scratchPad.getAttribute("collapsed") == "true")
       scratchPad.setAttribute("collapsed",false);
-    else scratchPad.setAttribute("collapsed",true);
+    else
+      scratchPad.setAttribute("collapsed",true);
   },
 
   clearSearch: function(which)
   {
     //scratchPad button
     if (which == 1) {
-      var scratchPad = document.getElementById("ScratchPad");
+      let scratchPad = document.getElementById("ScratchPad");
       if (scratchPad)
         scratchPad.value = "";
       return;
@@ -1575,13 +1594,13 @@ var scEdit = {
     {
       input.value = "temp";
       input.focus();
-      var evt = document.createEvent("KeyboardEvent");
+      let evt = document.createEvent("KeyboardEvent");
       evt.initKeyEvent("keypress",false,false,null,true,false,false,false,8,0);
       input.inputField.dispatchEvent(evt);
       input.value = "";
     }
 
-    var searchBox = document.getElementById("SearchBox"),
+    let searchBox = document.getElementById("SearchBox"),
     findbar = document.getElementById("findbar");
 
     if (searchBox && searchBox.style.display != "none" &&
@@ -1589,7 +1608,7 @@ var scEdit = {
       fireKeyEvent(searchBox);
 
     if (findbar && findbar.style.display != "none") {
-      var findbarTextbox = findbar.getElement("findbar-textbox");
+      let findbarTextbox = findbar.getElement("findbar-textbox");
       if (!findbarTextbox.inputField)
         return;
       fireKeyEvent(findbarTextbox);
@@ -1600,7 +1619,7 @@ var scEdit = {
   //for replacing text
   replaceText: function(what)
   {
-    var replaceBox = document.getElementById("ReplaceBox"),
+    let replaceBox = document.getElementById("ReplaceBox"),
     findbar = document.getElementById("findbar"),
     searchBox,
     selected,
@@ -1614,7 +1633,7 @@ var scEdit = {
     if (searchBox.value == "")
       return;
     //get caret position
-    var caretPosition = codeE.selectionEnd,
+    let caretPosition = codeE.selectionEnd,
     regex,
     selectionEnd;
     //no text selected
@@ -1623,7 +1642,7 @@ var scEdit = {
       styleCode = codeE.value;
       if (what == "ReplaceOnce") {
         //get text before caret
-        var styleCodeBefore = styleCode.substr(0,caretPosition);
+        let styleCodeBefore = styleCode.substr(0,caretPosition);
         //get text after caret
         styleCode = styleCode.substr(caretPosition);
         //used to move caret to after replaced text
@@ -1653,7 +1672,7 @@ var scEdit = {
     }
 
     codeE.focus();
-    var evt = document.createEvent("KeyboardEvent");
+    let evt = document.createEvent("KeyboardEvent");
     evt.initKeyEvent("keypress",false,false,null,false,false,false,false,39,0);
     codeE.inputField.dispatchEvent(evt);
     if (selected == false)
@@ -1666,7 +1685,7 @@ var scEdit = {
   //thanks Mikado
   styleSearchField: function(notfound)
   {
-    var searchBox = document.getElementById("SearchBox");
+    let searchBox = document.getElementById("SearchBox");
     if (!searchBox)
       return;
 
@@ -1679,7 +1698,7 @@ var scEdit = {
 
   findNext: function()
   {
-    var searchArea = document.getElementById("SearchAreaOld");
+    let searchArea = document.getElementById("SearchAreaOld");
     if (!searchArea)
       return;
 
@@ -1691,12 +1710,12 @@ var scEdit = {
       }
     }
 
-    var searchBox = document.getElementById("SearchBox");
+    let searchBox = document.getElementById("SearchBox");
     if (searchBox.value == "") {
       this.searchToggle(true,"Search");
       searchBox.focus();
     } else {
-      var code = codeE.value,
+      let code = codeE.value,
       searchText = searchBox.value,
       //check for search terms from caret position
       found = code.toLowerCase().indexOf(searchText.toLowerCase(),codeE.selectionEnd);
@@ -1707,18 +1726,19 @@ var scEdit = {
       if (found != -1) {
         codeE.focus();
         codeE.setSelectionRange(found,found+searchText.length-1);
-        var evt = document.createEvent("KeyboardEvent");
+        let evt = document.createEvent("KeyboardEvent");
         evt.initKeyEvent("keypress",false,false,null,false,false,true,false,39,0);
         codeE.inputField.dispatchEvent(evt);
-      } else
+      } else {
+      //else change searchbox colour
         this.styleSearchField(found);
-        //else change searchbox colour
+      }
     }
   },
 
   checkSearchBox: function()
   {
-    var searchBox = document.getElementById("SearchBox");
+    let searchBox = document.getElementById("SearchBox");
     if (!searchBox)
       return;
 
@@ -1731,10 +1751,10 @@ var scEdit = {
   ToggleBars: function()
   {
     //get the list of bars to toggle
-    var barList = scCommon.prefs.getCharPref("custom.togglebars").split(",");
+    let barList = scCommon.prefs.getCharPref("custom.togglebars").split(",");
     //loop the bars
-    for (var i = 0; i < barList.length; i++) {
-      var name = document.getElementById(barList[i]);
+    for (let i = 0; i < barList.length; i++) {
+      let name = document.getElementById(barList[i]);
       if (name.getAttribute("collapsed") == "true")
         name.setAttribute("collapsed",false);
       else
@@ -1747,7 +1767,7 @@ var scEdit = {
   {
     this.beforeChange();
 
-    var selTxt = codeE.value.substring(codeE.selectionStart,codeE.selectionEnd);
+    let selTxt = codeE.value.substring(codeE.selectionStart,codeE.selectionEnd);
 
     switch(which) {
     case "Merge":
@@ -1781,10 +1801,11 @@ var scEdit = {
           selTxt = selTxt.replace(/^([\s]*)\#([\S]*)([\s]*)$/igm,"$1[id=\"$2\"]$3");
         else
           selTxt = selTxt.replace(/^([\s]*)\[id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
-      } else if (selTxt.indexOf("[@id") != -1 && selTxt.search(/^[\s]*\[@id[\S]*\"\][\s]*$/i) != -1)
+      } else if (selTxt.indexOf("[@id") != -1 && selTxt.search(/^[\s]*\[@id[\S]*\"\][\s]*$/i) != -1) {
         selTxt = selTxt.replace(/^([\s]*)\[@id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
-      else if (selTxt.indexOf("//*[@id") != -1 && selTxt.search(/^[\s]*\/\/\*\[@id[\S]*\"\][\s]*$/i) != -1)
+      } else if (selTxt.indexOf("//*[@id") != -1 && selTxt.search(/^[\s]*\/\/\*\[@id[\S]*\"\][\s]*$/i) != -1) {
         selTxt = selTxt.replace(/^([\s]*)\/\/\*\[@id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
+      }
     break;
     case "Bracket":
       //adds/removes []
@@ -1806,11 +1827,11 @@ var scEdit = {
     break;
     }
 
-    var selectionEnd = codeE.selectionStart+selTxt.length;
+    let selectionEnd = codeE.selectionStart+selTxt.length;
     codeE.value = codeE.value.substring(0,codeE.selectionStart) + selTxt + codeE.value.substring(codeE.selectionEnd,codeE.value.length);
     codeE.focus();
 
-    var evt = document.createEvent("KeyboardEvent");
+    let evt = document.createEvent("KeyboardEvent");
     evt.initKeyEvent("keypress",false,false,null,false,false,false,false,39,0);
     codeE.inputField.dispatchEvent(evt);
     codeE.setSelectionRange(selectionEnd-selTxt.length,selectionEnd);
@@ -1827,19 +1848,19 @@ var scEdit = {
     }
     //we don't want to change the code, just meta
     style.mode = style.CALCULATE_META;
-    var comment,
+    let comment,
     commentId,
     comments;
 
     function listComments(commentId)
     {
-      var commentArray = [],
+      let commentArray = [],
       rightComment;
       //get list of comments
       comments = style.getMeta("scComment",{}).join("|nsChoGGiSezSplit|");
       //split them then loop through them
       comments = comments.split("|nsChoGGiSezSplit|");
-      for (var i = 0; i < comments.length; i++) {
+      for (let i = 0; i < comments.length; i++) {
         //if the comment is blank
         if (comments[i] == "")
           continue;
@@ -1847,7 +1868,7 @@ var scEdit = {
         if (typeof commentId != "undefined" && comments[i].indexOf(commentId) == -1)
           continue;
         comment = comments[i].split("@nsChoGGiSezSplit@");
-        for (var j = 0; j < comment.length; j++) {
+        for (let j = 0; j < comment.length; j++) {
           if (rightComment == true) {
             //push it to the array
             commentArray.push({id:comment[j-1],comment:comment[j]});
@@ -1864,7 +1885,7 @@ var scEdit = {
     if (selectedText.search(/^[\n\r\u2028\u2029 ]*\/\* scComment/) == -1) {//new comment
       comments = listComments();
       commentId = null;
-      for (var i = 0; i < comments.length; i++) {
+      for (let i = 0; i < comments.length; i++) {
         if (comments[i].comment == selectedText) {
           commentId = comments[i].id;
           break;
@@ -1901,7 +1922,7 @@ var scEdit = {
 
   whichSearchBox: function()
   {
-    var searchArea = document.getElementById("SearchAreaOld");
+    let searchArea = document.getElementById("SearchAreaOld");
     if (!searchArea)
       return;
 
@@ -1956,7 +1977,7 @@ var scEdit = {
   makeImportant: function()
   {
     //preserve scroll position
-    var box = codeE.inputField,
+    let box = codeE.inputField,
     scroll = [box.scrollTop,box.scrollLeft],
     code = codeE.value,
     declarationBlocks = code.match(/\{[^\{\}]*[\}]/g),
@@ -1984,7 +2005,7 @@ var scEdit = {
     //replace them with "hashes" to avoid a problem with multiple identical name/value pairs
     declarations.forEach(function (declaration)
     {
-      var replacement = {hash: Math.random(),value: declaration};
+      let replacement = {hash: Math.random(),value: declaration};
       replacements.push(replacement);
       code = code.replace(replacement.value,replacement.hash);
     });
@@ -2008,7 +2029,7 @@ var scEdit = {
   chooseColor: function(event)
   {
     this.colorChosen = true;
-    var parent = event.target.parentNode;
+    let parent = event.target.parentNode;
 
     while (parent != null) {
       switch (parent.nodeName) {
@@ -2022,26 +2043,26 @@ var scEdit = {
       parent = parent.parentNode;
     }
 
-    var observer = {
+    let observer = {
       observe: function()
       {
         scEdit.insertColor();
         timer.cancel();
       }
     };
-    var timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+    let timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
     timer.init(observer,1,Ci.nsITimer.TYPE_ONE_SHOT);
   },
 
   insertColor: function()
   {
-    var e = scEdit;
+    let e = scEdit;
     if (e.colorChosen) {
       e.beforeChange();
 
       codeE.focus();
       insertCodeAtCaret(document.getElementById("normal-colorpicker").color);
-      var evt = document.createEvent("KeyboardEvent");
+      let evt = document.createEvent("KeyboardEvent");
       evt.initKeyEvent("keypress",false,false,null,false,false,false,false,25,0);
       codeE.inputField.dispatchEvent(evt);
       evt = document.createEvent("KeyboardEvent");
@@ -2057,7 +2078,7 @@ var scEdit = {
   rainbowPickerJustChanged: false,
   insertRainbowPickerColor: function(event)
   {
-    var e = scEdit;
+    let e = scEdit;
     e.beforeChange();
 
     //rainbowpicker does it twice...
@@ -2065,19 +2086,19 @@ var scEdit = {
       return;
     e.rainbowPickerJustChanged = true;
 
-    var observer = {
+    let observer = {
       observe: function()
       {
         e.rainbowPickerJustChanged = false;
         timer.cancel();
       }
     };
-    var timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+    let timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
     timer.init(observer,100,Ci.nsITimer.TYPE_ONE_SHOT);
 
     codeE.focus();
     insertCodeAtCaret(event.target.color);
-    var evt = document.createEvent("KeyboardEvent");
+    let evt = document.createEvent("KeyboardEvent");
     evt.initKeyEvent("keypress",false,false,null,false,false,false,false,25,0);
     codeE.inputField.dispatchEvent(evt);
     evt = document.createEvent("KeyboardEvent");
@@ -2099,10 +2120,10 @@ var scEdit = {
     if (data.length == 0)
       return;
 
-    var selector = "",
+    let selector = "",
     newValue,
     newCaretPosition;
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       //if (selector != "")
       if (selector != "")
         selector += ", ";
@@ -2111,7 +2132,7 @@ var scEdit = {
     selector = "@-moz-document " + selector + "{\n";
     if (codeE.selectionStart != codeE.selectionEnd) {
       //there's a selection, so let's cram the selection inside
-      var selection = codeE.value.substring(codeE.selectionStart,codeE.selectionEnd);
+      let selection = codeE.value.substring(codeE.selectionStart,codeE.selectionEnd);
       //if there's stuff before the selection, include whitespace
       if (codeE.selectionStart > 0)
         newValue = codeE.value.substring(0,codeE.selectionStart) + "\n";
@@ -2143,7 +2164,7 @@ var scEdit = {
   addNewLine: function()
   {
     //add a newline so it saves it (else it doesn't save the original code)
-    var newLine = codeE.value.slice(codeE.value.length-2);
+    let newLine = codeE.value.slice(codeE.value.length-2);
     if (newLine != "\n\n")
       codeE.value = codeE.value + "\n";
     else
@@ -2152,7 +2173,7 @@ var scEdit = {
 
   errorCodeCopy: function(that)
   {
-    var scratchPad = document.getElementById("ScratchPad");
+    let scratchPad = document.getElementById("ScratchPad");
     if (!scratchPad)
       return;
     scratchPad.value = scratchPad.value + "\n" + that.textContent;
@@ -2162,7 +2183,7 @@ var scEdit = {
   saveSearchText: function(prefs)
   {
     //which search box to use
-    var searchBox;
+    let searchBox;
     if (prefs.getBoolPref("custom.newsearch") == true)
       searchBox = document.getElementById("findbar");
     else
@@ -2178,11 +2199,12 @@ var scEdit = {
 
   cloneStyle: function()
   {
-    var clone = scCommon.styleInit(null,null,null,null,nameE.value + " " + scCommon.getMsg("Cloned"),codeE.value,style.enabled,null,null,null);
+    let clone = scCommon.styleInit(null,null,null,null,nameE.value + " " + scCommon.getMsg("Cloned"),codeE.value,style.enabled,null,null,null),
     //from Stylish 1.*
-    var params = {style: clone},
+    params = {style: clone},
     name = scCommon.getWindowName("stylishEdit");
     params.windowType = name;
+
     //open the edit dialog
     window.openDialog("chrome://stylish-custom/content/edit.xul",name,"chrome,resizable,dialog=no",params,"Cloned",style.enabled,window.screenY,window.screenX);
   },
@@ -2195,7 +2217,7 @@ var scEdit = {
       alert(strings.getString("missingname"));
       return false;
     }
-    var code = codeE.value;
+    let code = codeE.value;
     if (!code) {
       alert(strings.getString("missingcode"));
       return false;
@@ -2206,7 +2228,7 @@ var scEdit = {
     //for revert last
     this.styleCodeLast = code;
 
-    var newStyle,
+    let newStyle,
     uniqueTags;
 
     if (!style.id) {
@@ -2214,9 +2236,10 @@ var scEdit = {
       style.enabled = true;
       //to remove the ! from the title
       newStyle = 1;
-    } else if (!style.enabled)
+    } else if (!style.enabled) {
       // turn off preview for previously saved disabled styles to avoid flicker
       style.setPreview(false);
+    }
 
     //for save as disabled/enabled
     if (which == 0 || which == 1) {
@@ -2226,7 +2249,7 @@ var scEdit = {
         style.enabled = true;
     } else {
       //see what the checkbox says about enabled
-      var toggleE = document.getElementById("ToggleEnabled");
+      let toggleE = document.getElementById("ToggleEnabled");
       if (toggleE) {
         if (toggleE.checked == true)
           style.enabled = true;
@@ -2238,9 +2261,10 @@ var scEdit = {
     if (code != initialCode) {
       style.code = code;
       initialCode = style.code;
-    } else
+    } else {
       style.revert();
       // we don't want to change the code, but we want to undo any preview
+    }
 
     style.removeAllMeta("tag");
 
@@ -2251,7 +2275,7 @@ var scEdit = {
           style.addMeta("tag",v);
         });
       } else {
-        var tags = tagsE.value.split(/[\s,]+/);
+        let tags = tagsE.value.split(/[\s,]+/);
         // tags should be unique and not just whitespace
         uniqueTags = [];
 
@@ -2299,7 +2323,7 @@ var scEdit = {
     if (this.oldPreview)
       scCommon.applyStyle(this.oldPreview,false);
     //save scratchpad view
-    var scratchPad = document.getElementById("ScratchPad");
+    let scratchPad = document.getElementById("ScratchPad");
     //if (scratchPad && scratchPad.getAttribute("collapsed") == "true")
     if (scratchPad && scratchPad.getAttribute("collapsed") == "true")
       scCommon.prefs.setBoolPref("custom.editorscratchpad",true);
@@ -2310,7 +2334,7 @@ var scEdit = {
     if (scCommon.prefs.getBoolPref("custom.asktosave") == false || codeE.value == style.code)
       return true;
     //default the checkbox to false
-    var check = {value: false},
+    let check = {value: false},
     result = Services.prompt.confirmCheck(window,nameE.value,scCommon.getMsg("CloseStyle"),scCommon.getMsg("SaveStyle"),check);
     if (result == false)//cancel so don't close it
       return false;

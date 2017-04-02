@@ -19,23 +19,23 @@ var scInfo = {
     this.createStyleList();
 
     //change the focus
-    var observer = {
+    let observer = {
       observe: function()
       {
         timer.cancel();
-        var element = document.getElementById("SearchBox");
+        let element = document.getElementById("SearchBox");
         if (element)
           element.focus();
       }
     };
-    var timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+    let timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
     timer.init(observer,100,Ci.nsITimer.TYPE_ONE_SHOT);
   },
 
   createStyleList: function(sortBy)
   {
-    //var scrollPos = this.stylesTree.treeBoxObject.getFirstVisibleRow();
-    var styleListE = document.getElementById("StyleList");
+    //let scrollPos = this.stylesTree.treeBoxObject.getFirstVisibleRow();
+    let styleListE = document.getElementById("StyleList");
 
     //used to refresh by sorting method
     if (sortBy != "Refresh" && typeof sortBy != "undefined")
@@ -46,7 +46,7 @@ var scInfo = {
       sortBy = undefined;
 
     //is it a search?
-    var searchText = document.getElementById("SearchBox").value,
+    let searchText = document.getElementById("SearchBox").value,
     doSearch;
     if (searchText != "")
       doSearch = 1;
@@ -55,7 +55,7 @@ var scInfo = {
     scCommon.removeChild(styleListE);
 
     //create some vars
-    var treeList = [],
+    let treeList = [],
     styleAmount = 0,
     styleAmountEnabled = 0,
     styleAmountDisabled = 0;
@@ -64,8 +64,8 @@ var scInfo = {
     scCommon.createStyleArray(treeList,sortBy);
 
     //populate the list
-    var style,searchType,item,row,nameCell,enabledCell,typeCell,tagsCell,iDCell,urlCell,domain,url,urlprefix;
-    for (var i = 0; i < treeList.length; i++) {
+    let style,searchType,item,row,nameCell,enabledCell,typeCell,tagsCell,iDCell,urlCell,domain,url,urlprefix;
+    for (let i = 0; i < treeList.length; i++) {
       style = service.find(treeList[i].id,service.REGISTER_STYLE_ON_CHANGE);
 
       if (doSearch) {
@@ -82,7 +82,7 @@ var scInfo = {
           continue;
       }
 
-      var d = document;
+      let d = document;
       item = d.createElement("treeitem");
       row = d.createElement("treerow");
       nameCell = d.createElement("treecell");
@@ -146,7 +146,7 @@ var scInfo = {
       styleListE.appendChild(item);
     }
     //which title to use
-    var whichTitle = "Styles";
+    let whichTitle = "Styles";
     if (doSearch)
       whichTitle = "StylesFound";
 
@@ -183,7 +183,7 @@ var scInfo = {
       scCommon.getMainWindow().Browser.addTab("chrome://stylish-custom/content/edit.xul");
       return;
     }
-    var openNewStyle = scCommon.openEdit(scCommon.getWindowName("stylishEdit"),{code: ''}).name,
+    let openNewStyle = scCommon.openEdit(scCommon.getWindowName("stylishEdit"),{code: ''}).name,
     newStyleWin = scCommon.getWin(openNewStyle.name);
 
     //wait for it to open
@@ -192,7 +192,7 @@ var scInfo = {
 
   deleteStyle: function()
   {
-    var tree = this.stylesTree,
+    let tree = this.stylesTree,
     //sel = tree.currentIndex,
     start = {},
     end = {},
@@ -203,9 +203,9 @@ var scInfo = {
     style;
 
     //create list of style(s) to be deleted
-    for (var t = 0; t < numRanges; t++) {
+    for (let t = 0; t < numRanges; t++) {
       tree.view.selection.getRangeAt(t,start,end);
-      for (var v = start.value; v <= end.value; v++) {
+      for (let v = start.value; v <= end.value; v++) {
         treeChildren = document.getElementById("StyleList").childNodes;
         treeItem = treeChildren[v];
         style = service.find(treeItem.id,service.REGISTER_STYLE_ON_CHANGE);
@@ -214,15 +214,15 @@ var scInfo = {
       }
     }
 
-    var checkmarkAsk = document.getElementById("DeleteStyleAsk").checked;
+    let checkmarkAsk = document.getElementById("DeleteStyleAsk").checked;
     if (checkmarkAsk === true) {//ask to delete
       //create a list of names to display
-      var listToDelete = [];
+      let listToDelete = [];
       deleteList.forEach(function (item) {
         listToDelete.push(item.style.name);
       });
 
-      var uselessReturnValueIDontNeed = {},
+      let uselessReturnValueIDontNeed = {},
       prompt = Services.prompt.select(null,scCommon.getMsg("Delete"),scCommon.getMsg("DeleteStyles"),listToDelete.length,listToDelete,uselessReturnValueIDontNeed);
 
       if (prompt == true) {
@@ -241,10 +241,10 @@ var scInfo = {
 
   openStyle: function()
   {
-    var sel = this.stylesTree.currentIndex;
+    let sel = this.stylesTree.currentIndex;
     if (sel == -1)
       return;
-    var treeChildren = document.getElementById("StyleList").childNodes;
+    let treeChildren = document.getElementById("StyleList").childNodes;
     scCommon.openEditForId(treeChildren[sel].id);
   },
 
@@ -252,16 +252,16 @@ var scInfo = {
   {
     if (event.charCode != 32)
       return;
-    var tree = this.stylesTree.view,
+    let tree = this.stylesTree.view,
     rangeCount = tree.selection.getRangeCount();
-    for (var i = 0; i < rangeCount; i++) {
-      var start = {},
+    for (let i = 0; i < rangeCount; i++) {
+      let start = {},
       end = {};
       tree.selection.getRangeAt(i,start,end);
-      for (var c = start.value; c <= end.value; c++) {
-        var treeRow = tree.getItemAtIndex(c).id;
+      for (let c = start.value; c <= end.value; c++) {
+        let treeRow = tree.getItemAtIndex(c).id;
         if (typeof treeRow != "undefined") {
-          var style = service.find(treeRow,service.REGISTER_STYLE_ON_CHANGE);
+          let style = service.find(treeRow,service.REGISTER_STYLE_ON_CHANGE);
           if (style.enabled == true)
             style.enabled = false;
           else
@@ -275,17 +275,17 @@ var scInfo = {
 
   onTreeClicked: function(event)
   {
-    var row = { },col = { },child = { };
+    let row = { },col = { },child = { };
     this.stylesTree.treeBoxObject.getCellAt(event.clientX,event.clientY,row,col,child);
     if (row.value == -1) {//-1 means nothing selected
       if (event.type != "click")
         this.newStyle();
       return;
     }
-    var style = service.find(this.stylesTree.view.getItemAtIndex(row.value).id,service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE);
+    let style = service.find(this.stylesTree.view.getItemAtIndex(row.value).id,service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE);
     if (event.type == "click") {
       this.selected = row.value;
-      var cellValue = this.stylesTree.view.getCellValue(row.value,col.value);
+      let cellValue = this.stylesTree.view.getCellValue(row.value,col.value);
       //if its blank it isn't the checkbox
       if (cellValue == "")
         return;
@@ -301,7 +301,7 @@ var scInfo = {
     }
     //dblclick
     if (event.button != 2) {//dbl left/middle click to open style
-      var sel = this.stylesTree.currentIndex,
+      let sel = this.stylesTree.currentIndex,
       treeChildren = document.getElementById("StyleList").childNodes;
       scCommon.openEditForId(treeChildren[sel].id);
       return;
@@ -314,7 +314,7 @@ var scInfo = {
       }
       this.stylesTree.addEventListener("keypress",function(event) {scInfo.onKeyPress(event);},false);
       //save text
-      var cellText = this.stylesTree.view.getCellText(row.value,col.value);
+      let cellText = this.stylesTree.view.getCellText(row.value,col.value);
       if (col.value.id == "NameColumn") {
         style.name = cellText;
       } else if (col.value.id == "TagsColumn") {

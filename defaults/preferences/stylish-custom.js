@@ -86,8 +86,8 @@ pref("extensions.stylish.custom.reloadstyles","");
 pref("extensions.stylish.custom.reloadstyleskey","s");
 //show the "Get Stylesheets" menuitem
 pref("extensions.stylish.custom.stylesheetmenuitem",true);
-//if we should toggle styles by using tags (see guide)
-pref("extensions.stylish.custom.styletoggle",0);
+//if we should toggle styles by using tags (see guide. 0=toggle for pageload and tab select, 1=tab select, 2=pageload, 3=don't toggle)
+pref("extensions.stylish.custom.styletoggle",3);
 //toolbars to be toggled in edit dialog
 pref("extensions.stylish.custom.togglebars","ScratchPadToolbar,TextToolbar,PageToolbar,InsertToolbar");
 //show the stylish icon in the tools menu
