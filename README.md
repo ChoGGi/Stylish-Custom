@@ -31,11 +31,11 @@ You could try having them both installed, but you are on your own for any issues
 ### Current issue(s):
 
 ```
-when you update all styles from the manage window;
-you need to either close then reopen it or save a style to see changes.
+The Style Info window can only be manually updated.
 
 If you use new search and you hide the search bar in the customize window,
 then close the edit window, open it, and then re-add the search bar:
 it'll be hidden till you reopen the edit window.
-If you use replace once with the caret after the search text it just skips forward instead of wrapping
+
+If you use replace once with the caret after the search text it just skips forward instead of wrapping.
 ```
