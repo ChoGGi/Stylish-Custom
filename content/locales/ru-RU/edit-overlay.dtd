@@ -54,7 +54,7 @@
 <!ENTITY Bottom "Низ">
 <!ENTITY ToggleScratchPad "Переключить ScratchPad">
 <!ENTITY ToggleScratchPadTip "Переключение ScratchPad">
-<!ENTITY ScratchPadTip "Место для сохранения текста, очищается при закрытии диалогового окна">
+<!ENTITY ScratchPadTip "Место для сохранения текста, очищается при закрытии диалогового окна (Отрегулируйте высоту в меню «Параметры»&gt;«Текст»)">
 <!ENTITY ScratchPad "ScratchPad">
 <!ENTITY ClearSearch "Очистить поиск">
 <!ENTITY ClearSearchTip "Очистка текста в поиске">

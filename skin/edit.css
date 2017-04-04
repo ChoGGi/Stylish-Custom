@@ -1,7 +1,6 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url-prefix("chrome://stylish-custom/"){
 /*from Stylish v1.4.3*/
-sourceeditor{-moz-binding:url("chrome://diavolo/content/sourceeditor.xml#sourceeditor")}
 #errors{min-height:3em;max-height:8em;overflow:auto;color:red}
 #errors label{cursor:pointer}
 #internal-code{font-family:monospace;margin-bottom:0}
@@ -10,7 +9,8 @@ sourceeditor{-moz-binding:url("chrome://diavolo/content/sourceeditor.xml#sourcee
 #editor-tools{margin-top:3px;padding-top:2px;border-top:2px solid -moz-use-text-color;-moz-border-top-colors:threedshadow threedhighlight}
 /*from Stylish v1.4.3*/
 
-
+/*hide "Whole Words" button from new search*/
+toolbarbutton[anonid="find-entire-word"],
 /*hide new search next/previous buttons if disabled*/
 .findbar-find-next[disabled="true"],.findbar-find-previous[disabled="true"],
 /*hide ScratchPad label unless we're in customize*/

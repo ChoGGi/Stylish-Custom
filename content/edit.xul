@@ -184,7 +184,7 @@ edit.js uses undoController/goDoCommand
       <toolbarbutton id="ClearScratchPad" label="&ClearScratchPad;" tooltiptext="&ClearScratchPadTip;" oncommand="scEdit.clearSearch(1)"/>
       <toolbaritem id="ScratchPadItem" flex="1" orient="vertical" tooltiptext="&ScratchPadTip;">
         <label>&ScratchPad;:</label>
-        <splitter collapse="after" state="collapsed">
+        <splitter id="ScratchPadSplitter" collapse="after">
           <grippy/>
         </splitter>
         <textbox id="ScratchPad" placeholder="&ScratchPadTip;" multiline="true" flex="1" collapsed="false"/>
@@ -203,6 +203,7 @@ edit.js uses undoController/goDoCommand
       <toolbarbutton id="CurlyBracket" label="&CurlyBracket;" tooltiptext="&CurlyBracketTip;" oncommand="scEdit.editText('CurlyBracket')"/>
       <toolbarbutton id="CloneStyle" label="&CloneStyle;" tooltiptext="&CloneStyleTip;" oncommand="scEdit.cloneStyle()"/>
       <toolbarbutton id="ExportStyle" label="&ExportStyle;" tooltiptext="&ExportStyleTip;" oncommand="scEdit.exportStyle()"/>
+      <!-- <toolbarbutton id="ImportStyle" label="&ImportStyle;" tooltiptext="&ImportStyleTip;" oncommand="scEdit.importStyle()"/> -->
       <toolbarbutton id="CustomizeToolbars" label="&Customize;" tooltiptext="&Customize;" command="cmd_CustomizeToolbars"/>
       <toolbarbutton id="Bottom_SwitchToInstall" label="&switchtoinstall;" tooltiptext="&switchtoinstallTip;" oncommand="scEdit.switchToInstall()" style="display:none"/>
       <toolbarbutton id="Bottom_InsertText" label="&insertText;" tooltip="insertTextTip" type="menu" popup="insertTextPopup2"/>

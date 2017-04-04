@@ -1,17 +1,20 @@
 "use strict";
 //the below is (mostly) from Stylish v1.4.3/2.0.4, so different license applies
-
+/* jshint ignore:start */
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
+/* jshint ignore:end */
 //cbCommon.dump();
 
 let saved = false,
 style = null,
 strings = null,
 codeE, nameE, tagsE, updateUrlE,
-//because some editors can have different CRLF settings than what we've saved as, we'll only save if the code in the editor has changed. this will prevent update notifications when there are none
+//because some editors can have different CRLF settings than what we've saved
+//as, we'll only save if the code in the editor has changed. this will prevent
+//update notifications when there are none
 initialCode,
 prefs = Services.prefs.getBranch("extensions.stylish.");
 
@@ -103,11 +106,18 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
     if (id) {//probably never getting called
 Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting called?");
       style = service.find(id, service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE);
-      document.documentElement.setAttribute("windowtype", scCommon.getWindowName("stylishEdit", id));
+      document.documentElement.setAttribute("windowtype",
+                                      scCommon.getWindowName("stylishEdit",id));
       document.documentElement.setAttribute("styleId", id);
-    } else if (window.arguments[0] && typeof window.arguments != "undefined" && "id" in window.arguments[0] || "style" in window.arguments[0]) {
+    } else if (window.arguments[0] &&
+              typeof window.arguments != "undefined" &&
+              "id" in window.arguments[0] ||
+              "style" in window.arguments[0]) {
       if ("id" in window.arguments[0]) {
-        style = service.find(window.arguments[0].id, service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE);
+        style = service.find(window.arguments[0].id,
+                            service.CALCULATE_META |
+                            service.REGISTER_STYLE_ON_CHANGE
+        );
         document.documentElement.setAttribute("styleId", style.id);
       } else {
         style = window.arguments[0].style;
@@ -199,13 +209,18 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
   {
     if (!saved && initialCode != codeElementWrapper.value) {
       let ps = Services.prompt;
-      switch (ps.confirmEx(window, strings.getString("unsavedchangestitle"), strings.getString("unsavedchanges"), ps.BUTTON_POS_0 * ps.BUTTON_TITLE_SAVE + ps.BUTTON_POS_1 * ps.BUTTON_TITLE_DONT_SAVE + ps.BUTTON_POS_2 * ps.BUTTON_TITLE_CANCEL, "", "", "", null, {})) {
-      case 0:
-        return save();
-      case 1:
-        return true;
-      case 2:
-        return false;
+      switch (ps.confirmEx(window,strings.getString("unsavedchangestitle"),
+              strings.getString("unsavedchanges"),
+              ps.BUTTON_POS_0 * ps.BUTTON_TITLE_SAVE +
+              ps.BUTTON_POS_1 * ps.BUTTON_TITLE_DONT_SAVE +
+              ps.BUTTON_POS_2 * ps.BUTTON_TITLE_CANCEL,
+              "", "", "", null, {})) {
+        case 0:
+          return save();
+        case 1:
+          return true;
+        case 2:
+          return false;
       }
     }
     return true;
@@ -228,6 +243,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
     while (errors.hasChildNodes()) {
       errors.removeChild(errors.lastChild);
     }
+
     let currentMessages = [],
     errorListener = {
       QueryInterface: XPCOMUtils.generateQI([Ci.nsIConsoleListener, Ci.nsISupports]),
@@ -236,9 +252,10 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
           errorsArea.style.display = "-moz-box";
           let error = message.QueryInterface(Ci.nsIScriptError);
 
-          //Note to reviewer: Doesn't change behavior of new tab page
+          //Note to reviewer: For showing an error box in style editor
           if (error.category == "CSS Parser" && error.sourceName == "about:blank") {
-            message = error.lineNumber + ":" + error.columnNumber + " " + error.errorMessage;
+            message = error.lineNumber + ":" +
+                      error.columnNumber + " " + error.errorMessage;
             // don't duplicate
             if (currentMessages.indexOf(message) == -1) {
               currentMessages.push(message);
@@ -255,6 +272,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
         }
       }
     };
+
     style.checkForErrors(codeElementWrapper.value, errorListener);
     //hide if no errors
     if (errors.childElementCount == 0)
@@ -298,7 +316,11 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
     // sourceditor is good at keeping the scroll position, but others are not
     let currentScrollTop = codeElementWrapper.scrollTop;
-    codeElementWrapper.value = codeElementWrapper.value.substring(0, codeElementWrapper.selectionStart) + snippet + codeElementWrapper.value.substring(codeElementWrapper.selectionEnd, codeElementWrapper.value.length);
+    codeElementWrapper.value = codeElementWrapper.value.substring(0,
+            codeElementWrapper.selectionStart) + snippet +
+            codeElementWrapper.value.substring(codeElementWrapper.selectionEnd,
+            codeElementWrapper.value.length
+    );
     codeElementWrapper.focus();
     codeElementWrapper.scrollTop = currentScrollTop;
     codeElementWrapper.setSelectionRange(selectionStart, selectionEnd);
@@ -318,8 +340,10 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
   function insertChromePath()
   {
-    let fileHandler = Services.io.getProtocolHandler("file").QueryInterface(Ci.nsIFileProtocolHandler),
-    chromePath = fileHandler.getURLSpecFromFile(Services.dirsvc.get("UChrm", Ci.nsIFile));
+    let fileHandler = Services.io.getProtocolHandler("file")
+                      .QueryInterface(Ci.nsIFileProtocolHandler),
+    chromePath = fileHandler
+                .getURLSpecFromFile(Services.dirsvc.get("UChrm", Ci.nsIFile));
 
     insertCodeAtCaret(chromePath);
   }
@@ -328,18 +352,21 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
   {
     const nsIFilePicker = Ci.nsIFilePicker;
     let fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
-    fp.init(window, strings.getString("dataURIDialogTitle"), nsIFilePicker.modeOpen);
+    fp.init(window,strings.getString("dataURIDialogTitle"),nsIFilePicker.modeOpen);
     //if (fp.show() != nsIFilePicker.returnOK)
     if (fp.show() != nsIFilePicker.returnOK)
       return;
     let file = fp.file,
-    contentType = Cc["@mozilla.org/mime;1"].getService(Ci.nsIMIMEService).getTypeFromFile(file),
-    inputStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance(Ci.nsIFileInputStream);
+    contentType = Cc["@mozilla.org/mime;1"]
+                .getService(Ci.nsIMIMEService).getTypeFromFile(file),
+    inputStream = Cc["@mozilla.org/network/file-input-stream;1"]
+                .createInstance(Ci.nsIFileInputStream);
 
     //inputStream.init(file, 0x01, 0600, 0);
     inputStream.init(file,parseInt("0x01",16),parseInt("0600",8),0);
 
-    let stream = Cc["@mozilla.org/binaryinputstream;1"].createInstance(Ci.nsIBinaryInputStream);
+    let stream = Cc["@mozilla.org/binaryinputstream;1"]
+                .createInstance(Ci.nsIBinaryInputStream);
     stream.setInputStream(inputStream);
     let encoded = btoa(stream.readBytes(stream.available()));
     stream.close();
@@ -376,7 +403,10 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
       removeResultListener: function (aListener)
       {
-        this._listeners = this._listeners.filter(function(l) {return l != aListener;});
+        this._listeners = this._listeners.filter(function(l)
+        {
+          return l != aListener;
+        });
       },
 
       _notify: function (aSearchString, aResult, aFindBackwards, aDrawOutline)
@@ -406,13 +436,18 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
       findAgain: function(aFindBackwards, aLinksOnly, aDrawOutline)
       {
-        let result = this._findFromIndex(codeElementWrapper.selectionStart + (aFindBackwards ? 0 : 1), aFindBackwards);
+        let result = this._findFromIndex (
+                      codeElementWrapper.selectionStart +
+                      (aFindBackwards ? 0 : 1), aFindBackwards
+        );
         this._notify(this.searchString, result, aFindBackwards, aDrawOutline);
       },
 
       _findFromIndex: function(index, backwards)
       {
-        let start = backwards ? codeElementWrapper.value.substring(0, index).lastIndexOf(this.searchString) : codeElementWrapper.value.indexOf(this.searchString, index);
+        let start = backwards ? codeElementWrapper.value.substring(0, index)
+                    .lastIndexOf(this.searchString) :
+                    codeElementWrapper.value.indexOf(this.searchString, index);
         let result;
         let iface = Ci.nsITypeAheadFind;
         if (start >= 0) {
@@ -421,12 +456,15 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
           result = iface.FIND_NOTFOUND;
         } else {
           // try again, start from the start
-          start = backwards ? codeElementWrapper.value.lastIndexOf(this.searchString) : codeElementWrapper.value.indexOf(this.searchString);
+          start = backwards ? codeElementWrapper.value
+                          .lastIndexOf(this.searchString) :
+                          codeElementWrapper.value.indexOf(this.searchString);
           result = start == -1 ? iface.FIND_NOTFOUND : iface.FIND_WRAPPED;
         }
         codeE.editor.selection.removeAllRanges();
         if (start >= 0) {
-          codeElementWrapper.setSelectionRange(start, start + this.searchString.length);
+          codeElementWrapper.setSelectionRange(start, start +
+                                              this.searchString.length);
           codeE.editor.selectionController.setDisplaySelection(2);
           codeE.editor.selectionController.scrollSelectionIntoView(1, 0, false);
         } else
@@ -455,12 +493,15 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
       findAgain: function(backwards, linksOnly)
       {
-        return this.findFromIndex(codeElementWrapper.selectionStart + (backwards ? 0 : 1), backwards);
+        return this.findFromIndex(codeElementWrapper.selectionStart +
+                                (backwards ? 0 : 1), backwards);
       },
 
       findFromIndex: function(index, backwards)
       {
-        let start = backwards ? codeElementWrapper.value.substring(0, index).lastIndexOf(this.searchString) : codeElementWrapper.value.indexOf(this.searchString, index),
+        let start = backwards ? codeElementWrapper.value.substring(0, index)
+                    .lastIndexOf(this.searchString) :
+                    codeElementWrapper.value.indexOf(this.searchString, index),
         result;
 
         if (start >= 0)
@@ -469,7 +510,9 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
           result = this.nsITAF.FIND_NOTFOUND;
         else {
           // try again, start from the start
-          start = backwards ? codeElementWrapper.value.lastIndexOf(this.searchString) : codeElementWrapper.value.indexOf(this.searchString);
+          start = backwards ? codeElementWrapper.value
+                          .lastIndexOf(this.searchString) :
+                          codeElementWrapper.value.indexOf(this.searchString);
           result = start == -1 ? this.nsITAF.FIND_NOTFOUND : this.nsITAF.FIND_WRAPPED;
         }
         codeE.editor.selection.removeAllRanges();
@@ -606,7 +649,8 @@ let deleteObserver = {
 };
 Services.obs.addObserver(deleteObserver, "stylish-style-delete", false);
 
-// Closing by closing the window (e.g. pressing the X when in windowed mode) doesn't fire beforeunload. Cancel the close event and close it ourselves so beforeunload runs.
+// Closing by closing the window (e.g. pressing the X when in windowed mode)
+//doesn't fire beforeunload. Cancel the close event and close it ourselves so beforeunload runs.
 window.addEventListener("close",function(event) {
   event.preventDefault();
   window.close();

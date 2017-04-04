@@ -1,9 +1,10 @@
 "use strict";
 //the below is (mostly) from Stylish v0.5.9, so different license applies
-
+/* jshint ignore:start */
 const Cu = Components.utils;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
+/* jshint ignore:end */
 //cbCommon.dump();
 
 var scSpecifySites = {
@@ -91,7 +92,10 @@ var scSpecifySites = {
     let data = [],currentRow;
     for (let i = 0; i < this.siteListE.childNodes.length; i++) {
       currentRow = this.siteListE.childNodes[i].firstChild;
-      data[i] = {type: currentRow.firstChild.getAttribute("value"),site: currentRow.childNodes[1].getAttribute("label")};
+      data[i] = {
+        type: currentRow.firstChild.getAttribute("value"),
+        site: currentRow.childNodes[1].getAttribute("label")
+      };
     }
     window.arguments[0](data);
   },

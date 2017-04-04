@@ -54,7 +54,7 @@
 <!ENTITY Bottom "ボトム">
 <!ENTITY ToggleScratchPad "メモ帳の切り替え">
 <!ENTITY ToggleScratchPadTip "メモ帳を切り替える">
-<!ENTITY ScratchPadTip "テキストを保持する場所、ダイアログを閉じるとクリアされる">
+<!ENTITY ScratchPadTip "テキストを保持する場所、ダイアログを閉じるとクリアされる（オプション&lt;テキストで高さを調整する）">
 <!ENTITY ScratchPad "メモ帳">
 <!ENTITY ClearSearch "検索をクリア">
 <!ENTITY ClearSearchTip "検索文字をクリアする">

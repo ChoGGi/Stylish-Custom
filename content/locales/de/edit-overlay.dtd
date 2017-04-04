@@ -54,7 +54,7 @@
 <!ENTITY Bottom "Unten">
 <!ENTITY ToggleScratchPad "Notizblock ein-/ausblenden">
 <!ENTITY ToggleScratchPadTip "Blendet den Notizblock ein bzw. aus">
-<!ENTITY ScratchPadTip "Ablage für Text, der beim Schließen des Dialogs gelöscht wird">
+<!ENTITY ScratchPadTip "Ablage für Text, der beim Schließen des Dialogs gelöscht wird (Höhe anpassen in Optionen&gt;Text)">
 <!ENTITY ScratchPad "Notizblock">
 <!ENTITY ClearSearch "Suche löschen">
 <!ENTITY ClearSearchTip "Suchtext löschen">

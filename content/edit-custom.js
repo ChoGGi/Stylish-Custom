@@ -1,10 +1,12 @@
 "use strict";
 /*global initialCode:true */
+/* jshint ignore:start */
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/AddonManager.jsm");
 Cu.import("resource://gre/modules/FileUtils.jsm");
 Cu.import("resource://gre/modules/NetUtil.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
+/* jshint ignore:end */
 //cbCommon.dump();
 
 var scEdit = {
@@ -19,10 +21,13 @@ var scEdit = {
     }
   },
 
+  styleId: null,
+  mutationOb: null,
   init: function()
   {
 
     let service = scCommon.service;
+    this.styleId = document.getElementById("stylish").getAttribute("styleId");
 
     //move error box below the save/close buttons
     if (scCommon.prefs.getIntPref("custom.errorboxplacement") == 1) {
@@ -102,11 +107,10 @@ var scEdit = {
       codeE.style.fontFamily = editfont[0];
       codeE.style.fontSize = editfont[1];
       codeE.style.color = editfont[2];
-      let scratchPadEl = document.getElementById("ScratchPad");
-      if (scratchPadEl) {
-        scratchPadEl.style.fontFamily = editfont[0];
-        scratchPadEl.style.fontSize = editfont[1];
-        scratchPadEl.style.color = editfont[2];
+      if (scratchPad) {
+        scratchPad.style.fontFamily = editfont[0];
+        scratchPad.style.fontSize = editfont[1];
+        scratchPad.style.color = editfont[2];
       }
     }
 
@@ -143,11 +147,10 @@ var scEdit = {
       }
     }
     */
-    let styleId = scCommon.getStyleId(document),
-    toggleE = document.getElementById("ToggleEnabled");
+    let toggleE = document.getElementById("ToggleEnabled");
 
-    if (styleId)
-      style = service.find(styleId,service.REGISTER_STYLE_ON_CHANGE);
+    if (this.styleId)
+      style = service.find(this.styleId,service.REGISTER_STYLE_ON_CHANGE);
 
     //for switch to install
     if (!style)
@@ -162,18 +165,17 @@ var scEdit = {
           bottom_SwitchToInstall.style.display = "-moz-box";
       }
     } else if (style.id) {
-      //set style id button text
-      styleId = document.getElementById("StyleId");
-      if (styleId)
-        styleId.inputField.value = style.id;
+      this.updateStyleId(style.id);
     }
 
     //set enable checkbox
     if (toggleE) {
       if (style.enabled == true)
         toggleE.checked = true;
-      if ("arguments" in window && typeof window.arguments[2] != "undefined" && window.arguments[2] == false)//cloned disabled style
+      if ("arguments" in window && typeof window.arguments[2] != "undefined" &&
+          window.arguments[2] == false) {//cloned disabled style
         toggleE.checked = false;
+      }
     }
 
     //toggle rainbow picker menuitem/button
@@ -185,9 +187,16 @@ var scEdit = {
       {
 
         //toggle scratchpad
-        let scratchPad = document.getElementById("ScratchPad");
-        if (scratchPad)
-          scratchPad.setAttribute("collapsed",scCommon.prefs.getBoolPref("custom.editorscratchpad"));
+        let ScratchPadSplitter = document.getElementById("ScratchPadSplitter"),
+        showPad = scCommon.prefs.getBoolPref("custom.editorscratchpad");
+        if (scratchPad) {
+          scratchPad.setAttribute("collapsed",showPad);
+          if (showPad == true)
+            ScratchPadSplitter.setAttribute("state","collapsed");
+          else
+            ScratchPadSplitter.setAttribute("state","open");
+        }
+
         //change focus/move caret to start of code
         if (document.getElementById("internal-code")) {
           //change focus to edit area instead of search checkbox
@@ -271,6 +280,21 @@ var scEdit = {
     };
     let timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
     timer.init(observer,100,Ci.nsITimer.TYPE_ONE_SHOT);
+
+    //update style info when style is saved
+    this.mutationOb = new window.MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        let savedStyleID = mutation.target.getAttribute("stylish-custom-id-edit");
+        if (savedStyleID == scEdit.styleId) {
+          let style = service.find(savedStyleID,service.REGISTER_STYLE_ON_CHANGE);
+          document.getElementById("ToggleEnabled").checked = style.enabled;
+          document.getElementById("name").value = style.name;
+          document.getElementById("tags").value = style.getMeta("tag",{}).join(" ");
+        }
+      });
+    });
+    let win = scCommon.getMainWindow().document.firstElementChild;
+    this.mutationOb.observe(win,{attributes:true,attributeFilter:["stylish-custom-id-edit"]});
 
     //picking a seachbox  (findbar has a tendency to **** up so sticking this at the end)
     let searchAreaOld = document.getElementById("SearchAreaOld"),
@@ -404,12 +428,17 @@ var scEdit = {
           scEdit.checkFile(scEdit.cssFile);
         }
       };
-      scEdit.intervalID.init(observer,scCommon.prefs.getIntPref("custom.editortimeout"),Ci.nsITimer.TYPE_REPEATING_SLACK);
+      scEdit.intervalID.init (
+        observer,scCommon.prefs.getIntPref("custom.editortimeout"),
+        Ci.nsITimer.TYPE_REPEATING_SLACK
+      );
     }
     let editorPath = scCommon.prefs.getCharPref("custom.editor");
     //for OSX and .app: use /usr/bin/open -a /path/to/some.app
-    if (Services.appinfo.OS == "Darwin" && editorPath.slice(editorPath.length-4) == ".app")
+    if (Services.appinfo.OS == "Darwin" &&
+        editorPath.slice(editorPath.length-4) == ".app") {
       scEdit.isOSX = true;
+    }
     if (this.cssFile) {//file already opened
       //update the file first
       this.checkFile(this.cssFile);
@@ -433,10 +462,17 @@ var scEdit = {
       style.code = codeE.value;
 
     //write style to css file
-    let foStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream),
-    converter = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
+    let foStream = Cc["@mozilla.org/network/file-output-stream;1"]
+                  .createInstance(Ci.nsIFileOutputStream),
+    converter = Cc["@mozilla.org/intl/converter-output-stream;1"]
+                  .createInstance(Ci.nsIConverterOutputStream);
 
-    foStream.init(cssFile,parseInt("0x02",16)|parseInt("0x08",16)|parseInt("0x20",16),parseInt("0664",8),0); // write, create, truncate
+    foStream.init(cssFile,
+                  parseInt("0x02",16)|
+                  parseInt("0x08",16)|
+                  parseInt("0x20",16),
+                  parseInt("0664",8),0
+    ); // write, create, truncate
     converter.init(foStream,"UTF-8",0,0);
     converter.writeString(style.code);
     converter.close();
@@ -490,7 +526,7 @@ var scEdit = {
         return;
       }
       try {
-        data = NetUtil.readInputStreamToString(inputStream, inputStream.available());
+        data = NetUtil.readInputStreamToString(inputStream,inputStream.available());
       } catch (e) {
         data = "";//if css file is blank throws error on old fox, so passing along "blank"
       }
@@ -622,7 +658,11 @@ var scEdit = {
 
     let customizeURL = "chrome://global/content/customizeToolbar.xul";
     if (Services.appinfo.OS != "Darwin") //WIN
-      window.openDialog(customizeURL,null,"chrome,titlebar,toolbar,location,resizable,dependent",toolbox,window);
+      window.openDialog (
+            customizeURL,null,
+            "chrome,titlebar,toolbar,location,resizable,dependent",
+            toolbox,window
+    );
     else { //OSX
       let sheetFrame = document.getElementById("customizeToolbarSheetIFrame"),
       sheetWidth,
@@ -632,21 +672,23 @@ var scEdit = {
       sheetFrame.toolbox = toolbox;
 
       // The document might not have been loaded yet, if this is the first time.
-      // If it is already loaded, reload it so that the onload initialization code
-      // re-runs.
+      // If it is already loaded, reload it so that the onload initialization code re-runs.
       if (sheetFrame.getAttribute("src") == customizeURL)
         sheetFrame.contentWindow.location.reload();
       else
         sheetFrame.setAttribute("src",customizeURL);
 
-      // XXXmano: there's apparently no better way to get this when the iframe is
-      // hidden
+      // XXXmano: there's apparently no better way to get this when the iframe is hidden
       sheetWidth = sheetFrame.style.width.match(/([0-9]+)px/)[1];
 
       // (popup height + height of top toolbars) - (code + bottom)
-      height = 414.5+getHeight("stylishCustomToolbox")-getHeight("CodeToolbar")-getHeight("BottomToolbar");
+      height = 414.5 + getHeight("stylishCustomToolbox") -
+                      getHeight("CodeToolbar") -
+                      getHeight("BottomToolbar");
       //open 'er up
-      document.getElementById("customizeToolbarSheetPopup").openPopup(toolbox,"before_start",(window.innerWidth - sheetWidth) / 2,height);
+      document.getElementById("customizeToolbarSheetPopup").openPopup (
+            toolbox,"before_start",(window.innerWidth - sheetWidth) / 2,height
+      );
     }
 
     //findbar has a tendency to disappear, so we'll just show old searchbar to give user something to move around
@@ -662,7 +704,7 @@ var scEdit = {
   customizeToolbarDone: function()
   {
     let service = scCommon.service,
-    styleId = scCommon.getStyleId(document),
+    styleId = this.styleId,
     style = service.find(styleId,service.REGISTER_STYLE_ON_CHANGE);
     //let removedE = document.getElementById("RemovedItems");
 
@@ -873,7 +915,9 @@ var scEdit = {
   refreshToolStuffMouse: function()
   {
     let e = scEdit;
-    document.getElementById("stylish").removeEventListener("mouseout",e.refreshToolStuffMouse,false);
+    document.getElementById("stylish")
+      .removeEventListener("mouseout",e.refreshToolStuffMouse,false);
+    //removeEventListener for dragndrop out
     e.refreshToolStuff();
   },
 
@@ -903,15 +947,6 @@ var scEdit = {
     }
   },
 
-  updateStyleId: function() {
-    let styleId = document.getElementById("StyleId");
-    //set style id button text
-    if (!styleId)
-      return;
-    let id = scCommon.getStyleId(document);
-    styleId.inputField.value = id;
-  },
-
   updateTitlebar: function(name)
   {
     let changeTitle = scCommon.prefs.getIntPref("custom.editorapptitle");
@@ -920,12 +955,17 @@ var scEdit = {
     {
       if (!scCommon.getWin(window))
         return;
-      if (changeTitle == 0)
-        document.title = name;
-      else if (changeTitle == 1)
-        document.title = appName + " : " + name;
-      else if (changeTitle == 2)
-        document.title = Services.appinfo.name + " : " + name;
+      switch (changeTitle) {
+        case "0":
+          document.title = name;
+        break;
+        case "1":
+          document.title = appName + " : " + name;
+        break;
+        case "2":
+          document.title = Services.appinfo.name + " : " + name;
+        break;
+      }
     }
     title("navigator:browser","Fx");
     title("mail:3pane","Tb");
@@ -1039,19 +1079,19 @@ var scEdit = {
   {
     this.beforeChange();
 
-    switch(which) {
-    case 0:
-      insertCodeAtStart(CSSHTMLNS);
-    break;
-    case 1:
-      insertCodeAtStart(CSSXULNS);
-    break;
-    case 2:
-      insertChromePath();
-    break;
-    case 3:
-      insertDataURI();
-    break;
+    switch (which) {
+      case 0:
+        insertCodeAtStart(CSSHTMLNS);
+      break;
+      case 1:
+        insertCodeAtStart(CSSXULNS);
+      break;
+      case 2:
+        insertChromePath();
+      break;
+      case 3:
+        insertDataURI();
+      break;
     }
 
     this.afterChange();
@@ -1069,8 +1109,10 @@ var scEdit = {
     }
     //ask to undo
     let check = {value: false},
-      result = Services.prompt.confirmCheck(window,nameE.value,scCommon.getMsg("RevertPrompt"),
-      scCommon.getMsg("DontAskAgain"),check);
+    result = Services.prompt.confirmCheck (
+              window,nameE.value,scCommon.getMsg("RevertPrompt"
+    ),scCommon.getMsg("DontAskAgain"),check);
+
     if (result == false)
       return;
     if (check.value == true)
@@ -1267,7 +1309,8 @@ var scEdit = {
 
     function pageListen(newStyle)
     {
-      scEdit.pageStyleId = document.getElementById("stylish").getAttribute("windowtype");
+      scEdit.pageStyleId = document.getElementById("stylish")
+                          .getAttribute("windowtype");
       if (newStyle != true) {
         scEdit.pageStyleUrl = styleUrl + "/edit";
         content.addTab(styleUrl + "/edit");
@@ -1291,17 +1334,17 @@ var scEdit = {
       .replace(/raw\//,"")
       //added to new styles?
       .replace(/\/about-firefox\?r\=.*$/,"");
-    switch(event.button) {
-    case 0: //left
-      content.addTab(styleUrl);
-    break;
-    case 1: //middle
-      content.addTab(styleUrl + "/edit");
-    break;
-    case 2: //right
-      pageListen();
-      //alert(styleUrl);
-    break;
+    switch (event.button) {
+      case 0: //left
+        content.addTab(styleUrl);
+      break;
+      case 1: //middle
+        content.addTab(styleUrl + "/edit");
+      break;
+      case 2: //right
+        pageListen();
+        //alert(styleUrl);
+      break;
     }
   },
 
@@ -1485,18 +1528,18 @@ var scEdit = {
               return;
             }
           switch (ErrorsLength) {
-          case 1:
-            errorMaxH = 16;
-          break;
-          case 2:
-            errorMaxH = 32;
-          break;
-          case 3:
-            errorMaxH = 48;
-          break;
-          case 4:
-            errorMaxH = 64;
-          break;
+            case 1:
+              errorMaxH = 16;
+            break;
+            case 2:
+              errorMaxH = 32;
+            break;
+            case 3:
+              errorMaxH = 48;
+            break;
+            case 4:
+              errorMaxH = 64;
+            break;
           }
           if (ErrorsLength > 5)
             errorMaxH = 80;
@@ -1555,11 +1598,19 @@ var scEdit = {
     fp.appendFilters(nsIFilePicker.filterAll);
     if (fp.show() == nsIFilePicker.returnCancel)
       return;
-    let foStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream),
-    converter = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
+    let foStream = Cc["@mozilla.org/network/file-output-stream;1"]
+                  .createInstance(Ci.nsIFileOutputStream),
+    converter = Cc["@mozilla.org/intl/converter-output-stream;1"]
+                .createInstance(Ci.nsIConverterOutputStream);
 
     //init the file stream
-    foStream.init(fp.file,parseInt("0x02",16)|parseInt("0x08",16)|parseInt("0x20",16),parseInt("0664",8),0); // write, create, truncate
+    foStream.init(fp.file,
+                  parseInt("0x02",16)|
+                  parseInt("0x08",16)|
+                  parseInt("0x20",16),
+                  parseInt("0664",8),0
+    ); // write, create, truncate
+
     converter.init(foStream,"UTF-8",0,0);
     //write it to disk
     converter.writeString(codeE.value);
@@ -1646,7 +1697,9 @@ var scEdit = {
         //get text after caret
         styleCode = styleCode.substr(caretPosition);
         //used to move caret to after replaced text
-        caretPosition = styleCode.toLowerCase().indexOf(searchBox.value.toLowerCase())+styleCodeBefore.length+replaceBox.textLength;
+        caretPosition = styleCode.toLowerCase().indexOf (
+                        searchBox.value.toLowerCase()
+        )+styleCodeBefore.length+replaceBox.textLength;
         //replace search text
         styleCode = styleCode.replace(searchBox.value,replaceBox.value);
         //restore the before caret text
@@ -1668,7 +1721,8 @@ var scEdit = {
         styleCode = styleCode.replace(regex,replaceBox.value);
       }
       selectionEnd = codeE.selectionStart+styleCode.length;
-      codeE.value = codeE.value.substring(0,codeE.selectionStart) + styleCode + codeE.value.substring(codeE.selectionEnd,codeE.value.length);
+      codeE.value = codeE.value.substring(0,codeE.selectionStart) + styleCode +
+                    codeE.value.substring(codeE.selectionEnd,codeE.value.length);
     }
 
     codeE.focus();
@@ -1769,66 +1823,69 @@ var scEdit = {
 
     let selTxt = codeE.value.substring(codeE.selectionStart,codeE.selectionEnd);
 
-    switch(which) {
-    case "Merge":
-      //merge lines of text
-      selTxt = selTxt.replace(/\u000A/g,"").replace(/\u000D/g,"");
-    break;
-    case "Comment":
-      //adds/removes /**/
-      if (selTxt.search(/^[\s]*\/\*[\s\S]*\*\/[\s]*$/))
-        selTxt = "/*" + selTxt + "*/";
-      else
-        selTxt = selTxt.replace(/^([\s]*)\/\*([\s\S]*)\*\/([\s]*)$/gm,"$1$2$3");
-    break;
-    case "CommentGroup":
-      // /*comments*/ a group of text and removes /*comments*/ form within it
-      selTxt = this.commentGroup(selTxt,scCommon);
-      if (!selTxt)//commentGroup: style doesn't exist
-        return;
-    break;
-    case "Class":
-      // [class="example"] to .example or reversed
-      if (selTxt.search(/^[\s]*\[class[\S]*\"\][\s]*$/i))
-        selTxt = selTxt.replace(/^([\s]*)\.([\S]*)([\s]*)$/igm,"$1[class=\"$2\"]$3");
-      else
-        selTxt = selTxt.replace(/^([\s]*)\[class=\"([\S]*)\"\]([\s]*)$/igm,"$1.$2$3");
-    break;
-    case "ID":
-      // [id="example"] to #example or reversed
-      if (selTxt.indexOf("[id") != -1 || selTxt.indexOf("#") != -1) {
-        if (selTxt.search(/^[\s]*\[id[\S]*\"\][\s]*$/i))
-          selTxt = selTxt.replace(/^([\s]*)\#([\S]*)([\s]*)$/igm,"$1[id=\"$2\"]$3");
+    switch (which) {
+      case "Merge":
+        //merge lines of text
+        selTxt = selTxt.replace(/\u000A/g,"").replace(/\u000D/g,"");
+      break;
+      case "Comment":
+        //adds/removes /**/
+        if (selTxt.search(/^[\s]*\/\*[\s\S]*\*\/[\s]*$/))
+          selTxt = "/*" + selTxt + "*/";
         else
-          selTxt = selTxt.replace(/^([\s]*)\[id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
-      } else if (selTxt.indexOf("[@id") != -1 && selTxt.search(/^[\s]*\[@id[\S]*\"\][\s]*$/i) != -1) {
-        selTxt = selTxt.replace(/^([\s]*)\[@id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
-      } else if (selTxt.indexOf("//*[@id") != -1 && selTxt.search(/^[\s]*\/\/\*\[@id[\S]*\"\][\s]*$/i) != -1) {
-        selTxt = selTxt.replace(/^([\s]*)\/\/\*\[@id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
-      }
-    break;
-    case "Bracket":
-      //adds/removes []
-      if (selTxt.search(/^[\s]*\[[\s\S]*\][\s]*$/))
-        selTxt = "[" + selTxt + "]";
-      else
-        selTxt = selTxt.replace(/^([\s]*)\[([\s\S]*)\]([\s]*)$/gm,"$1$2$3");
-    break;
-    case "CurlyBracket":
-      //adds/removes {}
-      if (selTxt.search(/^[\s]*\{[\s\S]*\}[\s]*$/))
-        selTxt = "{" + selTxt + "}";
-      else
-        selTxt = selTxt.replace(/^([\s]*)\{([\s\S]*)\}([\s]*)$/gm,"$1$2$3");
-    break;
-    case "RemoveXUL":
-      //removes xul:
-      codeE.value = codeE.value.replace(/xul\:/ig,"");
-    break;
+          selTxt = selTxt.replace(/^([\s]*)\/\*([\s\S]*)\*\/([\s]*)$/gm,"$1$2$3");
+      break;
+      case "CommentGroup":
+        // /*comments*/ a group of text and removes /*comments*/ form within it
+        selTxt = this.commentGroup(selTxt,scCommon);
+        if (!selTxt)//commentGroup: style doesn't exist
+          return;
+      break;
+      case "Class":
+        // [class="example"] to .example or reversed
+        if (selTxt.search(/^[\s]*\[class[\S]*\"\][\s]*$/i))
+          selTxt = selTxt.replace(/^([\s]*)\.([\S]*)([\s]*)$/igm,"$1[class=\"$2\"]$3");
+        else
+          selTxt = selTxt.replace(/^([\s]*)\[class=\"([\S]*)\"\]([\s]*)$/igm,"$1.$2$3");
+      break;
+      case "ID":
+        // [id="example"] to #example or reversed
+        if (selTxt.indexOf("[id") != -1 || selTxt.indexOf("#") != -1) {
+          if (selTxt.search(/^[\s]*\[id[\S]*\"\][\s]*$/i))
+            selTxt = selTxt.replace(/^([\s]*)\#([\S]*)([\s]*)$/igm,"$1[id=\"$2\"]$3");
+          else
+            selTxt = selTxt.replace(/^([\s]*)\[id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
+        } else if (selTxt.indexOf("[@id") != -1 &&
+                  selTxt.search(/^[\s]*\[@id[\S]*\"\][\s]*$/i) != -1) {
+          selTxt = selTxt.replace(/^([\s]*)\[@id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
+        } else if (selTxt.indexOf("//*[@id") != -1 &&
+                  selTxt.search(/^[\s]*\/\/\*\[@id[\S]*\"\][\s]*$/i) != -1) {
+          selTxt = selTxt.replace(/^([\s]*)\/\/\*\[@id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
+        }
+      break;
+      case "Bracket":
+        //adds/removes []
+        if (selTxt.search(/^[\s]*\[[\s\S]*\][\s]*$/))
+          selTxt = "[" + selTxt + "]";
+        else
+          selTxt = selTxt.replace(/^([\s]*)\[([\s\S]*)\]([\s]*)$/gm,"$1$2$3");
+      break;
+      case "CurlyBracket":
+        //adds/removes {}
+        if (selTxt.search(/^[\s]*\{[\s\S]*\}[\s]*$/))
+          selTxt = "{" + selTxt + "}";
+        else
+          selTxt = selTxt.replace(/^([\s]*)\{([\s\S]*)\}([\s]*)$/gm,"$1$2$3");
+      break;
+      case "RemoveXUL":
+        //removes xul:
+        codeE.value = codeE.value.replace(/xul\:/ig,"");
+      break;
     }
 
     let selectionEnd = codeE.selectionStart+selTxt.length;
-    codeE.value = codeE.value.substring(0,codeE.selectionStart) + selTxt + codeE.value.substring(codeE.selectionEnd,codeE.value.length);
+    codeE.value = codeE.value.substring(0,codeE.selectionStart) + selTxt +
+                  codeE.value.substring(codeE.selectionEnd,codeE.value.length);
     codeE.focus();
 
     let evt = document.createEvent("KeyboardEvent");
@@ -1881,7 +1938,8 @@ var scEdit = {
       return commentArray;
     }
     //remove any surrounding line breaks/spaces (so it makes less metadata)
-    selectedText = selectedText.replace(/^[\n\r\u2028\u2029 ]*/,"").replace(/[\n\r\u2028\u2029 ]*$/,"");
+    selectedText = selectedText.replace(/^[\n\r\u2028\u2029 ]*/,"")
+                              .replace(/[\n\r\u2028\u2029 ]*$/,"");
     if (selectedText.search(/^[\n\r\u2028\u2029 ]*\/\* scComment/) == -1) {//new comment
       comments = listComments();
       commentId = null;
@@ -1995,7 +2053,8 @@ var scEdit = {
     //make sure everything is really a declarationand make sure it's not already !important
     declarations = declarations.filter(function (declaration)
     {
-      return /[A-Za-z0-9-]+\s*:\s*[^};]+/.test(declaration) && !/!\s*important/.test(declaration);
+      return /[A-Za-z0-9-]+\s*:\s*[^};]+/.test(declaration) &&
+                      !/!\s*important/.test(declaration);
     });
     //strip out any extra stuff like brackets and whitespace
     declarations = declarations.map(function (declaration)
@@ -2033,12 +2092,12 @@ var scEdit = {
 
     while (parent != null) {
       switch (parent.nodeName) {
-      case "menupopup":
-        parent.hidePopup();
-      break;
-      case "button":
-        parent.open = false;
-      break;
+        case "menupopup":
+          parent.hidePopup();
+        break;
+        case "button":
+          parent.open = false;
+        break;
       }
       parent = parent.parentNode;
     }
@@ -2111,7 +2170,9 @@ var scEdit = {
 
   openSitesDialog: function()
   {
-    window.openDialog("chrome://stylish-custom/content/specifySites.xul","stylishSpecifySites","chrome,modal,resizable,centerscreen",this.applySpecifySite);
+    window.openDialog("chrome://stylish-custom/content/specifySites.xul",
+            "stylishSpecifySites","chrome,modal,resizable,centerscreen",
+            this.applySpecifySite);
   },
 
   //Process the return from the specify site dialog
@@ -2199,14 +2260,28 @@ var scEdit = {
 
   cloneStyle: function()
   {
-    let clone = scCommon.styleInit(null,null,null,null,nameE.value + " " + scCommon.getMsg("Cloned"),codeE.value,style.enabled,null,null,null),
+    let clone = scCommon.styleInit(null,null,null,null,nameE.value + " " +
+              scCommon.getMsg("Cloned"),codeE.value,style.enabled,null,null,null),
     //from Stylish 1.*
     params = {style: clone},
     name = scCommon.getWindowName("stylishEdit");
     params.windowType = name;
 
     //open the edit dialog
-    window.openDialog("chrome://stylish-custom/content/edit.xul",name,"chrome,resizable,dialog=no",params,"Cloned",style.enabled,window.screenY,window.screenX);
+    window.openDialog("chrome://stylish-custom/content/edit.xul",name,
+                    "chrome,resizable,dialog=no",params,"Cloned",style.enabled,
+                    window.screenY,window.screenX);
+  },
+
+  //set style id button text
+  updateStyleId: function(id) {
+    let styleBut = document.getElementById("StyleId");
+    if (!styleBut)
+      return;
+    if (id)
+      styleBut.inputField.value = id;
+    else
+      styleBut.inputField.value = this.styleId;
   },
 
   //save() function from Stylish (changed a bit)
@@ -2297,11 +2372,19 @@ var scEdit = {
 
     style.save();
 
-    //to remove ! from new styles
-    if (style.id != 0 && newStyle == 1)
-      document.title = document.title.substring(1);
+    if (style.id != 0) {
+      //update styleId button
+      this.styleId = style.id;
+      this.updateStyleId();
 
-    //saved = true;
+      //to remove ! from new styles
+      if (newStyle == 1)
+        document.title = document.title.substring(1);
+
+      //update stylishid attrib for info window
+      let win = scCommon.getMainWindow().document.firstElementChild;
+      win.setAttribute("stylish-custom-id",style.id);
+    }
 
     return true;
   },
@@ -2324,18 +2407,22 @@ var scEdit = {
       scCommon.applyStyle(this.oldPreview,false);
     //save scratchpad view
     let scratchPad = document.getElementById("ScratchPad");
-    //if (scratchPad && scratchPad.getAttribute("collapsed") == "true")
     if (scratchPad && scratchPad.getAttribute("collapsed") == "true")
       scCommon.prefs.setBoolPref("custom.editorscratchpad",true);
     else
       scCommon.prefs.setBoolPref("custom.editorscratchpad",false);
 
     //don't ask to save | not changed
-    if (scCommon.prefs.getBoolPref("custom.asktosave") == false || codeE.value == style.code)
+    if (scCommon.prefs.getBoolPref("custom.asktosave") == false ||
+                                      codeE.value == style.code) {
       return true;
+    }
     //default the checkbox to false
     let check = {value: false},
-    result = Services.prompt.confirmCheck(window,nameE.value,scCommon.getMsg("CloseStyle"),scCommon.getMsg("SaveStyle"),check);
+    result = Services.prompt.confirmCheck (
+            window,nameE.value,scCommon.getMsg("CloseStyle"),
+            scCommon.getMsg("SaveStyle"),check
+    );
     if (result == false)//cancel so don't close it
       return false;
     if (check.value == false)//close it

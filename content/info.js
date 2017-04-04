@@ -1,16 +1,23 @@
 "use strict";
+/* jshint ignore:start */
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
+/* jshint ignore:end */
 //cbCommon.dump();
+//scInfo.stylesTree.treeBoxObject scInfo.stylesTree.contentView scInfo.stylesTree.view
 
-var service;
-
-var scInfo = {
+var service,
+scInfo = {
 
   stylesTree: null,
   stylesSort: null,
   selected: null,
+  styleAmount: null,
+  styleAmountEnabled: null,
+  styleAmountDisabled: null,
+  styleListE: null,
+  mutationOb: null,
 
   init: function()
   {
@@ -30,12 +37,53 @@ var scInfo = {
     };
     let timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
     timer.init(observer,100,Ci.nsITimer.TYPE_ONE_SHOT);
+
+    //update style info when style is saved
+    this.mutationOb = new window.MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        let savedStyleID = mutation.target.getAttribute("stylish-custom-id");
+        if (savedStyleID && document.getElementById(savedStyleID)) {
+          let rowTree = scInfo.stylesTree.contentView
+                        .getIndexOfItem(document.getElementById(savedStyleID)),
+          row = document.getElementById(savedStyleID).firstChild,
+          style = service.find(savedStyleID,service.REGISTER_STYLE_ON_CHANGE);
+
+          for (let i = 0; i < row.children.length; i++) {
+            let cell = row.children[i];
+            switch (cell.className) {
+              case "enabledCell":
+                cell.setAttribute("value",style.enabled);
+              break;
+              case "nameCell":
+                  cell.setAttribute("label",style.name);
+              break;
+              case "urlCell":
+                  scCommon.setUrlCell(style,cell);
+              break;
+              case "tagsCell":
+                cell.setAttribute("label",style.getMeta("tag",{}).join(" "));
+              break;
+              case "typeCell":
+                cell.setAttribute("label",style.getMeta("type",{}).join(" "));
+              break;
+              case "iDCell":
+                cell.setAttribute("label",style.id);
+              break;
+            }
+            scInfo.stylesTree.treeBoxObject.invalidateRow(rowTree);
+          }
+
+        }
+      });
+    });
+    let win = scCommon.getMainWindow().document.firstElementChild;
+    this.mutationOb.observe(win,{attributes:true,attributeFilter:["stylish-custom-id"]});
   },
 
   createStyleList: function(sortBy)
   {
     //let scrollPos = this.stylesTree.treeBoxObject.getFirstVisibleRow();
-    let styleListE = document.getElementById("StyleList");
+    this.styleListE = document.getElementById("StyleList");
 
     //used to refresh by sorting method
     if (sortBy != "Refresh" && typeof sortBy != "undefined")
@@ -52,21 +100,19 @@ var scInfo = {
       doSearch = 1;
 
     // remove all children from element
-    scCommon.removeChild(styleListE);
-
-    //create some vars
-    let treeList = [],
-    styleAmount = 0,
-    styleAmountEnabled = 0,
-    styleAmountDisabled = 0;
+    scCommon.removeChild(this.styleListE);
 
     //create the list
+    this.styleAmount = 0;
+    this.styleAmountEnabled = 0;
+    this.styleAmountDisabled = 0;
+    let treeList = [];
     scCommon.createStyleArray(treeList,sortBy);
 
     //populate the list
-    let style,searchType,item,row,nameCell,enabledCell,typeCell,tagsCell,iDCell,urlCell,domain,url,urlprefix;
     for (let i = 0; i < treeList.length; i++) {
-      style = service.find(treeList[i].id,service.REGISTER_STYLE_ON_CHANGE);
+      let style = service.find(treeList[i].id,service.REGISTER_STYLE_ON_CHANGE),
+      searchType;
 
       if (doSearch) {
         //what are we searching for?
@@ -75,85 +121,26 @@ var scInfo = {
           searchType = style.name;
         else if (searchType == "style")
           searchType = style.code;
-        else searchType = style.getMeta(searchType,{}).toString();
+        else
+          searchType = style.getMeta(searchType,{}).toString();
 
         //skip not found
         if (searchType.toLowerCase().indexOf(searchText.toLowerCase()) == -1)
           continue;
       }
 
-      let d = document;
-      item = d.createElement("treeitem");
-      row = d.createElement("treerow");
-      nameCell = d.createElement("treecell");
-      enabledCell = d.createElement("treecell");
-      typeCell = d.createElement("treecell");
-      tagsCell = d.createElement("treecell");
-      iDCell = d.createElement("treecell");
-      urlCell = d.createElement("treecell");
-
-      styleAmount++;
-      if (style.enabled == 1) {
-        enabledCell.setAttribute("value",true);
-        item.setAttribute("enabled",true);
-        styleAmountEnabled++;
-      } else
-        styleAmountDisabled++;
-
-      item.id = style.id;
-      enabledCell.setAttribute("class","enabledCell");
-      nameCell.setAttribute("label",style.name);
-      nameCell.setAttribute("class","nameCell");
-      iDCell.setAttribute("label",style.id);
-      iDCell.setAttribute("editable","false");
-      iDCell.setAttribute("class","iDCell");
-      typeCell.setAttribute("label",style.getMeta("type",{}).join(" "));
-      typeCell.setAttribute("editable","false");
-      typeCell.setAttribute("class","typeCell");
-      tagsCell.setAttribute("label",style.getMeta("tag",{}).join(" "));
-      tagsCell.setAttribute("class","tagsCell");
-      //make the urls look nice
-      urlCell.setAttribute("editable","false");
-      urlCell.setAttribute("class","urlCell");
-      domain = style.getMeta("domain",{});
-      url = style.getMeta("url",{});
-      urlprefix = style.getMeta("url-prefix",{});
-
-      if (domain != "" && urlprefix != "" && url != "")
-        urlCell.setAttribute("label",domain + "," + urlprefix + "," + url);
-      else if (domain != "" && urlprefix != "")
-        urlCell.setAttribute("label",domain + "," + urlprefix);
-      else if (domain != "" && url != "")
-        urlCell.setAttribute("label",domain + "," + url);
-      else if (urlprefix != "" && url != "")
-        urlCell.setAttribute("label",urlprefix + "," + url);
-      else if (domain != "")
-        urlCell.setAttribute("label",domain);
-      else if (urlprefix != "")
-        urlCell.setAttribute("label",urlprefix);
-      else if (url != "")
-        urlCell.setAttribute("label",url);
-      else
-        urlCell.setAttribute("label","");
-
-      row.appendChild(enabledCell);
-      row.appendChild(nameCell);
-      row.appendChild(urlCell);
-      row.appendChild(tagsCell);
-      row.appendChild(typeCell);
-      row.appendChild(iDCell);
-      item.appendChild(row);
-      styleListE.appendChild(item);
+      scCommon.populateTree(style,this,0,null,document,null);
     }
+
     //which title to use
     let whichTitle = "Styles";
     if (doSearch)
       whichTitle = "StylesFound";
 
     document.title = scCommon.getMsg("StyleInfo") + " (" +
-      scCommon.getMsg(whichTitle) + ":" + styleAmount + " " +
-      scCommon.getMsg("Enabled") + ":" + styleAmountEnabled + " " +
-      scCommon.getMsg("Disabled") + ":" + styleAmountDisabled + ")";
+      scCommon.getMsg(whichTitle) + ":" + this.styleAmount + " " +
+      scCommon.getMsg("Enabled") + ":" + this.styleAmountEnabled + " " +
+      scCommon.getMsg("Disabled") + ":" + this.styleAmountDisabled + ")";
 
     /* hides style on palemoon when I'm scolled past the results
     this.stylesTree.treeBoxObject.scrollToRow(scrollPos);
@@ -193,7 +180,6 @@ var scInfo = {
   deleteStyle: function()
   {
     let tree = this.stylesTree,
-    //sel = tree.currentIndex,
     start = {},
     end = {},
     numRanges = tree.view.selection.getRangeCount(),
@@ -222,8 +208,11 @@ var scInfo = {
         listToDelete.push(item.style.name);
       });
 
-      let uselessReturnValueIDontNeed = {},
-      prompt = Services.prompt.select(null,scCommon.getMsg("Delete"),scCommon.getMsg("DeleteStyles"),listToDelete.length,listToDelete,uselessReturnValueIDontNeed);
+      let returnValueIDontNeed = {},
+      prompt = Services.prompt.select (
+                null,scCommon.getMsg("Delete"),scCommon.getMsg("DeleteStyles"),
+                listToDelete.length,listToDelete,returnValueIDontNeed
+      );
 
       if (prompt == true) {
         deleteList.forEach(function (item) {
@@ -248,31 +237,6 @@ var scInfo = {
     scCommon.openEditForId(treeChildren[sel].id);
   },
 
-  onKeyPress: function(event)
-  {
-    if (event.charCode != 32)
-      return;
-    let tree = this.stylesTree.view,
-    rangeCount = tree.selection.getRangeCount();
-    for (let i = 0; i < rangeCount; i++) {
-      let start = {},
-      end = {};
-      tree.selection.getRangeAt(i,start,end);
-      for (let c = start.value; c <= end.value; c++) {
-        let treeRow = tree.getItemAtIndex(c).id;
-        if (typeof treeRow != "undefined") {
-          let style = service.find(treeRow,service.REGISTER_STYLE_ON_CHANGE);
-          if (style.enabled == true)
-            style.enabled = false;
-          else
-            style.enabled = true;
-          style.save();
-          this.createStyleList();
-        }
-      }
-    }
-  },
-
   onTreeClicked: function(event)
   {
     let row = { },col = { },child = { };
@@ -282,7 +246,10 @@ var scInfo = {
         this.newStyle();
       return;
     }
-    let style = service.find(this.stylesTree.view.getItemAtIndex(row.value).id,service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE);
+    let style = service.find (
+                this.stylesTree.view.getItemAtIndex(row.value).id,
+                service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE
+    );
     if (event.type == "click") {
       this.selected = row.value;
       let cellValue = this.stylesTree.view.getCellValue(row.value,col.value);
@@ -297,6 +264,7 @@ var scInfo = {
         style.enabled = false;
       }
       style.save();
+      this.updateChangedStyleAttr(style.id);
       return;
     }
     //dblclick
@@ -307,12 +275,14 @@ var scInfo = {
       return;
     }
     //dbl right click to edit the name/tags
-    if (this.stylesTree.editingRow != -1 && col.value.id == "NameColumn" || col.value.id == "TagsColumn") {
-      this.stylesTree.removeEventListener("keypress",function(event) {scInfo.onKeyPress(event);},false);
+    if (this.stylesTree.editingRow != -1 &&
+        col.value.id == "NameColumn" ||
+        col.value.id == "TagsColumn") {
+
       while (this.stylesTree.editingRow != -1) {//pass events till user stops editing name
         Services.tm.currentThread.processNextEvent(true);
       }
-      this.stylesTree.addEventListener("keypress",function(event) {scInfo.onKeyPress(event);},false);
+
       //save text
       let cellText = this.stylesTree.view.getCellText(row.value,col.value);
       if (col.value.id == "NameColumn") {
@@ -323,6 +293,14 @@ var scInfo = {
           style.addMeta("tag",cellText);
       }
       style.save();
+      this.updateChangedStyleAttr(style.id);
     }
+  },
+
+  updateChangedStyleAttr: function(id)
+  {
+    //allows us to update style info in edit dialog
+    let win = scCommon.getMainWindow().document.firstElementChild;
+    win.setAttribute("stylish-custom-id-edit",id);
   }
 };

@@ -54,7 +54,7 @@
 <!ENTITY Bottom "Abajo">
 <!ENTITY ToggleScratchPad "Cambiar Bloc de Garabatos">
 <!ENTITY ToggleScratchPadTip "Cambiar el Bloc de Garabatos">
-<!ENTITY ScratchPadTip "Lugar para almacenar texto, se limpia cuando cierra el dialogo">
+<!ENTITY ScratchPadTip "Lugar para almacenar texto, se limpia cuando cierra el dialogo (Ajuste la altura en Opciones&gt;Texto)">
 <!ENTITY ScratchPad "Bloc de Garabatos">
 <!ENTITY ClearSearch "Limpiar Búsqueda">
 <!ENTITY ClearSearchTip "Limpiar texto de búsqueda">

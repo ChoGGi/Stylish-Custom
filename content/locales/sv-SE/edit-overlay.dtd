@@ -54,7 +54,7 @@
 <!ENTITY Bottom "Sidans nederkant">
 <!ENTITY ToggleScratchPad "Växla anteckningsblocket">
 <!ENTITY ToggleScratchPadTip "Växlar anteckningsblocket">
-<!ENTITY ScratchPadTip "Placera text som du vill behålla här, rensas när du stänger dialogen">
+<!ENTITY ScratchPadTip "Placera text som du vill behålla här, rensas när du stänger dialogen (Justera höjd i Val&gt;Text)">
 <!ENTITY ScratchPad "Anteckningsblock">
 <!ENTITY ClearSearch "Rensa sökning">
 <!ENTITY ClearSearchTip "Rensa söktext">

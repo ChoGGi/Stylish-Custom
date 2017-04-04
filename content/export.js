@@ -1,14 +1,17 @@
 "use strict";
+/* jshint ignore:start */
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("chrome://stylish-custom/content/common.jsm");
+/* jshint ignore:end */
 //cbCommon.dump();
 
-var styleListE,locationE,styleList,service;
-
-var scExport = {
+var locationE,treeList,service,
+scExport = {
 
   stylesTree: null,
   selected: null,
+  styleListE: null,
+  stylesSort: null,
   styleAmount: null,
   styleAmountEnabled: null,
   styleAmountDisabled: null,
@@ -16,7 +19,7 @@ var scExport = {
   init: function()
   {
     service = scCommon.service;
-    styleListE = document.getElementById("StyleList");
+    this.styleListE = document.getElementById("StyleList");
     locationE = document.getElementById("Location");
     locationE.value = scCommon.prefs.getCharPref("custom.exportpath");
     let XMLName = document.getElementById("XMLName");
@@ -38,7 +41,7 @@ var scExport = {
   {
     //let scrollPos = this.stylesTree.treeBoxObject.getFirstVisibleRow();
 
-    styleList = [];
+    treeList = [];
     this.styleAmount = 0;
     this.styleAmountEnabled = 0;
     this.styleAmountDisabled = 0;
@@ -62,15 +65,15 @@ var scExport = {
     this.storeChecked();
 
     // remove all children from element
-    scCommon.removeChild(styleListE);
+    scCommon.removeChild(this.styleListE);
 
     //create the list
-    scCommon.createStyleArray(styleList,sortBy);
+    scCommon.createStyleArray(treeList,sortBy);
 
     //populate the list
     let style;
-    for (let i = 0; i < styleList.length; i++) {
-      style = service.find(styleList[i].id,service.REGISTER_STYLE_ON_CHANGE);
+    for (let i = 0; i < treeList.length; i++) {
+      style = service.find(treeList[i].id,service.REGISTER_STYLE_ON_CHANGE);
 
       if (doSearch) {
         //what are we searching for?
@@ -79,38 +82,15 @@ var scExport = {
           searchType = style.name;
         else if (searchType == "style")
           searchType = style.code;
-        else searchType = style.getMeta(searchType,{}).toString();
+        else
+          searchType = style.getMeta(searchType,{}).toString();
 
         //skip not found
         if (searchType.toLowerCase().indexOf(searchText.toLowerCase()) == -1)
           continue;
       }
-      let d = document,
-      item = d.createElement("treeitem"),
-      row = d.createElement("treerow"),
-      exportCell = d.createElement("treecell"),
-      nameCell = d.createElement("treecell"),
-      enabledCell = d.createElement("treecell");
 
-      nameCell.setAttribute("label",styleList[i].name);
-      nameCell.setAttribute("styleid",styleList[i].id);
-      nameCell.setAttribute("class","nameCell");
-      if (style.enabled == 1) {
-        this.styleAmountEnabled++;
-        enabledCell.setAttribute("value",true);
-      } else this.styleAmountDisabled++;
-
-      enabledCell.setAttribute("class","enabledCell");
-      exportCell.setAttribute("class","exportCell");
-      item.setAttribute("styleId",styleList[i].id);
-      item.setAttribute("styleName",styleList[i].name);
-
-      row.appendChild(nameCell);
-      row.appendChild(exportCell);
-      row.appendChild(enabledCell);
-      item.appendChild(row);
-      styleListE.appendChild(item);
-      this.styleAmount++;
+      scCommon.populateTree(style,this,2,treeList,document,i);
     }
     //which title to use
     let whichTitle = "Styles";
@@ -133,7 +113,7 @@ var scExport = {
   checkedList: null,
   storeChecked: function()
   {
-    let children = styleListE.childNodes;
+    let children = this.styleListE.childNodes;
     //this.checkedList;
 
     this.checkedList = [];
@@ -147,7 +127,10 @@ var scExport = {
     const nsIFilePicker = Ci.nsIFilePicker;
     //open a file dialog
     let fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
-    fp.init(scCommon.getWin("stylishCustomExport"),scCommon.getMsg("ExportTitleFile"),nsIFilePicker.modeSave);
+    fp.init(scCommon.getWin("stylishCustomExport"),
+            scCommon.getMsg("ExportTitleFile"),
+            nsIFilePicker.modeSave
+    );
     //show filepicker and set path
     fp.appendFilter("Stylish Styles (xml|css)","*.xml,*.css");
     if (fp.show() == nsIFilePicker.returnCancel)
@@ -159,11 +142,10 @@ var scExport = {
 
   restoreChecked: function()
   {
-    let children = styleListE.childNodes,
-    i,j;
+    let children = this.styleListE.childNodes;
 
-    for (i = 0; i < children.length; i++) {
-      for (j = 0; j < this.checkedList.length; j++) {
+    for (let i = 0; i < children.length; i++) {
+      for (let j = 0; j < this.checkedList.length; j++) {
         if (!children[i] || !this.checkedList[j])
           continue;
         if (children[i].getAttribute("styleId") == this.checkedList[j].id)
@@ -180,24 +162,27 @@ var scExport = {
     this.selected = row.value;
   },
 
-  onTreeDblClicked: function(event)
+  openStyle: function(event)
   {
-    if (event.button != 2) {//left/middle to open style
-      let stylesTree = document.getElementById("style-tree-list"),
-      sel = stylesTree.currentIndex,
-      treeChildren = document.getElementById("StyleList").childNodes;
+    if (event.button === 2)//left/middle to open style
+      return;
+    let stylesTree = document.getElementById("style-tree-list"),
+    sel = stylesTree.currentIndex,
+    treeChildren = document.getElementById("StyleList").childNodes;
 
-      scCommon.openEditForId(treeChildren[sel].getAttribute("styleId"));
-    }
+    scCommon.openEditForId(treeChildren[sel].getAttribute("styleId"));
   },
 
   //remove bad chars from xml name
-
   checkXMLnameColour: null,
   checkXMLname: function(event)
   {
-    if (event.which != 47 && event.which != 42 && event.which != 124 && event.which != 60 && event.which != 62 && event.which != 63 && event.which != 34)
+    if (event.which != 47 && event.which != 42 &&
+        event.which != 124 && event.which != 60 &&
+        event.which != 62 && event.which != 63 &&
+        event.which != 34) {
       return;
+    }
     event.preventDefault();
     let XMLName = document.getElementById("XMLName");
     //let user know
@@ -216,7 +201,6 @@ var scExport = {
     let timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
     timer.init(observer,250,Ci.nsITimer.TYPE_ONE_SHOT);
   },
-
 
   //toggles textboxes/checkmarks
   exportChangedXML: function(which)
@@ -245,8 +229,6 @@ var scExport = {
     }
     XMLName.disabled = true;
     XMLBrowse.disabled = true;
-
-
   },
 
   exportStyles: function()
@@ -256,9 +238,9 @@ var scExport = {
 
     //saved path
     if (scCommon.prefs.prefHasUserValue("custom.exportpath" ||
-        locationE.value != ""))
+        locationE.value != "")) {
       PickOrUsePath = "Path";
-    else {
+    } else {
       const nsIFilePicker = Ci.nsIFilePicker;
       let win = scCommon.getWin("stylishCustomExport");
       fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
@@ -271,7 +253,7 @@ var scExport = {
     if (PickOrUsePath == false)
       return;
 
-    let children = styleListE.childNodes,
+    let children = this.styleListE.childNodes,
     ExportXML = document.getElementById("ExportXML").checked,
     GroupXML = document.getElementById("GroupXML").checked,
     exportList = [],
@@ -289,22 +271,28 @@ var scExport = {
       file.create(Ci.nsIFile.DIRECTORY_TYPE,parseInt("0777",8));
 
     //create the export list
-    let styleAmount = 0,
-    styleAmountEnabled = 0,
-    styleAmountDisabled = 0;
+    this.styleAmount = 0;
+    this.styleAmountEnabled = 0;
+    this.styleAmountDisabled = 0;
 
     for (let i = 0; i < children.length; i++) {
       //if not checked or if the ids don't match skip it
-      if (children[i].firstChild.firstChild.nextSibling.getAttribute("value") != "true" || children[i].getAttribute("styleId") != styleList[i].id)
+      if (children[i].firstChild.firstChild.nextSibling.getAttribute("value") != "true" ||
+          children[i].getAttribute("styleId") != treeList[i].id) {
         continue;
-      styleAmount++;
-      if (children[i].firstChild.firstChild.nextSibling.nextSibling.getAttribute("value") == "true")//enabled?
-        styleAmountEnabled++;
+      }
+      this.styleAmount++;
+      if (children[i].firstChild.firstChild.nextSibling
+                    .nextSibling.getAttribute("value") == "true")//enabled?
+        this.styleAmountEnabled++;
       else
-        styleAmountDisabled++;
+        this.styleAmountDisabled++;
       //clean up the name before export
       //let fileName = scCommon.regexEscape(children[i].getAttribute("styleName"));
-      let fileName = children[i].getAttribute("styleName").replace(/\\/g,"").replace(/\//g,"").replace(/\?/g,"").replace(/</g,"").replace(/\>/g,"").replace(/\*/g,"").replace(/\:/g,"").replace(/\"/g,"").replace(/\|/g,"");
+      let fileName = children[i].getAttribute("styleName")
+          .replace(/\\/g,"").replace(/\//g,"").replace(/\?/g,"")
+          .replace(/</g,"").replace(/\>/g,"").replace(/\*/g,"")
+          .replace(/\:/g,"").replace(/\"/g,"").replace(/\|/g,"");
       if (ExportXML == false || GroupXML == false) {//export as css or un-grouped xml
         //init the file object
         if (PickOrUsePath == "FilePicker")
@@ -316,17 +304,24 @@ var scExport = {
         //export as css
         if (ExportXML == false) {
           file.append(fileName + ".css");
-          this.writeStylesCSS(styleList[i],file);
+          this.writeStylesCSS(treeList[i],file);
         //export as xml none grouped
         } else if (GroupXML == false) {
           file.append(fileName + ".xml");
-          exportList[exportList.length] = styleList[i];
-          this.writeStylesXML(exportList,file,styleAmount,styleAmountEnabled,styleAmountDisabled);
+          exportList[exportList.length] = treeList[i];
+          this.writeStylesXML(exportList,file,scExport.styleAmount,
+                              scExport.styleAmountEnabled,
+                              scExport.styleAmountDisabled);
         }
-      } else exportList[exportList.length] = styleList[i];
+      } else {
+        exportList[exportList.length] = treeList[i];
+      }
     }
     function regExName(name){
-      return name.value.replace(/\\/g,"").replace(/\//g,"").replace(/\?/g,"").replace(/</g,"").replace(/\>/g,"").replace(/\*/g,"").replace(/\:/g,"").replace(/\"/g,"").replace(/\|/g,"");
+      return name.value.replace(/\\/g,"").replace(/\//g,"")
+            .replace(/\?/g,"").replace(/</g,"").replace(/\>/g,"")
+            .replace(/\*/g,"").replace(/\:/g,"").replace(/\"/g,"")
+            .replace(/\|/g,"");
     }
     //export as grouped xml
     if (ExportXML == true && GroupXML == true) {
@@ -351,14 +346,16 @@ var scExport = {
         else
           file.append(regExName(XMLName));
       }
-      this.writeStylesXML(exportList,file,styleAmount,styleAmountEnabled,styleAmountDisabled);
+      this.writeStylesXML(exportList,file,scExport.styleAmount,
+                          scExport.styleAmountEnabled,
+                          scExport.styleAmountDisabled);
     }
 
     //give a tooltip to say when we're done
     scCommon.tooltip("Finished","StyleList",document);
   },
 
-  writeStylesXML: function(exportList,file,styleAmount,styleAmountEnabled,styleAmountDisabled)
+  writeStylesXML: function(exportList,file)
   {
     let overwrite = document.getElementById("overWriteStyles").checked;
     if (file.exists()) {
@@ -367,10 +364,20 @@ var scExport = {
       else file.remove(false);
     }
     //make dom tree of styles
-    let DOMTree = this.createDOMTree(exportList,styleAmount,styleAmountEnabled,styleAmountDisabled),
+    let DOMTree = this.createDOMTree(exportList,
+                              scExport.styleAmount,scExport.styleAmountEnabled,
+                              scExport.styleAmountDisabled
+    ),
     //output to file
-    oFOStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
-    oFOStream.init(file,parseInt("0x02",16)|parseInt("0x08",16)|parseInt("0x20",16),parseInt("0664",8),0); // write, create, truncate
+    oFOStream = Cc["@mozilla.org/network/file-output-stream;1"]
+                .createInstance(Ci.nsIFileOutputStream);
+
+    oFOStream.init(file,
+                  parseInt("0x02",16)|
+                  parseInt("0x08",16)|
+                  parseInt("0x20",16),
+                  parseInt("0664",8),0
+    ); // write, create, truncate
     (new XMLSerializer()).serializeToStream(DOMTree,oFOStream,""); // rememeber, doc is the DOM tree
     oFOStream.close();
 
@@ -392,14 +399,13 @@ var scExport = {
     else
       this.selectedEnabledStyles = false;
 
-    let styleListE = document.getElementById("StyleList");
-    if (!styleListE.hasChildNodes())
+    this.styleListE = document.getElementById("StyleList");
+    if (!this.styleListE.hasChildNodes())
       return;
-    let children = styleListE.childNodes,
-    treecell;
+    let children = this.styleListE.childNodes;
 
     for (let i = 0; i < children.length; i++) {
-      treecell = children[i].firstChild.firstChild.nextSibling;
+      let treecell = children[i].firstChild.firstChild.nextSibling;
       if (!treecell.nextSibling.hasAttribute("value"))
         continue;
       if (treecell.nextSibling.getAttribute("value") != "true")
@@ -417,9 +423,16 @@ var scExport = {
       else file.remove(false);
     }
 
-    let foStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
-    foStream.init(file,parseInt("0x02",16)|parseInt("0x08",16)|parseInt("0x20",16),parseInt("0664",8),0); // write, create, truncate
-    let converter = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
+    let foStream = Cc["@mozilla.org/network/file-output-stream;1"]
+                  .createInstance(Ci.nsIFileOutputStream);
+    foStream.init(file,
+                  parseInt("0x02",16)|
+                  parseInt("0x08",16)|
+                  parseInt("0x20",16),
+                  parseInt("0664",8),0
+    ); // write, create, truncate
+    let converter = Cc["@mozilla.org/intl/converter-output-stream;1"]
+                  .createInstance(Ci.nsIConverterOutputStream);
     converter.init(foStream,"UTF-8",0,0);
     //make sure we get style from db (if it's been changed since window opened)
     let s = service.find(style.id,service.REGISTER_STYLE_ON_CHANGE);
@@ -429,15 +442,15 @@ var scExport = {
   },
 
   //convert a list of styles to an xml doc
-  createDOMTree: function(exportList,styleAmount,styleAmountEnabled,styleAmountDisabled)
+  createDOMTree: function(exportList)
   {
     let doc = document.implementation.createDocument("","",null),
     styleRoot = doc.createElement("styles"),
     style, aStyleTop, aStyle;
 
-    styleRoot.setAttribute("Amount",styleAmount);
-    styleRoot.setAttribute("Enabled",styleAmountEnabled);
-    styleRoot.setAttribute("Disabled",styleAmountDisabled);
+    styleRoot.setAttribute("Amount",scExport.styleAmount);
+    styleRoot.setAttribute("Enabled",scExport.styleAmountEnabled);
+    styleRoot.setAttribute("Disabled",scExport.styleAmountDisabled);
 
     function cleanUp(which,name)
     {

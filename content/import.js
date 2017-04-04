@@ -1,19 +1,23 @@
 "use strict";
+/* jshint ignore:start */
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
+Cu.import("resource://gre/modules/FileUtils.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
+/* jshint ignore:end */
 //cbCommon.dump();
 
-var styleListE,styleList,locationE,service;
-
-var scImport = {
+var locationE,treeList,service,
+scImport = {
 
   stylesTree: null,
   selected: null,
+  styleListE: null,
+  styleAmount: null,
 
   init: function()
   {
     service = scCommon.service;
-    styleListE = document.getElementById("StyleList");
+    this.styleListE = document.getElementById("StyleList");
     locationE = document.getElementById("Location");
     locationE.value = scCommon.prefs.getCharPref("custom.importpath");
 
@@ -24,19 +28,19 @@ var scImport = {
   createStyleList: function()
   {
     //let scrollPos = this.stylesTree.treeBoxObject.getFirstVisibleRow();
-    let styleAmount = 0;
-    styleList = [];
+    this.styleAmount = 0;
+    treeList = [];
 
     //remove all children from element
-    scCommon.removeChild(styleListE);
+    scCommon.removeChild(this.styleListE);
 
     //saved path or user choice
     let PickOrUsePath = false,
     fp;
     if (scCommon.prefs.prefHasUserValue("custom.importpath") ||
-        locationE.value != "")//if location entered
+        locationE.value != "") {//if location entered
       PickOrUsePath = "Path";
-    else {
+    } else {
       let importWin = scCommon.getWin("stylishCustomImport");
       const nsIFilePicker = Ci.nsIFilePicker;
       fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
@@ -63,46 +67,19 @@ var scImport = {
         let entry = entries.getNext();
         entry.QueryInterface(Ci.nsIFile);
         if (entry.leafName.search(/\.css$/i) != -1 || entry.leafName.search(/\.xml$/i) != -1)
-          styleList.push(entry);
+          treeList.push(entry);
       }
-      styleList.sort(scCommon.sortByleafName);
+      treeList.sort(scCommon.sortByleafName);
 
       //populate the list
-      for (let i = 0; i < styleList.length; i++) {
-        let d = document,
-        item = d.createElement("treeitem"),
-        row = d.createElement("treerow"),
-        nameCell = d.createElement("treecell"),
-        importCell = d.createElement("treecell"),
-        enableCell = d.createElement("treecell"),
-        typeCell = d.createElement("treecell");
-
-        let styleName = styleList[i].leafName.replace(/\.css$/i,"").replace(/\.xml$/i,"");
-        nameCell.setAttribute("label",styleName);
-        nameCell.setAttribute("class","nameCell");
-        nameCell.setAttribute("stylename",styleList[i].leafName);
-        enableCell.setAttribute("value",true);
-        enableCell.setAttribute("class","enableCell");
-        if (styleList[i].leafName.search(/\.xml$/i) >= 0)
-          typeCell.setAttribute("label","xml");
-        else if (styleList[i].leafName.search(/\.css$/i) >= 0)
-          typeCell.setAttribute("label","css");
-        typeCell.setAttribute("class","typeCell");
-        importCell.setAttribute("class","importCell");
-        item.setAttribute("styleName",styleName);
-        item.setAttribute("styleNameType",styleList[i].leafName);
-
-        row.appendChild(nameCell);
-        row.appendChild(importCell);
-        row.appendChild(enableCell);
-        row.appendChild(typeCell);
-        item.appendChild(row);
-        styleListE.appendChild(item);
-        styleAmount++;
+      for (let i = 0; i < treeList.length; i++) {
+        scCommon.populateTree(null,this,1,treeList,document,i);
       }
-      document.title = scCommon.getMsg("ImportStyles") + " (" + styleAmount + ")";
-    } else
+
+      document.title = scCommon.getMsg("ImportStyles") + " (" + this.styleAmount + ")";
+    } else {
       window.close();
+    }
 /*
     this.stylesTree.treeBoxObject.scrollToRow(scrollPos);
     if (this.selected != null && this.selected != -1)
@@ -117,10 +94,31 @@ var scImport = {
     this.selected = row.value;
   },
 
+  openStyle: function(event)
+  {
+    if (event.button === 2)//left/middle to open style
+      return;
+    let stylesTree = document.getElementById("style-tree-list"),
+    sel = stylesTree.currentIndex,
+    treeChildren = document.getElementById("StyleList").childNodes;
+
+    let name = treeChildren[sel].getAttribute("styleNameType"),
+    file = new FileUtils.File(locationE.value),
+    code;
+
+    file.append(name);
+    if (name.toLowerCase().indexOf(".css") !== -1)
+      code = scCommon.readFile(file.path,"Text");
+    else
+      return; //maybe I should make it open the first style in an xml...
+
+    scCommon.addCode(code,name);
+  },
+
   importStyles: function()
   {
     //are there any styles to import
-    if (!styleListE.hasChildNodes())
+    if (!this.styleListE.hasChildNodes())
       return;
     let importE = document.getElementById("save"),
     styleReg = scCommon.prefs.getBoolPref("styleRegistrationEnabled");
@@ -130,7 +128,8 @@ var scImport = {
     if (styleReg == true)
       scCommon.prefs.setBoolPref("styleRegistrationEnabled",false);
 
-    let children = styleListE.childNodes,
+    let children = this.styleListE.childNodes,
+    i1,i2,i3,iT,
     oldStyleList = [];
     service.list(service.REGISTER_STYLE_ON_CHANGE,{}).forEach(function(style) {
         oldStyleList.push(style);
@@ -139,12 +138,12 @@ var scImport = {
     function importStylesLoop(styleEnabled,styleNameType,styleName)
       {
       let name,enabled,code,styleUrl,updateUrl,md5Url,applyBackgroundUpdates;
-      for (i2 = 0; i2 < styleList.length; i2++) {
-        if (styleNameType != styleList[i2].leafName)
+      for (i2 = 0; i2 < treeList.length; i2++) {
+        if (styleNameType != treeList[i2].leafName)
           continue;
 
         let overWrite = document.getElementById("overWriteStyles").checked,
-        fileData = scCommon.readFile(styleList[i2].path,"Text"),
+        fileData = scCommon.readFile(treeList[i2].path,"Text"),
         style = "";
 
         //CSS
@@ -156,14 +155,19 @@ var scImport = {
               styleExists = oldStyleList[iT].id;
           }
 
-          style = service.find(styleExists,service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE);
+          style = service.find(styleExists,
+                  service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE
+          );
           if (style && overWrite == true) {
             //if there's a style then overwrite
             style.code = fileData;
             style.save();
           } else {
             //else it's a new style
-            style = scCommon.styleInit(null,null,null,null,styleName,fileData.replace(/\r/g,""),styleEnabled,null,null);
+            style = scCommon.styleInit(
+                                null,null,null,null,styleName,
+                                fileData.replace(/\r/g,""),styleEnabled,null,null
+            );
             style.save();
           }
           //i++;
@@ -173,7 +177,8 @@ var scImport = {
         //XML
         fileData = fileData.replace(/\n/g,"ChoGGisezNewLine");
         let domParser = new DOMParser();
-        fileData = domParser.parseFromString(fileData,"text/xml").firstChild.childNodes;
+        fileData = domParser.parseFromString(fileData,"text/xml")
+                  .firstChild.childNodes;
         //fileData = scCommon.parseXML(fileData).firstChild.childNodes;
         //remove text nodes from xml and create style list
         let styles = [];
@@ -189,7 +194,9 @@ var scImport = {
           if (styleData == "[object Text]")
             styleData = styles[i3].firstChild.nextSibling;
 
-          code = styleData.getAttribute("code").replace(/ChoGGisezNewLine/g,"\n").replace(/&quot;/g,"\"");
+          code = styleData.getAttribute("code")
+                .replace(/ChoGGisezNewLine/g,"\n")
+                .replace(/&quot;/g,"\"");
           if (styleData.getAttribute("enabled") == "false")
             enabled = false;
           else
@@ -199,7 +206,10 @@ var scImport = {
           md5Url = styleData.getAttribute("md5url");
           applyBackgroundUpdates = styleData.getAttribute("applyBackgroundUpdates");
           //new style or replace old one
-          style = service.find(parseInt(styleData.getAttribute("id")),service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE);
+          style = service.find(parseInt(
+                  styleData.getAttribute("id")),
+                  service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE
+          );
           if (style && overWrite == true) {
             style.url = styleUrl;
             style.updateUrl = updateUrl;
@@ -209,8 +219,12 @@ var scImport = {
             style.code = code;
             style.enabled = enabled;
             style.applyBackgroundUpdates = applyBackgroundUpdates;
-          } else
-            style = scCommon.styleInit(styleUrl,null,updateUrl,md5Url,name,code,enabled,null,null);
+          } else {
+            style = scCommon.styleInit(
+                          styleUrl,null,updateUrl,md5Url,
+                          name,code,enabled,null,null
+            );
+          }
           //add tags
           style.removeAllMeta("tag");
           style.addMeta("tag",styleData.getAttribute("tags"));
@@ -220,11 +234,12 @@ var scImport = {
       }
     }
 
-    let i1,i2,i3,iT;
     for (i1 = 0; i1 < children.length; i1++) {
 
-      let StyleListItemImport = children[i1].firstChild.firstChild.nextSibling.getAttribute("value"),
-      StyleListItemEnabled = children[i1].firstChild.firstChild.nextSibling.nextSibling.getAttribute("value");
+      let StyleListItemImport = children[i1].firstChild.firstChild
+                              .nextSibling.getAttribute("value"),
+      StyleListItemEnabled = children[i1].firstChild.firstChild
+                            .nextSibling.nextSibling.getAttribute("value");
 
       if (StyleListItemImport !== "true")
         continue;

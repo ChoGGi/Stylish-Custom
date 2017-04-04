@@ -1,9 +1,11 @@
 "use strict";
+/* jshint ignore:start */
 if (typeof Cc === "undefined") var Cc = Components.classes;
 if (typeof Ci === "undefined") var Ci = Components.interfaces;
 if (typeof Cu === "undefined") var Cu = Components.utils;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
+/* jshint ignore:end */
 //scCommon.dump();
 
 var scCustomize = {
@@ -133,7 +135,9 @@ var scCustomize = {
       //spacers don't need a tooltip or label
       if (msg == false)
         return;
-      msg = Services.strings.createBundle("chrome://stylish-custom/locale/tooltips.properties").GetStringFromName(msg);
+      msg = Services.strings
+            .createBundle("chrome://stylish-custom/locale/tooltips.properties")
+            .GetStringFromName(msg);
       //try to change labels first
       if (typeof type != "undefined") {
         el.label = msg;

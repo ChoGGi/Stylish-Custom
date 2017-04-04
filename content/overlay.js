@@ -1,8 +1,10 @@
 "use strict";
+/* jshint ignore:start */
 if (typeof Cu === "undefined") var Cu = Components.utils;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
 Cu.import("resource://gre/modules/NetUtil.jsm");
+/* jshint ignore:end */
 //scCommon.dump("XXX");
 
 var scOverlay = {
@@ -96,8 +98,11 @@ var scOverlay = {
     //load a style sheet to fix the style for nasa night launch / ft deepdark
     let selectedSkin = Services.prefs.getCharPref("general.skins.selectedSkin"),
     darkStyle = Services.prefs.getBoolPref("extensions.stylish.custom.dark");
-    if (darkStyle == true || selectedSkin == "nasanightlaunch" || selectedSkin == "nightlaunchnext" || selectedSkin == "ftdeepdark")
+    if (darkStyle == true || selectedSkin == "nasanightlaunch" ||
+                            selectedSkin == "nightlaunchnext" ||
+                            selectedSkin == "ftdeepdark") {
       scCommon.applyStyle("chrome://stylish-custom/skin/dark.css",true,true);
+    }
 
     //from stylish v1.0.6 (for toggling styles)
     let browser = document.getElementById("appcontent"); // browser
@@ -147,15 +152,20 @@ var scOverlay = {
 
     //e10s toggling styles
     if (window.messageManager) {
-      window.messageManager.loadFrameScript("chrome://stylish-custom/content/frame-script-load.js",true);
-      window.messageManager.addMessageListener("stylishCustom:pageload",scOverlay.onPageLoadE10s);
+      window.messageManager
+        .loadFrameScript("chrome://stylish-custom/content/frame-script-load.js",true);
+      window.messageManager
+        .addMessageListener("stylishCustom:pageload",scOverlay.onPageLoadE10s);
     }
 
   },
 
   styleSheetsMenu: function()
   {
-    let hidden = gContextMenu.onLink || gContextMenu.isTextSelected || gContextMenu.onImage || gContextMenu.onTextInput;
+    let hidden = gContextMenu.onLink ||
+                gContextMenu.isTextSelected ||
+                gContextMenu.onImage ||
+                gContextMenu.onTextInput;
     document.getElementById("StylishGetStyleSheets").hidden = hidden;
   },
 
@@ -185,12 +195,13 @@ var scOverlay = {
           let style = doc.array.pop();
           if (style.type === 0) {
             //inline styles
-            styleArray.push(scCommon.getMsg("InlineStyleSheet") + ": " + style.num + "|||" + style.data);
+            styleArray.push(scCommon.getMsg("InlineStyleSheet") + ": " +
+                            style.num + "|||" + style.data);
             styleText = styleText + style.data;
           } else if (style.type === 1) {
             //linked styles
-            scCommon.dump(style.data);
-            styleArray.push(style.data + "|||" + scCommon.readFile(style.data,"Text","web"));
+            styleArray.push(style.data + "|||" +
+                            scCommon.readFile(style.data,"Text","web"));
             styleText = styleText + scCommon.readFile(style.data,"Text","web");
           }
         }
@@ -200,8 +211,10 @@ var scOverlay = {
     }
     if (e10s) {
       if (window.messageManager) {
-        window.messageManager.loadFrameScript("chrome://stylish-custom/content/frame-script.js",true);
-        window.messageManager.addMessageListener("stylishCustom:callback",e10sData);
+        window.messageManager
+          .loadFrameScript("chrome://stylish-custom/content/frame-script.js",true);
+        window.messageManager
+          .addMessageListener("stylishCustom:callback",e10sData);
       }
       return;
     }
@@ -217,7 +230,8 @@ var scOverlay = {
     for (let i = 0; i < styleSheet.length; i++) {
       let tag = styleSheet[i].tagName;
       if (tag && tag.search(/style/i) != -1) {
-        styleArray.push(scCommon.getMsg("InlineStyleSheet") + ": " + i + "|||" + styleSheet[i].textContent);
+        styleArray.push(scCommon.getMsg("InlineStyleSheet") +
+                        ": " + i + "|||" + styleSheet[i].textContent);
         styleText = styleText + styleSheet[i].textContent;
       }
     }
@@ -225,8 +239,10 @@ var scOverlay = {
     //get linked styles: <link href="somestyle.css"/>
     for (let i = 0; i < doc.styleSheets.length; i++) {
       styleSheet = doc.styleSheets[i];
-      if (styleSheet.href && styleSheet.disabled == false) {//can't use inline styles for this. if href is null = inline | and not disabled styles
-        styleArray.push(styleSheet.href + "|||" + scCommon.readFile(styleSheet.href,"Text","web"));
+      if (styleSheet.href && styleSheet.disabled == false) {
+        //can't use inline styles for this. if href is null = inline | and not disabled styles
+        styleArray.push(styleSheet.href + "|||" +
+                        scCommon.readFile(styleSheet.href,"Text","web"));
         styleText = styleText + scCommon.readFile(styleSheet.href,"Text","web");
       }
     }
@@ -259,7 +275,8 @@ var scOverlay = {
     if (styleArray.length == 0)
       return;
     //display a list of stylesheets to let user choose
-    window.openDialog("chrome://stylish-custom/content/stylesheets.xul","","chrome,resizable,centerscreen",styleArray,styleName);
+    window.openDialog("chrome://stylish-custom/content/stylesheets.xul","",
+                      "chrome,resizable,centerscreen",styleArray,styleName);
   },
 
   loadImportStyle: function(url,domain,which)
@@ -394,7 +411,7 @@ var scOverlay = {
   },
 
   //I use one menu for tools menu/statusbar/toolbar, if I just add a popup="stylish-popup" the tools menu won't do jack
-  //this opens/closes it when you left click the menuitem (onmouseover doesn't work as well)
+  //this opens/closes it when you left click the menuitem ("on mouse over" doesn't work as well)
   toggleToolsPopupWhich: null,
   toggleToolsPopup: function(that,e)
   {
@@ -491,8 +508,10 @@ var scOverlay = {
 		let popup = event.target,
 		addSite = document.createElementNS(stylishCommon.XULNS, "menuitem");
 
-		addSite.setAttribute("label", stylishOverlay.STRINGS.getString("writeforsite"));
-		addSite.setAttribute("accesskey", stylishOverlay.STRINGS.getString("writeforsiteaccesskey"));
+		addSite.setAttribute("label",stylishOverlay
+                        .STRINGS.getString("writeforsite"));
+		addSite.setAttribute("accesskey",stylishOverlay
+                        .STRINGS.getString("writeforsiteaccesskey"));
 		//addSite.addEventListener("command", scCommon.addSite, false);
 		addSite.addEventListener("command", function() {
       scCommon.addSite(stylishOverlay);
@@ -512,8 +531,10 @@ var scOverlay = {
 		}
 
 		addSite = document.createElementNS(stylishCommon.XULNS, "menuitem");
-		addSite.setAttribute("label", stylishOverlay.STRINGS.getString("writeblank"));
-		addSite.setAttribute("accesskey", stylishOverlay.STRINGS.getString("writeblankaccesskey"));
+		addSite.setAttribute("label",stylishOverlay
+                        .STRINGS.getString("writeblank"));
+		addSite.setAttribute("accesskey",stylishOverlay
+                        .STRINGS.getString("writeblankaccesskey"));
 		addSite.addEventListener("command", function() {
       scCommon.addCode('');
     }, false);
@@ -522,7 +543,8 @@ var scOverlay = {
 
 	getDomainMenuItem: function(domain) {
 		let addSite = document.createElementNS(stylishCommon.XULNS, "menuitem");
-		addSite.setAttribute("label", stylishOverlay.STRINGS.getFormattedString("writefordomain", [domain]));
+		addSite.setAttribute("label",stylishOverlay
+                      .STRINGS.getFormattedString("writefordomain", [domain]));
 		addSite.addEventListener("command", function() {
       scCommon.addDomain(domain);
     }, false);
@@ -549,19 +571,24 @@ var scOverlay = {
     }
 
     //change colour of global styles
-    let children = document.getElementById("stylish-find-styles").parentNode.childNodes;
+    let children = document.getElementById("stylish-find-styles")
+                                          .parentNode.childNodes;
     for (i = 0; i < children.length; i++) {
       let styleType = children[i].getAttribute("style-type");
 
       if (scCommon.prefs.getBoolPref("custom.showappstyles") == false &&
-          styleType.indexOf("app") != -1)
+          styleType.indexOf("app") != -1) {
         children[i].setAttribute("hidden",true);
-      else if (styleType.indexOf("global site") != -1)
-        children[i].style.color = scCommon.prefs.getCharPref("custom.globalsitestyle");
-      else if (styleType.indexOf("global") != -1)
-        children[i].style.color = scCommon.prefs.getCharPref("custom.globalstyle");
-      else if (styleType.indexOf("site") != -1)
-        children[i].style.color = scCommon.prefs.getCharPref("custom.sitestyle");
+      } else if (styleType.indexOf("global site") != -1) {
+        children[i].style.color = scCommon.prefs
+                                  .getCharPref("custom.globalsitestyle");
+      } else if (styleType.indexOf("global") != -1) {
+        children[i].style.color = scCommon.prefs
+                                  .getCharPref("custom.globalstyle");
+      } else if (styleType.indexOf("site") != -1) {
+        children[i].style.color = scCommon.prefs
+                                  .getCharPref("custom.sitestyle");
+      }
       //add event listener here?
       //menu.style-menu-item children
     }
@@ -570,11 +597,16 @@ var scOverlay = {
   //stylish-custom-toolbar-button
   clickHandler: function(event)
   {
+    let et = event.target;
+
     //if they left click the dropmenu
-    if (event.target.id == "stylish-custom-toolbar-button" && event.button == 0 && event.originalTarget.tagName == "toolbarbutton") {
-      document.getElementById(event.target.setAttribute("popup","stylish-custom-popup"));
-      document.getElementById(event.target.getAttribute("popup")).openPopup(event.target,"after_start",null,null,"true");
-      document.getElementById(event.target.removeAttribute("popup"));
+    if (event.button == 0 &&
+        et.id == "stylish-custom-toolbar-button" &&
+        event.originalTarget.tagName == "toolbarbutton") {
+      document.getElementById(et.setAttribute("popup","stylish-custom-popup"));
+      document.getElementById(et.getAttribute("popup"))
+                        .openPopup(et,"after_start",null,null,"true");
+      document.getElementById(et.removeAttribute("popup"));
       return;
     }
 
@@ -583,16 +615,16 @@ var scOverlay = {
       scCommon.newStyle();
     break;
     case 2: //right
-      if (event.target.id == "stylish-custom-toolbar-button") { //toolbar
-        document.getElementById(event.target.setAttribute("popup","stylish-custom-popup"));
-        document.getElementById(event.target.getAttribute("popup"))
-          .openPopup(event.target,"after_start",null,null,"true");
-        document.getElementById(event.target.removeAttribute("popup"));
-      } else if (event.target.id == "stylish-custom-panel") {//statusbar
-        document.getElementById(event.target.setAttribute("popup","stylish-custom-popup"));
-        document.getElementById(event.target.getAttribute("popup"))
-          .openPopup(event.target,"before_start",null,null,"true");
-        document.getElementById(event.target.removeAttribute("popup"));
+      if (et.id == "stylish-custom-toolbar-button") { //toolbar
+        document.getElementById(et.setAttribute("popup","stylish-custom-popup"));
+        document.getElementById(et.getAttribute("popup"))
+          .openPopup(et,"after_start",null,null,"true");
+        document.getElementById(et.removeAttribute("popup"));
+      } else if (et.id == "stylish-custom-panel") {//statusbar
+        document.getElementById(et.setAttribute("popup","stylish-custom-popup"));
+        document.getElementById(et.getAttribute("popup"))
+          .openPopup(et,"before_start",null,null,"true");
+        document.getElementById(et.removeAttribute("popup"));
       }
     break;
     default:
@@ -629,7 +661,8 @@ var scOverlay = {
       if (em)
         em.focus();
       else
-        window.openDialog("chrome://stylish-custom/content/info.xul","","chrome,menubar,extra-chrome,toolbar,dialog=no,resizable");
+        window.openDialog("chrome://stylish-custom/content/info.xul","",
+                    "chrome,menubar,extra-chrome,toolbar,dialog=no,resizable");
     break;
 
     }

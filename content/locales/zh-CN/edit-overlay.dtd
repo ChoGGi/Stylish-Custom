@@ -54,7 +54,7 @@
 <!ENTITY Bottom "底部">
 <!ENTITY ToggleScratchPad "切换便条簿(ScratchPad)">
 <!ENTITY ToggleScratchPadTip "切换便条簿(ScratchPad)">
-<!ENTITY ScratchPadTip "放置保存的文本，关闭对话框时清除">
+<!ENTITY ScratchPadTip "放置保存的文本，关闭对话框时清除 （选项&lt;文本中调整高度）">
 <!ENTITY ScratchPad "便条簿(ScratchPad)">
 <!ENTITY ClearSearch "清理搜索">
 <!ENTITY ClearSearchTip "清理搜索文本">

@@ -17,6 +17,7 @@ Adds search/replace to edit dialog (ctrl+F, ctrl+R, and F3)
 Press ! to type !important (can be changed in edit dialog)
 Select and un/comment/merge lines of text
 Preview/unpreview style changes without closing dialog
+Toggle styles based on which page you're on
 Lots more...
 ```
 

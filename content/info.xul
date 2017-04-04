@@ -40,7 +40,7 @@
     <key id="key_closewin" keycode="VK_ESCAPE" oncommand="window.close()"/>
   </keyset>
 
-  <tree id="style-tree-list" flex="1" editable="true" enableColumnDrag="true" onclick="scInfo.onTreeClicked(event)" onkeypress="scInfo.onKeyPress(event)">
+  <tree id="style-tree-list" flex="1" editable="true" enableColumnDrag="true" onclick="scInfo.onTreeClicked(event)">
     <treecols>
       <treecol flex="1" id="EnabledColumn" label="&Enabled;" width="25" type="checkbox" editable="true" persist="width ordinal hidden" onclick="scInfo.createStyleList(this)"/>
       <splitter class="tree-splitter"/>

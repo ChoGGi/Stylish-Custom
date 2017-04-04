@@ -1,7 +1,9 @@
 "use strict";
+/* jshint ignore:start */
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
+/* jshint ignore:end */
 //cbCommon.dump();
 
 var scOptions = {
@@ -72,7 +74,8 @@ var scOptions = {
     set("SaveTextRadio","custom.searchtextsave","b");
 
     //get scratchpad height
-    document.getElementById("ScratchpadHeightText").inputField.value = scCommon.prefs.getIntPref("custom.scratchpadheight");
+    document.getElementById("ScratchpadHeightText").inputField.value =
+                          scCommon.prefs.getIntPref("custom.scratchpadheight");
 
     //hide view sidebar option on thunderbird
     if (!win.document.getElementById("sidebar"))
@@ -83,8 +86,10 @@ var scOptions = {
     while (files.hasMoreElements()) {
       let entry = files.getNext();
       entry.QueryInterface(Ci.nsIFile);
-      if (entry.leafName.indexOf("Stylish-Custom") != -1 && entry.leafName.indexOf(".css") != -1)
+      if (entry.leafName.indexOf("Stylish-Custom") != -1 &&
+          entry.leafName.indexOf(".css") != -1) {
         document.getElementById("RemoveCSS").disabled = false;
+      }
     }
   },
 
@@ -108,8 +113,10 @@ var scOptions = {
     while(files.hasMoreElements()) {
       let entry = files.getNext();
       entry.QueryInterface(Ci.nsIFile);
-      if (entry.leafName.indexOf("Stylish-Custom") != -1 && entry.leafName.indexOf(".css") != -1)
+      if (entry.leafName.indexOf("Stylish-Custom") != -1 &&
+          entry.leafName.indexOf(".css") != -1) {
         entry.remove(false);
+      }
     }
     document.getElementById("RemoveCSS").disabled = true;
   },
@@ -117,7 +124,8 @@ var scOptions = {
   //when you press a radio for statusbar icon
   statusbar: function(view)
   {
-    let StatusbarIcon = this.mainWin.document.getElementById("stylish-custom-panel");
+    let StatusbarIcon = this.mainWin
+                        .document.getElementById("stylish-custom-panel");
     scCommon.prefs.setBoolPref("custom.statusbaricon",view);
 
     if (view == true)
@@ -173,7 +181,8 @@ var scOptions = {
   getStyleSheets: function(b)
   {
     scCommon.prefs.setBoolPref("custom.stylesheetmenuitem",b);
-    let getStyleSheets = this.mainWin.document.getElementById("StylishGetStyleSheets");
+    let getStyleSheets = this.mainWin
+                        .document.getElementById("StylishGetStyleSheets");
     if (!getStyleSheets)
       return;
 
@@ -405,9 +414,15 @@ var scOptions = {
 
     doc.appendChild(docRoot);
 
-    let oFOStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
-    oFOStream.init(file,parseInt("0x02",16)|parseInt("0x08",16)|parseInt("0x20",16),parseInt("0664",8),0); // write, create, truncate
-    (new XMLSerializer()).serializeToStream(doc,oFOStream,""); // rememeber, doc is the DOM tree
+    let oFOStream = Cc["@mozilla.org/network/file-output-stream;1"]
+                    .createInstance(Ci.nsIFileOutputStream);
+    oFOStream.init(file,
+                  parseInt("0x02",16)|
+                  parseInt("0x08",16)|
+                  parseInt("0x20",16),
+                  parseInt("0664",8),0
+    ); // write, create, truncate
+    (new XMLSerializer()).serializeToStream(doc,oFOStream,"");//doc is the DOM tree
     oFOStream.close();
   },
 
@@ -428,7 +443,8 @@ var scOptions = {
     else {//fennec has one window
       let str = {},
       charset = "UTF-8",
-      is = Cc["@mozilla.org/intl/converter-input-stream;1"].createInstance(Ci.nsIConverterInputStream);
+      is = Cc["@mozilla.org/intl/converter-input-stream;1"]
+            .createInstance(Ci.nsIConverterInputStream);
 
       const replacementChar = Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER;
       is.init(fp.file,charset,0,replacementChar);

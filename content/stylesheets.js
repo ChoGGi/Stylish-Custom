@@ -9,7 +9,9 @@ var scStylesheets = {
   init: function()
   {
     //hide bottom area
-    document.getAnonymousElementByAttribute(document.getElementById("stylish-custom"),"anonid","buttons").style.display = "none";
+    document.getAnonymousElementByAttribute (
+              document.getElementById("stylish-custom"),"anonid","buttons"
+    ).style.display = "none";
 
     if (window.arguments[0] && window.arguments[1]) {
       this.createStyleSheetList(window.arguments[0]);
@@ -62,7 +64,8 @@ var scStylesheets = {
     //add an html namespace as i somewhat doubt everybody will (only slightly) and wrap it in an @-moz-doc-domain
     //let domain = window.opener.gBrowser.selectedTab.linkedBrowser.documentURI.host;
     let domain = window.opener.gBrowser.currentURI.host;
-    styleText = '@namespace url(http://www.w3.org/1999/xhtml);\n@-moz-document domain("' + domain + '"){\n' + styleText + "\n}";
+    styleText = '@namespace url(http://www.w3.org/1999/xhtml);\n@-moz-document domain("' +
+                domain + '"){\n' + styleText + "\n}";
     //load it into stylish
     scCommon.addCode(styleText,this.styleName);
     /*

@@ -54,7 +54,7 @@
 <!ENTITY Bottom "Bottom">
 <!ENTITY ToggleScratchPad "Toggle ScratchPad">
 <!ENTITY ToggleScratchPadTip "Toggles the ScratchPad">
-<!ENTITY ScratchPadTip "Place to keep text, cleared when you close the dialog">
+<!ENTITY ScratchPadTip "Place to keep text, cleared when you close the dialog (Adjust height in Options&gt;Text)">
 <!ENTITY ScratchPad "ScratchPad">
 <!ENTITY ClearSearch "Clear Search">
 <!ENTITY ClearSearchTip "Clear search text">

@@ -54,7 +54,7 @@
 <!ENTITY Bottom "하단">
 <!ENTITY ToggleScratchPad "임시 메모">
 <!ENTITY ToggleScratchPadTip "임시 메모장을 토글합니다.">
-<!ENTITY ScratchPadTip "임시 메모장 (편집 창을 닫으면 지워짐)">
+<!ENTITY ScratchPadTip "임시 메모장 (편집 창을 닫으면 지워짐)(옵션&lt;텍스트에서 높이 조정)">
 <!ENTITY ScratchPad "임시 메모장">
 <!ENTITY ClearSearch "검색어 지우기">
 <!ENTITY ClearSearchTip "검색 상자에서 텍스트를 지웁니다.">
@@ -113,4 +113,3 @@
 <!ENTITY StyleIdTip "stylish.sqlite database로부터 스타일 ID를 보여줍니다">
 <!ENTITY RemoveXUL "xul:을 제거합니다 ">
 <!ENTITY RemoveXULTip "복사 된 코드에서 xul: 제거  (&quot;xul:hbox &gt; xul:scrollbox&quot; to &quot;hbox &gt; scrollbox&quot;)">
-                                   
