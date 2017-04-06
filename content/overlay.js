@@ -169,6 +169,7 @@ var scOverlay = {
     document.getElementById("StylishGetStyleSheets").hidden = hidden;
   },
 
+  domain: null,
   getStyleSheets: function()
   {
     let doc,
@@ -181,7 +182,12 @@ var scOverlay = {
     //are we using multiprocess fox (e10s)?
     doc = gBrowser.contentDocument;
     try {
-      styleName = doc.url;
+      styleName = doc.URL;
+      //if it's an about: page just use the URL
+      if (!gBrowser.contentDocument.domain)
+        this.domain = styleName;
+      else
+        this.domain = gBrowser.contentDocument.domain;
     } catch (e) {
       e10s = true;
     }
@@ -190,6 +196,7 @@ var scOverlay = {
     function e10sData(message)
     {
       if (activeURL === message.data.url) {
+        scOverlay.domain = message.data.domain;
         doc = message.data;
         while (doc.array.length != 0) {
           let style = doc.array.pop();
@@ -206,7 +213,9 @@ var scOverlay = {
           }
         }
         scOverlay.showStyleWin(doc,styleArray,styleText,doc.url);
-        window.messageManager.removeMessageListener("stylishCustom:callback",e10sData);
+        window.messageManager.removeMessageListener (
+                              "stylishCustom:callback",e10sData
+        );
       }
     }
     if (e10s) {
@@ -222,8 +231,8 @@ var scOverlay = {
     //below is ignored if e10s
 
     //nothing on a blank page
-    if (!doc.documentElement.firstChild)
-      return;
+    //if (!doc.documentElement.firstChild)
+    //  return;
 
     //get inline styles from head element
     let styleSheet = doc.documentElement.firstChild.childNodes;
@@ -254,19 +263,25 @@ var scOverlay = {
   {
     //read @import rules
     let imports = styleText.split("@import");
+
     for (let i = 0; i < imports.length; i++) {
-      //look for a line ending with .css";
-      let search = imports[i].search(/\.css\"\;$/mi);
+      //cleanup @import lines to be "url.css";
+      let str = imports[i].replace(/[ ]\)\;[ ]\-\-\>/,'";')
+                          .replace(/url\([ ]/,'"'),
+      search = str.search(/\.css\"\;$/mi);
+
       if (search == -1)
         continue;
       //2 being the start of the line excluding the space and the quote, and 4 being .css
-      let url = imports[i].substring(2,search+4),
+      let url = str.substring(2,search+4),
       //maybe someone enjoys adding urls
       text;
-      if (url.search(/http\:\/\//i) == -1)
-        text = scOverlay.loadImportStyle(url,doc.domain);
-      else
-        text = scOverlay.loadImportStyle(url,doc.domain,1);
+      try {
+        text = scCommon.readFile(url,"Text","web");
+      } catch (e) {
+        let css = "http://" + this.domain + url;
+        text = scCommon.readFile(css,"Text","web");
+      }
       //add text to style with a comment for people to know about
       if (text && text != "" && typeof text != "undefined")
         styleArray.push(url + "|||" + text);
@@ -276,28 +291,7 @@ var scOverlay = {
       return;
     //display a list of stylesheets to let user choose
     window.openDialog("chrome://stylish-custom/content/stylesheets.xul","",
-                      "chrome,resizable,centerscreen",styleArray,styleName);
-  },
-
-  loadImportStyle: function(url,domain,which)
-  {
-    if (!which && url.charAt(0) == "/") {
-      url = "http://" + domain + url;
-    }
-    //download and return; it
-    let req = new XMLHttpRequest();
-    req.open("GET",url,true);
-    req.onreadystatechange = function() {
-      if (req.readyState == 4) {
-        if (req.status == 200) {
-          return req.responseText;
-        } else {
-          scCommon.catchError(event);
-          return null;
-        }
-      }
-    };
-    req.send(null);
+                      "chrome,resizable,centerscreen",styleArray,styleName,this.domain);
   },
 
   onPageLoadE10s: function(message)
