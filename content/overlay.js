@@ -228,11 +228,7 @@ var scOverlay = {
       return;
     }
 
-    //below is ignored if e10s
-
-    //nothing on a blank page
-    //if (!doc.documentElement.firstChild)
-    //  return;
+    //below is ignored if e10s is enabled
 
     //get inline styles from head element
     let styleSheet = doc.documentElement.firstChild.childNodes;
@@ -268,6 +264,7 @@ var scOverlay = {
       //cleanup @import lines to be "url.css";
       let str = imports[i].replace(/[ ]\)\;[ ]\-\-\>/,'";')
                           .replace(/url\([ ]/,'"'),
+      //look for a line ending with .css";
       search = str.search(/\.css\"\;$/mi);
 
       if (search == -1)
@@ -275,12 +272,18 @@ var scOverlay = {
       //2 being the start of the line excluding the space and the quote, and 4 being .css
       let url = str.substring(2,search+4),
       //maybe someone enjoys adding urls
-      text;
+      text,css;
       try {
         text = scCommon.readFile(url,"Text","web");
       } catch (e) {
-        let css = "http://" + this.domain + url;
-        text = scCommon.readFile(css,"Text","web");
+        //try to fixup @import "/location/rules.css";
+        try {
+          css = "http://" + this.domain + url;
+          text = scCommon.readFile(css,"Text","web");
+        } catch (e) {
+          css = "https://" + this.domain + url;
+          text = scCommon.readFile(css,"Text","web");
+        }
       }
       //add text to style with a comment for people to know about
       if (text && text != "" && typeof text != "undefined")
