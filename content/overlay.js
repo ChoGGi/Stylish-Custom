@@ -95,6 +95,11 @@ var scOverlay = {
       dBox("StylishInfoMain",true);
     }
 
+    if (scCommon.prefs.getIntPref("custom.newstylelocation") == 1) {
+      dBox("StylishNewStyle",false);
+      dBox("StylishNewStyleMain",true);
+    }
+
     //load a style sheet to fix the style for nasa night launch / ft deepdark
     let selectedSkin = Services.prefs.getCharPref("general.skins.selectedSkin"),
     darkStyle = Services.prefs.getBoolPref("extensions.stylish.custom.dark");
@@ -308,6 +313,9 @@ var scOverlay = {
 
   onPageLoad: function(event)
   {
+    if (typeof gBrowser !== "undefined")//Thunderbird
+      return;
+
     let t = scCommon.prefs.getIntPref("custom.styletoggle");
     if (t == 0 ||
         t == 1 && event.type == "TabSelect" ||
@@ -318,6 +326,7 @@ var scOverlay = {
 
   onPageLoadTask: function(event)
   {
+
     let href,
     currentTab,
     xul = "chrome://browser/content/browser.xul";

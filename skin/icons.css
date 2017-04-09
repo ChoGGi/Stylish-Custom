@@ -39,7 +39,7 @@ menuitem[id^="StylishImport"]{-moz-image-region:rect(0 160px 16px 144px);list-st
 #stylishCustom_ClearSearchText{-moz-image-region:rect(16px 80px 32px 64px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
 #copy-style-info{-moz-image-region:rect(32px 64px 48px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
 [id^="StylishAppStyles"]{-moz-image-region:rect(0 112px 16px 96px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
-[id^="StylishAppStyles"]>menupopup>.Style[enabled="true"]{-moz-image-region:rect(48px 176px 64px 160px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#StylishNewStyle,#StylishNewStyleMain,[id^="StylishAppStyles"]>menupopup>.Style[enabled="true"]{-moz-image-region:rect(48px 176px 64px 160px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
 [id^="StylishAppStyles"]>menupopup>.Style[enabled="false"]{-moz-image-region:rect(32px 176px 48px 160px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
 [id^="StylishEnabledStyles"]{-moz-image-region:rect(16px 176px 32px 160px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
 [id^="StylishDisabledStyles"]{-moz-image-region:rect(0 176px 16px 160px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}

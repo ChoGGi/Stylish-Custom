@@ -37,6 +37,7 @@
       <menuitem id="StylishImportMain" label="&ImportStyles;" tooltiptext="&ImportStylesTip;" oncommand="scCommon.openDialog('Import')"/>
       <menuitem id="StylishExportMain" label="&ExportStyles;" tooltiptext="&ExportStylesTip;" oncommand="scCommon.openDialog('Export')"/>
       <menuseparator/>
+      <menuitem id="StylishNewStyleMain" label="&NewStyle;" oncommand="scCommon.addCode()"/>
       <menuitem id="StylishInfoMain" label="&StylishInfo;" tooltiptext="&StylishInfoTip;" oncommand="scCommon.openDialog('Info')"/>
       <menuitem id="StylishOptionsMain" label="&Options;" tooltiptext="&OptionsTip;" oncommand="scCommon.openDialog('Options')"/>
       <menuitem id="StylishGuide" label="&Guide;" tooltiptext="&GuideTip;" oncommand="scCommon.openChoGGiki()"/>
@@ -51,6 +52,7 @@
     <menuitem position="4" id="StylishImport" label="&ImportStyles;" tooltiptext="&ImportStylesTip;" oncommand="scCommon.openDialog('Import')" hidden="true"/>
     <menuitem position="5" id="StylishExport" label="&ExportStyles;" tooltiptext="&ExportStylesTip;" oncommand="scCommon.openDialog('Export')" hidden="true"/>
     <menuseparator position="14"/>
+    <menuitem id="StylishNewStyle" label="&NewStyle;" oncommand="scCommon.addCode()" hidden="true"/>
     <menu position="15" id="StylishAppStyles" label="&AppStyles;" hidden="true">
       <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
     </menu>
@@ -100,7 +102,7 @@
   <!-- added above -->
   <menu id="stylish-toolmenu" label="&Stylish;" hidden="true" onclick="scOverlay.toggleToolsPopup(this,event)"/>
   <toolbarbutton id="stylish-custom-toolbar-button" class="toolbarbutton-1" label="&StylishCustom;" onclick="event.preventDefault();scOverlay.clickHandler(event)" type="menu-button" context=""/>
-  <toolbarbutton id="stylish-custom-toolbar-manage" class="toolbarbutton-1" label="&StylishManage;" onclick="event.preventDefault();scOverlay.clickHandlerManage(event.button)" tooltiptext="&StylishManageTip;" orient="vertical"/>
+  <toolbarbutton id="stylish-custom-toolbar-manage" class="toolbarbutton-1" label="&StylishManage;" onclick="event.preventDefault();scOverlay.clickHandlerManage(event.button)" tooltiptext="&StylishManageTip;"/>
   <key id="key_stylishCustom-openManage" modifiers="accel,shift" key="m" oncommand="scCommon.openStyleManager(window)"/>
   <key id="key_stylishCustom-reloadStyles" modifiers="accel,alt" key="s" oncommand="scOverlay.reloadStyles()"/>
 

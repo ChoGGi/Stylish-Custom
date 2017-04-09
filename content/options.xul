@@ -172,6 +172,14 @@
               </radiogroup>
           </groupbox>
 
+          <groupbox>
+            <caption label="&NewStyle;"/>
+              <radiogroup id="NewStyleRadio" orient="horizontal" value="">
+                <radio label="&Stylish;" value="1" onmousedown="scOptions.newStyle(1);this.parentNode.selectedIndex = 0"/>
+                <radio label="&StylishCustom;" value="0" onmousedown="scOptions.newStyle(0);this.parentNode.selectedIndex = 1"/>
+              </radiogroup>
+          </groupbox>
+
         </groupbox>
 
       </tabpanel>

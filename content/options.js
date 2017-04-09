@@ -61,6 +61,7 @@ var scOptions = {
     set("AppTitleRadio","custom.editorapptitle","i");
     set("StyleMenusRadio","custom.stylemenulocation","i");
     set("MoveErrorBoxRadio","custom.errorboxplacement","i");
+    set("NewStyleRadio","custom.newstylelocation","i");
 
     set("StyleMenuOverrideRadio","custom.stylemenuoverride","b");
     set("RemoveCSSRadio","custom.removecss","b");
@@ -278,18 +279,37 @@ var scOptions = {
   {
     scCommon.prefs.setIntPref("custom.infolocation",i);
     let doc = this.mainWin.document,
-    StylishInfo = doc.getElementById("StylishInfo"),
-    StylishInfoMain = doc.getElementById("StylishInfoMain");
-    if (!StylishInfo)
+    menuitem = doc.getElementById("StylishInfo"),
+    menuitemMain = doc.getElementById("StylishInfoMain");
+    if (!menuitem)
       return;
 
     if (i == 1) {
-      StylishInfo.style.display = "-moz-box";
-      StylishInfoMain.style.display = "none";
+      menuitem.style.display = "-moz-box";
+      menuitemMain.style.display = "none";
       return;
     }
-    StylishInfo.style.display = "none";
-    StylishInfoMain.style.display = "-moz-box";
+    menuitem.style.display = "none";
+    menuitemMain.style.display = "-moz-box";
+  },
+
+  newStyle: function(i)
+  {
+    scCommon.prefs.setIntPref("custom.newstylelocation",i);
+    let doc = this.mainWin.document,
+    menuitem = doc.getElementById("StylishNewStyle"),
+    menuitemMain = doc.getElementById("StylishNewStyleMain");
+
+    if (!menuitem)
+      return;
+
+    if (i == 1) {
+      menuitem.style.display = "-moz-box";
+      menuitemMain.style.display = "none";
+      return;
+    }
+    menuitem.style.display = "none";
+    menuitemMain.style.display = "-moz-box";
   },
 
   //when you press a save button

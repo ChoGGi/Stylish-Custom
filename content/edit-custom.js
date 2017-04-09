@@ -956,13 +956,13 @@ var scEdit = {
       if (!scCommon.getWin(window))
         return;
       switch (changeTitle) {
-        case "0":
+        case 0:
           document.title = name;
         break;
-        case "1":
+        case 1:
           document.title = appName + " : " + name;
         break;
-        case "2":
+        case 2:
           document.title = Services.appinfo.name + " : " + name;
         break;
       }

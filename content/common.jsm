@@ -266,10 +266,10 @@ var scCommon = {
       }
     }
 
-    //if it's hidden then show it, if something else is in sidebar then switch to sc, else hide it
+    //if it's hidden then show it, if something else is in sidebar then switch to SC, otherwise hide it
     let b = win.document.getElementById("sidebar-box");
     if (!b) {
-      scCommon.dump("Sidebar is missing on this platform");
+      //scCommon.dump("Sidebar is missing on this platform");
       return;
     }
     if (b.getAttribute("src").indexOf("stylish-custom") !== -1 && b.hidden == true)
@@ -604,6 +604,9 @@ var scCommon = {
   },
 
 	addSite: function(stylishOverlay) {
+    if (typeof gBrowser == "undefined")//Thunderbird
+      return;
+
 		stylishOverlay.getFromContent("stylish:page-info", function(message) {
 			let code = "@namespace url(" + message.data.namespace +
           ");\n@-moz-document url-prefix(\"" + message.data.url + "\") {\n\n}";
@@ -622,6 +625,8 @@ var scCommon = {
       win = scCommon.getWindowName("stylishEdit");
     if (!name)
       name = "";
+    if (!code)
+      code = "";
 
     let style = scCommon.styleInit(null,null,null,null,name,code,null,null,null);
     scCommon.openEdit(win,{style: style});

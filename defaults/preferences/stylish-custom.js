@@ -60,6 +60,8 @@ pref("extensions.stylish.custom.inserttextsep",",,");
 pref("extensions.stylish.custom.manageview",1);
 //use the new search in 1.0.6
 pref("extensions.stylish.custom.newsearch",true);
+//stylish new style menuitem location
+pref("extensions.stylish.custom.newstylelocation",0);
 //checks if we should remove css files from temp dir without asking
 pref("extensions.stylish.custom.removecss",false);
 //set height of scratchpad
