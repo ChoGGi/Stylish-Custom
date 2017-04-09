@@ -4,7 +4,7 @@ Stylish v2.0.* and up (not tested nor supported on older versions)
 * [Changelog](https://choggi.org/misc/Stylish-Custom/change.log)
 * [Stylish-Custom Guide](https://choggi.org/guide)
 * [Forum Thread](https://forum.userstyles.org/discussion/2799/stylish-custom/p1)
-* for a temporary signed extension see [here](https://choggi.org/misc/Stylish-Custom/) (this will have a different ID then the release versions)
+* for a signed extension see [here](https://choggi.org/misc/Stylish-Custom/), or [Releases](https://github.com/ChoGGi/Stylish-Custom/releases) (the point releases will have a different ID then the release versions)
 
 ### Some features:
 ```
