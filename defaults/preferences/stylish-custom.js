@@ -51,7 +51,7 @@ pref("extensions.stylish.custom.showappstyles",true);
 //where to look for css/xml files to import
 pref("extensions.stylish.custom.importpath","");
 //stylish info menuitem location
-pref("extensions.stylish.custom.infolocation",0);
+pref("extensions.stylish.custom.infolocation",1);
 //list of text for insert text menu
 pref("extensions.stylish.custom.inserttext","{display:block!important},,{display:-moz-box!important},,{display:none!important},,{-moz-appearance:none!important},,{border:1pt solid red!important;color:red!important;background:red!important}");
 //which separator to use for insert text
@@ -74,12 +74,10 @@ pref("extensions.stylish.custom.searchtextsave",false);
 pref("extensions.stylish.custom.showicons",true);
 //change colour of site styles in stylish menu
 pref("extensions.stylish.custom.sitestyle","#3366FF");
-//show the stylish-custom statusbar icon
-pref("extensions.stylish.custom.statusbaricon",true);
 //rightclick style menuitem for menu (0) or edit (1)
 pref("extensions.stylish.custom.stylemenuitem",0);
 //style list menu location
-pref("extensions.stylish.custom.stylemenulocation",0);
+pref("extensions.stylish.custom.stylemenulocation",1);
 //override edit item on Stylish edit menu
 pref("extensions.stylish.custom.stylemenuoverride",true);
 //list of style ids to reload (blank for all). separate with ,(54,365,234)

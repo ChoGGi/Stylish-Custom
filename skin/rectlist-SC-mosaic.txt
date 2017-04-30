@@ -77,7 +77,7 @@ search
 32px 160px 48px 144px
 install
 32px 176px 48px 160px
-stylish new
+stylish purple
 
 
 

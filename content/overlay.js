@@ -65,10 +65,6 @@ var scOverlay = {
       }
     }
 
-    //display statusbar icon?
-    if (scCommon.prefs.getBoolPref("custom.statusbaricon") == true)
-      dBox("stylish-custom-panel",false);
-
     //display tools menupopup
     if (scCommon.prefs.getBoolPref("custom.toolbar") == true)
       dBox("stylish-toolmenu",false);
@@ -621,17 +617,10 @@ var scOverlay = {
       scCommon.newStyle();
     break;
     case 2: //right
-      if (et.id == "stylish-custom-toolbar-button") { //toolbar
-        document.getElementById(et.setAttribute("popup","stylish-custom-popup"));
-        document.getElementById(et.getAttribute("popup"))
-          .openPopup(et,"after_start",null,null,"true");
-        document.getElementById(et.removeAttribute("popup"));
-      } else if (et.id == "stylish-custom-panel") {//statusbar
-        document.getElementById(et.setAttribute("popup","stylish-custom-popup"));
-        document.getElementById(et.getAttribute("popup"))
-          .openPopup(et,"before_start",null,null,"true");
-        document.getElementById(et.removeAttribute("popup"));
-      }
+      document.getElementById(et.setAttribute("popup","stylish-custom-popup"));
+      document.getElementById(et.getAttribute("popup"))
+        .openPopup(et,"after_start",null,null,"true");
+      document.getElementById(et.removeAttribute("popup"));
     break;
     default:
       scCommon.openStyleManager(window);

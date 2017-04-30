@@ -14,7 +14,6 @@ toolbar[iconsize="small"]>#wrapper-stylish-custom-toolbar-button>#stylish-custom
 toolbar[iconsize="small"]>#wrapper-stylish-custom-toolbar-manage>#stylish-custom-toolbar-manage,
 toolbar[iconsize="small"]>#stylish-custom-toolbar-button,
 toolbar[iconsize="small"]>#stylish-custom-toolbar-manage,
-#stylish-custom-panel,
 #stylish-custom-toolbar-button[cui-areatype="toolbar"],
 #stylish-custom-toolbar-manage[cui-areatype="toolbar"]
 {list-style-image:url("chrome://stylish-custom/skin/icon-16.png")}

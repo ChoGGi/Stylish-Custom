@@ -80,7 +80,7 @@
       <button id="NewStyle" label="&New;" tooltiptext="&NewStyle;" oncommand="scInfo.newStyle()"/>
       <spacer flex="1"/>
       <button id="DeleteStyle" label="&Delete;" tooltiptext="&DeleteStyleTip;" oncommand="scInfo.deleteStyle()"/>
-      <checkbox id="DeleteStyleAsk" style="padding-right:1pt" checked="true" label="&Ask;" tooltiptext="&AskTip;"/>
+      <checkbox id="DeleteStyleAsk" style="padding-right:1pt" checked="true" label="&Ask;" tooltiptext="&DeleteStyleAskTip;"/>
     </box>
   </groupbox>
 

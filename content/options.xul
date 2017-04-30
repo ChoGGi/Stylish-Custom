@@ -53,51 +53,43 @@
         <groupbox>
           <caption label="&Manageview;" tooltiptext="&ManageviewTip;"/>
             <radiogroup id="ManageRadio" orient="horizontal" value="" tooltiptext="&ManageviewTip;">
-              <radio label="&Info;" value="1" onmousedown="scOptions.manage(1)"/>
-              <radio label="&Addons;" value="0" onmousedown="scOptions.manage(0)"/>
-              <radio label="&Addons; &Window;" value="2" onmousedown="scOptions.manage(2)"/>
-              <radio label="&Sidebar;" value="3" onmousedown="scOptions.manage(3)"/>
+              <radio label="&Info;" value="1" onmousedown="scOptions.savePref('manageview',1)"/>
+              <radio label="&Addons;" value="0" onmousedown="scOptions.savePref('manageview',0)"/>
+              <radio label="&Addons; &Window;" value="2" onmousedown="scOptions.savePref('manageview',2)"/>
+              <radio label="&Sidebar;" value="3" onmousedown="scOptions.savePref('manageview',3)"/>
             </radiogroup>
         </groupbox>
 
         <groupbox>
           <caption label="&AppTitle;" tooltiptext="&AppTitleTip;"/>
             <radiogroup id="AppTitleRadio" orient="horizontal" value="" tooltiptext="&AppTitleTip;">
-              <radio label="&Nothing;" value="0" onmousedown="scOptions.apptitle(0)"/>
-              <radio label="&Initials;" value="1" onmousedown="scOptions.apptitle(1)"/>
-              <radio label="&FullTitle;" value="2" onmousedown="scOptions.apptitle(2)"/>
+              <radio label="&Nothing;" value="0" onmousedown="scOptions.savePref('editorapptitle',0)"/>
+              <radio label="&Initials;" value="1" onmousedown="scOptions.savePref('editorapptitle',1)"/>
+              <radio label="&FullTitle;" value="2" onmousedown="scOptions.savePref('editorapptitle',2)"/>
             </radiogroup>
         </groupbox>
 
         <groupbox>
           <caption label="&AskToSave;" tooltiptext="&AskToSaveTip;"/>
             <radiogroup id="AskToSaveRadio" orient="horizontal" value="" tooltiptext="&AskToSaveTip;">
-              <radio label="&True;" value="1" onmousedown="scOptions.asktosave(true);this.parentNode.selectedIndex = 0"/>
-              <radio label="&False;" value="0" onmousedown="scOptions.asktosave(false);this.parentNode.selectedIndex = 1"/>
-            </radiogroup>
-        </groupbox>
-
-        <groupbox>
-          <caption label="&StatusBar;" tooltiptext="&StatusBarTip;"/>
-            <radiogroup id="StatusbarRadio" orient="horizontal" value="" tooltiptext="&StatusBarTip;">
-              <radio label="&Show;" value="1" onmousedown="scOptions.statusbar(true);this.parentNode.selectedIndex = 0"/>
-              <radio label="&Hide;" value="0" onmousedown="scOptions.statusbar(false);this.parentNode.selectedIndex = 1"/>
+              <radio label="&True;" value="1" onmousedown="scOptions.savePref('asktosave',true);this.parentNode.selectedIndex = 0"/>
+              <radio label="&False;" value="0" onmousedown="scOptions.savePref('asktosave',false);this.parentNode.selectedIndex = 1"/>
             </radiogroup>
         </groupbox>
 
         <groupbox>
           <caption label="&SearchBar;" tooltiptext="&SearchBarTip;"/>
             <radiogroup id="SearchBarRadio" orient="horizontal" value="" tooltiptext="&SearchBarTip;">
-              <radio label="&New;" value="1" onmousedown="scOptions.newsearch(true);this.parentNode.selectedIndex = 1"/>
-              <radio label="&Old;" value="0" onmousedown="scOptions.newsearch(false);this.parentNode.selectedIndex = 0"/>
+              <radio label="&New;" value="1" onmousedown="scOptions.savePref('newsearch',true);this.parentNode.selectedIndex = 1"/>
+              <radio label="&Old;" value="0" onmousedown="scOptions.savePref('newsearch',false);this.parentNode.selectedIndex = 0"/>
             </radiogroup>
         </groupbox>
 
         <groupbox>
           <caption label="&ToggleIcons;" tooltiptext="&ToggleIconsTip;"/>
             <radiogroup id="ToggleIconsRadio" orient="horizontal" value="" tooltiptext="&ToggleIconsTip;">
-              <radio label="&Show;" value="1" onmousedown="scOptions.toggleicons(true);this.parentNode.selectedIndex = 1"/>
-              <radio label="&Hide;" value="0" onmousedown="scOptions.toggleicons(false);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Show;" value="1" onmousedown="scOptions.savePref('showicons',true);this.parentNode.selectedIndex = 1"/>
+              <radio label="&Hide;" value="0" onmousedown="scOptions.savePref('showicons',false);this.parentNode.selectedIndex = 0"/>
             </radiogroup>
         </groupbox>
 
@@ -116,32 +108,32 @@
         <groupbox>
           <caption label="&ToolMenu;" tooltiptext="&ToolMenuTip;"/>
             <radiogroup id="ToolMenuRadio" orient="horizontal" value="" tooltiptext="&ToolMenuTip;">
-              <radio label="&Show;" value="1" onmousedown="scOptions.toolmenu(true);this.parentNode.selectedIndex = 0"/>
-              <radio label="&Hide;" value="0" onmousedown="scOptions.toolmenu(false);this.parentNode.selectedIndex = 1"/>
+              <radio label="&Show;" value="1" onmousedown="scOptions.savePref('toolbar',true);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Hide;" value="0" onmousedown="scOptions.savePref('toolbar',false);this.parentNode.selectedIndex = 1"/>
             </radiogroup>
         </groupbox>
 
         <groupbox>
           <caption label="&GetStyleSheetsMenu;" tooltiptext="&GetStyleSheetsMenuTip;"/>
             <radiogroup id="GetStyleSheetsRadio" orient="horizontal" value="" tooltiptext="&GetStyleSheetsMenuTip;">
-              <radio label="&Show;" value="1" onmousedown="scOptions.getStyleSheets(true);this.parentNode.selectedIndex = 0"/>
-              <radio label="&Hide;" value="0" onmousedown="scOptions.getStyleSheets(false);this.parentNode.selectedIndex = 1"/>
+              <radio label="&Show;" value="1" onmousedown="scOptions.savePref('stylesheetmenuitem',true);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Hide;" value="0" onmousedown="scOptions.savePref('stylesheetmenuitem',false);this.parentNode.selectedIndex = 1"/>
             </radiogroup>
         </groupbox>
 
         <groupbox>
           <caption label="&StyleMenu;" tooltiptext="&StyleMenuTip;"/>
             <radiogroup id="StyleMenuRadio" orient="horizontal" value="" tooltiptext="&StyleMenuTip;">
-              <radio label="&Menu;" value="0" onmousedown="scOptions.styleMenu(0);this.parentNode.selectedIndex = 0"/>
-              <radio label="&Edit;" value="1" onmousedown="scOptions.styleMenu(1);this.parentNode.selectedIndex = 1"/>
+              <radio label="&Menu;" value="0" onmousedown="scOptions.savePref('stylemenuitem',0);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Edit;" value="1" onmousedown="scOptions.savePref('stylemenuitem',1);this.parentNode.selectedIndex = 1"/>
             </radiogroup>
         </groupbox>
 
         <groupbox>
           <caption label="&StyleMenuOverride;" tooltiptext="&StyleMenuOverrideTip;"/>
             <radiogroup id="StyleMenuOverrideRadio" orient="horizontal" value="" tooltiptext="&StyleMenuOverrideTip;">
-              <radio label="&StylishCustom;" value="1" onmousedown="scOptions.styleMenuOverride(true);this.parentNode.selectedIndex = 0"/>
-              <radio label="&Stylish;" value="0" onmousedown="scOptions.styleMenuOverride(false);this.parentNode.selectedIndex = 1"/>
+              <radio label="&StylishCustom;" value="1" onmousedown="scOptions.savePref('stylemenuoverride',true);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Stylish;" value="0" onmousedown="scOptions.savePref('stylemenuoverride',false);this.parentNode.selectedIndex = 1"/>
             </radiogroup>
         </groupbox>
 
@@ -258,8 +250,8 @@
         <groupbox>
           <caption label="&SaveText;" tooltiptext="&SaveTextTip;"/>
             <radiogroup id="SaveTextRadio" orient="horizontal" value="" tooltiptext="&SaveTextTip;">
-              <radio label="&True;" value="1" onmousedown="scOptions.saveText(true);this.parentNode.selectedIndex = 0"/>
-              <radio label="&False;" value="0" onmousedown="scOptions.saveText(false);this.parentNode.selectedIndex = 1"/>
+              <radio label="&True;" value="1" onmousedown="scOptions.savePref('searchtextsave',true);this.parentNode.selectedIndex = 0"/>
+              <radio label="&False;" value="0" onmousedown="scOptions.savePref('searchtextsave',false);this.parentNode.selectedIndex = 1"/>
             </radiogroup>
         </groupbox>
 
@@ -277,8 +269,8 @@
         <groupbox>
           <caption label="&WhichEditor;" tooltiptext="&WhichEditorTip;"/>
             <radiogroup id="WhichEditorRadio" orient="horizontal" value="" tooltiptext="&WhichEditorTip;">
-              <radio label="&StylishCustom;" value="1" onmousedown="scOptions.whichEditor(1);this.parentNode.selectedIndex = 0"/>
-              <radio label="&IAT;" value="0" onmousedown="scOptions.whichEditor(0);this.parentNode.selectedIndex = 1"/>
+              <radio label="&StylishCustom;" value="1" onmousedown="scOptions.savePref('editorwhich',1);this.parentNode.selectedIndex = 0"/>
+              <radio label="&IAT;" value="0" onmousedown="scOptions.savePref('editorwhich',0);this.parentNode.selectedIndex = 1"/>
             </radiogroup>
         </groupbox>
 
@@ -308,8 +300,8 @@
             <groupbox>
               <caption label="&RemoveCSSAuto;" tooltiptext="&RemoveCSSAutoTip;"/>
               <radiogroup id="RemoveCSSRadio" orient="horizontal" value="" tooltiptext="&RemoveCSSAutoTip;">
-                <radio label="&Enable;" value="1" onmousedown="scOptions.removeCSSWhich(true);this.parentNode.selectedIndex = 0"/>
-                <radio label="&Disable;" value="0" onmousedown="scOptions.removeCSSWhich(false);this.parentNode.selectedIndex = 1"/>
+                <radio label="&Enable;" value="1" onmousedown="scOptions.savePref('removecss',true);this.parentNode.selectedIndex = 0"/>
+                <radio label="&Disable;" value="0" onmousedown="scOptions.savePref('removecss',false);this.parentNode.selectedIndex = 1"/>
               </radiogroup>
             </groupbox>
           </vbox>
@@ -321,10 +313,10 @@
         <groupbox>
           <caption label="&StyleToggle;" tooltiptext="&StyleToggleTip;"/>
             <radiogroup id="StyleToggleRadio" orient="vertical" value="" tooltiptext="&StyleToggleTip;">
-                <radio label="&StyleToggle0;" value="0" onmousedown="scOptions.styletoggle(0);this.parentNode.selectedIndex = 0"/>
-                <radio label="&StyleToggle1;" value="1" onmousedown="scOptions.styletoggle(1);this.parentNode.selectedIndex = 1"/>
-                <radio label="&StyleToggle2;" value="2" onmousedown="scOptions.styletoggle(2);this.parentNode.selectedIndex = 2"/>
-                <radio label="&StyleToggle3;" value="3" onmousedown="scOptions.styletoggle(3);this.parentNode.selectedIndex = 3"/>
+                <radio label="&StyleToggle0;" value="0" onmousedown="scOptions.savePref('styletoggle',0);this.parentNode.selectedIndex = 0"/>
+                <radio label="&StyleToggle1;" value="1" onmousedown="scOptions.savePref('styletoggle',1);this.parentNode.selectedIndex = 1"/>
+                <radio label="&StyleToggle2;" value="2" onmousedown="scOptions.savePref('styletoggle',2);this.parentNode.selectedIndex = 2"/>
+                <radio label="&StyleToggle3;" value="3" onmousedown="scOptions.savePref('styletoggle',3);this.parentNode.selectedIndex = 3"/>
             </radiogroup>
         </groupbox>
         <caption label="&StyleToggleHelp1;"/>
@@ -368,8 +360,8 @@
         <groupbox>
           <caption label="&MoveErrorBox;" tooltiptext="&MoveErrorBoxTip;"/>
             <radiogroup id="MoveErrorBoxRadio" orient="horizontal" value="" tooltiptext="&MoveErrorBoxTip;">
-              <radio label="&Code;" value="0" onmousedown="scOptions.MoveErrorBox(0);this.parentNode.selectedIndex = 0"/>
-              <radio label="&Bottom;" value="1" onmousedown="scOptions.MoveErrorBox(1);this.parentNode.selectedIndex = 1"/>
+              <radio label="&Code;" value="0" onmousedown="scOptions.savePref('errorboxplacement',0);this.parentNode.selectedIndex = 0"/>
+              <radio label="&Bottom;" value="1" onmousedown="scOptions.savePref('errorboxplacement',1);this.parentNode.selectedIndex = 1"/>
             </radiogroup>
         </groupbox>
 

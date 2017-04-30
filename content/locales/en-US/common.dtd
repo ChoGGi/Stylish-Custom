@@ -47,7 +47,6 @@
 <!ENTITY Toggle "Toggle">
 <!ENTITY Toolbar "Toolbar">
 <!ENTITY Page "Page">
-<!ENTITY WriteNewStyle "New Style">
 <!ENTITY Disable "Disable">
 <!ENTITY DeleteStyle "Delete Style">
 <!ENTITY Enable "Enable">
@@ -63,7 +62,7 @@
 <!ENTITY ImportStyles "Import Styles">
 <!ENTITY ImportStylesTip "Import file(s) to style(s)">
 <!ENTITY RemoveDupes "Remove Dupes">
-<!ENTITY RemoveDupesTip "shows a list of dupe styles and allows you to remove them">
+<!ENTITY RemoveDupesTip "shows a list of duplicate styles and allows you to remove them">
 <!ENTITY Import "Import">
 <!ENTITY Export "Export">
 <!ENTITY SelectAll "Select All">

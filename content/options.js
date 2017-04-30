@@ -22,20 +22,20 @@ var scOptions = {
 
     function set(id,pref,which)
     {
-      switch(which) {
-      case "s":
-        document.getElementById(id).value = scCommon.prefs.getCharPref(pref);
-      break;
-      case "i":
-        document.getElementById(id).value = scCommon.prefs.getIntPref(pref);
-      break;
-      case "b":
-        let idTmp = document.getElementById(id);
-        if (scCommon.prefs.getBoolPref(pref) == true)
-          idTmp.value = 1;
-        else
-          idTmp.value = 0;
-      break;
+      switch (which) {
+        case "s":
+          document.getElementById(id).value = scCommon.prefs.getCharPref(pref);
+        break;
+        case "i":
+          document.getElementById(id).value = scCommon.prefs.getIntPref(pref);
+        break;
+        case "b":
+          let idTmp = document.getElementById(id);
+          if (scCommon.prefs.getBoolPref(pref) == true)
+            idTmp.value = 1;
+          else
+            idTmp.value = 0;
+        break;
       }
     }
     set("AutoImportantText","autoimportant.text","s");
@@ -67,7 +67,6 @@ var scOptions = {
     set("RemoveCSSRadio","custom.removecss","b");
     set("SearchBarRadio","custom.newsearch","b");
     set("AskToSaveRadio","custom.asktosave","b");
-    set("StatusbarRadio","custom.statusbaricon","b");
     set("ToolMenuRadio","custom.toolbar","b");
     set("ToggleIconsRadio","custom.showicons","b");
     set("GetStyleSheetsRadio","custom.stylesheetmenuitem","b");
@@ -107,6 +106,7 @@ var scOptions = {
       document.getElementById("ExternalEditorText").value = fp.file.path;
   },
 
+  //remove Stylish-Custom*.css from TEMP directory
   removeStaleCSS: function()
   {
     let files = Services.dirsvc.get("TmpD",Ci.nsIFile).directoryEntries;
@@ -120,102 +120,6 @@ var scOptions = {
       }
     }
     document.getElementById("RemoveCSS").disabled = true;
-  },
-
-  //when you press a radio for statusbar icon
-  statusbar: function(view)
-  {
-    let StatusbarIcon = this.mainWin
-                        .document.getElementById("stylish-custom-panel");
-    scCommon.prefs.setBoolPref("custom.statusbaricon",view);
-
-    if (view == true)
-      StatusbarIcon.style.display = "-moz-box";
-    else
-      StatusbarIcon.style.display = "none";
-  },
-
-  //when you press a radio for tool menu
-  toolmenu: function(view)
-  {
-    let ToolMenu = this.mainWin.document.getElementById("stylish-toolmenu");
-    scCommon.prefs.setBoolPref("custom.toolbar",view);
-
-    if (view == true)
-      ToolMenu.style.display = "-moz-box";
-    else
-      ToolMenu.style.display = "none";
-  },
-
-  toggleicons: function(view)
-  {
-    scCommon.prefs.setBoolPref("custom.showicons",view);
-    if (view == true)
-      scCommon.applyStyle("chrome://stylish-custom/skin/iconsDisabled.css",false,true);
-    else
-      scCommon.applyStyle("chrome://stylish-custom/skin/iconsDisabled.css",true,true);
-  },
-
-  //when you press a radio
-  saveText: function(b)
-  {
-    scCommon.prefs.setBoolPref("custom.searchtextsave",b);
-  },
-  asktosave: function(b)
-  {
-    scCommon.prefs.setBoolPref("custom.asktosave",b);
-  },
-  newsearch: function(b)
-  {
-    scCommon.prefs.setBoolPref("custom.newsearch",b);
-  },
-  removeCSSWhich: function(b)
-  {
-    scCommon.prefs.setBoolPref("custom.removecss",b);
-  },
-  styleMenuOverride: function(b)
-  {
-    scCommon.prefs.setBoolPref("custom.stylemenuoverride",b);
-    scCommon.toggleStyleMenuOverride(b);
-  },
-
-  getStyleSheets: function(b)
-  {
-    scCommon.prefs.setBoolPref("custom.stylesheetmenuitem",b);
-    let getStyleSheets = this.mainWin
-                        .document.getElementById("StylishGetStyleSheets");
-    if (!getStyleSheets)
-      return;
-
-    if (b == true)
-      getStyleSheets.style.display = "-moz-box";
-    else
-      getStyleSheets.style.display = "none";
-  },
-
-  whichEditor: function(i)
-  {
-    scCommon.prefs.setIntPref("custom.editorwhich",i);
-  },
-  MoveErrorBox: function(i)
-  {
-    scCommon.prefs.setIntPref("custom.errorboxplacement",i);
-  },
-  apptitle: function(i)
-  {
-    scCommon.prefs.setIntPref("custom.editorapptitle",i);
-  },
-  manage: function(i)
-  {
-    scCommon.prefs.setIntPref("custom.manageview",i);
-  },
-  styletoggle: function(i)
-  {
-    scCommon.prefs.setIntPref("custom.styletoggle",i);
-  },
-  styleMenu: function(i)
-  {
-    scCommon.prefs.setIntPref("custom.stylemenuitem",i);
   },
 
   //when you press a radio for change ex/import location
@@ -312,6 +216,51 @@ var scOptions = {
     menuitemMain.style.display = "-moz-box";
   },
 
+  //when you press a radio
+  savePref: function(pref,value)
+  {
+    function toggleView(which)
+    {
+      let el = scOptions.mainWin
+              .document.getElementById(which);
+      if (!el)
+        return;
+
+      if (value == true)
+        el.style.display = "-moz-box";
+      else
+        el.style.display = "none";
+    }
+    switch (typeof value) {
+      case "boolean":
+        scCommon.prefs.setBoolPref("custom." + pref,value);
+        switch (pref) {
+          case "stylemenuoverride":
+            scCommon.toggleStyleMenuOverride(value);
+          break;
+          case "toolbar":
+            toggleView("stylish-toolmenu");
+          break;
+          case "stylesheetmenuitem":
+            toggleView("StylishGetStyleSheets");
+          break;
+          case "showicons":
+            if (value == true) {
+              scCommon.applyStyle(
+                  "chrome://stylish-custom/skin/iconsDisabled.css",false,true);
+            } else {
+              scCommon.applyStyle(
+                  "chrome://stylish-custom/skin/iconsDisabled.css",true,true);
+            }
+          break;
+        }
+      break;
+      case "number":
+        scCommon.prefs.setIntPref("custom." + pref,value);
+      break;
+    }
+  },
+
   //when you press a save button
   saveOption: function(which)
   {
@@ -320,50 +269,52 @@ var scOptions = {
       scCommon.prefs.setCharPref(pref,document.getElementById(setting).value);
     }
 
-    switch(which) {
-    case "AutoImportant":
-      setPref("autoimportant.text","AutoImportantText");
-    break;
-    case "Domains":
-      setPref("install.allowedDomains","ChangeDomainsText");
-    break;
-    case "Font":
-      setPref("custom.editfont","ChangeFontText");
-    break;
-    case "InsertText":
-      setPref("custom.inserttext","InsertTextText");
-    break;
-    case "GlobalColour":
-      setPref("custom.globalstyle","ChangeGlobalColourText");
-    break;
-    case "SiteColour":
-      setPref("custom.sitestyle","ChangeSiteColourText");
-    break;
-    case "GlobalSiteColour":
-      setPref("custom.globalsitestyle","ChangeGlobalSiteColourText");
-    break;
-    case "ExternalEditor":
-      setPref("custom.editor","ExternalEditorText");
-    break;
-    case "ToolbarToggle":
-      setPref("custom.togglebars","ToolbarToggleText");
-    break;
-    case "reloadStyles":
-      setPref("custom.reloadstyles","reloadStylesText");
-    break;
-    case "reloadStylesKey":
-      setPref("custom.reloadstyleskey","reloadStylesKeyText");
-    break;
-    case "InsertSep":
-      setPref("custom.inserttextsep","ChangeInsertSepText");
-    break;
-    case "EditorTime":
-      scCommon.prefs.setIntPref("custom.editortimeout",document.getElementById("EditorTimeText").value);
-    break;
-    case "ScratchpadHeight":
-      let height = document.getElementById("ScratchpadHeightText").inputField.value;
-      scCommon.prefs.setIntPref("custom.scratchpadheight",height);
-    break;
+    switch (which) {
+      case "AutoImportant":
+        setPref("autoimportant.text","AutoImportantText");
+      break;
+      case "Domains":
+        setPref("install.allowedDomains","ChangeDomainsText");
+      break;
+      case "Font":
+        setPref("custom.editfont","ChangeFontText");
+      break;
+      case "InsertText":
+        setPref("custom.inserttext","InsertTextText");
+      break;
+      case "GlobalColour":
+        setPref("custom.globalstyle","ChangeGlobalColourText");
+      break;
+      case "SiteColour":
+        setPref("custom.sitestyle","ChangeSiteColourText");
+      break;
+      case "GlobalSiteColour":
+        setPref("custom.globalsitestyle","ChangeGlobalSiteColourText");
+      break;
+      case "ExternalEditor":
+        setPref("custom.editor","ExternalEditorText");
+      break;
+      case "ToolbarToggle":
+        setPref("custom.togglebars","ToolbarToggleText");
+      break;
+      case "reloadStyles":
+        setPref("custom.reloadstyles","reloadStylesText");
+      break;
+      case "reloadStylesKey":
+        setPref("custom.reloadstyleskey","reloadStylesKeyText");
+      break;
+      case "InsertSep":
+        setPref("custom.inserttextsep","ChangeInsertSepText");
+      break;
+      case "EditorTime":
+        scCommon.prefs.setIntPref("custom.editortimeout",
+                              document.getElementById("EditorTimeText").value);
+      break;
+      case "ScratchpadHeight":
+        let height = document.getElementById("ScratchpadHeightText")
+                                            .inputField.value;
+        scCommon.prefs.setIntPref("custom.scratchpadheight",height);
+      break;
     }
   },
 
@@ -397,28 +348,28 @@ var scOptions = {
     {
       for (let i = 0; i < array.length; i++) {
         prefType = prefs.getPrefType(array[i]);
-        switch(prefType) {
-        case 32://char
-          aPref = doc.createElement("pref");
-          aPref.setAttribute("name",path + array[i]);
-          aPref.setAttribute("type","char");
-          aPref.setAttribute("data",prefs.getCharPref(array[i]));
-          docRoot.appendChild(aPref);
-        break;
-        case 64://int
-          aPref = doc.createElement("pref");
-          aPref.setAttribute("name",path + array[i]);
-          aPref.setAttribute("type","int");
-          aPref.setAttribute("data",prefs.getIntPref(array[i]));
-          docRoot.appendChild(aPref);
-        break;
-        case 128://bool
-          aPref = doc.createElement("pref");
-          aPref.setAttribute("name",path + array[i]);
-          aPref.setAttribute("type","bool");
-          aPref.setAttribute("data",prefs.getBoolPref(array[i]));
-          docRoot.appendChild(aPref);
-        break;
+        switch (prefType) {
+          case 32://char
+            aPref = doc.createElement("pref");
+            aPref.setAttribute("name",path + array[i]);
+            aPref.setAttribute("type","char");
+            aPref.setAttribute("data",prefs.getCharPref(array[i]));
+            docRoot.appendChild(aPref);
+          break;
+          case 64://int
+            aPref = doc.createElement("pref");
+            aPref.setAttribute("name",path + array[i]);
+            aPref.setAttribute("type","int");
+            aPref.setAttribute("data",prefs.getIntPref(array[i]));
+            docRoot.appendChild(aPref);
+          break;
+          case 128://bool
+            aPref = doc.createElement("pref");
+            aPref.setAttribute("name",path + array[i]);
+            aPref.setAttribute("type","bool");
+            aPref.setAttribute("data",prefs.getBoolPref(array[i]));
+            docRoot.appendChild(aPref);
+          break;
         }
       }
     }
@@ -466,7 +417,8 @@ var scOptions = {
       is = Cc["@mozilla.org/intl/converter-input-stream;1"]
             .createInstance(Ci.nsIConverterInputStream);
 
-      const replacementChar = Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER;
+      const replacementChar = Ci.nsIConverterInputStream
+                                .DEFAULT_REPLACEMENT_CHARACTER;
       is.init(fp.file,charset,0,replacementChar);
       //let tmp = is.readString(-1,str);
       prefsFile = this.parseXML(str.value);
@@ -490,19 +442,19 @@ var scOptions = {
         continue;
       let type = children[i].getAttribute("type"),
       data = children[i].getAttribute("data");
-      switch(type) {
-      case "int":
-        prefs.setIntPref(name,data);
-      break;
-      case "char":
-        prefs.setCharPref(name,data);
-      break;
-      case "bool":
-        if (data == "true")
-          prefs.setBoolPref(name,true);
-        else
-          prefs.setBoolPref(name,false);
-      break;
+      switch (type) {
+        case "int":
+          prefs.setIntPref(name,data);
+        break;
+        case "char":
+          prefs.setCharPref(name,data);
+        break;
+        case "bool":
+          if (data == "true")
+            prefs.setBoolPref(name,true);
+          else
+            prefs.setBoolPref(name,false);
+        break;
       }
     }
 
