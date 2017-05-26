@@ -63,7 +63,7 @@
 <!ENTITY LineNumber "Line Number:">
 <!ENTITY LineNumberTip "Shows line number when code clicked">
 <!ENTITY LineNumberSearch "Line#">
-<!ENTITY LineNumberSearchTip "Goes to line number (5) or column (5:12), you can dragdrop">
+<!ENTITY LineNumberSearchTip "Goes to line number (5) or column (5:12), you can drag and drop">
 <!ENTITY ExportStyle "Export Style">
 <!ENTITY ExportStyleTip "Exports the style to a file">
 <!ENTITY CloneStyle "Clone Style">

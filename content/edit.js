@@ -249,9 +249,9 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
           errorsArea.style.display = "-moz-box";
           let error = message.QueryInterface(Ci.nsIScriptError);
 
-          //Note to reviewer: For showing an error box in style editor
           if (error.category == "CSS Parser" &&
               error.sourceName == "about:blank") {
+            //Note to reviewer: For showing an error box in style editor
             message = error.lineNumber + ":" +
                       error.columnNumber + " " + error.errorMessage;
             // don't duplicate

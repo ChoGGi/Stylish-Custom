@@ -330,17 +330,14 @@ var scCommon = {
   //check if dialog is opened already or open it
   openDialog: function(which,window)
   {
-    let whichWin,
-    loc = "chrome://stylish-custom/content/";
-
-    function checkWin(win,xul)
+    function checkWin(dialog,xul)
     {
-      if (win) {
-        win.focus();
+      if (dialog) {
+        dialog.focus();
       } else {
         if (!window)
           var window = scCommon.getMainWindow();
-        window.openDialog(loc + xul);
+        window.openDialog("chrome://stylish-custom/content/" + xul);
       }
     }
 

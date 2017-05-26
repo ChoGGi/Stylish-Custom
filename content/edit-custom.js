@@ -723,7 +723,7 @@ var scEdit = {
   customizeToolbarDone: function()
   {
     let service = scCommon.service,
-    styleId = this.styleId,
+    styleId = scEdit.styleId,
     style = service.find(styleId,service.REGISTER_STYLE_ON_CHANGE);
     //let removedE = document.getElementById("RemovedItems");
 
