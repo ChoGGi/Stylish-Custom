@@ -159,7 +159,8 @@ var scEdit = {
     if (style.id == "0") {
       if (toggleE)
         toggleE.checked = true;
-      let bottom_SwitchToInstall = document.getElementById("Bottom_SwitchToInstall");
+      let bottom_SwitchToInstall = document
+                                  .getElementById("Bottom_SwitchToInstall");
       if (bottom_SwitchToInstall) {
         if (style.url != null)
           bottom_SwitchToInstall.style.display = "-moz-box";
@@ -237,6 +238,22 @@ var scEdit = {
             document.title = "!" + document.title;
         }
 
+        //add items to insert menu
+        scEdit.populateInsertTextMenu();
+        //get original code for cancel button
+        scEdit.styleCodeOriginal = codeE.value;
+        //check if IAT addon is enabled
+        scEdit.toggleIAT();
+
+      }
+    };
+    let timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+    timer.init(observer,100,Ci.nsITimer.TYPE_ONE_SHOT);
+
+    //needed a longer delay for new findbar under palemoon
+    let observer2 = {
+      observe: function()
+      {
         //add saved search text
         let searchText = scCommon.prefs.getCharPref("custom.searchtext"),
         newSearch = scCommon.prefs.getBoolPref("custom.newsearch"),
@@ -250,53 +267,49 @@ var scEdit = {
           else
             whichSearch = document.getElementById("SearchBox");
 
-          //if user removed search box
+          //check if user removed search box
           if (whichSearch) {
             whichSearch.style.display = "-moz-box";
             if (whichSearch.hasAttribute("browserid")) {
               //new search
               whichSearch.getElement("findbar-textbox").value = searchText;
-              //if (searchText != "") {
+              whichSearch._findField.value = searchText;
               if (searchText != "") {
-                whichSearch.getElement("find-next").setAttribute("disabled",false);
-                whichSearch.getElement("find-previous").setAttribute("disabled",false);
+                whichSearch.getElement("find-next")
+                                      .setAttribute("disabled",false);
+                whichSearch.getElement("find-previous")
+                                      .setAttribute("disabled",false);
               }
-            }
-            else
+            } else {
               whichSearch.value = searchText; //old search
+            }
           }
         }
-
-        //add items to insert menu
-        scEdit.populateInsertTextMenu();
-        //get original code for cancel button
-        scEdit.styleCodeOriginal = codeE.value;
-        //check if IAT addon is enabled
-        scEdit.toggleIAT();
-
-        //need to cancel a oneshot?
-        timer.cancel();
       }
     };
-    let timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
-    timer.init(observer,100,Ci.nsITimer.TYPE_ONE_SHOT);
+    let timer2 = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+    timer2.init(observer2,500,Ci.nsITimer.TYPE_ONE_SHOT);
 
     //update style info when style is saved
     this.mutationOb = new window.MutationObserver(function(mutations) {
       mutations.forEach(function(mutation) {
-        let savedStyleID = mutation.target.getAttribute("stylish-custom-id-edit");
+        let savedStyleID = mutation.target
+                          .getAttribute("stylish-custom-id-edit");
         if (savedStyleID == scEdit.styleId) {
-          let style = service.find(savedStyleID,service.REGISTER_STYLE_ON_CHANGE);
+          let style = service.find(
+                      savedStyleID,service.REGISTER_STYLE_ON_CHANGE);
           document.getElementById("ToggleEnabled").checked = style.enabled;
           document.getElementById("name").value = style.name;
-          document.getElementById("tags").value = style.getMeta("tag",{}).join(" ");
+          document.getElementById("tags").value = style
+                                                  .getMeta("tag",{}).join(" ");
         }
       });
     });
     let win = scCommon.getMainWindow().document.firstElementChild;
-    this.mutationOb.observe(win,{attributes:true,attributeFilter:["stylish-custom-id-edit"]});
+    this.mutationOb.observe(
+              win,{attributes:true,attributeFilter:["stylish-custom-id-edit"]});
 
-    //picking a seachbox  (findbar has a tendency to **** up so sticking this at the end)
+    //picking a seachbox (findbar has a tendency to **** up so sticking this at the end)
     let searchAreaOld = document.getElementById("SearchAreaOld"),
     findbar = document.getElementById("findbar");
 
@@ -312,13 +325,13 @@ var scEdit = {
         findbar.open();
       }
     }
-
   },
 
   toggleRainbow: function()
   {
     //check if rainbowpicker is enabled
-    AddonManager.getAddonByID("{9c1acee4-c567-4e71-8d1b-edf314afef97}",function(addon)
+    AddonManager.getAddonByID(
+                "{9c1acee4-c567-4e71-8d1b-edf314afef97}",function(addon)
     {
       let rain1 = document.getElementById("pick-color-rainbowpicker"),
       rain2 = document.getElementById("RainbowPicker");
@@ -371,7 +384,8 @@ var scEdit = {
     if (typeof FileUtils.File !== "undefined")
       return new FileUtils.File(file);
     else {
-      let temp = Cc["@mozilla.org/file/local;1"].createInstance(Ci.nsILocalFile);
+      let temp = Cc["@mozilla.org/file/local;1"]
+                .createInstance(Ci.nsILocalFile);
       temp.initWithPath(file);
       return temp;
     }
@@ -526,7 +540,8 @@ var scEdit = {
         return;
       }
       try {
-        data = NetUtil.readInputStreamToString(inputStream,inputStream.available());
+        data = NetUtil
+              .readInputStreamToString(inputStream,inputStream.available());
       } catch (e) {
         data = "";//if css file is blank throws error on old fox, so passing along "blank"
       }
@@ -582,7 +597,8 @@ var scEdit = {
   {
 
     //disable customize cmd
-    document.getElementById("cmd_CustomizeToolbars").setAttribute("disabled","true");
+    document.getElementById("cmd_CustomizeToolbars")
+            .setAttribute("disabled","true");
 
     //remove fake elements (so they don't interfere {see edit-onload})
     //scCommon.removeChild(document.getElementById("RemovedItems"));
@@ -643,8 +659,10 @@ var scEdit = {
     //call it once for initial stuff
     this.refreshToolStuff();
 
-    if (Services.prefs.prefHasUserValue("toolbar.customization.usesheet"))
-      this.customizeSheet = Services.prefs.getBoolPref("toolbar.customization.usesheet");
+    if (Services.prefs.prefHasUserValue("toolbar.customization.usesheet")) {
+      this.customizeSheet = Services.prefs
+                            .getBoolPref("toolbar.customization.usesheet");
+    }
 
     //customize "done" function
     let toolbox = document.getElementById("stylishCustomToolbox");
@@ -652,7 +670,8 @@ var scEdit = {
 
     function getHeight(id)
     {
-      let num = scCommon.getStyle(document.getElementById(id),window).height.replace(/px$/,"");
+      let num = scCommon
+          .getStyle(document.getElementById(id),window).height.replace(/px$/,"");
       return Number(num);
     }
 
@@ -742,10 +761,12 @@ var scEdit = {
 
     let importantText = document.getElementById("ImportantText");
     if (importantText) {
-      if (scEdit.toolbarAutoimportant)
+      if (scEdit.toolbarAutoimportant) {
         importantText.value = scEdit.toolbarAutoimportant;
-      else
-        importantText.value = String.fromCharCode(scCommon.prefs.getCharPref("autoimportant.key"));
+      } else {
+        importantText.value = String
+            .fromCharCode(scCommon.prefs.getCharPref("autoimportant.key"));
+      }
     }
 
     //checkboxes
@@ -771,7 +792,8 @@ var scEdit = {
       }
     }
     restoreCheck("wrap-lines",scEdit.toolbarWrapLines,"wrap_lines");
-    restoreCheck("ImportantEnabled",scEdit.toolbarImportantEnabled,"autoimportant.enabled");
+    restoreCheck("ImportantEnabled",
+                scEdit.toolbarImportantEnabled,"autoimportant.enabled");
 
     let toggleEnabled = document.getElementById("ToggleEnabled");
     if (toggleEnabled) {
@@ -807,19 +829,23 @@ var scEdit = {
     //from Stylish v1.0.2
     let bottomSwitchToInstall = document.getElementById("Bottom_SwitchToInstall");
     if (bottomSwitchToInstall) {
-      if (document.getElementById("stylish").getAttribute("windowtype").search(/tp/) > 0)
+      if (document.getElementById("stylish").getAttribute("windowtype")
+                                                          .search(/tp/) > 0) {
         bottomSwitchToInstall.style.display = "-moz-box";//new style
-      else
+      } else {
         bottomSwitchToInstall.style.display = "none";//old style
+      }
     }
 
     scEdit.populateInsertTextMenu();
 
     //enable customize cmd
-    document.getElementById("cmd_CustomizeToolbars").removeAttribute("disabled");
+    document.getElementById("cmd_CustomizeToolbars")
+              .removeAttribute("disabled");
 
     //removeEventListener for dragndrop
-    document.getElementById("stylish").removeEventListener("drag",scEdit.refreshToolStuff,true);
+    document.getElementById("stylish")
+              .removeEventListener("drag",scEdit.refreshToolStuff,true);
 
     // XXX Shouldn't have to do this, but I do
     if (!scEdit.customizeSheet)
@@ -835,7 +861,7 @@ var scEdit = {
       searchAreaOld.style.display = "none";
 
     let findbar = document.getElementById("findbar");
-    // findbar has a tendency to fuck up so sticking this at the end
+    // findbar has a tendency to **** up so sticking this at the end
     if (!findbar)
       return;
     if (scEdit.toolbarSearch2)
@@ -891,7 +917,8 @@ var scEdit = {
       menuitem.setAttribute("label",toolbar.bar.getAttribute("toolbarname"));
       menuitem.setAttribute("accesskey",toolbar.bar.getAttribute("accesskey"));
       //menuitem.setAttribute("checked",toolbar.getAttribute("collapsed") != "true");
-      menuitem.setAttribute("checked",toolbar.bar.getAttribute("collapsed") != "true");
+      menuitem.setAttribute("checked",
+                              toolbar.bar.getAttribute("collapsed") != "true");
       popup.insertBefore(menuitem,popup.firstChild);
       //popup.appendChild(menuitem);
 
@@ -924,7 +951,8 @@ var scEdit = {
   refreshToolStuff: function()
   {
     //show the buttons for customize
-    let bottom_SwitchToInstall = document.getElementById("Bottom_SwitchToInstall");
+    let bottom_SwitchToInstall = document
+                                .getElementById("Bottom_SwitchToInstall");
 
     if (bottom_SwitchToInstall)
       bottom_SwitchToInstall.style.display = "-moz-box";
@@ -943,7 +971,8 @@ var scEdit = {
     let findbar = document.getElementById("findbar");
     if (findbar) {
       if (findbar.getElement("find-label")) //why did it now decide to be null?
-        findbar.getElement("find-label").setAttribute("value",scEdit.toolbarSearch3);
+        findbar.getElement("find-label")
+                .setAttribute("value",scEdit.toolbarSearch3);
     }
   },
 
@@ -992,7 +1021,8 @@ var scEdit = {
         Bottom_InsertText.style.display = "none";
       return;
     }
-    textList = textList.split(scCommon.prefs.getCharPref("custom.inserttextsep"));
+    textList = textList.split(scCommon.prefs
+                              .getCharPref("custom.inserttextsep"));
     let popup = document.getElementById("insertTextPopup");
     if (!popup)
       return;
@@ -1018,7 +1048,8 @@ var scEdit = {
     {
       for (let i = 0; i < tmpPopup.childNodes.length; ++i) {
         let menuitemClickEvent = addMenuitem();
-        tmpPopup.childNodes[i].addEventListener("click",menuitemClickEvent,false);
+        tmpPopup.childNodes[i]
+                .addEventListener("click",menuitemClickEvent,false);
       }
     }
 
@@ -1248,10 +1279,12 @@ var scEdit = {
     } else if (start == "") {//it'll select too much if there's nothing on the line
       codeE.setSelectionRange(end.length+newLines,end.length+newLines);
     } else {//if we have text on the line
-      if (col)
-        codeE.setSelectionRange(start.length+newLines,end.length+newLines-lastLine+col++);
-      else
+      if (col) {
+        codeE.setSelectionRange(start.length+newLines,
+                                end.length+newLines-lastLine+col++);
+      } else {
         codeE.setSelectionRange(start.length+newLines,end.length+newLines+1);
+      }
     }
 
     //scroll to line (16 pixels a line...)
@@ -1713,7 +1746,8 @@ var scEdit = {
     //text selected
     } else if (codeE.selectionStart-codeE.selectionEnd < 0) {
       selected = true;
-      styleCode = codeE.value.substring(codeE.selectionStart,codeE.selectionEnd);
+      styleCode = codeE.value
+                        .substring(codeE.selectionStart,codeE.selectionEnd);
       if (what == "ReplaceOnce")
         styleCode = styleCode.replace(searchBox.value,replaceBox.value);
       else if (what == "ReplaceAll") {
@@ -1722,7 +1756,7 @@ var scEdit = {
       }
       selectionEnd = codeE.selectionStart+styleCode.length;
       codeE.value = codeE.value.substring(0,codeE.selectionStart) + styleCode +
-                    codeE.value.substring(codeE.selectionEnd,codeE.value.length);
+                  codeE.value.substring(codeE.selectionEnd,codeE.value.length);
     }
 
     codeE.focus();
@@ -1772,7 +1806,8 @@ var scEdit = {
       let code = codeE.value,
       searchText = searchBox.value,
       //check for search terms from caret position
-      found = code.toLowerCase().indexOf(searchText.toLowerCase(),codeE.selectionEnd);
+      found = code.toLowerCase()
+                  .indexOf(searchText.toLowerCase(),codeE.selectionEnd);
       //if not found search from the start
       if (found == -1)
         found = code.toLowerCase().indexOf(searchText.toLowerCase());
@@ -1781,7 +1816,8 @@ var scEdit = {
         codeE.focus();
         codeE.setSelectionRange(found,found+searchText.length-1);
         let evt = document.createEvent("KeyboardEvent");
-        evt.initKeyEvent("keypress",false,false,null,false,false,true,false,39,0);
+        evt.initKeyEvent("keypress",
+                          false,false,null,false,false,true,false,39,0);
         codeE.inputField.dispatchEvent(evt);
       } else {
       //else change searchbox colour
@@ -1860,7 +1896,8 @@ var scEdit = {
           selTxt = selTxt.replace(/^([\s]*)\[@id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
         } else if (selTxt.indexOf("//*[@id") != -1 &&
                   selTxt.search(/^[\s]*\/\/\*\[@id[\S]*\"\][\s]*$/i) != -1) {
-          selTxt = selTxt.replace(/^([\s]*)\/\/\*\[@id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
+          selTxt = selTxt
+                    .replace(/^([\s]*)\/\/\*\[@id=\"([\S]*)\"\]([\s]*)$/igm,"$1#$2$3");
         }
       break;
       case "Bracket":
@@ -1922,8 +1959,10 @@ var scEdit = {
         if (comments[i] == "")
           continue;
         //if we don't have an id & if it isn't the right id
-        if (typeof commentId != "undefined" && comments[i].indexOf(commentId) == -1)
+        if (typeof commentId != "undefined" &&
+                    comments[i].indexOf(commentId) == -1) {
           continue;
+        }
         comment = comments[i].split("@nsChoGGiSezSplit@");
         for (let j = 0; j < comment.length; j++) {
           if (rightComment == true) {
@@ -1967,7 +2006,8 @@ var scEdit = {
     }
     //not a new comment
     //get id from text
-    commentId = selectedText.split("\n")[0].replace(/^[\n\r\u2028\u2029 ]*\/\* scComment/,"");
+    commentId = selectedText
+                  .split("\n")[0].replace(/^[\n\r\u2028\u2029 ]*\/\* scComment/,"");
     //get comment from meta
     comments = listComments(commentId);
     //is it the right comment?
@@ -2122,10 +2162,12 @@ var scEdit = {
       codeE.focus();
       insertCodeAtCaret(document.getElementById("normal-colorpicker").color);
       let evt = document.createEvent("KeyboardEvent");
-      evt.initKeyEvent("keypress",false,false,null,false,false,false,false,25,0);
+      evt.initKeyEvent("keypress",
+                        false,false,null,false,false,false,false,25,0);
       codeE.inputField.dispatchEvent(evt);
       evt = document.createEvent("KeyboardEvent");
-      evt.initKeyEvent("keypress",false,false,null,false,false,false,false,27,0);
+      evt.initKeyEvent("keypress",
+                        false,false,null,false,false,false,false,27,0);
       codeE.inputField.dispatchEvent(evt);
       codeE.setSelectionRange(codeE.selectionStart-7,codeE.selectionStart);
       e.colorChosen = false;
@@ -2193,7 +2235,8 @@ var scEdit = {
     selector = "@-moz-document " + selector + "{\n";
     if (codeE.selectionStart != codeE.selectionEnd) {
       //there's a selection, so let's cram the selection inside
-      let selection = codeE.value.substring(codeE.selectionStart,codeE.selectionEnd);
+      let selection = codeE.value
+                          .substring(codeE.selectionStart,codeE.selectionEnd);
       //if there's stuff before the selection, include whitespace
       if (codeE.selectionStart > 0)
         newValue = codeE.value.substring(0,codeE.selectionStart) + "\n";
@@ -2201,8 +2244,10 @@ var scEdit = {
       newCaretPosition = newValue.length;
       newValue += selection + "\n}";
       //if there's stuff after the selection, include whitespace
-      if (codeE.selectionEnd < codeE.value.length)
-        newValue += "\n" + codeE.value.substring(codeE.selectionEnd,codeE.value.length);
+      if (codeE.selectionEnd < codeE.value.length) {
+        newValue += "\n" + codeE.value
+                            .substring(codeE.selectionEnd,codeE.value.length);
+      }
     } else {
       //there's no selection, just put it at the end
       //if there's stuff in the textbox, add some whitespace
@@ -2253,7 +2298,8 @@ var scEdit = {
     if (!searchBox)
       return;
     if (searchBox.hasAttribute("browserid"))//new search
-      prefs.setCharPref("custom.searchtext",searchBox.getElement("findbar-textbox").value);
+      prefs.setCharPref("custom.searchtext",searchBox
+                                          .getElement("findbar-textbox").value);
     else //old search
       prefs.setCharPref("custom.searchtext",searchBox.value);
   },
@@ -2261,7 +2307,7 @@ var scEdit = {
   cloneStyle: function()
   {
     let clone = scCommon.styleInit(null,null,null,null,nameE.value + " " +
-              scCommon.getMsg("Cloned"),codeE.value,style.enabled,null,null,null),
+            scCommon.getMsg("Cloned"),codeE.value,style.enabled,null,null,null),
     //from Stylish 1.*
     params = {style: clone},
     name = scCommon.getWindowName("stylishEdit");
@@ -2354,7 +2400,10 @@ var scEdit = {
         // tags should be unique and not just whitespace
         uniqueTags = [];
 
-        tags.filter(function(tag) {return !/^\s*$/.test(tag);}).forEach(function(tag)
+        tags.filter(function(tag)
+        {
+          return !/^\s*$/.test(tag);
+        }).forEach(function(tag)
         {
           if (!uniqueTags.some(function(utag) {
             return utag.toLowerCase() == tag.toLowerCase();
@@ -2437,7 +2486,8 @@ var scEdit = {
       return false;
   }
 };
-//before paint
+
+//before XUL paint
 scEdit.beforePaint();
 
 /*

@@ -97,11 +97,11 @@ var scOverlay = {
     }
 
     //load a style sheet to fix the style for nasa night launch / ft deepdark
-    let selectedSkin = Services.prefs.getCharPref("general.skins.selectedSkin"),
+    let selSkin = Services.prefs.getCharPref("general.skins.selectedSkin"),
     darkStyle = Services.prefs.getBoolPref("extensions.stylish.custom.dark");
-    if (darkStyle == true || selectedSkin == "nasanightlaunch" ||
-                            selectedSkin == "nightlaunchnext" ||
-                            selectedSkin == "ftdeepdark") {
+    if (darkStyle == true || selSkin == "nasanightlaunch" ||
+                            selSkin == "nightlaunchnext" ||
+                            selSkin == "ftdeepdark") {
       scCommon.applyStyle("chrome://stylish-custom/skin/dark.css",true,true);
     }
 
@@ -132,14 +132,15 @@ var scOverlay = {
       document.getElementById("StylishGetStyleSheets").hidden = true;
 
     //set the key for reloading styles
-    let reloadStyles = document.getElementById("key_stylishCustom-reloadStyles"),
+    let relStyles = document.getElementById("key_stylishCustom-reloadStyles"),
     reloadKey = scCommon.prefs.getCharPref("custom.reloadstyleskey");
-    if (reloadStyles && reloadKey != "")
-      reloadStyles.setAttribute("key",reloadKey);
+    if (relStyles && reloadKey != "")
+      relStyles.setAttribute("key",reloadKey);
 
     //should we hide the icons
     if (scCommon.prefs.getBoolPref("custom.showicons") == false)
-      scCommon.applyStyle("chrome://stylish-custom/skin/iconsDisabled.css",true,true);
+      scCommon
+        .applyStyle("chrome://stylish-custom/skin/iconsDisabled.css",true,true);
 
     //replace S menuitems for SC menuitems
     if (scCommon.prefs.getBoolPref("custom.stylemenuoverride") == true)
@@ -148,15 +149,16 @@ var scOverlay = {
     //for toggling styles
     //should i add an option to do it for new page loads as well as tab switching?
     try {
-      gBrowser.tabContainer.addEventListener("TabSelect",scOverlay.onPageLoad,false);
+      gBrowser.tabContainer
+                .addEventListener("TabSelect",scOverlay.onPageLoad,false);
     } catch(e) {/*don't care if it fails, probably just means fennec or Thunderbird*/}
 
     //e10s toggling styles
     if (window.messageManager) {
-      window.messageManager
-        .loadFrameScript("chrome://stylish-custom/content/frame-script-load.js",true);
-      window.messageManager
-        .addMessageListener("stylishCustom:pageload",scOverlay.onPageLoadE10s);
+      window.messageManager.loadFrameScript(
+                "chrome://stylish-custom/content/frame-script-load.js",true);
+      window.messageManager.addMessageListener(
+                "stylishCustom:pageload",scOverlay.onPageLoadE10s);
     }
 
   },
@@ -221,10 +223,10 @@ var scOverlay = {
     }
     if (e10s) {
       if (window.messageManager) {
-        window.messageManager
-          .loadFrameScript("chrome://stylish-custom/content/frame-script.js",true);
-        window.messageManager
-          .addMessageListener("stylishCustom:callback",e10sData);
+        window.messageManager.loadFrameScript(
+                      "chrome://stylish-custom/content/frame-script.js",true);
+        window.messageManager.addMessageListener(
+                      "stylishCustom:callback",e10sData);
       }
       return;
     }
@@ -295,7 +297,8 @@ var scOverlay = {
       return;
     //display a list of stylesheets to let user choose
     window.openDialog("chrome://stylish-custom/content/stylesheets.xul","",
-                      "chrome,resizable,centerscreen",styleArray,styleName,this.domain);
+                      "chrome,resizable,centerscreen",
+                      styleArray,styleName,this.domain);
   },
 
   onPageLoadE10s: function(message)
@@ -612,69 +615,73 @@ var scOverlay = {
       return;
     }
 
-    switch(event.button) {
-    case 1: //middle
-      scCommon.newStyle();
-    break;
-    case 2: //right
-      document.getElementById(et.setAttribute("popup","stylish-custom-popup"));
-      document.getElementById(et.getAttribute("popup"))
-        .openPopup(et,"after_start",null,null,"true");
-      document.getElementById(et.removeAttribute("popup"));
-    break;
-    default:
-      scCommon.openStyleManager(window);
-    break;
+    switch (event.button) {
+      case 1: //middle
+        scCommon.newStyle();
+      break;
+      case 2: //right
+        document
+          .getElementById(et.setAttribute("popup","stylish-custom-popup"));
+        document
+          .getElementById(et.getAttribute("popup"))
+          .openPopup(et,"after_start",null,null,"true");
+        document.getElementById(et.removeAttribute("popup"));
+      break;
+      default:
+        scCommon.openStyleManager(window);
+      break;
     }
   },
 
   //stylish-custom-toolbar-manage
   clickHandlerManage: function(button)
   {
-    switch(button) {
-    //standalone
-    case 1: //middle
-      //from Stylish v2.0.4
-      if (typeof window.BrowserOpenAddonsMgr !== "undefined")
-        BrowserOpenAddonsMgr("addons://list/userstyle");
-      else if (typeof window.toEM !== "undefined")
-        toEM("addons://list/userstyle");
-      else if (typeof window.openAddonsMgr !== "undefined")
-        openAddonsMgr("addons://list/userstyle");
-      else
-        scCommon.addonsManagerWindow(window);
-    break;
+    switch (button) {
+      //standalone
+      case 1: //middle
+        //from Stylish v2.0.4
+        if (typeof window.BrowserOpenAddonsMgr !== "undefined")
+          BrowserOpenAddonsMgr("addons://list/userstyle");
+        else if (typeof window.toEM !== "undefined")
+          toEM("addons://list/userstyle");
+        else if (typeof window.openAddonsMgr !== "undefined")
+          openAddonsMgr("addons://list/userstyle");
+        else
+          scCommon.addonsManagerWindow(window);
+      break;
 
-    //sidebar
-    case 2: //right
-      scCommon.sidebarToggle(window);
-    break;
+      //sidebar
+      case 2: //right
+        scCommon.sidebarToggle(window);
+      break;
 
-    //addons
-    default: //left
-      let em = scCommon.getWin("stylishCustomInfo");
-      if (em)
-        em.focus();
-      else
-        window.openDialog("chrome://stylish-custom/content/info.xul","",
-                    "chrome,menubar,extra-chrome,toolbar,dialog=no,resizable");
-    break;
-
+      //addons
+      default: //left
+        let em = scCommon.getWin("stylishCustomInfo");
+        if (em) {
+          em.focus();
+        } else {
+          window.openDialog("chrome://stylish-custom/content/info.xul","",
+                      "chrome,menubar,extra-chrome,toolbar,dialog=no,resizable"
+                      );
+        }
+      break;
     }
   },
 
   //for app styles submenu
   clickHandlerSubMenu: function(id,event)
   {
-    switch(event.button) {
-    case 2: //right
-      scCommon.openEditForId(id);
-      event.stopPropagation();
-    break;
-    default: //left
-      let service = scCommon.service;
-      stylishOverlay.toggleStyle(service.find(id,service.REGISTER_STYLE_ON_CHANGE));
-    break;
+    switch (event.button) {
+      case 2: //right
+        scCommon.openEditForId(id);
+        event.stopPropagation();
+      break;
+      default: //left
+        let service = scCommon.service;
+        stylishOverlay
+              .toggleStyle(service.find(id,service.REGISTER_STYLE_ON_CHANGE));
+      break;
     }
   }
 

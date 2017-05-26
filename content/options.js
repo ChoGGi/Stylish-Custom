@@ -152,31 +152,31 @@ var scOptions = {
   {
     scCommon.prefs.setIntPref("custom.stylemenulocation",i);
     let doc = this.mainWin.document,
-    StylishAppStyles = doc.getElementById("StylishAppStyles"),
-    StylishAppStylesMain = doc.getElementById("StylishAppStylesMain"),
-    StylishEnabledStyles = doc.getElementById("StylishEnabledStyles"),
-    StylishEnabledStylesMain = doc.getElementById("StylishEnabledStylesMain"),
-    StylishDisabledStyles = doc.getElementById("StylishDisabledStyles"),
-    StylishDisabledStylesMain = doc.getElementById("StylishDisabledStylesMain");
+    AppStyles = doc.getElementById("StylishAppStyles"),
+    EnabledStyles = doc.getElementById("StylishEnabledStyles"),
+    DisabledStyles = doc.getElementById("StylishDisabledStyles"),
+    AppStylesMain = doc.getElementById("StylishAppStylesMain"),
+    EnabledStylesMain = doc.getElementById("StylishEnabledStylesMain"),
+    DisabledStylesMain = doc.getElementById("StylishDisabledStylesMain");
 
-    if (!StylishAppStyles && !StylishEnabledStyles && !StylishDisabledStyles)
+    if (!AppStyles && !EnabledStyles && !DisabledStyles)
       return;
 
     if (i == 1) {
-      StylishAppStyles.style.display = "-moz-box";
-      StylishEnabledStyles.style.display = "-moz-box";
-      StylishDisabledStyles.style.display = "-moz-box";
-      StylishAppStylesMain.style.display = "none";
-      StylishEnabledStylesMain.style.display = "none";
-      StylishDisabledStylesMain.style.display = "none";
+      AppStyles.style.display = "-moz-box";
+      EnabledStyles.style.display = "-moz-box";
+      DisabledStyles.style.display = "-moz-box";
+      AppStylesMain.style.display = "none";
+      EnabledStylesMain.style.display = "none";
+      DisabledStylesMain.style.display = "none";
       return;
     }
-    StylishAppStyles.style.display = "none";
-    StylishEnabledStyles.style.display = "none";
-    StylishDisabledStyles.style.display = "none";
-    StylishAppStylesMain.style.display = "-moz-box";
-    StylishEnabledStylesMain.style.display = "-moz-box";
-    StylishDisabledStylesMain.style.display = "-moz-box";
+    AppStyles.style.display = "none";
+    EnabledStyles.style.display = "none";
+    DisabledStyles.style.display = "none";
+    AppStylesMain.style.display = "-moz-box";
+    EnabledStylesMain.style.display = "-moz-box";
+    DisabledStylesMain.style.display = "-moz-box";
   },
 
   styleInfo: function(i)

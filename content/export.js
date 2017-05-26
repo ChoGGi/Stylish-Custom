@@ -118,8 +118,10 @@ scExport = {
 
     this.checkedList = [];
     for (let i = 0; i < children.length; i++)
-      this.checkedList.push({id: children[i].getAttribute("styleId"),enabled: children[i]
-        .firstChild.firstChild.nextSibling.getAttribute("value")});
+      this.checkedList.push({
+              id: children[i].getAttribute("styleId"),
+              enabled: children[i].firstChild.firstChild.nextSibling
+              .getAttribute("value")});
   },
 
   xmlBrowse: function()
@@ -158,7 +160,8 @@ scExport = {
   onSelect: function(event)
   {
     let row = { },col = { },child = { };
-    this.stylesTree.treeBoxObject.getCellAt(event.clientX,event.clientY,row,col,child);
+    this.stylesTree.treeBoxObject
+                        .getCellAt(event.clientX,event.clientY,row,col,child);
     this.selected = row.value;
   },
 
@@ -187,8 +190,10 @@ scExport = {
     let XMLName = document.getElementById("XMLName");
     //let user know
     XMLName = document.getAnonymousElementByAttribute(XMLName,"anonid","input");
-    if (this.checkXMLnameColour == null)//store original colour
-      this.checkXMLnameColour = scCommon.getStyle(XMLName,window).backgroundColor;
+    if (this.checkXMLnameColour == null) {//store original colour
+      this.checkXMLnameColour = scCommon
+                                  .getStyle(XMLName,window).backgroundColor;
+    }
 
     XMLName.style.backgroundColor = "red";
     let observer = {
@@ -277,7 +282,8 @@ scExport = {
 
     for (let i = 0; i < children.length; i++) {
       //if not checked or if the ids don't match skip it
-      if (children[i].firstChild.firstChild.nextSibling.getAttribute("value") != "true" ||
+      if (children[i].firstChild.firstChild.nextSibling
+            .getAttribute("value") != "true" ||
           children[i].getAttribute("styleId") != treeList[i].id) {
         continue;
       }
@@ -298,7 +304,8 @@ scExport = {
         if (PickOrUsePath == "FilePicker")
           file = fp.file;
         else {
-          file = Cc['@mozilla.org/file/local;1'].createInstance(Ci.nsILocalFile);
+          file = Cc['@mozilla.org/file/local;1']
+                                            .createInstance(Ci.nsILocalFile);
           file.initWithPath(locationE.value);
         }
         //export as css
@@ -378,9 +385,8 @@ scExport = {
                   parseInt("0x20",16),
                   parseInt("0664",8),0
     ); // write, create, truncate
-    (new XMLSerializer()).serializeToStream(DOMTree,oFOStream,""); // rememeber, doc is the DOM tree
+    (new XMLSerializer()).serializeToStream(DOMTree,oFOStream,"");
     oFOStream.close();
-
   },
 
   toggleSelected: function()
@@ -477,7 +483,8 @@ scExport = {
       aStyle.setAttribute("tags",style.getMeta("tag",{}).toString());
       aStyle.setAttribute("type",style.getMeta("type",{}).toString());
       aStyle.setAttribute("domain",style.getMeta("domain",{}).toString());
-      aStyle.setAttribute("url-prefix",style.getMeta("url-prefix",{}).toString());
+      aStyle.setAttribute("url-prefix",style
+                                        .getMeta("url-prefix",{}).toString());
       aStyle.setAttribute("url",style.getMeta("url",{}).toString());
       aStyle.setAttribute("code",style.code.replace(/\"/g,"&quot;"));
 

@@ -62,8 +62,10 @@ var scCustomize = {
 
   init: function(which)
   {
-    if (which == true)//for osx ff < v3.6
-      InitWithToolbox(window.parent.document.getElementById("stylishCustomToolbox"));
+    if (which == true) {//for osx ff < v3.6
+      InitWithToolbox(window.parent.document
+                                    .getElementById("stylishCustomToolbox"));
+    }
 
     //persistent window position
     if (document.getElementById("CustomizeToolbarWindowStylish") &&
@@ -84,7 +86,8 @@ var scCustomize = {
       //and since we have the id then we'll change the title too
       customizeWindow.setAttribute("title",scCommon.getMsg("CustomizeToolbar"));
     }
-    let customizeWindow = document.getElementById("CustomizeToolbarWindowStylish");
+    let customizeWindow = document
+                          .getElementById("CustomizeToolbarWindowStylish");
     if (customizeWindow)
       eventlisteners(customizeWindow);
     else
@@ -113,7 +116,8 @@ var scCustomize = {
     function eventlisteners(el) {
       el.removeEventListener("drag",scCustomize.loadToolTips,true);
     }
-    let customizeWindow = document.getElementById("CustomizeToolbarWindowStylish");
+    let customizeWindow = document
+                          .getElementById("CustomizeToolbarWindowStylish");
     if (customizeWindow) {
       //remove eventlisteners
       eventlisteners(customizeWindow);

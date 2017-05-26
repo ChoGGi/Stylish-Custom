@@ -125,15 +125,19 @@ var scCommon = {
     //"Edit" menuitem
     let editContext = document.getElementById("stylish-style-context-edit"),
     //write new style popup
-    newStylePop = document.getElementById("stylish-write-style-menu").firstChild;
+    newStylePop = document
+                    .getElementById("stylish-write-style-menu").firstChild;
 
     if (which == true){
       editContext.removeAttribute("oncommand");
-      editContext.addEventListener("command",scCommon.editContextOverrideFunc,false);
+      editContext.addEventListener(
+                    "command",scCommon.editContextOverrideFunc,false);
       newStylePop.removeAttribute("onpopupshowing");
-      newStylePop.addEventListener("popupshowing",scCommon.newStylePopFunc,false);
+      newStylePop.addEventListener(
+                    "popupshowing",scCommon.newStylePopFunc,false);
     } else {
-      editContext.removeEventListener("command",scCommon.editContextOverrideFunc);
+      editContext.removeEventListener(
+                    "command",scCommon.editContextOverrideFunc);
       //Note to reviewer: Fails if I use addEventListener (or I'm just doing it wrong)
       editContext.setAttribute("oncommand","stylishOverlay.contextEdit()");
       newStylePop.removeEventListener("popupshowing",scCommon.newStylePopFunc);
@@ -146,7 +150,8 @@ var scCommon = {
 
   newStylePopFunc: function(e)
   {
-    e.originalTarget.ownerDocument.defaultView.scOverlay.writeStylePopupShowing(e);
+    e.originalTarget.ownerDocument.defaultView
+                                    .scOverlay.writeStylePopupShowing(e);
   },
 
   editContextOverrideFunc: function(event)
@@ -158,14 +163,18 @@ var scCommon = {
   updateAllStyles: function(what)
   {
     let service = scCommon.service;
-    service.list(service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE,{}).forEach(
+    service.list(service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE,
+                                                                  {}).forEach(
       function(style) {
         style.checkForUpdates(null);
         style.applyUpdate(null);
       }
     );
-    if (what == "Info")
-      this.prompt.alert(null,this.getMsg("StylesUpdated"),this.getMsg("StylesUpdated"));
+    if (what == "Info") {
+      this.prompt.alert(null,
+                        this.getMsg("StylesUpdated"),
+                        this.getMsg("StylesUpdated"));
+    }
   },
 
   tooltipTimer: null,
@@ -217,32 +226,31 @@ var scCommon = {
     if (!win)
       win = this.getMainWindow();
 
-    switch(manageView) {
-    default: // info
-      let em = this.getWin("stylishCustomInfo");
-      if (em)
-        em.focus();
-      else
-        win.openDialog("chrome://stylish-custom/content/info.xul");
-        //win.openDialog("chrome://stylish-custom/content/info.xul","","chrome,menubar,extra-chrome,toolbar,dialog=no,resizable");
-    break;
-    case 3: // sidebar
-      this.sidebarToggle(win);
-    break;
-    case 2: // add-ons window
-      this.addonsManagerWindow(win);
-    break;
-    case 0: // add-ons
-      //from Stylish v2.0.4
-      if (typeof win.BrowserOpenAddonsMgr !== "undefined")
-        win.BrowserOpenAddonsMgr("addons://list/userstyle");
-      else if (typeof win.toEM !== "undefined")
-        win.toEM("addons://list/userstyle");
-      else if (typeof win.openAddonsMgr !== "undefined")
-        win.openAddonsMgr("addons://list/userstyle");
-      else
+    switch (manageView) {
+      default: // info
+        let em = this.getWin("stylishCustomInfo");
+        if (em)
+          em.focus();
+        else
+          win.openDialog("chrome://stylish-custom/content/info.xul");
+      break;
+      case 3: // sidebar
+        this.sidebarToggle(win);
+      break;
+      case 2: // add-ons window
         this.addonsManagerWindow(win);
-    break;
+      break;
+      case 0: // add-ons
+        //from Stylish v2.0.4
+        if (typeof win.BrowserOpenAddonsMgr !== "undefined")
+          win.BrowserOpenAddonsMgr("addons://list/userstyle");
+        else if (typeof win.toEM !== "undefined")
+          win.toEM("addons://list/userstyle");
+        else if (typeof win.openAddonsMgr !== "undefined")
+          win.openAddonsMgr("addons://list/userstyle");
+        else
+          this.addonsManagerWindow(win);
+      break;
     }
   },
 
@@ -272,12 +280,15 @@ var scCommon = {
       //scCommon.dump("Sidebar is missing on this platform");
       return;
     }
-    if (b.getAttribute("src").indexOf("stylish-custom") !== -1 && b.hidden == true)
+    if (b.getAttribute("src").indexOf("stylish-custom") !== -1 &&
+        b.hidden == true) {
       toggleSB(true);
-    else if (b.getAttribute("src").indexOf("stylish-custom") !== -1 && b.hidden == false)
+    } else if (b.getAttribute("src").indexOf("stylish-custom") !== -1 &&
+        b.hidden == false) {
       toggleSB(null);
-    else
+    } else {
       toggleSB(true);
+    }
   },
 
   addonsManagerWindow: function(win)
@@ -289,7 +300,8 @@ var scCommon = {
     if (!addonWin)
       win.openDialog(
       "chrome://mozapps/content/extensions/extensions.xul?NoSidebar","",
-      "chrome,menubar,extra-chrome,toolbar,dialog=no,resizable,centerscreen,width=1000,height=500"
+                            "chrome,menubar,extra-chrome,toolbar,dialog=no," +
+                            "resizable,centerscreen,width=1000,height=500"
     );
 
     win.setTimeout(function(){
@@ -318,48 +330,35 @@ var scCommon = {
   //check if dialog is opened already or open it
   openDialog: function(which,window)
   {
-    let whichWin;
+    let whichWin,
+    loc = "chrome://stylish-custom/content/";
 
-    switch(which) {
-      case "Options":
-        whichWin = this.getWin("stylishCustomOptions");
-      break;
-      case "Export":
-        whichWin = this.getWin("stylishCustomExport");
-      break;
-      case "Import":
-        whichWin = this.getWin("stylishCustomImport");
-      break;
-      case "Info":
-        whichWin = this.getWin("stylishCustomInfo");
-      break;
-      case "RemoveDupes":
-        whichWin = this.getWin("stylishCustomRemoveDupes");
-      break;
+    function checkWin(win,xul)
+    {
+      if (win) {
+        win.focus();
+      } else {
+        if (!window)
+          var window = scCommon.getMainWindow();
+        window.openDialog(loc + xul);
+      }
     }
 
-    if (whichWin) {
-      whichWin.focus();
-      return;
-    }
-
-    if (!window)
-      window = this.getMainWindow();
-    switch(which) {
+    switch (which) {
       case "Options":
-        window.openDialog("chrome://stylish-custom/content/options.xul");
+        checkWin(this.getWin("stylishCustomOptions"),"options.xul");
       break;
       case "Export":
-        window.openDialog("chrome://stylish-custom/content/export.xul");
+        checkWin(this.getWin("stylishCustomExport"),"export.xul");
       break;
       case "Import":
-        window.openDialog("chrome://stylish-custom/content/import.xul");
+        checkWin(this.getWin("stylishCustomImport"),"import.xul");
       break;
       case "Info":
-        window.openDialog("chrome://stylish-custom/content/info.xul");
+        checkWin(this.getWin("stylishCustomInfo"),"info.xul");
       break;
       case "RemoveDupes":
-        window.openDialog("chrome://stylish-custom/content/removedupes.xul");
+        checkWin(this.getWin("stylishCustomRemoveDupes"),"removedupes.xul");
       break;
     }
   },
@@ -456,247 +455,33 @@ var scCommon = {
     }
     sortBy = sortBy.id.toString();
 
-    switch(sortBy) {
-    case "NameColumn":
-      treeList.sort(this.sortByName);
-    break;
-    case "EnabledColumn":
-      treeList.sort(this.sortByName);
-      treeList.sort(this.sortByEnabled);
-    break;
-    case "UrlColumn":
-      treeList.sort(this.sortByName);
-      treeList.sort(this.sortByUrl);
-      treeList.sort(this.sortByUrlPrefix);
-      treeList.sort(this.sortByDomain);
-    break;
-    case "TagsColumn":
-      treeList.sort(this.sortByName);
-      treeList.sort(this.sortByTags);
-    break;
-    case "TypeColumn":
-      treeList.sort(this.sortByName);
-      treeList.sort(this.sortByType);
-    break;
-    case "IDColumn":
-      treeList.sort(this.sortById);
-    break;
+    switch (sortBy) {
+      case "NameColumn":
+        treeList.sort(this.sortByName);
+      break;
+      case "EnabledColumn":
+        treeList.sort(this.sortByName);
+        treeList.sort(this.sortByEnabled);
+      break;
+      case "UrlColumn":
+        treeList.sort(this.sortByName);
+        treeList.sort(this.sortByUrl);
+        treeList.sort(this.sortByUrlPrefix);
+        treeList.sort(this.sortByDomain);
+      break;
+      case "TagsColumn":
+        treeList.sort(this.sortByName);
+        treeList.sort(this.sortByTags);
+      break;
+      case "TypeColumn":
+        treeList.sort(this.sortByName);
+        treeList.sort(this.sortByType);
+      break;
+      case "IDColumn":
+        treeList.sort(this.sortById);
+      break;
     }
 
-  },
-
-  sortByNumbers: function(a,b)
-  {
-    return a - b;
-  },
-
-  //http://www.breakingpar.com/bkp/home.nsf/0/87256B280015193F87256C8D00514FA4
-  sortByName: function(a,b)
-  {
-    let x = a.name.toLowerCase(),
-    y = b.name.toLowerCase();
-    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-  },
-
-  sortByEnabled: function(a,b)
-  {
-    let x = a.enabled.toLowerCase(),
-    y = b.enabled.toLowerCase();
-    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-  },
-
-  sortById: function(a,b)
-  {
-    return a.id - b.id;
-  },
-
-  sortByType: function(a,b)
-  {
-    let x = a.type.toLowerCase(),
-    y = b.type.toLowerCase();
-    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-  },
-
-  sortByTags: function(a,b)
-  {
-    let x = a.tags.toLowerCase(),
-    y = b.tags.toLowerCase();
-    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-  },
-
-  sortByDomain: function(a,b)
-  {
-    let x = a.domain.toLowerCase(),
-    y = b.domain.toLowerCase();
-    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-  },
-
-  sortByUrl: function(a,b)
-  {
-    let x = a.url.toLowerCase(),
-    y = b.url.toLowerCase();
-    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-  },
-
-  sortByUrlPrefix: function(a,b)
-  {
-    let x = a.urlprefix.toLowerCase(),
-    y = b.urlprefix.toLowerCase();
-    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-  },
-
-  sortByleafName: function(a,b)
-  {
-    let x = a.leafName.toLowerCase(),
-    y = b.leafName.toLowerCase();
-    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-  },
-
-  readFile: function(file,type,type2)
-  {
-    let XMLHttpRequest = CCon("@mozilla.org/xmlextras/xmlhttprequest;1",
-                              "nsIXMLHttpRequest");
-    if (type2 !== "web")
-      file = "file:///" + file;
-    let req = new XMLHttpRequest();
-    req.open("GET",file,false);
-    if (type2 !== "web")
-      file = file.toLowerCase();
-
-    if (type2 == "web" || file.indexOf("css") >= 0)
-      req.overrideMimeType("text/css");
-    else if (file.indexOf("xml") >= 0)
-      req.overrideMimeType("text/xml");
-
-    try {
-      req.send(null);
-    } catch (e) {
-      if (type == "goodbye")
-        return null;
-      this.catchError(e);
-      return null;
-    }
-
-    if (type != "Text")
-      return req.responseXML;
-    else
-      return req.responseText;
-  },
-
-  newStyle: function(code)
-  {
-    if (code)
-      this.openEdit(scCommon.getWindowName("stylishEdit"), {code: code});
-    else
-      this.openEdit(scCommon.getWindowName("stylishEdit"), {code: ''});
-  },
-
-  //the below is (mostly) from Stylish v1.4.3/2.0.6
-  styleInit: function(styleUrl,idUrl,updateUrl,md5Url,
-                      name,code,enabled,origCode,origMd5,backgroundUpdates)
-  {
-    let style = Cc["@userstyles.org/style;1"].createInstance(Ci.stylishStyle);
-    style.mode = style.CALCULATE_META | style.REGISTER_STYLE_ON_CHANGE;
-
-    style.init(styleUrl,idUrl,updateUrl,md5Url,name,
-              code,enabled,origCode,origMd5,backgroundUpdates);
-    return style;
-  },
-
-	addSite: function(stylishOverlay) {
-    if (typeof gBrowser == "undefined")//Thunderbird
-      return;
-
-		stylishOverlay.getFromContent("stylish:page-info", function(message) {
-			let code = "@namespace url(" + message.data.namespace +
-          ");\n@-moz-document url-prefix(\"" + message.data.url + "\") {\n\n}";
-			scCommon.addCode(code,message.data.url);
-		});
-	},
-
-	addDomain: function(domain) {
-		let code = "@namespace url(http://www.w3.org/1999/xhtml);\n@-moz-document domain(\"" +
-                domain + "\") {\n\n}";
-		scCommon.addCode(code,domain);
-	},
-
-	addCode: function(code,name,win) {
-    if (!win)
-      win = scCommon.getWindowName("stylishEdit");
-    if (!name)
-      name = "";
-    if (!code)
-      code = "";
-
-    let style = scCommon.styleInit(null,null,null,null,name,code,null,null,null);
-    scCommon.openEdit(win,{style: style});
-	},
-
-  openEdit: function(name,params)
-  {
-    if (this.focusWindow(name))
-      return;
-    params.windowType = name;
-    //return this.getMainWindow().openDialog("chrome://stylish-custom/content/edit.xul", name, "chrome,resizable,dialog=no,centerscreen", params);
-
-    return this.getMainWindow().openDialog(
-                              "chrome://stylish-custom/content/edit.xul",name,
-                              "chrome,resizable,dialog=no",params
-    );
-  },
-
-	openEditForId: function(id) {
-		return this.openEdit(
-          this.getWindowName("stylishEdit", id), {id: id},this.getMainWindow()
-    );
-	},
-
-	openEditForStyle: function(style, win) {
-		return this.openEditForId(style.id, win);
-	},
-
-  getWindowName: function(prefix, id)
-  {
-    return (prefix + (id || Math.random())).replace(/\W/g, "");
-  },
-
-  focusWindow: function(name)
-  {
-    //if a window is already open, openDialog will clobber the changes made. check for an open window for this style and focus to it
-    if (this.getWin(name)) {
-      this.getWin(name).focus();
-      return true;
-    }
-    return false;
-  },
-
-  getdataUrl: function(code,name)
-  {
-    if (!code)
-      return null;
-    //let nameComment = name ? "/*" + name.replace("*/", "") + "*/" : "";
-    let nameComment = name ? "/*" + name.replace(/\*\//g,"").replace(/#/g,"") + "*/" : "";
-    // this will strip new lines rather than escape - not what we want
-    //return this.ios.newURI("data:text/css," + nameComment + this.code.replace(/\n/g, "%0A"), null, null);
-    return Services.io.newURI("data:text/css," + nameComment +
-                                          encodeURIComponent(code),null,null);
-  },
-
-  // Removes whitespace and duplicate tags. Pass in a string and receive an array.
-  cleanTags: function(tags)
-  {
-    tags = tags.split(/[\s,]+/);
-    let uniqueTags = [];
-    tags.filter(function(tag) {
-      return !/^\s*$/.test(tag);
-    }).forEach(function(tag) {
-      if (!uniqueTags.some(function(utag) {
-        return utag.toLowerCase() == tag.toLowerCase();
-      })) {
-        uniqueTags.push(tag);
-      }
-    });
-    return uniqueTags;
   },
 
   //type=0=info 1=import 2=export 3=remdupes
@@ -826,6 +611,223 @@ var scCommon = {
       urlCell.setAttribute("label",url);
     else
       urlCell.setAttribute("label","");
+  },
+
+  readFile: function(file,type,type2)
+  {
+    let XMLHttpRequest = CCon("@mozilla.org/xmlextras/xmlhttprequest;1",
+                              "nsIXMLHttpRequest");
+    if (type2 !== "web")
+      file = "file:///" + file;
+    let req = new XMLHttpRequest();
+    req.open("GET",file,false);
+    if (type2 !== "web")
+      file = file.toLowerCase();
+
+    if (type2 == "web" || file.indexOf("css") >= 0)
+      req.overrideMimeType("text/css");
+    else if (file.indexOf("xml") >= 0)
+      req.overrideMimeType("text/xml");
+
+    try {
+      req.send(null);
+    } catch (e) {
+      if (type == "goodbye")
+        return null;
+      this.catchError(e);
+      return null;
+    }
+
+    if (type != "Text")
+      return req.responseXML;
+    else
+      return req.responseText;
+  },
+
+  newStyle: function(code)
+  {
+    if (code)
+      this.addCode({code: code});
+    else
+      this.addCode();
+  },
+
+  sortByNumbers: function(a,b)
+  {
+    return a - b;
+  },
+
+  //http://www.breakingpar.com/bkp/home.nsf/0/87256B280015193F87256C8D00514FA4
+  sortByName: function(a,b)
+  {
+    let x = a.name.toLowerCase(),
+    y = b.name.toLowerCase();
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  },
+
+  sortByEnabled: function(a,b)
+  {
+    let x = a.enabled.toLowerCase(),
+    y = b.enabled.toLowerCase();
+    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+  },
+
+  sortById: function(a,b)
+  {
+    return a.id - b.id;
+  },
+
+  sortByType: function(a,b)
+  {
+    let x = a.type.toLowerCase(),
+    y = b.type.toLowerCase();
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  },
+
+  sortByTags: function(a,b)
+  {
+    let x = a.tags.toLowerCase(),
+    y = b.tags.toLowerCase();
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  },
+
+  sortByDomain: function(a,b)
+  {
+    let x = a.domain.toLowerCase(),
+    y = b.domain.toLowerCase();
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  },
+
+  sortByUrl: function(a,b)
+  {
+    let x = a.url.toLowerCase(),
+    y = b.url.toLowerCase();
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  },
+
+  sortByUrlPrefix: function(a,b)
+  {
+    let x = a.urlprefix.toLowerCase(),
+    y = b.urlprefix.toLowerCase();
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  },
+
+  sortByleafName: function(a,b)
+  {
+    let x = a.leafName.toLowerCase(),
+    y = b.leafName.toLowerCase();
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  },
+
+  //the below is (mostly) from Stylish v1.4.3/2.0.6
+  styleInit: function(styleUrl,idUrl,updateUrl,md5Url,
+                      name,code,enabled,origCode,origMd5,backgroundUpdates)
+  {
+    let style = Cc["@userstyles.org/style;1"].createInstance(Ci.stylishStyle);
+    style.mode = style.CALCULATE_META | style.REGISTER_STYLE_ON_CHANGE;
+
+    style.init(styleUrl,idUrl,updateUrl,md5Url,name,
+              code,enabled,origCode,origMd5,backgroundUpdates);
+    return style;
+  },
+
+	addSite: function(stylishOverlay) {
+    if (typeof gBrowser == "undefined")//Thunderbird
+      return;
+
+		stylishOverlay.getFromContent("stylish:page-info", function(message) {
+			let code = "@namespace url(" + message.data.namespace +
+          ");\n@-moz-document url-prefix(\"" + message.data.url + "\") {\n\n}";
+			scCommon.addCode(code,message.data.url);
+		});
+	},
+
+	addDomain: function(domain) {
+		let code = "@namespace url(http://www.w3.org/1999/xhtml);\n" +
+                                                  "@-moz-document domain(\"" +
+                domain + "\") {\n\n}";
+		scCommon.addCode(code,domain);
+	},
+
+	addCode: function(code,name,win) {
+    if (!win)
+      win = scCommon.getWindowName("stylishEdit");
+    if (!name)
+      name = "";
+    if (!code)
+      code = "";
+
+    let style = scCommon
+                  .styleInit(null,null,null,null,name,code,null,null,null);
+    scCommon.openEdit(win,{style: style});
+	},
+
+  openEdit: function(name,params)
+  {
+    if (this.focusWindow(name))
+      return;
+    params.windowType = name;
+    return this.getMainWindow().openDialog(
+                                  "chrome://stylish-custom/content/edit.xul",
+                                  name,
+                                  "chrome,resizable,dialog=no",params);
+  },
+
+	openEditForId: function(id) {
+		return this.openEdit(
+          this.getWindowName("stylishEdit", id), {id: id},this.getMainWindow()
+    );
+	},
+
+	openEditForStyle: function(style, win) {
+		return this.openEditForId(style.id, win);
+	},
+
+  getWindowName: function(prefix, id)
+  {
+    return (prefix + (id || Math.random())).replace(/\W/g, "");
+  },
+
+  focusWindow: function(name)
+  {
+    //if a window is already open, openDialog will clobber the changes made.
+    //check for an open window for this style and focus to it
+    if (this.getWin(name)) {
+      this.getWin(name).focus();
+      return true;
+    }
+    return false;
+  },
+
+  getdataUrl: function(code,name)
+  {
+    if (!code)
+      return null;
+    //let nameComment = name ? "/*" + name.replace("*/", "") + "*/" : "";
+    let nameComment = name ? "/*" + name
+                                    .replace(/\*\//g,"")
+                                    .replace(/#/g,"") + "*/" : "";
+    // this will strip new lines rather than escape - not what we want
+    //return this.ios.newURI("data:text/css," + nameComment + this.code.replace(/\n/g, "%0A"), null, null);
+    return Services.io.newURI("data:text/css," + nameComment +
+                                          encodeURIComponent(code),null,null);
+  },
+
+  // Removes whitespace and duplicate tags. Pass in a string and receive an array.
+  cleanTags: function(tags)
+  {
+    tags = tags.split(/[\s,]+/);
+    let uniqueTags = [];
+    tags.filter(function(tag) {
+      return !/^\s*$/.test(tag);
+    }).forEach(function(tag) {
+      if (!uniqueTags.some(function(utag) {
+        return utag.toLowerCase() == tag.toLowerCase();
+      })) {
+        uniqueTags.push(tag);
+      }
+    });
+    return uniqueTags;
   }
 
 };

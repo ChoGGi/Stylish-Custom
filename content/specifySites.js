@@ -32,39 +32,39 @@ var scSpecifySites = {
 
     if (url.length == 0)
       return;
-    switch(typeGroup.value) {
-    case "url":
-      //Make a URI. This will throw if it's not valid
-      try {
-        ios = Services.io;
-        uri = ios.newURI(url,"UTF-8",null);
-      } catch(e) {
+    switch (typeGroup.value) {
+      case "url":
+        //Make a URI. This will throw if it's not valid
         try {
-          //maybe someone forgot to put the protocol in. let's assume they meant http://
-          uri = ios.newURI("http://" + url,"UTF-8",null);
+          ios = Services.io;
+          uri = ios.newURI(url,"UTF-8",null);
         } catch(e) {
-          //I give up
-          alert("urlNotValid");
-          return;
+          try {
+            //maybe someone forgot to put the protocol in. let's assume they meant http://
+            uri = ios.newURI("http://" + url,"UTF-8",null);
+          } catch(e) {
+            //I give up
+            alert("urlNotValid");
+            return;
+          }
         }
-      }
-      url = uri.spec;
-    break;
-    case "url-prefix":
-      //not really any way to validate this other than making sure the protocol is there
-      if (url.indexOf("://") == -1)
-        url = "http://" + url;
-    break;
-    case "domain":
-      //The user might have mistakenly included the protocol. Let's strip it.
-      let position = url.indexOf("://");
-      if (position > -1)
-        url = url.substring(position + 3,url.length);
-    break;
-    default:
-      alert("Unrecognized site entry type '" + typeGroup.value + "'");
-      return;
-    //break;
+        url = uri.spec;
+      break;
+      case "url-prefix":
+        //not really any way to validate this other than making sure the protocol is there
+        if (url.indexOf("://") == -1)
+          url = "http://" + url;
+      break;
+      case "domain":
+        //The user might have mistakenly included the protocol. Let's strip it.
+        let position = url.indexOf("://");
+        if (position > -1)
+          url = url.substring(position + 3,url.length);
+      break;
+      default:
+        alert("Unrecognized site entry type '" + typeGroup.value + "'");
+        return;
+      //break;
     }
 
     //add it to the list
@@ -131,7 +131,8 @@ var scSpecifySites = {
 
   changeSelection: function()
   {
-    document.getElementById("delete").disabled = (this.getSelectedStyles().length == 0);
+    document.getElementById("delete").disabled =
+                                        (this.getSelectedStyles().length == 0);
   },
 
   getSelectedStyles: function()
@@ -144,7 +145,8 @@ var scSpecifySites = {
       let end = {};
       this.siteListTreeE.view.selection.getRangeAt(i,start,end);
       for (let c = start.value; c <= end.value; c++) {
-        selectedItems[selectedItems.length] = this.siteListTreeE.view.getItemAtIndex(c);
+        selectedItems[selectedItems.length] =
+                                    this.siteListTreeE.view.getItemAtIndex(c);
       }
     }
     return selectedItems;

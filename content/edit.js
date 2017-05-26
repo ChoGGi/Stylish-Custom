@@ -18,7 +18,8 @@ codeE, nameE, tagsE, updateUrlE,
 initialCode,
 prefs = Services.prefs.getBranch("extensions.stylish.");
 
-const CSSXULNS = "@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);";
+const CSSXULNS = "@namespace url" +
+          "(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);";
 const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
 
 // Because the edit windows have different URL, we need to do this ourselves to persist the position for all edit windows.
@@ -103,13 +104,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
       });
     }
 
-    if (id) {//probably never getting called
-Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting called?");
-      style = service.find(id, service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE);
-      document.documentElement.setAttribute("windowtype",
-                                      scCommon.getWindowName("stylishEdit",id));
-      document.documentElement.setAttribute("styleId", id);
-    } else if (window.arguments[0] &&
+    if (window.arguments[0] &&
               typeof window.arguments != "undefined" &&
               "id" in window.arguments[0] ||
               "style" in window.arguments[0]) {
@@ -123,7 +118,8 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
         style = window.arguments[0].style;
         style.mode = service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE;
       }
-      document.documentElement.setAttribute("windowtype", window.arguments[0].windowType);
+      document.documentElement.setAttribute("windowtype",
+                                            window.arguments[0].windowType);
 
     } else {//new style
       if (code == null)
@@ -246,14 +242,16 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
 
     let currentMessages = [],
     errorListener = {
-      QueryInterface: XPCOMUtils.generateQI([Ci.nsIConsoleListener, Ci.nsISupports]),
+      QueryInterface: XPCOMUtils.generateQI(
+                      [Ci.nsIConsoleListener, Ci.nsISupports]),
       observe: function(message) {
         if ("QueryInterface" in message) {
           errorsArea.style.display = "-moz-box";
           let error = message.QueryInterface(Ci.nsIScriptError);
 
           //Note to reviewer: For showing an error box in style editor
-          if (error.category == "CSS Parser" && error.sourceName == "about:blank") {
+          if (error.category == "CSS Parser" &&
+              error.sourceName == "about:blank") {
             message = error.lineNumber + ":" +
                       error.columnNumber + " " + error.errorMessage;
             // don't duplicate
@@ -305,7 +303,8 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
         codeElementWrapper.value = snippet + "\n";
     }
     //highlight it
-    codeElementWrapper.setSelectionRange(snippet.length + 1, snippet.length + 1);
+    codeElementWrapper.setSelectionRange(
+                        snippet.length + 1, snippet.length + 1);
     codeElementWrapper.focus();
   }
 
@@ -317,9 +316,9 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
     // sourceditor is good at keeping the scroll position, but others are not
     let currentScrollTop = codeElementWrapper.scrollTop;
     codeElementWrapper.value = codeElementWrapper.value.substring(0,
-            codeElementWrapper.selectionStart) + snippet +
-            codeElementWrapper.value.substring(codeElementWrapper.selectionEnd,
-            codeElementWrapper.value.length
+          codeElementWrapper.selectionStart) + snippet +
+          codeElementWrapper.value.substring(codeElementWrapper.selectionEnd,
+          codeElementWrapper.value.length
     );
     codeElementWrapper.focus();
     codeElementWrapper.scrollTop = currentScrollTop;
@@ -352,7 +351,8 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
   {
     const nsIFilePicker = Ci.nsIFilePicker;
     let fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
-    fp.init(window,strings.getString("dataURIDialogTitle"),nsIFilePicker.modeOpen);
+    fp.init(window,strings.getString("dataURIDialogTitle"),
+                                      nsIFilePicker.modeOpen);
     //if (fp.show() != nsIFilePicker.returnOK)
     if (fp.show() != nsIFilePicker.returnOK)
       return;
@@ -374,18 +374,14 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
     insertCodeAtCaret("data:" + contentType + ";base64," + encoded);
   }
 
-  //fails badly on Pale Moon
-  let finderJsmStyle = null;
-  if (scCommon.appInfo.ID != "{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}") {
-    // Firefox 27 changed this interface
-    finderJsmStyle = false;
-    try {
-      Cu.import("resource://gre/modules/Finder.jsm", {});
-      finderJsmStyle = true;
-    } catch (e) {
-      scCommon.catchError(e);
-      // file not available...
-    }
+  let finderJsmStyle = false;
+  // Firefox 27 changed this interface
+  try {
+    Cu.import("resource://gre/modules/Finder.jsm", {});
+    finderJsmStyle = true;
+  } catch (e) {
+    scCommon.catchError(e);
+    // file not available...
   }
 
   let finder = null;
@@ -467,8 +463,9 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
                                               this.searchString.length);
           codeE.editor.selectionController.setDisplaySelection(2);
           codeE.editor.selectionController.scrollSelectionIntoView(1, 0, false);
-        } else
+        } else {
           codeElementWrapper.setSelectionRange(0, 0);
+        }
         return result;
       },
 
@@ -480,13 +477,14 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
     };
   } else {
     finder = {
-      QueryInterface: XPCOMUtils.generateQI([Ci.nsITypeAheadFind, Ci.nsISupports]),
+      QueryInterface: XPCOMUtils.generateQI(
+                      [Ci.nsITypeAheadFind, Ci.nsISupports]),
       nsITAF: Ci.nsITypeAheadFind,
 
       init: function(docshell) {},
 
       find: function(s, linksOnly)
-        {
+      {
         this.searchString = s;
         return this.findFromIndex(0, false);
       },
@@ -501,26 +499,31 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
       {
         let start = backwards ? codeElementWrapper.value.substring(0, index)
                     .lastIndexOf(this.searchString) :
-                    codeElementWrapper.value.indexOf(this.searchString, index),
-        result;
+                    codeElementWrapper.value.indexOf(this.searchString, index);
+        let result;
 
-        if (start >= 0)
+        if (start >= 0) {
           result = this.nsITAF.FIND_FOUND;
-        else if (index == 0)
+        } else if (index == 0) {
           result = this.nsITAF.FIND_NOTFOUND;
-        else {
+        } else {
           // try again, start from the start
           start = backwards ? codeElementWrapper.value
                           .lastIndexOf(this.searchString) :
                           codeElementWrapper.value.indexOf(this.searchString);
-          result = start == -1 ? this.nsITAF.FIND_NOTFOUND : this.nsITAF.FIND_WRAPPED;
+          result = start == -1 ?
+                  this.nsITAF.FIND_NOTFOUND :
+                  this.nsITAF.FIND_WRAPPED;
         }
         codeE.editor.selection.removeAllRanges();
         if (start >= 0) {
-          codeElementWrapper.setSelectionRange(start, start + this.searchString.length);
+          codeElementWrapper.setSelectionRange(start, start +
+                                              this.searchString.length);
           codeE.editor.selectionController.setDisplaySelection(2);
           codeE.editor.selectionController.scrollSelectionIntoView(1, 0, false);
-        } else codeElementWrapper.setSelectionRange(0, 0);
+        } else {
+        codeElementWrapper.setSelectionRange(0, 0);
+        }
 
         return result;
       },
@@ -546,13 +549,11 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
       codeE.value = v;
     },
 
-    setSelectionRange: function(start, end)
-    {
+    setSelectionRange: function(start, end) {
       codeE.setSelectionRange(start, end);
     },
 
-    focus: function()
-    {
+    focus: function() {
       codeE.focus();
     },
 
@@ -584,7 +585,7 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
     //if findbar gone or not using new search
     let pref = scCommon.prefs.getBoolPref("custom.newsearch");
     //don't add findbar unless using new search
-    if (!findBar && pref == true){
+    if (!findBar && pref == true) {
       let findTemp = document.createElement("findbar");
       findTemp.setAttribute("id","findbar");
       findTemp.setAttribute("browserid","internal-code");
@@ -593,16 +594,19 @@ Services.console.logStringMessage("Stylish-Custom:\n " + "probably never getting
         searchArea.appendChild(findTemp);
       findTemp.removeAttribute("hidden");
       findBar = findTemp;
-    } else if (!findBar || pref == false)
+    } else if (!findBar || pref == false) {
+      //user removed findbar / using old search
       return;
+    }
     if (finderJsmStyle) {
       let editor = document.getElementById("internal-code");
       editor.finder = finder;
       try {
         findBar.browser = editor;
       } catch(e) {/*always fails?*/}
-    } else
+    } else {
       document.getElementById("internal-code").fastFind = finder;
+    }
 
     findBar._findField.value = "";
 

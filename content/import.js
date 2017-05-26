@@ -44,7 +44,8 @@ scImport = {
       let importWin = scCommon.getWin("stylishCustomImport");
       const nsIFilePicker = Ci.nsIFilePicker;
       fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
-      fp.init(importWin,scCommon.getMsg("ImportTitle"),nsIFilePicker.modeGetFolder);
+      fp.init(importWin,scCommon.getMsg("ImportTitle"),
+                                                  nsIFilePicker.modeGetFolder);
       if (fp.show() != nsIFilePicker.returnCancel)
         PickOrUsePath = "FilePicker";
     }
@@ -66,8 +67,10 @@ scImport = {
       while(entries.hasMoreElements()) {
         let entry = entries.getNext();
         entry.QueryInterface(Ci.nsIFile);
-        if (entry.leafName.search(/\.css$/i) != -1 || entry.leafName.search(/\.xml$/i) != -1)
+        if (entry.leafName.search(/\.css$/i) != -1 ||
+            entry.leafName.search(/\.xml$/i) != -1) {
           treeList.push(entry);
+        }
       }
       treeList.sort(scCommon.sortByleafName);
 
@@ -76,7 +79,8 @@ scImport = {
         scCommon.populateTree(null,this,1,treeList,document,i);
       }
 
-      document.title = scCommon.getMsg("ImportStyles") + " (" + this.styleAmount + ")";
+      document.title = scCommon
+                      .getMsg("ImportStyles") + " (" + this.styleAmount + ")";
     } else {
       window.close();
     }
@@ -90,7 +94,8 @@ scImport = {
   onSelect: function(event)
   {
     let row = { },col = { },child = { };
-    this.stylesTree.treeBoxObject.getCellAt(event.clientX,event.clientY,row,col,child);
+    this.stylesTree.treeBoxObject
+                        .getCellAt(event.clientX,event.clientY,row,col,child);
     this.selected = row.value;
   },
 
@@ -183,8 +188,10 @@ scImport = {
         //remove text nodes from xml and create style list
         let styles = [];
         for (iT = 0; iT < fileData.length; iT++) {
-          if (fileData[iT] == "[object Element]" && fileData[iT].hasAttribute("name"))
+          if (fileData[iT] == "[object Element]" &&
+                                          fileData[iT].hasAttribute("name")) {
             styles.push(fileData[iT]);
+          }
         }
         //create styles from xml
         for (i3 = 0; i3 < styles.length; i3++) {
@@ -204,7 +211,8 @@ scImport = {
           styleUrl = styleData.getAttribute("styleurl");
           updateUrl = styleData.getAttribute("updateurl");
           md5Url = styleData.getAttribute("md5url");
-          applyBackgroundUpdates = styleData.getAttribute("applyBackgroundUpdates");
+          applyBackgroundUpdates = styleData
+                                    .getAttribute("applyBackgroundUpdates");
           //new style or replace old one
           style = service.find(parseInt(
                   styleData.getAttribute("id")),

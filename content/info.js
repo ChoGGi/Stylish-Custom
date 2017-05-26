@@ -77,7 +77,8 @@ scInfo = {
       });
     });
     let win = scCommon.getMainWindow().document.firstElementChild;
-    this.mutationOb.observe(win,{attributes:true,attributeFilter:["stylish-custom-id"]});
+    this.mutationOb.observe(
+                  win,{attributes:true,attributeFilter:["stylish-custom-id"]});
   },
 
   createStyleList: function(sortBy)
@@ -151,30 +152,14 @@ scInfo = {
 
   newStyle: function()
   {
-    function windowClosed()
-    {
-      newStyleWin.removeEventListener("unload",windowClosed,false);
-      //refresh style list
-      scInfo.createStyleList();
-    }
-    function windowOpened()
-    {
-      newStyleWin.removeEventListener("load",windowOpened,false);
-      //wait for it to close
-      newStyleWin.addEventListener("unload",windowClosed,false);
-    }
-
     //why do i want to add tab (thunderbird?)
     //maybe for android?
     if (scCommon.getMainWindow().Browser) {
-      scCommon.getMainWindow().Browser.addTab("chrome://stylish-custom/content/edit.xul");
+      scCommon.getMainWindow().Browser
+                          .addTab("chrome://stylish-custom/content/edit.xul");
       return;
     }
-    let openNewStyle = scCommon.openEdit(scCommon.getWindowName("stylishEdit"),{code: ''}).name,
-    newStyleWin = scCommon.getWin(openNewStyle.name);
-
-    //wait for it to open
-    newStyleWin.addEventListener("load",windowOpened,false);
+    scCommon.addCode();
   },
 
   deleteStyle: function()
@@ -240,7 +225,8 @@ scInfo = {
   onTreeClicked: function(event)
   {
     let row = { },col = { },child = { };
-    this.stylesTree.treeBoxObject.getCellAt(event.clientX,event.clientY,row,col,child);
+    this.stylesTree.treeBoxObject
+                        .getCellAt(event.clientX,event.clientY,row,col,child);
     if (row.value == -1) {//-1 means nothing selected
       if (event.type != "click")
         this.newStyle();
@@ -258,9 +244,11 @@ scInfo = {
         return;
       if (cellValue == "true") {
         style.enabled = true;
-        this.stylesTree.view.getItemAtIndex(row.value).setAttribute("enabled",true);
+        this.stylesTree.view
+                      .getItemAtIndex(row.value).setAttribute("enabled",true);
       } else {
-        this.stylesTree.view.getItemAtIndex(row.value).removeAttribute("enabled");
+        this.stylesTree.view
+                      .getItemAtIndex(row.value).removeAttribute("enabled");
         style.enabled = false;
       }
       style.save();

@@ -61,11 +61,13 @@ styleAmount: null,
       let sel = tree.currentIndex;
       if (sel == -1)
         return;
-      style = service.find(treeChildren[sel].id,service.REGISTER_STYLE_ON_CHANGE);
+      style = service
+                  .find(treeChildren[sel].id,service.REGISTER_STYLE_ON_CHANGE);
       stylishCommon.deleteWithPrompt(style);
     } else {
       for (let i = 0; i < treeChildren.length; i++) {
-        style = service.find(treeChildren[i].id,service.REGISTER_STYLE_ON_CHANGE);
+        style = service
+                    .find(treeChildren[i].id,service.REGISTER_STYLE_ON_CHANGE);
         if (style && treeChildren[i].value == true)
           style.delete();
       }
@@ -78,8 +80,10 @@ styleAmount: null,
     let newList = [];
     for (let i = 0; i < styleList.length; i++) {
       for (let j = 0; j < styleList.length; j++) {
-        if (styleList[i].name != styleList[j].name || styleList[i].id == styleList[j].id)
+        if (styleList[i].name != styleList[j].name ||
+            styleList[i].id == styleList[j].id) {
           continue;
+        }
         newList.push(styleList[j]);
       }
     }
@@ -141,7 +145,8 @@ styleAmount: null,
   onTreeClicked: function(event)
   {
     let treeChildren,cellValue,row = {},col = {},child = {};
-    this.stylesTree.treeBoxObject.getCellAt(event.clientX,event.clientY,row,col,child);
+    this.stylesTree.treeBoxObject
+                        .getCellAt(event.clientX,event.clientY,row,col,child);
     if (row.value == -1)//-1 means nothing selected
       return;
 

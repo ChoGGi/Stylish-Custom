@@ -66,7 +66,6 @@ var scDomi = {
       selectors.push("." + classes.join(".") + ",");
     }
     //attribute selectors. it's pointless to create a complicated attribute selector including an id or only a class
-    //if (node.attributes.length > 1 || (node.attributes.length == 1 && node.attributes[0].name != "id" && node.attributes[0].name != "class")) {
     if (node.attributes.length > 1 || (
                                       node.attributes.length == 1 &&
                                       node.attributes[0].name != "id" &&
