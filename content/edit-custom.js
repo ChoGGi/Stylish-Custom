@@ -254,37 +254,41 @@ var scEdit = {
     let observer2 = {
       observe: function()
       {
-        //add saved search text
-        let searchText = scCommon.prefs.getCharPref("custom.searchtext"),
-        newSearch = scCommon.prefs.getBoolPref("custom.newsearch"),
-        saveSearch = scCommon.prefs.getBoolPref("custom.searchtextsave");
-
-        if (saveSearch == true) {
-          //which search box to use
-          let whichSearch;
-          if (newSearch == true)
-            whichSearch = document.getElementById("findbar");
-          else
-            whichSearch = document.getElementById("SearchBox");
-
+        function setSearchText(findbar,text)
+        {
           //check if user removed search box
-          if (whichSearch) {
-            whichSearch.style.display = "-moz-box";
-            if (whichSearch.hasAttribute("browserid")) {
+          if (findbar) {
+            findbar.style.display = "-moz-box";
+            if (findbar.hasAttribute("browserid")) {
               //new search
-              whichSearch.getElement("findbar-textbox").value = searchText;
-              whichSearch._findField.value = searchText;
-              if (searchText != "") {
-                whichSearch.getElement("find-next")
+              findbar.getElement("findbar-textbox").value = text;
+              findbar._findField.value = text;
+              if (text != "") {
+                findbar.getElement("find-next")
                                       .setAttribute("disabled",false);
-                whichSearch.getElement("find-previous")
+                findbar.getElement("find-previous")
                                       .setAttribute("disabled",false);
               }
             } else {
-              whichSearch.value = searchText; //old search
+              //old search
+              findbar.value = text;
             }
           }
         }
+
+        let newSearch = scCommon.prefs.getBoolPref("custom.newsearch"),
+        saveSearch = scCommon.prefs.getBoolPref("custom.searchtextsave");
+        //which search box to use
+        let whichSearch;
+        if (newSearch == true)
+          whichSearch = document.getElementById("findbar");
+        else
+          whichSearch = document.getElementById("SearchBox");
+        //saved text?
+        if (saveSearch == true)
+          setSearchText(whichSearch,scCommon.prefs.getCharPref("custom.searchtext"));
+        else
+          setSearchText(whichSearch,"");
       }
     };
     let timer2 = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
