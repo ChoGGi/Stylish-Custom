@@ -1,4 +1,4 @@
-# Stylish-Custom
+### Info:
 Stylish v2.0.* and up (not tested nor supported on older versions)
 
 * [Changelog](https://choggi.org/misc/Stylish-Custom/change.log)
@@ -40,3 +40,7 @@ it'll be hidden till you reopen the edit window.
 
 If you use replace once with the caret after the search text it just skips forward instead of wrapping.
 ```
+
+### License:
+Any code from Stylish is licensed under GPLv3 (edit.js, specifySites.js, specifySites.xul, domi-overlay.js, and domi-overlay.xul)
+Anything I wrote is whatever you want it to be (I had to pick a license for AMO/GitHub).
