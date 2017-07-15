@@ -18,7 +18,6 @@
 <!ENTITY SaveMenuTip "Меню с Сохранить&amp;Вернуть">
 <!ENTITY SaveButton "Меню сохранения (Кнопка)">
 <!ENTITY SaveButtonTip "Кнопка для сохранения и меню для остальных">
-
 <!ENTITY switchtoinstallTip "Показать переключатель в установке для новых стилей">
 <!ENTITY ExportSettings "Экспорт настроек">
 <!ENTITY ExportSettingsTip "Сохранить настройки Stylish-Custom в файл">
@@ -38,7 +37,6 @@
 <!ENTITY WhichEditorTip "Выбор метод для внешнего редактора">
 <!ENTITY EditorTime "Таймаут обновления стиля (ms)">
 <!ENTITY EditorTimeTip "Период проверки Stylish-Custom изменений файла">
-
 <!ENTITY RemoveCSS "Remove CSS files (see tooltip)">
 <!ENTITY RemoveCSSTip "This will remove any open files!">
 <!ENTITY RemoveCSSAuto "Auto-remove old css files">
@@ -58,7 +56,6 @@
 <!ENTITY AskToSave "Ask to Save Style">
 <!ENTITY AskToSaveTip "If you haven't saved the style it will ask if you want to">
 <!ENTITY AppTitleTip "Shows the app (ff,tb,sb) in the style editor title bar">
-
 <!ENTITY InsertTextCaption "Вставить текст">
 <!ENTITY InsertTextTip "Что показывать в меню редактора Вставить&gt;Вставить текст (разделять ,,)">
 <!ENTITY AutoImportantCaption "Текст Auto!important">
@@ -78,7 +75,6 @@
 <!ENTITY IAT "It's All Text!">
 <!ENTITY AppTitle "Название в заголовке - Firefox/Fx, Thunderbird/Tb и т.п.">
 <!ENTITY StyleMenusTip "Подменю со списками стилей (Интерфейса/Включенные/Отключенные)">
-
 <!ENTITY GetStyleSheetsMenu "Вызов &quot;Таблицы стилей&quot;">
 <!ENTITY GetStyleSheetsMenuTip "Показать в меню &quot;Таблица стилей&quot;">
 <!ENTITY ShowAppStyles "Подменю &quot;Интерфейс&quot; в меню Stylish">
