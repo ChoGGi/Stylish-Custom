@@ -1,21 +1,21 @@
-<!ENTITY Options "Опции">
-<!ENTITY OptionsTip "Показать диалог настроек">
+<!ENTITY Options "Настройки">
+<!ENTITY OptionsTip "Диалог настроек">
 <!ENTITY StylishCustom "Stylish-Custom">
 <!ENTITY Styles "Стили">
 <!ENTITY Stylish "Stylish">
 <!ENTITY Manage "Управление">
 <!ENTITY StylishManage "Управление Stylish">
-<!ENTITY StylishManageTip "Нажатие левой кнопкой мыши для автономной работы, средней для дополнений и правой для боковой панели">
-<!ENTITY StylishInfo "Информация Stylish">
-<!ENTITY StylishInfoTip "Показать информацию о стиле">
+<!ENTITY StylishManageTip "ЛКМ - автономная работа, ПКМ - боковая панель, СКМ - дополнения">
+<!ENTITY StylishInfo "Инфо о стилях">
+<!ENTITY StylishInfoTip "Показ информации о стилях">
 <!ENTITY New "Новый">
 <!ENTITY Old "Старый">
 <!ENTITY NewStyle "Новый стиль">
 <!ENTITY Save "Сохранить">
 <!ENTITY Colours "Цвета">
-<!ENTITY Info "Информация">
-<!ENTITY Guide "Руководство">
-<!ENTITY GuideTip "Прочтите руководство перед использованием &StylishCustom;">
+<!ENTITY Info "StylishCustom">
+<!ENTITY Guide "Справка">
+<!ENTITY GuideTip "Руководство &StylishCustom;">
 <!ENTITY Remove "Удалить">
 <!ENTITY Delete "Удалить">
 <!ENTITY Preview "Предпросмотр">
@@ -29,46 +29,46 @@
 <!ENTITY Tools "Инструменты">
 <!ENTITY Tags "Теги">
 <!ENTITY Code "Код">
-<!ENTITY True "True">
-<!ENTITY False "False">
+<!ENTITY True "Да">
+<!ENTITY False "Нет">
 <!ENTITY Domain "Домен">
-<!ENTITY Url "Ссылка">
-<!ENTITY UrlPrefix "Ссылка-префикс">
+<!ENTITY Url "URL">
+<!ENTITY UrlPrefix "Префикс URL">
 <!ENTITY Clear "Очистить">
-<!ENTITY ClearTip "Очистить результаты поиска">
+<!ENTITY ClearTip "Очистить поиск">
 <!ENTITY Type "Тип">
 <!ENTITY Text "Текст">
 <!ENTITY Name "Имя">
 <!ENTITY Menu "Меню">
-<!ENTITY Edit "Редактировать">
+<!ENTITY Edit "Правка">
 <!ENTITY Enabled "Включено">
 <!ENTITY ID "ID">
-<!ENTITY IDColumnTip "Показывать внутренний идентификатор стиля">
+<!ENTITY IDColumnTip "Показывать внутренний ID">
 <!ENTITY Toggle "Переключить">
-<!ENTITY Toolbar "Панель инструментов">
+<!ENTITY Toolbar "Панель">
 <!ENTITY Page "Страница">
 <!ENTITY Disable "Отключить">
 <!ENTITY DeleteStyle "Удалить стиль">
 <!ENTITY Enable "Включить">
 <!ENTITY Browse "Обзор">
 <!ENTITY Search "Поиск...">
-<!ENTITY SearchTip "Введите поисковый запрос, нажмите F3 для поиска следующего и CTRL + F, чтобы сфокусироваться на окне поиска">
+<!ENTITY SearchTip "Введите поисковый запрос, F3 - найти далее и CTRL + F для фокуса в строке поиска">
 <!ENTITY SearchStylesTip "Поиск стилей (Использует regexp)">
-<!ENTITY SearchStylesMenuTip "Выберите другую категорию поиска">
+<!ENTITY SearchStylesMenuTip "Выбор другой категории поиска">
 <!ENTITY Show "Показать">
 <!ENTITY Hide "Скрыть">
 <!ENTITY ExportStyles "Экспорт стилей">
-<!ENTITY ExportStylesTip "Экспорт стиля(ей) из файла(ов)">
+<!ENTITY ExportStylesTip "Экспорт стилей в файл">
 <!ENTITY ImportStyles "Импорт стилей">
-<!ENTITY ImportStylesTip "Импорт файла(ов) из стиля(ей)">
-<!ENTITY RemoveDupes "Удалить Dupes">
-<!ENTITY RemoveDupesTip "Показывает список стилей dupe и позволяет их удалить.">
+<!ENTITY ImportStylesTip "Импорт стилей из файла">
+<!ENTITY RemoveDupes "Удалить дубликаты">
+<!ENTITY RemoveDupesTip "Показ списка дубликатов и возможность их удаления">
 <!ENTITY Import "Импорт">
 <!ENTITY Export "Экспорт">
-<!ENTITY SelectAll "Выбрать всё">
-<!ENTITY SelectAllTip "Выбрать все стили (переключить)">
-<!ENTITY SelectEnabled "Выбрать включенные">
-<!ENTITY SelectEnabledTip "Выберите включенные стили (переключить)">
+<!ENTITY SelectAll "Обратить">
+<!ENTITY SelectAllTip "Обратить выбор">
+<!ENTITY SelectEnabled "Активные">
+<!ENTITY SelectEnabledTip "Выбор активных стилей (переключить)">
 <!ENTITY GetStyleSheets "Добавить таблицу стилей">
 <!ENTITY GetStyleSheetsTip "Извлекает список стилей для текущей страницы и вставляет их в новый стиль">
 <!ENTITY sBy "Искать по ">
@@ -79,15 +79,15 @@
 <!ENTITY SearchUrl "&sBy;ссылке">
 <!ENTITY SearchUrlPrefix "&sBy;ссылке-префиксу">
 <!ENTITY SearchDomain "&sBy;домену">
-<!ENTITY AppStyles "Стили приложений">
-<!ENTITY EnabledStyles "Включенные стили">
-<!ENTITY DisabledStyles "Отключенные стили">
+<!ENTITY AppStyles "Стили интерфеса">
+<!ENTITY EnabledStyles "Активные стили">
+<!ENTITY DisabledStyles "Не активные стили">
 <!ENTITY Width "Ширина">
 <!ENTITY Height "Высота">
 <!ENTITY Selectable "Выбирается">
 <!ENTITY Clickable "Нажимается">
 <!ENTITY Default "По умолчанию">
-<!ENTITY Window "Окно">
-<!ENTITY CopySelectorComma "Копировать селектор (,)">
+<!ENTITY Window "в окне">
+<!ENTITY CopySelectorComma "Copy Selector (,)">
 <!ENTITY Ask "Запрос">
-<!ENTITY AskTip "Запрашивать удаление каждому стилю">
+<!ENTITY AskTip "Запрос при удалении стиля">

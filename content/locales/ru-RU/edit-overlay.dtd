@@ -1,60 +1,60 @@
-<!ENTITY PageTip1 "Щелкните левой кнопкой мыши, чтобы перейти к странице стиля">
-<!ENTITY PageTip2 "Щелкните средней кнопкой мыши чтобы перейти к /редактору страницы">
-<!ENTITY PageTip3 "Щелкните правой кнопкой мыши чтобы перейти к /редактору страницы и вставке кода">
+<!ENTITY PageTip1 "ЛКМ, чтобы перейти к странице стиля">
+<!ENTITY PageTip2 "СКМ чтобы перейти к /редактору страницы">
+<!ENTITY PageTip3 "ПКМ чтобы перейти к /редактору страницы и вставке кода">
 <!ENTITY AutoImportant "auto!important">
 <!ENTITY AutoImportantTextTip "Введите ключ для auto!important">
 <!ENTITY AutoImportantToggleTip "Переключить ключ auto!important">
 <!ENTITY Important "!important">
-<!ENTITY ImportantTip "Автоматическая вставка !important">
+<!ENTITY ImportantTip "Авто-вставка !important">
 <!ENTITY SiteRules "Правила сайта...">
-<!ENTITY SiteRulesTip "Вставка раздела @-moz-doc">
+<!ENTITY SiteRulesTip "Вставка секции @-moz-doc">
 <!ENTITY SiteRules.ak "S">
 <!ENTITY CommentText "Комментарий">
-<!ENTITY CommentTextTip "Выберите текст и нажмите на него, чтобы добавить или удалить комментарии вокруг него.: /* */">
+<!ENTITY CommentTextTip "Выберите текст и нажмите здесь, для доб./удаления комментариев вокруг него: /* */">
 <!ENTITY MergeLines "Объединить строки">
-<!ENTITY MergeLinesTip "Объединить строки кода в один, удалив разрывы строк (ctrl+z для отмены)">
-<!ENTITY ExternalEditTip1 "Изменить стиль как файл css во внешнем редакторе">
-<!ENTITY ExternalEditTip2 "Щелкните правой кнопкой мыши, чтобы переключить проверку файла">
+<!ENTITY MergeLinesTip "Объединить код в одну строку, удалив разрывы (ctrl+z для отмены)">
+<!ENTITY ExternalEditTip1 "Править стиль как файл css во внешнем редакторе">
+<!ENTITY ExternalEditTip2 "ПКМ, чтобы переключить проверку файла">
 <!ENTITY DisablePreview "Откл. предпросмотр">
-<!ENTITY DisablePreviewTip "Отменить предварительный просмотр и вернуться в предыдущее состояние">
-<!ENTITY SaveClose "Сохранить &amp; Закрыть">
-<!ENTITY SaveCloseTip "Сохранить и закрыть диалоговое окно">
-<!ENTITY SaveTip "Сохранить без закрытия диалогового окна">
-<!ENTITY MenuSaveTip "Сохранить или вернуться">
-<!ENTITY PreviewTip "Предварительный просмотр стиля без его сохранения">
-<!ENTITY SearchToggleTip "Используется для переключения области поиска и замены (ctrl+f / ctrl+r)">
+<!ENTITY DisablePreviewTip "Отменить предпросмотр и вернуться в предыдущее состояние">
+<!ENTITY SaveClose "Сохранить и закрыть">
+<!ENTITY SaveCloseTip "Сохранить и закрыть диалог">
+<!ENTITY SaveTip "Сохранить без закрытия диалога">
+<!ENTITY MenuSaveTip "Сохранить или вернуть">
+<!ENTITY PreviewTip "Предпросмотр стиля без его сохранения">
+<!ENTITY SearchToggleTip "Переключение области поиска и замены (ctrl+f / ctrl+r)">
 <!ENTITY CommentGroup "Группа комментариев">
-<!ENTITY CommentGroupTip "Удаляет комментарии, затем повторно комментирует выделенный текст">
+<!ENTITY CommentGroupTip "Удаляет комментарии и повторно комментирует выделенный текст">
 <!ENTITY insertText "Вставить текст">
 <!ENTITY insertTextTip1 "Вставка текста в стиль">
-<!ENTITY insertTextTip2 "Опции&gt;Текст для изменения">
-<!ENTITY UndoLast "Восстановить (последнее сохранение)">
-<!ENTITY UndoLastTip "Сбросить стиль до последнего сохраненного состояния">
-<!ENTITY UndoAll "Восстановить (Оригинал)">
+<!ENTITY insertTextTip2 "Настройки&gt;Вставить текст">
+<!ENTITY UndoLast "Вернуть (посл. сохранение)">
+<!ENTITY UndoLastTip "Сбросить стиль до посл. сохраненного состояния">
+<!ENTITY UndoAll "Вернуть (Оригинал)">
 <!ENTITY UndoAllTip "Сбросить стиль в исходное состояние">
 <!ENTITY CloseTip "Закрыть без сохранения стиля">
 <!ENTITY ColorTip "Вставка цвета в стиль">
-<!ENTITY UpdateCheck "Обновление">
-<!ENTITY UpdateCheckTip "Разрешить этому стилю проверять наличие обновлений">
+<!ENTITY UpdateCheck "Обновить">
+<!ENTITY UpdateCheckTip "Разрешить этому стилю проверять обновления">
 <!ENTITY SaveEnabled "Сохранение включено">
 <!ENTITY SaveDisabled "Сохранение отключено">
 <!ENTITY EnableTip "Включение и отключение стиля при его сохранении">
 <!ENTITY EnableCloseTip "Включить, сохранить и закрыть стиль">
 <!ENTITY DisableCloseTip "Отключить, сохранить и закрыть стиль">
 <!ENTITY Customize "Настроить...">
-<!ENTITY ReplaceTip "Текст для замены &quot;Поиск&quot; текст">
+<!ENTITY ReplaceTip "Текст для замены &quot;Поиска&quot;">
 <!ENTITY Replace "Заменить...">
 <!ENTITY ReplaceOnce "Первое">
 <!ENTITY ReplaceAll "Все">
-<!ENTITY ReplaceOnceTip "Заменить первое вхождение &quot;Поиск&quot; текст">
-<!ENTITY ReplaceAllTip "Заменить все вхождения &quot;Поиск&quot; текст">
+<!ENTITY ReplaceOnceTip "Заменить первое вхождение &quot;Поиска&quot;">
+<!ENTITY ReplaceAllTip "Заменить все вхождения &quot;Поиска&quot;">
 <!ENTITY Find "Найти">
 <!ENTITY Color "Вставить цвет">
-<!ENTITY pickcolorrainbowpicker "Rainbowpicker">
-<!ENTITY Bottom "Низ">
+<!ENTITY pickcolorrainbowpicker "Палитра цветов">
+<!ENTITY Bottom "Внизу">
 <!ENTITY ToggleScratchPad "Переключить ScratchPad">
 <!ENTITY ToggleScratchPadTip "Переключение ScratchPad">
-<!ENTITY ScratchPadTip "Место для сохранения текста, очищается при закрытии диалогового окна (Отрегулируйте высоту в меню «Параметры»&gt;«Текст»)">
+<!ENTITY ScratchPadTip "Место для сохранения текста, очищается при закрытии диалога">
 <!ENTITY ScratchPad "ScratchPad">
 <!ENTITY ClearSearch "Очистить поиск">
 <!ENTITY ClearSearchTip "Очистка текста в поиске">
@@ -63,9 +63,9 @@
 <!ENTITY LineNumber "Номер строки:">
 <!ENTITY LineNumberTip "Показывает номер строки при нажатии кода">
 <!ENTITY LineNumberSearch "Строка#">
-<!ENTITY LineNumberSearchTip "Переход к номеру строки (5) или столбцу (5:12), вы можете перетаскивать мышью">
+<!ENTITY LineNumberSearchTip "Переход к строке (5) или столбцу (5:12), можно перетаскивать">
 <!ENTITY ExportStyle "Экспорт стиля">
-<!ENTITY ExportStyleTip "Экспортирует стиль в файл">
+<!ENTITY ExportStyleTip "Экспорт стиля в файл">
 <!ENTITY CloneStyle "Клонировать стиль">
 <!ENTITY CloneStyleTip "Создает новый стиль с тем же кодом">
 <!ENTITY Url "Ссылка">
@@ -77,14 +77,14 @@
 <!ENTITY wraplinesTip "Переносит длинные строки">
 <!ENTITY switchtoinstall "Перейти к установке">
 <!ENTITY switchtoinstallTip "Переключение между окнами редактора и установщика">
-<!ENTITY Insert "Вставка">
+<!ENTITY Insert "Вставить">
 <!ENTITY InsertTip "Позволяет вставлять текст, цвета и т.д. ...">
 <!ENTITY Insert.k "I">
-<!ENTITY dataURI "Data URI...">
-<!ENTITY dataURITip "Выберите файл и вставьте в качестве знака URI данных">
+<!ENTITY dataURI "Данные URI...">
+<!ENTITY dataURITip "Выбрать файл и вставить данные URL в область каретки">
 <!ENTITY dataURI.ak "D">
-<!ENTITY chromefolder "Путо до папки Chrome">
-<!ENTITY chromefolderTip "Вставить путь к папке chrome в качестве знака">
+<!ENTITY chromefolder "Путь к папке Chrome">
+<!ENTITY chromefolderTip "Вставить путь к папке chrome в область каретки">
 <!ENTITY chromefolder.ak "C">
 <!ENTITY htmlnamespace "Пространство имен по умолчанию HTML">
 <!ENTITY htmlnamespaceTip "Вставка пространства имен HTML">
@@ -92,7 +92,7 @@
 <!ENTITY xulnamespace "Пространство имен по умолчанию XUL">
 <!ENTITY xulnamespaceTip "Вставка пространства имен XUL">
 <!ENTITY xulnamespace.ak "X">
-<!ENTITY openintexternaleditor "Внешние">
+<!ENTITY openintexternaleditor "Внешний">
 <!ENTITY openintexternaleditorTip "Изменить стиль как файл css во внешнем редакторе">
 <!ENTITY openintexternaleditor.ak "O">
 <!ENTITY Bracket "Скобки">
@@ -102,13 +102,13 @@
 <!ENTITY Undo "Отменить">
 <!ENTITY UndoTip "Отменить последнее изменение">
 <!ENTITY Redo "Вернуть">
-<!ENTITY RedoTip "Вернуть последнее отменённое">
+<!ENTITY RedoTip "Вернуть последюю отмену">
 <!ENTITY Class "Класс">
 <!ENTITY ClassTip "изменения выделенного текста: [class=&quot;example&quot;] для .example (или назад)">
 <!ENTITY ID "ID">
 <!ENTITY IDTip "изменения выделенного текста: [id=&quot;example&quot;] для #example (или назад)">
-<!ENTITY ToggleBars "Переключить панель инструментов">
-<!ENTITY ToggleBarsTip "Переключает панель инструментов (выберите их в настройках&gt;Переключение&gt;Переключение панели инструментов)">
+<!ENTITY ToggleBars "Панель инструментов">
+<!ENTITY ToggleBarsTip "Переключает панель инструментов (выберите их в Настройки&gt;Переключение&gt;Переключение панелей)">
 <!ENTITY StyleId "ID стиля">
 <!ENTITY StyleIdTip "Показывает идентификатор стиля из базы данных stylish.sqlite">
 <!ENTITY RemoveXUL "Удалить XUL:">

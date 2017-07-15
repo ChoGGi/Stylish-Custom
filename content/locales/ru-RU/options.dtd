@@ -1,104 +1,108 @@
-<!ENTITY changedomains "Изменить разрешенные домены">
-<!ENTITY changedomainsTip "Введите список доменов, разрешенных для установки стилей (пробел для разделения)">
-<!ENTITY Sidebar "Боковая панель">
-<!ENTITY Standalone "Автономное">
+<!ENTITY changedomains "Разрешенные домены:">
+<!ENTITY changedomainsTip "Ввод списка доменов, из которых разрешена установка стилей (пробел для разделения)">
+<!ENTITY Sidebar "В боковой панели">
+<!ENTITY Standalone "В отдельном окне">
 <!ENTITY Addons "Дополнения">
-<!ENTITY Manageview "Управление представлением">
-<!ENTITY ManageviewTip "Позволяет выбрать, какое окно УПРАВЛЕНИЕ СТИЛЯМИ откроется с помощью">
-<!ENTITY General "Общие">
+<!ENTITY Manageview "Настройка вида">
+<!ENTITY ManageviewTip "Выбрать как будет открываться управление стилями">
+<!ENTITY General "Главное">
 <!ENTITY Text "Текст">
 <!ENTITY MenuItems "Пункты меню">
 <!ENTITY Toggle "Переключение">
 <!ENTITY Buttons "Кнопки">
-<!ENTITY BottomArea "Нижняя область редактирования стиля">
-<!ENTITY BottomAreaTip "Выбрать кнопки для нижней области редактирования стиля">
-<!ENTITY StyleMenu "Изменить действие правой кнопки мыши для стиля Пункты меню">
-<!ENTITY StyleMenuTip "Выбор между отображением меню и редактированием стиля">
+<!ENTITY BottomArea "Нижняя область окна редактора стилей">
+<!ENTITY BottomAreaTip "Кнопки для нижней области редактора стилей">
+<!ENTITY StyleMenu "Изменить действие ПКМ для пунктов меню стиля">
+<!ENTITY StyleMenuTip "Или отображение меню или редактирование стиля">
 <!ENTITY SaveMenu "Меню сохранения">
-<!ENTITY SaveMenuTip "Меню с сохранением&amp;Возвращением">
+<!ENTITY SaveMenuTip "Меню с Сохранить&amp;Вернуть">
 <!ENTITY SaveButton "Меню сохранения (Кнопка)">
-<!ENTITY SaveButtonTip "Есть кнопка для сохранения и меню для остальных">
+<!ENTITY SaveButtonTip "Кнопка для сохранения и меню для остальных">
+
 <!ENTITY switchtoinstallTip "Показать переключатель в установке для новых стилей">
 <!ENTITY ExportSettings "Экспорт настроек">
-<!ENTITY ExportSettingsTip "Экспорт настроек Stylish-Custom из файла">
+<!ENTITY ExportSettingsTip "Сохранить настройки Stylish-Custom в файл">
 <!ENTITY ImportSettings "Импорт настроек">
-<!ENTITY ImportSettingsTip "Импорт настроек Stylish-Custom из файла">
-<!ENTITY StyleToggle0 "Переключение для загруженной страницы / выбранной вкладке">
-<!ENTITY StyleToggle1 "Только выбранной вкладке">
+<!ENTITY ImportSettingsTip "Загрузить настройки Stylish-Custom из файла">
+<!ENTITY StyleToggle0 "Переключение для загруженной страницы / выбранной вкладки">
+<!ENTITY StyleToggle1 "Только выбранной вкладки">
 <!ENTITY StyleToggle2 "Только загруженной страницы">
 <!ENTITY StyleToggle3 "Нет (игнорировать теги)">
 <!ENTITY StyleToggle "Переключение стиля">
-<!ENTITY StyleToggleTip "Выберите способ переключения стилей">
-<!ENTITY StyleToggleHelp1 "Вы можете использовать теги для переключения стилей (см. Руководство\Редактор Диалог\#15 для большей помощи)">
+<!ENTITY StyleToggleTip "Выбор как переключать стили">
+<!ENTITY StyleToggleHelp1 "Использовать теги для переключения стилей (см. Справка\Edit Dialog\#15">
 <!ENTITY StyleToggleHelp2 "пример: ">
-<!ENTITY ExternalEditor "Внешний редактор">
-<!ENTITY ExternalEditorTip "Путь к исполняемому файлу для использования">
-<!ENTITY WhichEditor "Какой метод использовать">
-<!ENTITY WhichEditorTip "Выбирете метод для внешнего редактирования">
-<!ENTITY EditorTime "Задержка между обновлениями стиля (ms)">
-<!ENTITY EditorTimeTip "Период проверки файла изменений Stylish-Custom">
-<!ENTITY RemoveCSS "Удалить файлы CSS (см. подсказка)">
-<!ENTITY RemoveCSSTip "Это приведет к удалению любых открытых файлов!">
-<!ENTITY RemoveCSSAuto "Автоматически удалять старые файлы css">
-<!ENTITY RemoveCSSAutoTip "Автоматически удаляет stylishCustom*.css из временного каталога, когда запускается firefox">
-<!ENTITY ChangeGlobalColour "Глобальный цвет стилей">
-<!ENTITY ChangeGlobalColourTip "Изменяет цвет глобальных стилей в меню Stylish">
-<!ENTITY ChangeSiteColour "Цвет стилей сайта">
-<!ENTITY ChangeSiteColourTip "Изменяет цвет стилей сайта в меню Stylish">
-<!ENTITY ChangeGlobalSiteColour "Цвет стилей Общие/Сайт">
-<!ENTITY ChangeGlobalSiteColourTip "Изменяет цвет стилей общие/сайт в меню Stylish">
-<!ENTITY StatusBar "Значок состояния">
-<!ENTITY StatusBarTip "Показать/скрыть значок состояния Stylish-Custom">
-<!ENTITY ToggleIcons "Переключить значки">
-<!ENTITY ToggleIconsTip "Если вы хотите скрыть значки меню/кнопки">
-<!ENTITY ToolMenu "Инструменты Пункты меню">
-<!ENTITY ToolMenuTip "Показать/скрыть Управление Stylish в меню инструментов">
-<!ENTITY AskToSave "Запрос на сохранение стиля">
-<!ENTITY AskToSaveTip "Если вы не сохранили стиль, он спросит, хотите ли вы">
-<!ENTITY AppTitleTip "Показывает приложение (ff,tb,sb) в строке заголовка редактора стиля">
+<!ENTITY ExternalEditor "Внешний редактор:">
+<!ENTITY ExternalEditorTip "Путь к исполняемому файлу">
+<!ENTITY WhichEditor "Выбор метода">
+<!ENTITY WhichEditorTip "Выбор метод для внешнего редактора">
+<!ENTITY EditorTime "Таймаут обновления стиля (ms)">
+<!ENTITY EditorTimeTip "Период проверки Stylish-Custom изменений файла">
+
+<!ENTITY RemoveCSS "Remove CSS files (see tooltip)">
+<!ENTITY RemoveCSSTip "This will remove any open files!">
+<!ENTITY RemoveCSSAuto "Auto-remove old css files">
+<!ENTITY RemoveCSSAutoTip "automatically remove stylishCustom*.css from temp dir when firefox starts">
+<!ENTITY ChangeGlobalColour "Global styles color">
+<!ENTITY ChangeGlobalColourTip "Changes color of global styles in Stylish menu">
+<!ENTITY ChangeSiteColour "Site styles color">
+<!ENTITY ChangeSiteColourTip "Changes color of site styles in Stylish menu">
+<!ENTITY ChangeGlobalSiteColour "Global/Site styles color">
+<!ENTITY ChangeGlobalSiteColourTip "Changes color of global/site styles in Stylish menu">
+<!ENTITY StatusBar "Statusbar Icon">
+<!ENTITY StatusBarTip "Show/hide Stylish-Custom statusbar icon">
+<!ENTITY ToggleIcons "Toggle icons">
+<!ENTITY ToggleIconsTip "If you want to hide menu/button icons">
+<!ENTITY ToolMenu "Tools Menuitem">
+<!ENTITY ToolMenuTip "Show/hide stylish manage in the tools menu">
+<!ENTITY AskToSave "Ask to Save Style">
+<!ENTITY AskToSaveTip "If you haven't saved the style it will ask if you want to">
+<!ENTITY AppTitleTip "Shows the app (ff,tb,sb) in the style editor title bar">
+
 <!ENTITY InsertTextCaption "Вставить текст">
-<!ENTITY InsertTextTip "Что появляется в Меню вставки&gt;Вставить текст (,, разделяет)">
+<!ENTITY InsertTextTip "Что показывать в меню редактора Вставить&gt;Вставить текст (разделять ,,)">
 <!ENTITY AutoImportantCaption "Текст Auto!important">
-<!ENTITY AutoImportantTip "Что заполняется после нажатия ключа auto!important">
-<!ENTITY ChangeFontCaption "Изменить шрифт области редактирования">
-<!ENTITY ChangeFontTip "Используется для выбора font-family/font-size/color">
-<!ENTITY ExImportLocation "Расположение элементов меню Экс/Импорт">
-<!ENTITY ExImportLocationTip "Показать элементы меню экс/импорт в stylish или Stylish-Custom">
-<!ENTITY ToggleRulesLocation "Переключить расположение элемента меню Стиль">
-<!ENTITY ToggleRulesLocationTip "Показать элементы меню выкл/включить в stylish или Stylish-Custom">
-<!ENTITY StyleInfoLocation "Показать расположение элемента меню Информация стиля">
-<!ENTITY StyleInfoLocationTip "Показать элемент меню Информация стиля в stylish или Stylish-Custom">
-<!ENTITY ChangeInsertSepCaption "Изменение разделителя вставки текста">
-<!ENTITY ChangeInsertSepTip "Позволяет выбрать другой разделитель (,,) для использования">
-<!ENTITY ToolbarToggle "Переключатель панели инструментов">
-<!ENTITY ToolbarToggleTip "Панели инструментов для переключения в диалоговом окне редактирования">
-<!ENTITY IAT "Это весь текст!">
-<!ENTITY AppTitle "Название приложения">
-<!ENTITY StyleMenusTip "Показывает меню с различными списками стилей (Приложения/Включенные/Отключенные)">
-<!ENTITY GetStyleSheetsMenu "Элемент меню &quot;Получить таблицу стилей&quot;">
-<!ENTITY GetStyleSheetsMenuTip "Показать в меню содержания &quot;Получить таблицу стилей&quot;">
-<!ENTITY ShowAppStyles "Показывать стили &quot;Приложения&quot; в меню stylish">
-<!ENTITY ShowAppStylesTip "Поскольку вы можете увидеть их в подменю &quot;Стили приложений&quot;">
+<!ENTITY AutoImportantTip "Что вставляет кнопка auto!important">
+<!ENTITY ChangeFontCaption "Шрифт области редактора">
+<!ENTITY ChangeFontTip "Установить семейство/размер/цвет шрифта">
+<!ENTITY ExImportLocation "Элементы - экспорт/импорт">
+<!ENTITY ExImportLocationTip "Где показывать экспорт/импорт в меню Stylish или Stylish-Custom">
+<!ENTITY ToggleRulesLocation "Элементы - включенные/отключенные стили">
+<!ENTITY ToggleRulesLocationTip "Показывать включенные/отключенные стили в Stylish или в Stylish-Custom">
+<!ENTITY StyleInfoLocation "Элемент - Информация о стиле">
+<!ENTITY StyleInfoLocationTip "Где показывать Информация о стиле в меню Stylish или в Stylish-Custom">
+<!ENTITY ChangeInsertSepCaption "Разделитель вставки текста">
+<!ENTITY ChangeInsertSepTip "Выбор другого разделителя, по умолчанию  (,,)">
+<!ENTITY ToolbarToggle "Кнопка - Панели">
+<!ENTITY ToolbarToggleTip "Панели для переключения в окне редактора">
+<!ENTITY IAT "It's All Text!">
+<!ENTITY AppTitle "Название в заголовке - Firefox/Fx, Thunderbird/Tb и т.п.">
+<!ENTITY StyleMenusTip "Подменю со списками стилей (Интерфейса/Включенные/Отключенные)">
+
+<!ENTITY GetStyleSheetsMenu "Вызов &quot;Таблицы стилей&quot;">
+<!ENTITY GetStyleSheetsMenuTip "Показать в меню &quot;Таблица стилей&quot;">
+<!ENTITY ShowAppStyles "Подменю &quot;Интерфейс&quot; в меню Stylish">
+<!ENTITY ShowAppStylesTip "Вы можете увидеть их в подменю &quot;Интерфейс&quot;">
 <!ENTITY SaveText "Сохранить текст поиска">
-<!ENTITY SaveTextTip "При закрытии диалогового окна стиля, сохранить текст в поле поиска">
-<!ENTITY ResizeStyleDialog "Диалоговое окно изменения размера">
-<!ENTITY ResizeStyleDialogTip "Установить размер диалогов, открытых из Диспетчера дополнений">
-<!ENTITY ScratchpadHeightCaption "Установить высоту блокнота">
-<!ENTITY ScratchpadHeightTip "Позволяет регулировать высоту блокнота в редакторе стилей">
+<!ENTITY SaveTextTip "При закрытии диалога стиля, сохранить текст в поле поиска">
+<!ENTITY ResizeStyleDialog "Изменения размера диалога">
+<!ENTITY ResizeStyleDialogTip "Размер диалогов, открытых из Управление дополнениями">
+<!ENTITY ScratchpadHeightCaption "Установить высоту черновика">
+<!ENTITY ScratchpadHeightTip "Позволяет регулировать высоту черновика редактора">
 <!ENTITY Nothing "Ничего">
 <!ENTITY Initials "Инициалы">
 <!ENTITY FullTitle "Полное название">
-<!ENTITY reloadStyles "Перезагрузить стили">
-<!ENTITY reloadStylesTip1 "Отключает, а затем включает стили (для обновления стилей с помощью директивы @import)">
-<!ENTITY reloadStylesTip2 "Используйте запятые (,) для разделения стиля (34,28,115) или оставьте поле пустым, чтобы перезагрузить всё">
-<!ENTITY reloadStylesTip3 "в главном окне браузера Firefox ctrl+alt+s">
-<!ENTITY reloadStylesKey "Перезагрузить ключ стилей">
-<!ENTITY reloadStylesKeyTip "По умолчанию (ctrl+alt+s) или если вы хотите изменить букву">
-<!ENTITY StyleMenus "Расположение меню Список стилей">
+<!ENTITY reloadStyles "Перезагрузка стилей">
+<!ENTITY reloadStylesTip1 "Отключает, а затем включает стили (обновления с помощью директивы @import)">
+<!ENTITY reloadStylesTip2 "Запятые (,) для разделения стилей (34,28,115), если пусто - перезагрузить всё">
+<!ENTITY reloadStylesTip3 "В главном окне Firefox ctrl+alt+s">
+<!ENTITY reloadStylesKey "Ключ перезагрузки стилей:">
+<!ENTITY reloadStylesKeyTip "По умолчанию (ctrl+alt+s) или укажите свой">
+<!ENTITY StyleMenus "Расположение списка стилей">
 <!ENTITY MenuitemLocations "Расположение пунктов меню">
-<!ENTITY MoveErrorBox "Переместить поле ошибки">
-<!ENTITY MoveErrorBoxTip "Область отчета об ошибках: область кода ниже (по умолчанию) или ниже всего">
-<!ENTITY SearchBar "Какой поиск использовать?">
-<!ENTITY SearchBarTip "выбрать между новым поиском и поиском Микадо">
-<!ENTITY StyleMenuOverride "Переключить переопределение элементов меню для кнопки Инструменты Stylish">
-<!ENTITY StyleMenuOverrideTip "Выберите между открытием в Stylish-Custom или Stylish">
+<!ENTITY MoveErrorBox "Поле ошибки">
+<!ENTITY MoveErrorBoxTip "Отчет об ошибках: область ниже кода (по умолчанию) или ниже всего">
+<!ENTITY SearchBar "Метод поиска:">
+<!ENTITY SearchBarTip "Выбор между новым поиском и поиском Микадо">
+<!ENTITY StyleMenuOverride "Переопределение вида меню для кнопки Stylish">
+<!ENTITY StyleMenuOverrideTip "Открытие меню Stylish-Custom или Stylish">

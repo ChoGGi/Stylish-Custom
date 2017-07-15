@@ -1,8 +1,8 @@
-<!ENTITY chromefolder "Путь до папки Chrome">
+<!ENTITY chromefolder "Путь к папке Chrome">
 <!ENTITY chromefolder.ak "C">
-<!ENTITY dataURI "Data URI...">
+<!ENTITY dataURI "Данные URI...">
 <!ENTITY dataURI.ak "D">
-<!ENTITY htmlnamespace "Пространство имен по умолчанию HTML">
+<!ENTITY htmlnamespace "Пространство имен HTML по умолчанию">
 <!ENTITY htmlnamespace.ak "H">
 <!ENTITY insert "Вставка">
 <!ENTITY insert.ak "I">
@@ -20,5 +20,5 @@
 <!ENTITY tags.ak "T">
 <!ENTITY wraplines "Перенос строк">
 <!ENTITY wraplines.ak "W">
-<!ENTITY xulnamespace "Пространство имен по умолчанию XUL">
+<!ENTITY xulnamespace "Пространство имен XUL по умолчанию">
 <!ENTITY xulnamespace.ak "X">
