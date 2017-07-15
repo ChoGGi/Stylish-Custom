@@ -1,12 +1,10 @@
 ### Info:
-```
 Stylish v2.0.* and up (not tested nor supported on older versions)
 
 * [Changelog](https://choggi.org/misc/Stylish-Custom/change.log)
 * [Stylish-Custom Guide](https://choggi.org/guide)
 * [Forum Thread](https://forum.userstyles.org/discussion/2799/stylish-custom/p1)
 * for a signed extension see [here](https://choggi.org/misc/Stylish-Custom/), or [Releases](https://github.com/ChoGGi/Stylish-Custom/releases) (the point releases will have a different ID then the release versions)
-```
 
 ### Some features:
 ```
@@ -23,14 +21,12 @@ Toggle styles based on which page you're on
 Lots more...
 ```
 
-```
 Stylish-Custom for Stylish v1.4.3:
 https://choggi.org/misc/Stylish-Custom/Stylish_v1.4.3
 
 There is also Stylish Editor Modified:
 https://addons.palemoon.org/extensions/appearance/stylish-editor-modified/
 You could try having them both installed, but you are on your own for any issues/bugs.
-```
 ### Current issue(s):
 
 ```
