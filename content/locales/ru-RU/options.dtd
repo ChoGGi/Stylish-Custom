@@ -12,7 +12,7 @@
 <!ENTITY Buttons "Кнопки">
 <!ENTITY BottomArea "Нижняя область окна редактора стилей">
 <!ENTITY BottomAreaTip "Кнопки для нижней области редактора стилей">
-<!ENTITY StyleMenu "Изменить действие ПКМ для пунктов меню стиля">
+<!ENTITY StyleMenu "Изменить действие ПКМ для пунктов стилей в меню">
 <!ENTITY StyleMenuTip "Или отображение меню или редактирование стиля">
 <!ENTITY SaveMenu "Меню сохранения">
 <!ENTITY SaveMenuTip "Меню с Сохранить&amp;Вернуть">
@@ -37,32 +37,32 @@
 <!ENTITY WhichEditorTip "Выбор метод для внешнего редактора">
 <!ENTITY EditorTime "Таймаут обновления стиля (ms)">
 <!ENTITY EditorTimeTip "Период проверки Stylish-Custom изменений файла">
-<!ENTITY RemoveCSS "Remove CSS files (see tooltip)">
-<!ENTITY RemoveCSSTip "This will remove any open files!">
-<!ENTITY RemoveCSSAuto "Auto-remove old css files">
-<!ENTITY RemoveCSSAutoTip "automatically remove stylishCustom*.css from temp dir when firefox starts">
-<!ENTITY ChangeGlobalColour "Global styles color">
-<!ENTITY ChangeGlobalColourTip "Changes color of global styles in Stylish menu">
-<!ENTITY ChangeSiteColour "Site styles color">
-<!ENTITY ChangeSiteColourTip "Changes color of site styles in Stylish menu">
-<!ENTITY ChangeGlobalSiteColour "Global/Site styles color">
-<!ENTITY ChangeGlobalSiteColourTip "Changes color of global/site styles in Stylish menu">
-<!ENTITY StatusBar "Statusbar Icon">
-<!ENTITY StatusBarTip "Show/hide Stylish-Custom statusbar icon">
-<!ENTITY ToggleIcons "Toggle icons">
-<!ENTITY ToggleIconsTip "If you want to hide menu/button icons">
-<!ENTITY ToolMenu "Tools Menuitem">
-<!ENTITY ToolMenuTip "Show/hide stylish manage in the tools menu">
-<!ENTITY AskToSave "Ask to Save Style">
-<!ENTITY AskToSaveTip "If you haven't saved the style it will ask if you want to">
-<!ENTITY AppTitleTip "Shows the app (ff,tb,sb) in the style editor title bar">
+<!ENTITY RemoveCSS "Удалить файлы CSS (см. подсказку)">
+<!ENTITY RemoveCSSTip "Это приведет к удалению любых открытых файлов!">
+<!ENTITY RemoveCSSAuto "Авто-удалять старые файлы css">
+<!ENTITY RemoveCSSAutoTip "Автоматически удаляет stylishCustom*.css из временного каталога, когда запускается firefox">
+<!ENTITY ChangeGlobalColour "Цвет глобальных стилей">
+<!ENTITY ChangeGlobalColourTip "Изменяет цвет глобальных стилей в меню Stylish">
+<!ENTITY ChangeSiteColour "Цвет стилей сайта">
+<!ENTITY ChangeSiteColourTip "Изменяет цвет стилей сайта в меню Stylish">
+<!ENTITY ChangeGlobalSiteColour "Цвет стилей Глобальные/Сайта">
+<!ENTITY ChangeGlobalSiteColourTip "Изменяет цвет стилей Глобальные/Сайта в меню Stylish">
+<!ENTITY StatusBar "Значок в строке состояния:">
+<!ENTITY StatusBarTip "Показать/скрыть значок Stylish-Custom в строке состояния">
+<!ENTITY ToggleIcons "Значки в контекстном меню">
+<!ENTITY ToggleIconsTip "Показать/скрыть значки в контекстном меню">
+<!ENTITY ToolMenu "Пункт в Инструменты">
+<!ENTITY ToolMenuTip "Показать/скрыть Stylish в меню Инструменты">
+<!ENTITY AskToSave "Запрос на сохранение">
+<!ENTITY AskToSaveTip "Если вы не сохранили стиль, будет запрос на сохранение">
+<!ENTITY AppTitleTip "Показывает AppName (ff,tb,sb) в заголовке редактора">
 <!ENTITY InsertTextCaption "Вставить текст">
 <!ENTITY InsertTextTip "Что показывать в меню редактора Вставить&gt;Вставить текст (разделять ,,)">
 <!ENTITY AutoImportantCaption "Текст Auto!important">
 <!ENTITY AutoImportantTip "Что вставляет кнопка auto!important">
 <!ENTITY ChangeFontCaption "Шрифт области редактора">
 <!ENTITY ChangeFontTip "Установить семейство/размер/цвет шрифта">
-<!ENTITY ExImportLocation "Элементы - экспорт/импорт">
+<!ENTITY ExImportLocation "Элементы - Экспорт / Импорт">
 <!ENTITY ExImportLocationTip "Где показывать экспорт/импорт в меню Stylish или Stylish-Custom">
 <!ENTITY ToggleRulesLocation "Элементы - включенные/отключенные стили">
 <!ENTITY ToggleRulesLocationTip "Показывать включенные/отключенные стили в Stylish или в Stylish-Custom">
@@ -89,7 +89,7 @@
 <!ENTITY Initials "Инициалы">
 <!ENTITY FullTitle "Полное название">
 <!ENTITY reloadStyles "Перезагрузка стилей">
-<!ENTITY reloadStylesTip1 "Отключает, а затем включает стили (обновления с помощью директивы @import)">
+<!ENTITY reloadStylesTip1 "Отключает, а затем включает стили (обновление с помощью директивы @import)">
 <!ENTITY reloadStylesTip2 "Запятые (,) для разделения стилей (34,28,115), если пусто - перезагрузить всё">
 <!ENTITY reloadStylesTip3 "В главном окне Firefox ctrl+alt+s">
 <!ENTITY reloadStylesKey "Ключ перезагрузки стилей:">
@@ -98,7 +98,7 @@
 <!ENTITY MenuitemLocations "Расположение пунктов меню">
 <!ENTITY MoveErrorBox "Поле ошибки">
 <!ENTITY MoveErrorBoxTip "Отчет об ошибках: область ниже кода (по умолчанию) или ниже всего">
-<!ENTITY SearchBar "Метод поиска:">
+<!ENTITY SearchBar "Метод поиска">
 <!ENTITY SearchBarTip "Выбор между новым поиском и поиском Микадо">
 <!ENTITY StyleMenuOverride "Переопределение вида меню для кнопки Stylish">
 <!ENTITY StyleMenuOverrideTip "Открытие меню Stylish-Custom или Stylish">
