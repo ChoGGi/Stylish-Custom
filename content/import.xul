@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/tree.css" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/icons.css" type="text/css"?>
+
+<!DOCTYPE dialog [
+  <!ENTITY % export SYSTEM "chrome://stylish-custom/locale/export.dtd">
+  <!ENTITY % common SYSTEM "chrome://stylish-custom/locale/common.dtd">
+  %export;
+  %common;
+]>
+
+<window
+  id="stylish-custom-import"
+  title="&ImportStyles;"
+  windowtype="stylishCustomImport"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  persist="screenX screenY width height sizemode"
+  buttons="accept"
+  ondialogaccept="return false"
+  width="450"
+  height="400"
+  onload="scImport.init()"
+  onunload="scImport.unload()">
+
+  <tooltip id="scTooltip"/>
+
+  <scriptset>
+    <script type="application/x-javascript" src="chrome://stylish-custom/content/import.js"/>
+    <script type="application/x-javascript" src="chrome://stylish/content/common.js"/>
+  </scriptset>
+
+  <keyset>
+    <key id="key_manage" modifiers="control" key="M" oncommand="scCommon.openStyleManager(window)"/>
+    <key id="key_closewin" keycode="VK_ESCAPE" oncommand="window.close()"/>
+    <key id="key_open-styleR" keycode="VK_RETURN" oncommand="scImport.openStyle(0)"/>
+    <key id="key_open-styleE" keycode="VK_ENTER" oncommand="scImport.openStyle(0)"/>
+   </keyset>
+
+  <tree id="style-tree-list" flex="1" enableColumnDrag="true" editable="true">
+    <treecols>
+      <treecol flex="2" id="NameColumn" label="&Name;" persist="width ordinal hidden"/>
+      <splitter class="tree-splitter"/>
+      <treecol flex="1" id="ImportColumn" label="&Import;" width="25" type="checkbox" persist="width ordinal hidden" editable="true"/>
+      <splitter class="tree-splitter"/>
+      <treecol flex="1" id="EnableColumn" label="&Enable;" width="25" type="checkbox" persist="width ordinal hidden" editable="true"/>
+      <splitter class="tree-splitter"/>
+      <treecol flex="1" id="TypeColumn" label="&Type;" width="25" persist="width ordinal hidden"/>
+    </treecols>
+    <treechildren id="StyleList" onclick="scImport.onSelect(event)" ondblclick="scImport.openStyle(event)"/>
+  </tree>
+
+  <box align="center" id="ImportLocation">
+    <button id="Refresh" label="&Refresh;" tooltiptext="&RefreshTip;" oncommand="scImport.createStyleList('Refresh')"/>
+    <spacer flex="1"/>
+    <button id="LocationBrowse" label="&Browse;" oncommand="scCommon.pathBrowse('Import',document,scImport)" tooltiptext="&BrowseTip;"/>
+    <textbox id="Location" flex="1" tooltiptext="&BrowseTip;" placeholder="X:\\Example Import"/>
+  </box>
+
+  <box align="center" id="stylish-bottom">
+    <button oncommand="scImport.importStyles()" id="save" label="&Import;" tooltiptext="&ImportStyles;"/>
+    <checkbox id="overWriteStyles" checked="true" label="&overWrite;" tooltiptext="&OverwriteStyles;"/>
+    <spacer flex="1"/>
+    <button oncommand="scCommon.selectAllStyles(document)" id="SelectAll" label="&SelectAll;" tooltiptext="&SelectAllTip;"/>
+  </box>
+
+</window>

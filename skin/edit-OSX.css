@@ -1,0 +1,7 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url-prefix("chrome://stylish-custom/"){
+/*not sure why firefox doesn't hide this*/
+.dropmarker-icon{display:none}
+/*padding i added looks ugly on OSX*/
+#stylishCustomToolbox{padding:0!important}
+}

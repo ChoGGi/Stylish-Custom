@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/tree.css" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/icons.css" type="text/css"?>
+
+<!DOCTYPE dialog [
+  <!ENTITY % removedupes SYSTEM "chrome://stylish-custom/locale/removedupes.dtd">
+  <!ENTITY % common SYSTEM "chrome://stylish-custom/locale/common.dtd">
+  %removedupes;
+  %common;
+]>
+
+<window
+  id="stylish-custom"
+  title="&RemoveDupes;"
+  windowtype="stylishCustomRemoveDupes"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  persist="screenX screenY width height sizemode"
+  buttons="accept"
+  ondialogaccept="return false"
+  width="350"
+  height="400"
+  onload="scRemovedupes.init()"
+  onunload="scRemovedupes.onExit()">
+
+  <scriptset>
+    <script type="application/x-javascript" src="chrome://stylish-custom/content/removedupes.js"/>
+    <script type="application/x-javascript" src="chrome://stylish/content/common.js"/>
+  </scriptset>
+
+  <keyset>
+    <key id="key_search" modifiers="control" key="F" oncommand="document.getElementById('SearchBox').focus()"/>
+    <key id="key_delete" keycode="VK_DELETE" oncommand="scRemovedupes.removeStyles('Ask')"/>
+    <key id="key_open-styleR" keycode="VK_RETURN" oncommand="scRemovedupes.openStyle()"/>
+    <key id="key_open-styleE" keycode="VK_ENTER" oncommand="scRemovedupes.openStyle()"/>
+    <key id="key_manage" modifiers="control" key="M" oncommand="scCommon.openStyleManager(window)"/>
+    <key id="key_refresh-list" modifiers="control" key="R" oncommand="scRemovedupes.createStyleList()"/>
+    <key id="key_closewin" keycode="VK_ESCAPE" oncommand="window.close()"/>
+  </keyset>
+
+  <tree id="style-tree-list" flex="1" editable="true" enableColumnDrag="true" onclick="scRemovedupes.onTreeClicked(event)" seltype="single">
+    <treecols>
+      <treecol flex="5" id="NameColumn" label="&Name;" persist="width ordinal hidden"/>
+      <splitter class="tree-splitter"/>
+      <treecol flex="1" id="IDColumn" label="&ID;" tooltiptext="&IDColumnTip;" width="25" persist="width ordinal hidden"/>
+      <splitter class="tree-splitter"/>
+      <treecol flex="1" id="RemoveColumn" label="&Remove;" width="25" persist="width ordinal hidden" type="checkbox" editable="true"/>
+    </treecols>
+    <treechildren id="StyleList" ondblclick="scRemovedupes.onTreeClicked(event)" onclick="scRemovedupes.onTreeClicked(event)"/>
+  </tree>
+
+  <box id="BottomArea">
+    <button id="RemoveStyles" label="&RemoveStyles;" tooltiptext="&RemoveStylesTip;" oncommand="scRemovedupes.removeStyles()"/>
+    <spacer flex="1"/>
+    <button id="Refresh" label="&Refresh;" tooltiptext="&RefreshTip;" oncommand="scRemovedupes.createStyleList()"/>
+    <button id="Close" label="&Close;" tooltiptext="&CloseTip;" oncommand="window.close()"/>
+  </box>
+
+</window>

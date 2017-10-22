@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/overlay.css" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/icons.css" type="text/css"?>
+
+<!DOCTYPE overlay [
+  <!ENTITY % common SYSTEM "chrome://stylish-custom/locale/common.dtd">
+  %common;
+]>
+
+<overlay id="stylishCustom" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script type="application/x-javascript" src="chrome://stylish-custom/content/overlay.js"/>
+
+        <!-- Sidebar -->
+  <broadcasterset id="mainBroadcasterSet">
+    <broadcaster id="viewStylishSidebar" autoCheck="false" label="&Stylish;" type="checkbox" group="sidebar" sidebarurl="chrome://stylish-custom/content/info.xul" sidebartitle="&Stylish;" oncommand="toggleSidebar('viewStylishSidebar');"/>
+  </broadcasterset>
+
+  <menupopup id="viewSidebarMenu">
+    <menuitem id="stylish-view-sidebar" observes="viewStylishSidebar"/>
+  </menupopup>
+
+<popupset id="mainPopupSet">
+    <menupopup id="stylish-custom-popup">
+      <menu id="StylishAppStylesMain" label="&AppStyles;">
+        <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
+        <!-- Why is TB doubling this menupopup (and showing a little square after the arrow -->
+      </menu>
+      <menu id="StylishEnabledStylesMain" label="&EnabledStyles;">
+        <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
+        <!-- Why is TB doubling this menupopup -->
+      </menu>
+      <menu id="StylishDisabledStylesMain" label="&DisabledStyles;">
+        <!-- Why is TB doubling this menupopup -->
+        <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
+      </menu>
+      <menuitem id="StylishImportMain" label="&ImportStyles;" tooltiptext="&ImportStylesTip;" oncommand="scCommon.openDialog('Import')"/>
+      <menuitem id="StylishExportMain" label="&ExportStyles;" tooltiptext="&ExportStylesTip;" oncommand="scCommon.openDialog('Export')"/>
+      <menuseparator/>
+      <menuitem id="StylishNewStyleMain" label="&NewStyle;" oncommand="scCommon.addCode()"/>
+      <menuitem id="StylishInfoMain" label="&StylishInfo;" tooltiptext="&StylishInfoTip;" oncommand="scCommon.openDialog('Info')"/>
+      <menuitem id="StylishOptionsMain" label="&Options;" tooltiptext="&OptionsTip;" oncommand="scCommon.openDialog('Options')"/>
+      <menuitem id="StylishGuide" label="&Guide;" tooltiptext="&GuideTip;" oncommand="scCommon.openChoGGiki()"/>
+      <!-- Why is TB adding a menuseparator here? -->
+    </menupopup>
+  </popupset>
+
+  <!-- attaches to stylish popup -->
+  <menupopup id="stylish-popup" onpopupshowing="stylishOverlay.popupShowing(event); scOverlay.popupshowing(event);" >
+    <menuitem position="2" id="StylishOptions" label="&Options;" tooltiptext="&OptionsTip;" oncommand="scCommon.openDialog('Options')"/>
+    <menuitem position="3" id="StylishInfo" label="&StylishInfo;" tooltiptext="&StylishInfoTip;" oncommand="scCommon.openDialog('Info')" hidden="true"/>
+    <menuitem position="4" id="StylishImport" label="&ImportStyles;" tooltiptext="&ImportStylesTip;" oncommand="scCommon.openDialog('Import')" hidden="true"/>
+    <menuitem position="5" id="StylishExport" label="&ExportStyles;" tooltiptext="&ExportStylesTip;" oncommand="scCommon.openDialog('Export')" hidden="true"/>
+    <menuseparator position="14"/>
+    <menuitem id="StylishNewStyle" label="&NewStyle;" oncommand="scCommon.addCode()" hidden="true"/>
+    <menu position="15" id="StylishAppStyles" label="&AppStyles;" hidden="true">
+      <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
+    </menu>
+    <menu position="16" id="StylishEnabledStyles" label="&EnabledStyles;" hidden="true">
+      <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
+    </menu>
+    <menu position="17" id="StylishDisabledStyles" label="&DisabledStyles;" hidden="true">
+      <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
+    </menu>
+  </menupopup>
+
+  <!-- "Get Stylesheets" menuitem -->
+  <popup id="contentAreaContextMenu">
+    <menuitem id="StylishGetStyleSheets" label="&GetStyleSheets;" tooltiptext="&GetStyleSheetsTip;" insertafter="context-sep-viewsource" oncommand="scOverlay.getStyleSheets()"/>
+  </popup>
+
+  <!-- Firefox -->
+  <keyset id="mainKeyset">
+    <key id="key_stylishCustom-openManage"/>
+    <key id="key_stylishCustom-reloadStyles"/>
+  </keyset>
+
+  <toolbarpalette id="BrowserToolbarPalette">
+    <toolbarbutton id="stylish-custom-toolbar-button"/>
+    <toolbarbutton id="stylish-custom-toolbar-manage"/>
+  </toolbarpalette>
+
+  <menupopup id="menu_ToolsPopup">
+    <menu id="stylish-toolmenu" insertbefore="webDeveloperMenu"/>
+  </menupopup>
+
+  <!-- Thunderbird -->
+  <keyset id="navKeys">
+    <key id="key_stylishCustom-openManage"/>
+    <key id="key_stylishCustom-reloadStyles"/>
+  </keyset>
+
+  <toolbarpalette id="MailToolbarPalette">
+    <toolbarbutton id="stylish-custom-toolbar-button"/>
+    <toolbarbutton id="stylish-custom-toolbar-manage"/>
+  </toolbarpalette>
+
+  <menupopup id="taskPopup">
+    <menu id="stylish-toolmenu" insertbefore="javascriptConsole"/>
+  </menupopup>
+
+  <!-- added above -->
+  <menu id="stylish-toolmenu" label="&Stylish;" hidden="true" onclick="scOverlay.toggleToolsPopup(this,event)"/>
+  <toolbarbutton id="stylish-custom-toolbar-button" class="toolbarbutton-1" label="&StylishCustom;" onclick="event.preventDefault();scOverlay.clickHandler(event)" type="menu-button" context=""/>
+  <toolbarbutton id="stylish-custom-toolbar-manage" class="toolbarbutton-1" label="&StylishManage;" onclick="event.preventDefault();scOverlay.clickHandlerManage(event.button)" tooltiptext="&StylishManageTip;"/>
+  <key id="key_stylishCustom-openManage" modifiers="accel,shift" key="m" oncommand="scCommon.openStyleManager(window)"/>
+  <key id="key_stylishCustom-reloadStyles" modifiers="accel,alt" key="s" oncommand="scOverlay.reloadStyles()"/>
+
+</overlay>

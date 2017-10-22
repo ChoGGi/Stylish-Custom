@@ -1,0 +1,324 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://global/skin/toolbar.css" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/edit.css" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/icons.css" type="text/css"?>
+
+<!DOCTYPE dialog [
+  <!ENTITY % edit SYSTEM "chrome://stylish-custom/locale/edit.dtd">
+  <!ENTITY % overlay SYSTEM "chrome://stylish-custom/locale/edit-overlay.dtd">
+  <!ENTITY % common SYSTEM "chrome://stylish-custom/locale/common.dtd">
+  <!ENTITY % internaledit SYSTEM "chrome://global/locale/editMenuOverlay.dtd">
+  %edit;
+  %overlay;
+  %common;
+  %internaledit;
+]>
+
+<dialog
+  id="stylish"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  persist="screenX screenY width height sizemode"
+  width="600"
+  height="400"
+  onload="init();scEdit.init()"
+  onunload="scEdit.onExit()"
+  style="padding:0"
+  ondialogcancel="return scEdit.unLoad()"
+  ondialogaccept="return false">
+
+    <stringbundle id="stringsEdit" src="chrome://stylish-custom/locale/edit.properties"/>
+
+  <scriptset id="scScriptset">
+    <script type="application/x-javascript" src="chrome://stylish/content/common.js"/>
+    <script type="application/x-javascript" src="chrome://stylish-custom/content/edit.js"/>
+    <script type="application/x-javascript" src="chrome://stylish-custom/content/edit-custom.js"/>
+    <script type="application/x-javascript" src="chrome://itsalltext/content/API.js"/>
+<!--
+edit.js uses undoController/goDoCommand
+    <script type="application/x-javascript" src="chrome://global/content/globalOverlay.js"/>
+-->
+  </scriptset>
+
+  <commandset id="scCommandset">
+    <!-- to disable customize menuitem when customize window is opened -->
+    <command id="cmd_CustomizeToolbars" oncommand="scEdit.customizeToolbar()"/>
+<!--
+    <command id="stylish_cmd_undo" oncommand="goDoCommand('stylish_cmd_undo')" disabled="true"/>
+-->
+  </commandset>
+
+  <keyset id="scKeyset">
+    <key id="key_customize" modifiers="control" key="H" command="cmd_CustomizeToolbars"/>
+    <key id="key_preview" modifiers="control" key="P" oncommand="scEdit.togglePreview('Preview')"/>
+    <key id="key_unpreview" modifiers="control" key="U" oncommand="scEdit.togglePreview('UnPreview')"/>
+    <key id="key_replace" modifiers="control" key="R" oncommand="scEdit.searchToggle(false,'Replace')"/>
+    <key id="key_manage" modifiers="control" key="M" oncommand="scCommon.openStyleManager(window)"/>
+
+    <key id="save-key" modifiers="control" key="S" oncommand="scEdit.save()"/>
+    <!--<key id="find-key" modifiers="control" key="F" oncommand="scEdit.whichSearchBox();document.getElementById('findbar').open();document.getElementById('findbar')._findField.focus()"/>-->
+    <key id="find-key" modifiers="control" key="F" oncommand="scEdit.whichSearchBox()"/>
+    <key id="findnext-key" key="F3" oncommand="scEdit.findNext()"/>
+  </keyset>
+
+
+  <popupset id="scPopupset">
+    <menupopup id="insertTextPopup" maxwidth="250" maxheight="500"/>
+    <menupopup id="customizeToolbar" onpopupshowing="scEdit.customizeToolbarPopup(event)">
+      <menuseparator/>
+      <menuitem id="customizeToolbarMenu" label="&Customize;" command="cmd_CustomizeToolbars"/>
+    </menupopup>
+  </popupset>
+
+  <tooltipset id="scTooltipset">
+    <tooltip id="scTooltip"/>
+    <tooltip id="PageTip" orient="vertical" style="opacity:.9">
+      <label value="&PageTip1;"/>
+      <label value="&PageTip2;"/>
+      <label value="&PageTip3;"/>
+    </tooltip>
+    <tooltip id="insertTextTip" orient="vertical" style="opacity:.9">
+      <label value="&insertTextTip1;"/>
+      <label value="&insertTextTip2;"/>
+    </tooltip>
+    <tooltip id="ExternalEditTip" orient="vertical" style="opacity:.9">
+      <label value="&ExternalEditTip1;"/>
+      <label value="&ExternalEditTip2;"/>
+    </tooltip>
+  </tooltipset>
+
+  <panel id="customizeToolbarSheetPopup" noautohide="true">
+    <!-- Note to reviewer: used for OSX customize dialog. -->
+    <iframe type="chrome" id="customizeToolbarSheetIFrame" style="width:635px;height:400px" hidden="true"/>
+  </panel>
+
+  <toolbox id="stylishCustomToolbox" flex="1">
+    <toolbarpalette id="ToolbarPalette">
+
+      <!-- insert toolbar -->
+      <toolbarbutton id="InsertMenu" label="&Insert;" tooltiptext="&InsertTip;" type="menu">
+        <menupopup id="InsertMenuPopup">
+          <menuitem label="&SiteRules;" accesskey="&SiteRules.ak;" tooltiptext="&SiteRulesTip;" id="specifySites" oncommand="scEdit.openSitesDialog()"/>
+          <menuitem id="insert-html" accesskey="&htmlnamespace.ak;" label="&htmlnamespace;" tooltiptext="&htmlnamespaceTip;" oncommand="scEdit.insertStuff(0)"/>
+          <menuitem id="insert-xul" accesskey="&xulnamespace.ak;" label="&xulnamespace;" tooltiptext="&xulnamespaceTip;" oncommand="scEdit.insertStuff(1)"/>
+          <menuitem id="insert-chrome-folder" accesskey="&chromefolder.ak;" label="&chromefolder;" tooltiptext="&chromefolderTip;" oncommand="scEdit.insertStuff(2)"/>
+          <menuitem id="insert-data-uri" accesskey="&dataURI.ak;" label="&dataURI;" tooltiptext="&dataURITip;" oncommand="scEdit.insertStuff(3)"/>
+          <menu id="pick-color" label="&Color;" tooltiptext="&ColorTip;">
+            <menupopup>
+              <colorpicker id="normal-colorpicker" onclick="scEdit.chooseColor(event)"/>
+            </menupopup>
+          </menu>
+          <menuitem id="pick-color-rainbowpicker" tooltiptext="&ColorTip;" label="&pickcolorrainbowpicker;" oncommand="document.getElementById('rainbowpicker-detect').showPopup()" style="display:none"/>
+          <menu id="insertText" label="&insertText;" tooltip="insertTextTip"/>
+        </menupopup>
+      </toolbarbutton>
+      <toolbarbutton id="itsalltext" label="&openintexternaleditor;" tooltiptext="&openintexternaleditorTip;" accesskey="&openintexternaleditor.ak;" itsalltext-control="internal-code" itsalltext-extension=".css"/>
+      <toolbarbutton id="ExternalEdit" tooltip="ExternalEditTip" onclick="event.preventDefault();scEdit.externalEdit(event.button)"/>
+      <toolbaritem id="SearchToggleItem">
+        <checkbox id="SearchToggle" label="&Search;" tooltiptext="&SearchToggleTip;" checked="true" oncommand="scEdit.searchToggle(this.checked)"/>
+      </toolbaritem>
+      <toolbaritem id="wrap-linesItem">
+        <checkbox id="wrap-lines" label="&wraplines;" tooltiptext="&wraplinesTip;" oncommand="changeWordWrap(this.checked)"/>
+      </toolbaritem>
+
+      <!-- page toolbar -->
+      <toolbarbutton id="userstyles-page" onclick="event.preventDefault();scEdit.userstylesPage(event);" tooltip="PageTip" label="&Page;"/>
+      <toolbaritem id="AutoImportantItem">
+        <textbox id="ImportantText" maxlength="1" width="25" onkeypress="scEdit.getKeyCode(event.which);" tooltiptext="&AutoImportantTextTip;"/>
+        <checkbox id="ImportantEnabled" label="&AutoImportant;" tooltiptext="&AutoImportantToggleTip;" oncommand="scEdit.changeImportantEnabled(this.checked)"/>
+      </toolbaritem>
+      <toolbarbutton id="ImportantButton" label="&Important;" tooltiptext="&ImportantTip;" oncommand="scEdit.makeImportant()"/>
+      <toolbaritem id="LineNumberItem" tooltiptext="&LineNumberTip;">
+        <label>&LineNumber;</label>
+        <textbox id="LineNumber" size="6" readonly="true" value="0:0"/>
+      </toolbaritem>
+      <toolbaritem id="LineNumberSearchItem" tooltiptext="&LineNumberSearchTip;" context="">
+        <toolbarbutton id="LineNumberSearchButton" label="&LineNumberSearch;" onclick="scEdit.lineNumberSearchChoice(event.button,this.nextSibling.value,13)"/>
+        <textbox id="LineNumberSearch" size="3"
+    ondragover="scEdit.lineNumberSearchDrag(this,event)"
+    onkeyup="scEdit.lineNumberSearchType(this.value,event)"/>
+      </toolbaritem>
+      <toolbarbutton id="MergeLines" label="&MergeLines;" tooltiptext="&MergeLinesTip;" oncommand="scEdit.editText('Merge')"/>
+      <toolbarbutton id="CommentGroup" label="&CommentGroup;" tooltiptext="&CommentGroupTip;" oncommand="scEdit.editText('CommentGroup')"/>
+      <toolbarbutton id="CommentText" label="&CommentText;" tooltiptext="&CommentTextTip;" oncommand="scEdit.editText('Comment')"/>
+
+      <!-- name toolbar -->
+      <toolbaritem id="NameArea" flex="1">
+        <label>&Name;</label>
+        <textbox id="name" accesskey="&Name.k;" flex="1"/>
+      </toolbaritem>
+      <toolbarbutton id="ClearSearch" label="&ClearSearch;" tooltiptext="&ClearSearchTip;" oncommand="scEdit.clearSearch()"/>
+      <toolbaritem id="SearchArea">
+        <box id="SearchAreaOld" style="display:none">
+          <toolbarbutton id="FindNext" label="&Find;" tooltiptext="&SearchTip;" oncommand="scEdit.checkSearchBox()"/>
+          <textbox id="SearchBox" size="20" emptytext="&Search;" tooltiptext="&SearchTip;" type="search"
+      onkeypress="if(event.which == 13){event.preventDefault();scEdit.findNext();}
+      else if(event.which == 27){event.preventDefault();document.getElementById('internal-code').focus();}
+      else {scEdit.styleSearchField();}"
+      onkeyup="if (event.which == 114){ scEdit.findNext();}"/>
+        </box>
+        <box id="ReplaceArea" style="display:none">
+          <button id="ReplaceOnce" label="&ReplaceOnce;" oncommand="scEdit.replaceText('ReplaceOnce')" tooltiptext="&ReplaceOnceTip;"/>
+          <button id="ReplaceAll" label="&ReplaceAll;" oncommand="scEdit.replaceText('ReplaceAll')" tooltiptext="&ReplaceAllTip;"/>
+          <textbox emptytext="&Replace;" id="ReplaceBox" tooltiptext="&ReplaceTip;" flex="1"/>
+        </box>
+<!--
+        added through js, so no error when using old search bar
+        <findbar id="findbar" browserid="internal-code"/>
+-->
+      </toolbaritem>
+
+      <!-- tags toolbar -->
+      <toolbaritem id="TagsArea" flex="1">
+        <label>&Tags;</label>
+        <textbox id="tags" accesskey="&Tags.k;" flex="1"/>
+      </toolbaritem>
+
+      <!-- url toolbar -->
+      <toolbaritem id="UpdateUrlArea" flex="1">
+        <label>&Url;</label>
+        <textbox id="update-url" accesskey="&Url.k;" flex="1" onchange="scEdit.updateUrlCheck()"/>
+      </toolbaritem>
+
+      <!-- ScratchPad toolbar -->
+      <toolbarbutton id="ClearScratchPad" label="&ClearScratchPad;" tooltiptext="&ClearScratchPadTip;" oncommand="scEdit.clearSearch(1)"/>
+      <toolbaritem id="ScratchPadItem" flex="1" orient="vertical" tooltiptext="&ScratchPadTip;">
+        <label>&ScratchPad;:</label>
+        <splitter id="ScratchPadSplitter" collapse="after">
+          <grippy/>
+        </splitter>
+        <textbox id="ScratchPad" placeholder="&ScratchPadTip;" multiline="true" flex="1" collapsed="false"/>
+      </toolbaritem>
+      <toolbarbutton id="ToggleScratchPad" label="&ToggleScratchPad;" tooltiptext="&ToggleScratchPadTip;" oncommand="scEdit.toggleScratchPad()"/>
+
+      <!-- buttons -->
+      <toolbarbutton id="RainbowPicker" tooltiptext="&ColorTip;" label="&pickcolorrainbowpicker;" oncommand="document.getElementById('rainbowpicker-detect').showPopup()" style="display:none"/>
+      <toolbarbutton id="RemoveXUL" label="&RemoveXUL;" tooltiptext="&RemoveXULTip;" oncommand="scEdit.editText('RemoveXUL')"/>
+      <toolbarbutton id="Undo" label="&Undo;" tooltiptext="&UndoTip;" oncommand="codeE.editor.undo(1)"/>
+      <toolbarbutton id="Redo" label="&Redo;" tooltiptext="&RedoTip;" oncommand="codeE.editor.redo(1)"/>
+      <toolbarbutton id="ToggleBars" label="&ToggleBars;" tooltiptext="&ToggleBarsTip;" oncommand="scEdit.ToggleBars()"/>
+      <toolbarbutton id="ID" label="&ID;" tooltiptext="&IDTip;" oncommand="scEdit.editText('ID')"/>
+      <toolbarbutton id="Class" label="&Class;" tooltiptext="&ClassTip;" oncommand="scEdit.editText('Class')"/>
+      <toolbarbutton id="Bracket" label="&Bracket;" tooltiptext="&BracketTip;" oncommand="scEdit.editText('Bracket')"/>
+      <toolbarbutton id="CurlyBracket" label="&CurlyBracket;" tooltiptext="&CurlyBracketTip;" oncommand="scEdit.editText('CurlyBracket')"/>
+      <toolbarbutton id="CloneStyle" label="&CloneStyle;" tooltiptext="&CloneStyleTip;" oncommand="scEdit.cloneStyle()"/>
+      <toolbarbutton id="ExportStyle" label="&ExportStyle;" tooltiptext="&ExportStyleTip;" oncommand="scEdit.exportStyle()"/>
+      <!-- <toolbarbutton id="ImportStyle" label="&ImportStyle;" tooltiptext="&ImportStyleTip;" oncommand="scEdit.importStyle()"/> -->
+      <toolbarbutton id="CustomizeToolbars" label="&Customize;" tooltiptext="&Customize;" command="cmd_CustomizeToolbars"/>
+      <toolbarbutton id="Bottom_SwitchToInstall" label="&switchtoinstall;" tooltiptext="&switchtoinstallTip;" oncommand="scEdit.switchToInstall()" style="display:none"/>
+      <toolbarbutton id="Bottom_InsertText" label="&insertText;" tooltip="insertTextTip" type="menu" popup="insertTextPopup2"/>
+      <toolbarbutton id="Bottom_SaveEnabled" label="&SaveEnabled;" tooltiptext="&EnableCloseTip;" oncommand="scEdit.toggleSaveClose(1)"/>
+      <toolbarbutton id="Bottom_SaveDisabled" label="&SaveDisabled;" tooltiptext="&DisableCloseTip;" oncommand="scEdit.toggleSaveClose(0)"/>
+      <toolbarbutton id="Bottom_Save" label="&Save;" tooltiptext="&SaveTip;" oncommand="scEdit.checkIfSaved()"/>
+      <toolbarbutton id="Bottom_SaveClose" label="&SaveClose;" tooltiptext="&SaveCloseTip;" oncommand="scEdit.checkIfSaved('Close')"/>
+      <toolbarbutton id="Bottom_UndoLastSave" label="&UndoLast;" tooltiptext="&UndoLastTip;" oncommand="scEdit.undo('UndoLast')"/>
+      <toolbarbutton id="Bottom_UndoAllSaves" label="&UndoAll;" tooltiptext="&UndoAllTip;" oncommand="scEdit.undo('UndoAll')"/>
+      <toolbarbutton id="Bottom_CloseStyle" label="&Close;" oncommand="scEdit.unLoad();window.close()" tooltiptext="&CloseTip;"/>
+      <toolbaritem id="StyleIdItem">
+        <toolbarbutton id="StyleIdButton" label="&StyleId;" tooltiptext="&StyleIdTip;" oncommand="scEdit.updateStyleId()"/>
+        <textbox id="StyleId" tooltiptext="&StyleIdTip;" size="3"/>
+      </toolbaritem>
+      <toolbaritem id="PreviewStyles">
+        <toolbarbutton id="PreviewStyle" label="&Preview;" tooltiptext="&PreviewTip;" oncommand="scEdit.togglePreview('Preview')"/>
+        <toolbarbutton id="DisablePreview" label="&DisablePreview;" tooltiptext="&DisablePreviewTip;" oncommand="scEdit.togglePreview('UnPreview')" style="display:none"/>
+      </toolbaritem>
+      <toolbaritem id="ToggleEnabledItem">
+        <checkbox id="ToggleEnabled" label="&Enable;" tooltiptext="&EnableTip;"/>
+      </toolbaritem>
+      <toolbaritem id="UpdateCheckItem">
+        <checkbox id="UpdateCheck" label="&UpdateCheck;" tooltiptext="&UpdateCheckTip;" oncommand="scEdit.updateCheckToggle()"/>
+      </toolbaritem>
+      <toolbarbutton id="Bottom_SaveMenu" label="&Save;" tooltiptext="&MenuSaveTip;" type="menu" accesskey="s">
+        <menupopup id="undo-menupopup">
+          <menuitem label="&Save;" id="Save" oncommand="scEdit.checkIfSaved()" tooltiptext="&SaveTip;"/>
+          <menuitem label="&SaveClose;" id="SaveClose" oncommand="scEdit.checkIfSaved('Close')" tooltiptext="&SaveCloseTip;"/>
+          <menuseparator/>
+          <menuitem label="&UndoLast;" id="UndoLastSave" oncommand="scEdit.undo('UndoLast')" tooltiptext="&UndoLastTip;"/>
+          <menuitem label="&UndoAll;" id="UndoAllSaves" oncommand="scEdit.undo('UndoAll')" tooltiptext="&UndoAllTip;"/>
+        </menupopup>
+      </toolbarbutton>
+      <toolbarbutton id="Bottom_SaveButton" label="&Save;" tooltiptext="&MenuSaveTip;" type="menu-button" accesskey="s" oncommand="scEdit.checkIfSaved()">
+        <menupopup id="undo-menupopup">
+          <menuitem label="&SaveClose;" id="SaveClose" oncommand="scEdit.checkIfSaved('Close')" tooltiptext="&SaveCloseTip;"/>
+          <menuseparator/>
+          <menuitem label="&UndoLast;" id="UndoLastSave" oncommand="scEdit.undo('UndoLast')" tooltiptext="&UndoLastTip;"/>
+          <menuitem label="&UndoAll;" id="UndoAllSaves" oncommand="scEdit.undo('UndoAll')" tooltiptext="&UndoAllTip;"/>
+        </menupopup>
+      </toolbarbutton>
+    </toolbarpalette>
+
+    <toolbar id="InsertToolbar"
+    toolbarname="&Insert; &Toolbar;"
+    defaultset="InsertMenu,separator,spacer,ExternalEdit,itsalltext,spring,SearchToggleItem,wrap-linesItem,spacer,LineNumberItem,LineNumberSearchItem"
+    customizable="true"
+    class="chromeclass-toolbar"
+    context="customizeToolbar"
+    collapsed="true"
+    mode="full"/>
+    <toolbar id="PageToolbar"
+    toolbarname="&Page; &Toolbar;"
+    defaultset="userstyles-page,separator,spacer,AutoImportantItem,ImportantButton,spring,MergeLines,CommentGroup,CommentText"
+    customizable="true"
+    class="chromeclass-toolbar"
+    context="customizeToolbar"
+    collapsed="true"
+    mode="full"/>
+    <toolbar id="NameToolbar"
+    toolbarname="&Name; &Toolbar;"
+    defaultset="ToggleBars,NameArea,ClearSearch,SearchArea"
+    customizable="true"
+    class="chromeclass-toolbar"
+    context="customizeToolbar"
+    mode="full"/>
+    <toolbar id="TextToolbar"
+    toolbarname="&Text; &Toolbar;"
+    defaultset="TagsArea,UpdateUrlArea"
+    customizable="true"
+    class="chromeclass-toolbar"
+    context="customizeToolbar"
+    collapsed="true"
+    mode="full"/>
+    <toolbar id="ScratchPadToolbar"
+    toolbarname="&ScratchPad; &Toolbar;"
+    defaultset="ScratchPadItem"
+    customizable="true"
+    class="chromeclass-toolbar"
+    context="customizeToolbar"
+    collapsed="true"
+    mode="full"/>
+  <!-- -moz-box-align:stretch needed for songbird -->
+    <toolbar id="CodeToolbar"
+    toolbarname="&Code; &Toolbar;"
+    customizable="false"
+    flex="8"
+    orient="vertical"
+    style="-moz-box-align:stretch!important"
+    class="chromeclass-toolbar"
+    context="customizeToolbar"
+    mode="full">
+          <toolbaritem id="CodeArea" flex="1">
+          <deck id="editor" flex="1">
+            <textbox id="internal-code" multiline="true" flex="1" onkeydown="scEdit.codeElKeyDown(event.which,this)" onmousedown="scEdit.lineNumber(this)"/>
+          </deck>
+          </toolbaritem>
+          <toolbaritem id="errorsArea" flex="1" style="display:none">
+            <vbox id="errors" flex="1"/>
+            <button id="errorClose" label="&Close;" oncommand="this.parentNode.style.display='none'"/>
+          </toolbaritem>
+          <toolbaritem style="display:none">
+            <box id="RemovedItems"/>
+            <colorpicker id="rainbowpicker-detect" type="button" onchange="scEdit.insertRainbowPickerColor(event)"/>
+          </toolbaritem>
+    </toolbar>
+    <toolbar id="BottomToolbar"
+    toolbarname="&Bottom; &Toolbar;"
+    defaultset="Bottom_SwitchToInstall,PreviewStyles,ToggleEnabledItem,UpdateCheckItem,spring,Bottom_SaveMenu,Bottom_CloseStyle"
+    customizable="true"
+    class="chromeclass-toolbar"
+    context="customizeToolbar"
+    mode="full"/>
+
+    <toolbarset id="customToolbars" context="customizeToolbar"/>
+  </toolbox>
+
+</dialog>

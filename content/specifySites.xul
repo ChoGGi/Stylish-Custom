@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/icons.css" type="text/css"?>
+
+<!--
+the below is from Stylish v1.4.3/2.0.4, so different license applies
+-->
+
+<!DOCTYPE dialog SYSTEM "chrome://stylish-custom/locale/specifySites.dtd">
+
+<dialog
+  id="stylish"
+  title="&specifySites;"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  persist="screenX screenY width height sizemode"
+  width="350"
+  height="200"
+  onload="scSpecifySites.init()"
+  ondialogaccept="return scSpecifySites.close()">
+
+    <scriptset>
+      <script type="application/x-javascript" src="chrome://stylish/content/common.js"/>
+      <script type="application/x-javascript" src="chrome://stylish-custom/content/specifySites.js"/>
+    </scriptset>
+
+  <keyset>
+    <key id="key_closewin" keycode="VK_ESCAPE" oncommand="window.close()"/>
+  </keyset>
+
+  <radiogroup id="type" orient="horizontal">
+    <radio id="url-type" selected="true" label="&urltype;" value="url"/>
+    <radio id="url-prefix-type" label="&urlprefixtype;" value="url-prefix"/>
+    <radio id="domain-type" label="&domaintype;" value="domain"/>
+  </radiogroup>
+
+  <box>
+    <textbox id="url" flex="1" onkeypress="scSpecifySites.urlKeyPress(event)" oninput="scSpecifySites.urlInput()"/>
+    <button id="add" label="&add;" oncommand="scSpecifySites.addSpecifySiteEntry()" disabled="true"/>
+    <button id="delete" label="&delete;" oncommand="scSpecifySites.deleteSiteList()" disabled="true"/>
+  </box>
+
+  <tree flex="1" id="site-list-tree" seltype="multiple" onselect="scSpecifySites.changeSelection()" onkeypress="scSpecifySites.siteListKeyPress(event)" hidecolumnpicker="true">
+    <treecols>
+      <treecol flex="1" id="type-column" label="&type;" persist="width ordinal hidden"/>
+      <splitter class="tree-splitter"/>
+      <treecol flex="2" id="site-column" label="&site;" persist="width ordinal hidden"/>
+    </treecols>
+    <treechildren id="site-list"/>
+  </tree>
+</dialog>

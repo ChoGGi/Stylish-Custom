@@ -1,0 +1,23 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url-prefix("chrome://global/content/customizeToolbar.xul"){
+/*hide the tip*/
+#CustomizeToolbarWindowStylish #instructions.stylishCustomPalette{display:none}
+
+/*change the sc toolbarbutton to be vertical in customize window*/
+#CustomizeToolbarWindowStylish #stylish-custom-toolbar-button{-moz-box-orient:vertical}
+/*change orientation of items*/
+#CustomizeToolbarWindowStylish .stylishCustomPalette>toolbarbutton,
+#CustomizeToolbarWindowStylish .stylishCustomPalette>toolbaritem>checkbox,
+#CustomizeToolbarWindowStylish .stylishCustomPalette>.toolbarpaletteitem-box>toolbarbutton,
+#CustomizeToolbarWindowStylish .stylishCustomPalette>.toolbarpaletteitem-box>toolbaritem>*{-moz-box-orient:vertical}
+
+/*add a grabby cursor when you click an item*/
+#CustomizeToolbarWindowStylish .stylishCustomPalette:active{cursor:-moz-grabbing}
+/*rounded border for the :hover/:active backgrounds*/
+#CustomizeToolbarWindowStylish .stylishCustomPalette{border-radius:4pt}
+/*some backgrounds (older fox)*/
+#CustomizeToolbarWindowStylish [class="stylishCustomPalette"]:hover,[class="stylishCustomPalette"]:active:hover{background:#8b8b8b}
+/*some nicer backgrounds (newer fox)*/
+#CustomizeToolbarWindowStylish [class="stylishCustomPalette"]:hover{background:-moz-linear-gradient(left center,#8b8b8b,rgba(139,139,139,0))}
+#CustomizeToolbarWindowStylish [class="stylishCustomPalette"]:active{background:-moz-linear-gradient(right center,#8b8b8b,rgba(139,139,139,0))}
+}

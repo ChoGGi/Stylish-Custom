@@ -1,0 +1,23 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+/*unlimit width of sidebar*/
+browser#sidebar{max-width:none!important}
+
+/*icons for toolbarbuttons/statusbar*/
+toolbar[iconsize="large"]>#wrapper-stylish-custom-toolbar-button>#stylish-custom-toolbar-button,
+toolbar[iconsize="large"]>#wrapper-stylish-custom-toolbar-manage>#stylish-custom-toolbar-manage
+toolbar[iconsize="large"]>#stylish-custom-toolbar-button,
+toolbar[iconsize="large"]>#stylish-custom-toolbar-manage
+{list-style-image:url("chrome://stylish-custom/skin/icon-24.png")}
+
+toolbar[iconsize="small"]>#wrapper-stylish-custom-toolbar-button>#stylish-custom-toolbar-button,
+toolbar[iconsize="small"]>#wrapper-stylish-custom-toolbar-manage>#stylish-custom-toolbar-manage,
+toolbar[iconsize="small"]>#stylish-custom-toolbar-button,
+toolbar[iconsize="small"]>#stylish-custom-toolbar-manage,
+#stylish-custom-toolbar-button[cui-areatype="toolbar"],
+#stylish-custom-toolbar-manage[cui-areatype="toolbar"]
+{list-style-image:url("chrome://stylish-custom/skin/icon-16.png")}
+
+#stylish-custom-toolbar-button,
+#stylish-custom-toolbar-manage
+{list-style-image:url("chrome://stylish-custom/skin/icon-32.png")}

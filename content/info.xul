@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/tree.css" type="text/css"?>
+<?xml-stylesheet href="chrome://stylish-custom/skin/icons.css" type="text/css"?>
+
+<!DOCTYPE dialog [
+  <!ENTITY % info SYSTEM "chrome://stylish-custom/locale/info.dtd">
+  <!ENTITY % export SYSTEM "chrome://stylish-custom/locale/export.dtd">
+  <!ENTITY % common SYSTEM "chrome://stylish-custom/locale/common.dtd">
+  %info;
+  %export;
+  %common;
+]>
+
+<window
+  id="stylish-custom"
+  title="&StyleInfo;"
+  windowtype="stylishCustomInfo"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  persist="screenX screenY width height sizemode"
+  buttons="accept"
+  ondialogaccept="return false"
+  width="700"
+  height="400"
+  onload="scInfo.init()">
+
+  <scriptset>
+    <script type="application/x-javascript" src="chrome://stylish-custom/content/info.js"/>
+    <script type="application/x-javascript" src="chrome://stylish/content/common.js"/>
+  </scriptset>
+
+  <keyset>
+    <key id="key_search" modifiers="control" key="F" oncommand="document.getElementById('SearchBox').focus()"/>
+    <key id="key_deleteAsk" keycode="VK_DELETE" oncommand="scInfo.deleteStyle()"/>
+    <key id="key_new-style" modifiers="control" key="N" oncommand="scInfo.newStyle()"/>
+    <key id="key_open-styleR" keycode="VK_RETURN" oncommand="scInfo.openStyle()"/>
+    <key id="key_open-styleE" keycode="VK_ENTER" oncommand="scInfo.openStyle()"/>
+    <key id="key_manage" modifiers="control" key="M" oncommand="scCommon.openStyleManager(window)"/>
+    <key id="key_refresh-list" modifiers="control" key="R" oncommand="scInfo.createStyleList()"/>
+    <key id="key_closewin" keycode="VK_ESCAPE" oncommand="window.close()"/>
+  </keyset>
+
+  <tree id="style-tree-list" flex="1" editable="true" enableColumnDrag="true" onclick="scInfo.onTreeClicked(event)">
+    <treecols>
+      <treecol flex="1" id="EnabledColumn" label="&Enabled;" width="25" type="checkbox" editable="true" persist="width ordinal hidden" onclick="scInfo.createStyleList(this)"/>
+      <splitter class="tree-splitter"/>
+      <treecol flex="5" id="NameColumn" label="&Name;" persist="width ordinal hidden" onclick="scInfo.createStyleList(this)"/>
+      <splitter class="tree-splitter"/>
+      <treecol flex="2" id="UrlColumn" label="&Url;" width="50" persist="width ordinal hidden" onclick="scInfo.createStyleList(this)"/>
+      <splitter class="tree-splitter"/>
+      <treecol flex="2" id="TagsColumn" label="&Tags;" width="50" persist="width ordinal hidden" onclick="scInfo.createStyleList(this)"/>
+      <splitter class="tree-splitter"/>
+      <treecol flex="1" id="TypeColumn" label="&Type;" width="50" persist="width ordinal hidden" onclick="scInfo.createStyleList(this)"/>
+      <splitter class="tree-splitter"/>
+      <treecol flex="1" id="IDColumn" label="&ID;" tooltiptext="&IDColumnTip;" width="25" persist="width ordinal hidden" onclick="scInfo.createStyleList(this)"/>
+    </treecols>
+    <treechildren id="StyleList" ondblclick="scInfo.onTreeClicked(event)" onclick="scInfo.onTreeClicked(event)"/>
+  </tree>
+
+  <groupbox id="BottomGroup" type="vertical">
+    <box id="SearchArea">
+      <button id="RefreshStyleList" label="&Refresh;" tooltiptext="&RefreshStyleListTip;" oncommand="scInfo.createStyleList('Refresh')"/>
+      <textbox id="SearchBox" tooltiptext="&SearchStylesTip;" flex="1" emptytext="&Search;" type="search" oncommand="scInfo.createStyleList()"/>
+      <menulist id="SearchType" value="name" label="&Name;" tooltiptext="&SearchStylesMenuTip;" oncommand="scInfo.createStyleList()">
+        <menupopup>
+          <menuitem value="style" label="&Styles;" tooltiptext="&SearchStyle;"/>
+          <menuitem value="name" label="&Name;" tooltiptext="&SearchName;"/>
+          <menuitem value="tag" label="&Tags;" tooltiptext="&SearchTags;"/>
+          <menuitem value="type" label="&Type;" tooltiptext="&SearchType;"/>
+          <menuitem value="url" label="&Url;" tooltiptext="&SearchUrl;"/>
+          <menuitem value="url-prefix" label="&UrlPrefix;" tooltiptext="&SearchUrlPrefix;"/>
+          <menuitem value="domain" label="&Domain;" tooltiptext="&SearchDomain;"/>
+        </menupopup>
+      </menulist>
+      <button id="RemoveDupes" label="&RemoveDupes;" tooltiptext="&RemoveDupesTip;" oncommand="scCommon.openDialog('RemoveDupes',window)"/>
+    </box>
+    <separator class="thin"/>
+    <box id="BottomArea">
+      <button id="UpdateAllStyles" label="&UpdateAllStyles;" tooltiptext="&UpdateAllStylesTip;" oncommand="scCommon.updateAllStyles('Info')"/>
+      <button id="NewStyle" label="&New;" tooltiptext="&NewStyle;" oncommand="scInfo.newStyle()"/>
+      <spacer flex="1"/>
+      <button id="DeleteStyle" label="&Delete;" tooltiptext="&DeleteStyleTip;" oncommand="scInfo.deleteStyle()"/>
+      <checkbox id="DeleteStyleAsk" style="padding-right:1pt" checked="true" label="&Ask;" tooltiptext="&DeleteStyleAskTip;"/>
+    </box>
+  </groupbox>
+
+</window>

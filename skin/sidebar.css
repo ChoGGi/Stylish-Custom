@@ -1,0 +1,4 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+page#addons-page>hbox>vbox:not(.main-content)
+{display:none!important}

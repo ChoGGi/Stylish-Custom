@@ -1,0 +1,135 @@
+shows a list for -moz-image-region:rect(*px *px *px *px)
+
+
+Line:1
+0 16px 16px 0
+checkmark green
+0 32px 16px 16px
+red X
+0 48px 16px 32px
+grey X
+0 64px 16px 48px
+add
+0 80px 16px 64px
+page
+0 96px 16px 80px
+delete
+0 112px 16px 96px
+firefox
+0 128px 16px 112px
+ie
+0 144px 16px 128px
+help
+0 160px 16px 144px
+folder
+0 176px 16px 160px
+stylish disabled
+
+
+
+
+Line:2
+16px 16px 32px 0
+important
+16px 32px 32px 16px
+save
+16px 48px 32px 32px
+saveas
+16px 64px 32px 48px
+options
+16px 80px 32px 64px
+clear
+16px 96px 32px 80px
+stylish
+16px 112px 32px 96px
+text
+16px 128px 32px 112px
+refresh
+16px 144px 32px 128px
+undo
+16px 160px 32px 144px
+undo grey
+16px 176px 32px 160px
+stylish enabled
+
+
+
+
+Line:3
+32px 16px 48px 0
+blank window
+32px 32px 48px 16px
+highlight yellow
+32px 48px 48px 32px
+cut
+32px 64px 48px 48px
+copy
+32px 80px 48px 64px
+paste
+32px 96px 48px 80px
+select all
+32px 112px 48px 96px
+menu edit
+32px 128px 48px 112px
+find next
+32px 144px 48px 128px
+search
+32px 160px 48px 144px
+install
+32px 176px 48px 160px
+stylish purple
+
+
+
+Line:4
+48px 16px 64px 0
+blank doc
+48px 32px 64px 16px
+text doc
+48px 48px 64px 32px
+moz eye
+48px 64px 64px 48px
+download
+48px 80px 64px 64px
+update
+48px 96px 64px 80px
+pencil
+48px 112px 64px 96px
+merge
+48px 128px 64px 112px
+info
+48px 144px 64px 128px
+theme
+48px 160px 64px 144px
+insert
+48px 176px 64px 160px
+stylish new star
+
+
+
+
+Line:5
+64px 16px 80px 0
+toggle
+64px 32px 80px 16px
+camera
+64px 48px 80px 32px
+find
+64px 64px 80px 48px
+colour
+64px 80px 80px 64px
+edit
+64px 96px 80px 80px
+rainbow picker
+64px 112px 80px 96px
+reset
+64px 128px 80px 112px
+Redo
+64px 144px 80px 128px
+Class
+64px 160px 80px 144px
+ID
+64px 176px 80px 160px
+XUL:
+
+

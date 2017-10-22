@@ -1,0 +1,59 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url-prefix("chrome://stylish-custom/"){
+/*from Stylish v1.4.3*/
+#errors{min-height:3em;max-height:8em;overflow:auto;color:red}
+#errors label{cursor:pointer}
+#internal-code{font-family:monospace;margin-bottom:0}
+.findbar-closebutton,.findbar-highlight,*[anonid="find-case-sensitive"]{display:none}
+#findbar{border-top:0}
+#editor-tools{margin-top:3px;padding-top:2px;border-top:2px solid -moz-use-text-color;-moz-border-top-colors:threedshadow threedhighlight}
+/*from Stylish v1.4.3*/
+
+/*hide "Whole Words" button from new search*/
+toolbarbutton[anonid="find-entire-word"],
+/*hide new search next/previous buttons if disabled*/
+.findbar-find-next[disabled="true"],.findbar-find-previous[disabled="true"],
+/*hide ScratchPad label unless we're in customize*/
+#stylishCustomToolbox>toolbar>#ScratchPadItem>label,#stylishCustomToolbox>toolbar>#LineNumberItem>label,
+/*hide original bottom area*/
+#stylish>.dialog-button-box,
+/*hide accel text from menuitems*/
+menuitem>hbox[anonid="accel"]{display:none}
+
+/*default is too big 0 isn't enough*/
+toolbar{min-height:8px!important}
+#errorToolbar{min-height:0!important}
+/*remove whitespace in new search area*/
+#findbar>hbox>[anonid="find-status-icon"]{margin:0!important;width:auto!important;height:auto!important}
+#findbar>hbox>[anonid="find-status"]{margin:0!important}
+/*make new search textbox wider*/
+#findbar>hbox>[anonid="findbar-textbox"]{padding:4px!important}
+/*add some spacing for textbox labels*/
+#AutoImportantItem>#ImportantText>hbox>input,#LineNumbersItem>#LineNumber>hbox>input,#TagsArea>#tags>hbox>input,#SearchArea>#ReplaceArea>#ReplaceBox>hbox>input,#UpdateUrlArea>#update-url>hbox>input,#NameArea>#name>hbox>input
+{margin-top:2pt!important}
+/*center toolbarbuttons*/
+#stylishCustomToolbox>toolbar:not(#bottomToolbar)>toolbarbutton:not(#FindNext){margin-top:-1px!important}
+/*change the orient so it isn't vertical*/
+#Bottom_SaveButton>toolbarbutton{-moz-box-orient:horizontal}
+/*make toolbars look like dialogs*/
+toolbarbutton{-moz-appearance:button!important}
+toolbox{-moz-appearance:none!important}
+
+/*rounded border for the :hover/:active backgrounds*/
+toolbarpaletteitem{border-radius:4pt}
+/*some backgrounds (older fox)*/
+toolbarpaletteitem:hover,toolbarpaletteitem:active:hover{background:#8b8b8b}
+/*some nicer backgrounds (newer fox)*/
+toolbarpaletteitem:hover{background:-moz-linear-gradient(left center,#8b8b8b,rgba(139,139,139,0))}
+toolbarpaletteitem:active{background:-moz-linear-gradient(right center,#8b8b8b,rgba(139,139,139,0))}
+/*add a grabby cursor when you click an item*/
+toolbarpaletteitem:active{cursor:-moz-grabbing}
+
+/*vertical align stuff from Barbiegirl*/
+#update-url>.textbox-input-box>.textbox-input-box,#tags>.textbox-input-box>.textbox-input-box{padding-top:0!important;margin-top:-2px!important}
+#update-url,#tags{margin-bottom:3px!important}
+/*5px or 6px*/
+#LineNumberSearchItem>label,#LineNumberItem>label,#NameArea>label,#UpdateUrlArea>label,#TagsArea>label{margin-top:5px!important}
+#findbar>hbox>.findbar-textbox,#SearchBox{margin-bottom:3px!important;margin-top:2px!important}
+#tags,#update-url,#name{padding-top:1px!important;margin-bottom:3px!important}
+}
