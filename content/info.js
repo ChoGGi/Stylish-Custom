@@ -44,7 +44,7 @@ scInfo = {
         let savedStyleID = mutation.target.getAttribute("stylish-custom-id");
         if (savedStyleID &&
             document.getElementById(savedStyleID) &&
-            typeof scInfo.stylesTree.contentView !== "undefined") {
+            typeof (scInfo.stylesTree.contentView) !== "undefined") {
           let rowTree = scInfo.stylesTree.contentView
                         .getIndexOfItem(document.getElementById(savedStyleID)),
           row = document.getElementById(savedStyleID).firstChild,
@@ -88,7 +88,7 @@ scInfo = {
     this.styleListE = document.getElementById("StyleList");
 
     //used to refresh by sorting method
-    if (sortBy != "Refresh" && typeof sortBy != "undefined")
+    if (sortBy != "Refresh" && typeof (sortBy) != "undefined")
       this.stylesSort = sortBy;
     if (sortBy == "Refresh" && this.stylesSort != null)
       sortBy = this.stylesSort;

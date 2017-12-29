@@ -1,0 +1,93 @@
+<!ENTITY Options "옵션">
+<!ENTITY OptionsTip "옵션 창을 엽니다.">
+<!ENTITY StylishCustom "Stylish-Custom">
+<!ENTITY Styles "스타일">
+<!ENTITY Stylish "Stylish">
+<!ENTITY Manage "관리">
+<!ENTITY StylishManage "Stylish 관리">
+<!ENTITY StylishManageTip "왼쪽 클릭 - 별도 창, 가운데 클릭 - 부가 기능 창, 오른쪽 클릭 - 사이드바">
+<!ENTITY StylishInfo "스타일 정보">
+<!ENTITY StylishInfoTip "스타일 정보 보기">
+<!ENTITY New "새로운 방식">
+<!ENTITY Old "이전 방식">
+<!ENTITY NewStyle "새 스타일">
+<!ENTITY Save "저장">
+<!ENTITY Colours "색상">
+<!ENTITY Info "정보">
+<!ENTITY Guide "도움말">
+<!ENTITY GuideTip "Stylish-Custom을 사용하기 전에 도움말을 읽어주십시오.">
+<!ENTITY Remove "제거">
+<!ENTITY Delete "삭제">
+<!ENTITY Preview "미리 보기">
+<!ENTITY Cancel "취소">
+<!ENTITY Close "닫기">
+<!ENTITY CloseTip "창 닫기">
+<!ENTITY Refresh "새로 고침">
+<!ENTITY RefreshTip "목록 새로 고침">
+<!ENTITY UpdateAllStyles "모두 업데이트">
+<!ENTITY UpdateAllStylesTip "묻지 않고 모든 스타일을 업데이트합니다.">
+<!ENTITY Tools "도구">
+<!ENTITY Tags "태그">
+<!ENTITY Code "코드">
+<!ENTITY True "예">
+<!ENTITY False "아니오">
+<!ENTITY Domain "도메인">
+<!ENTITY Url "URL">
+<!ENTITY UrlPrefix "주소 접두사">
+<!ENTITY Clear "지우기">
+<!ENTITY ClearTip "검색어 지우기">
+<!ENTITY Type "종류">
+<!ENTITY Text "텍스트">
+<!ENTITY Name "이름">
+<!ENTITY Menu "메뉴">
+<!ENTITY Edit "편집">
+<!ENTITY Enabled "사용함">
+<!ENTITY ID "ID">
+<!ENTITY IDColumnTip "내부 스타일 ID 보이기">
+<!ENTITY Toggle "토글">
+<!ENTITY Toolbar "툴바">
+<!ENTITY Page "페이지">
+<!ENTITY Disable "사용 안 함">
+<!ENTITY DeleteStyle "스타일 제거">
+<!ENTITY Enable "사용함">
+<!ENTITY Browse "찾아보기">
+<!ENTITY Search "찾기">
+<!ENTITY SearchTip "Enter - 찾기, F3 - 다음 찾기, Ctrl-F - 검색 상자로 커서 이동">
+<!ENTITY SearchStylesTip "스타일 찾기(정규 표현식 사용)">
+<!ENTITY SearchStylesMenuTip "찾을 다른 분류를 선택하십시오.">
+<!ENTITY Show "보이기">
+<!ENTITY Hide "숨기기">
+<!ENTITY ExportStyles "스타일 내보내기">
+<!ENTITY ExportStylesTip "스타일을 파일로 내보내기">
+<!ENTITY ImportStyles "스타일 가져오기">
+<!ENTITY ImportStylesTip "파일에서 스타일 가져오기">
+<!ENTITY RemoveDupes "중복 제거">
+<!ENTITY RemoveDupesTip "중복된 스타일을 제거하기 위해 목록을 보여줍니다.">
+<!ENTITY Import "가져오기">
+<!ENTITY Export "내보내기">
+<!ENTITY SelectAll "모두 선택">
+<!ENTITY SelectAllTip "모든 스타일을 선택합니다. (토글)">
+<!ENTITY SelectEnabled "사용함 선택">
+<!ENTITY SelectEnabledTip "모든 사용하는 스타일을 선택합니다. (토글)">
+<!ENTITY GetStyleSheets "스타일시트 얻기">
+<!ENTITY GetStyleSheetsTip "이 페이지에 적용된 스타일을 검색하여 새 스타일에 삽입합니다.">
+<!ENTITY sBy "다음으로 찾기 :">
+<!ENTITY SearchStyle "스타일 안에서 찾기">
+<!ENTITY SearchName "이름으로 찾기">
+<!ENTITY SearchTags "태그로 찾기">
+<!ENTITY SearchType "종류로 찾기">
+<!ENTITY SearchUrl "주소로 찾기">
+<!ENTITY SearchUrlPrefix "주소 접두사로 찾기">
+<!ENTITY SearchDomain "도메인으로 찾기">
+<!ENTITY AppStyles "앱 스타일">
+<!ENTITY EnabledStyles "사용 스타일">
+<!ENTITY DisabledStyles "장애인 스타일">
+<!ENTITY Width "너비">
+<!ENTITY Height "높이">
+<!ENTITY Selectable "선택">
+<!ENTITY Clickable "클릭 가능한">
+<!ENTITY Default "태만">
+<!ENTITY Window "창문">
+<!ENTITY CopySelectorComma "복사 선택기 (,)">
+<!ENTITY Ask "청하다">
+<!ENTITY AskTip "각 스타일을 삭제 요청">

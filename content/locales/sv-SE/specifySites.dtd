@@ -1,0 +1,9 @@
+<!ENTITY urltype "Exakt">
+<!ENTITY urlprefixtype "Börjar med">
+<!ENTITY domaintype "I domäntypen">
+<!ENTITY add "Lägg till">
+<!ENTITY delete "Ta bort">
+<!ENTITY type "typ">
+<!ENTITY site "webbplats">
+<!ENTITY specifySites "Ange webbplatser">
+<!ENTITY regexptype "RegExp">

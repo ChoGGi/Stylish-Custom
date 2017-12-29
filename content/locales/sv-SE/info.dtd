@@ -1,0 +1,6 @@
+<!ENTITY DeleteStyle "Ta bort formatmall(ar)">
+<!ENTITY DeleteStyleTip "VARNING! Ta bort valda stilar permanent!">
+<!ENTITY DeleteStyleText "Exempel: 24,443,122">
+<!ENTITY RefreshStyleList "Uppdatera formatmallslistan">
+<!ENTITY RefreshStyleListTip "Uppdatera listan och behåll sökresultat">
+<!ENTITY DeleteStyleAskTip "Bekräfta radering av stilar">

@@ -1,0 +1,104 @@
+<!ENTITY changedomains "Ändra tillåtna domäner">
+<!ENTITY changedomainsTip "Ange en lista över domäner som tillåts installera formatmallar (mellanslag för att avgränsa)">
+<!ENTITY Sidebar "Sidopanel">
+<!ENTITY Standalone "Fristående">
+<!ENTITY Addons "Tillägg">
+<!ENTITY Manageview "Hanteringsvy">
+<!ENTITY ManageviewTip "Låter dig välja i vilket fönster &quot;Hantera formatmallar&quot; kommer att öppnas">
+<!ENTITY General "Allmänt">
+<!ENTITY Text "Text">
+<!ENTITY MenuItems "Menyobjekt">
+<!ENTITY Toggle "Växling">
+<!ENTITY Buttons "Knappar">
+<!ENTITY BottomArea "Redigeringsområdet i sidans nederkant">
+<!ENTITY BottomAreaTip "Välj knappar för formatmallsredigeringsområdet i sidans nederkant">
+<!ENTITY StyleMenu "Ändra högerklicksåtgärd för formatmallsmenyobjekt">
+<!ENTITY StyleMenuTip "Välj mellan att visa menyn och att redigera den">
+<!ENTITY SaveMenu "Sparmenyn">
+<!ENTITY SaveMenuTip "En meny med Spara &amp; Återställ">
+<!ENTITY SaveButton "Sparmenyn (knapp)">
+<!ENTITY SaveButtonTip "Har en knapp för att spara och en meny för resten">
+<!ENTITY switchtoinstallTip "Visa &quot;Byt till Installera&quot; för nya formatmallar">
+<!ENTITY ExportSettings "Exportera inställningar">
+<!ENTITY ExportSettingsTip "Exporterar Stylish-Customs inställningar till en fil">
+<!ENTITY ImportSettings "Importera inställningar">
+<!ENTITY ImportSettingsTip "Importera Stylish-Customs inställningar från en fil">
+<!ENTITY StyleToggle0 "Växla för inläst sida / bytt flik">
+<!ENTITY StyleToggle1 "Endast bytt flik">
+<!ENTITY StyleToggle2 "Endast inläst sida">
+<!ENTITY StyleToggle3 "Ingen (ignorera taggar)">
+<!ENTITY StyleToggle "Formatmallsväxling">
+<!ENTITY StyleToggleTip "Välj hur den Växlar formatmallar">
+<!ENTITY StyleToggleHelp1 "Du kan använda taggar för att växla formatmallar (se Handbok\Edit Dialog\Nr. 15 för mer hjälp)">
+<!ENTITY StyleToggleHelp2 "exempel: ">
+<!ENTITY ExternalEditor "Externt redigeringsprogram">
+<!ENTITY ExternalEditorTip "Sökväg till exekverbar programfil att använda">
+<!ENTITY WhichEditor "Metod som skall användas">
+<!ENTITY WhichEditorTip "Välj metod att använda för extern redigering">
+<!ENTITY EditorTime "Intervall mellan formatmallsuppdateringar (ms)">
+<!ENTITY EditorTimeTip "Tidsperiod som förflyter innan Stylish-Custom söker efter ändringar i filen">
+<!ENTITY RemoveCSS "Ta bort CSS-filer (se verktygstips)">
+<!ENTITY RemoveCSSTip "Detta kommer att ta bort alla öppna filer!">
+<!ENTITY RemoveCSSAuto "Ta automatiskt bort gamla CSS-filer">
+<!ENTITY RemoveCSSAutoTip "Ta automatiskt bort stylishCustom*.css från temp-mappen när Firefox startar">
+<!ENTITY ChangeGlobalColour "Global formatmallsfärg">
+<!ENTITY ChangeGlobalColourTip "Ändrar färg på globala formatmallar i Stylish-menyn">
+<!ENTITY ChangeSiteColour "Webbplatsformatmallsfärg">
+<!ENTITY ChangeSiteColourTip "Ändrar färg på webbplatsformatmallar i Stylish-menyn">
+<!ENTITY ChangeGlobalSiteColour "Global-/Webbplatsformatmallsfärg">
+<!ENTITY ChangeGlobalSiteColourTip "Ändrar färg på globala-/webbplatsformatmallar i Stylish-menyn">
+<!ENTITY StatusBar "Statusfältikon">
+<!ENTITY StatusBarTip "Visa/dölj Stylish-Customs statusfältikon">
+<!ENTITY ToggleIcons "Växla ikoner">
+<!ENTITY ToggleIconsTip "Om du vill dölja meny-/knappikoner">
+<!ENTITY ToolMenu "Verktyg-menyobjekt">
+<!ENTITY ToolMenuTip "Visa/dölj Stylish-hanteraren i Verktyg-menyn">
+<!ENTITY AskToSave "Påminn om att spara formatmall">
+<!ENTITY AskToSaveTip "Om du inte har sparat formatmallen kommer tillägget att fråga om du vill göra det">
+<!ENTITY AppTitleTip "Visar programmet (FF, TB, SB) i formatmallsredigerarens namnlist">
+<!ENTITY InsertTextCaption "Infoga text">
+<!ENTITY InsertTextTip "Vad som visas i Infoga-menyn &gt; Infoga text (avgränsa med ,,)">
+<!ENTITY AutoImportantCaption "Auto!important-text">
+<!ENTITY AutoImportantTip "Vad som fylls i när du trycker ned auto!important-kortkommandot">
+<!ENTITY ChangeFontCaption "Byt redigeringsområdets font">
+<!ENTITY ChangeFontTip "Används för att välja fontfamilj/fontstorlek/färg">
+<!ENTITY ExImportLocation "Plats för menyobjektet &quot;Exportera/Importera&quot;">
+<!ENTITY ExImportLocationTip "Visa menyobjekten Exportera/Importera i Stylish eller Stylish-Custom">
+<!ENTITY ToggleRulesLocation "Plats för menyobjektet &quot;Växla formatmallar&quot;">
+<!ENTITY ToggleRulesLocationTip "Visa menyobjekten Inaktivera/Aktivera formatmallar i Stylish eller Stylish-Custom">
+<!ENTITY StyleInfoLocation "Plats för menyobjektet &quot;Formatmallsinfo&quot;">
+<!ENTITY StyleInfoLocationTip "Visa menyobjektet Formatmallsinfo i Stylish eller Stylish-Custom">
+<!ENTITY ChangeInsertSepCaption "Byt avgränsare för infogningstext">
+<!ENTITY ChangeInsertSepTip "Låter dig välja en annan avgränsare än dubbla kommatecken (,,) att använda för Infoga-menyn &gt; Infoga text">
+<!ENTITY ToolbarToggle "Verktygsfältsväxling">
+<!ENTITY ToolbarToggleTip "Verktygsfält som skall kunna växlas i redigeringsdialogen">
+<!ENTITY IAT "Inget Annat än Text! (IAT)">
+<!ENTITY AppTitle "Programnamnsrubrik">
+<!ENTITY Nothing "Inget">
+<!ENTITY Initials "Initialer">
+<!ENTITY FullTitle "Fullständigt namn">
+<!ENTITY reloadStyles "Läs in formatmallar igen">
+<!ENTITY reloadStylesTip1 "Inaktiverar formatmallarna för att sedan aktivera dem igen (för uppdatering av formatmallar med @import-direktivet)">
+<!ENTITY reloadStylesTip2 "Använd kommatecken (,) för att avgränsa formatmallar (t.ex. 34,28,115) eller lämna tomt för att läsa in alla">
+<!ENTITY reloadStylesTip3 "I huvudfönstret, tryck Ctrl+Alt+S">
+<!ENTITY reloadStylesKey "Läs in formatmallskortkommando">
+<!ENTITY reloadStylesKeyTip "Standard är Ctrl+Alt+S, men du kan byta kortkommando om du vill">
+<!ENTITY StyleMenus "Plats för menyn &quot;Formatmallslista&quot;">
+<!ENTITY StyleMenusTip "Visar menyer med olika listor över formatmallar (Program/Aktiverade/Inaktiverade)">
+<!ENTITY GetStyleSheetsMenu "Menyobjektet &quot;Hämta formatmallar&quot;">
+<!ENTITY GetStyleSheetsMenuTip "Visa &quot;Hämta formatmallar&quot; i innehållsmenyn">
+<!ENTITY ShowAppStyles "Visa &quot;Formatmallar för program&quot; i Stylish-menyn">
+<!ENTITY ShowAppStylesTip "Du kan se dem i undermenyn &quot;Formatmallar för program&quot;">
+<!ENTITY SaveText "Spara söktext">
+<!ENTITY SaveTextTip "Spara texten i sökrutan när formatmallsdialogen stängs">
+<!ENTITY ResizeStyleDialog "Ändra storlek på formatdialogen">
+<!ENTITY ResizeStyleDialogTip "Ange storleken för dialoger som öppnas från tilläggshanteraren">
+<!ENTITY ScratchpadHeightCaption "Ange anteckningsblockets höjd">
+<!ENTITY ScratchpadHeightTip "Låter dig justera höjden på anteckningsblocket i formatmallsredigeraren">
+<!ENTITY MenuitemLocations "Meny platser">
+<!ENTITY MoveErrorBox "Flytta felruta">
+<!ENTITY MoveErrorBoxTip "Felanmälan område: nedanför riktnummer (standard) eller under allt">
+<!ENTITY SearchBar "Vilken sökning skall användas?">
+<!ENTITY SearchBarTip "Välj mellan ny sökning och original">
+<!ENTITY StyleMenuOverride "Växla Åsidosätta menyalternativ för Stylish Toolbar knapp">
+<!ENTITY StyleMenuOverrideTip "Välj mellan öppning i &quot;Stylish-Custom&quot; eller &quot;Stylish&quot;">

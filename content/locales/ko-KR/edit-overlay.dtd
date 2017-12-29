@@ -1,0 +1,115 @@
+<!ENTITY PageTip1 "왼쪽 클릭 - userstyles.org의 스타일 페이지 열기">
+<!ENTITY PageTip2 "가운데 클릭 - userstyles.org의 편집 페이지 열기">
+<!ENTITY PageTip3 "오른쪽 클릭 - userstyles.org의 편집 페이지에 코드 붙여넣기">
+<!ENTITY AutoImportant "!important 단축키">
+<!ENTITY AutoImportantTextTip "!important 단축키로 사용할 문자를 입력하십시오.">
+<!ENTITY AutoImportantToggleTip "!important 단축키 기능을 사용할 것인지 선택합니다.">
+<!ENTITY Important "!important">
+<!ENTITY ImportantTip "선언문을 찾은 후 !important를 자동으로 삽입합니다.">
+<!ENTITY SiteRules "사이트 규칙">
+<!ENTITY SiteRulesTip "@-moz-doc section 삽입">
+<!ENTITY SiteRules.ak "S">
+<!ENTITY CommentText "주석">
+<!ENTITY CommentTextTip "텍스트를 선택한 후 버튼을 누르면 주석으로 처리/해제됩니다 : /* */">
+<!ENTITY MergeLines "줄 합침">
+<!ENTITY MergeLinesTip "줄 끊어짐을 제거함으로써 여러 줄의 코드를 한 줄로 만듭니다. (되돌리기 : Ctrl+z)">
+<!ENTITY ExternalEditTip1 "CSS 파일처럼 외부 편집기로 스타일 편집">
+<!ENTITY ExternalEditTip2 "오른쪽 클릭하면 외부 편집기와의 연결이 정지됩니다.">
+<!ENTITY DisablePreview "미리보기 중지">
+<!ENTITY DisablePreviewTip "미리보기를 취소하고 이전 상태로 돌아가기">
+<!ENTITY SaveClose "저장 후 닫기">
+<!ENTITY SaveCloseTip "저장한 후 창을 닫습니다.">
+<!ENTITY SaveTip "창을 닫지 않고 저장합니다.">
+<!ENTITY MenuSaveTip "저장 또는 되돌리기">
+<!ENTITY PreviewTip "저장하지 않고 스타일을 미리봅니다.">
+<!ENTITY SearchToggleTip "찾기/바꾸기 전환 (ctrl+f / ctrl+r)">
+<!ENTITY CommentGroup "주석 정리">
+<!ENTITY CommentGroupTip "선택된 텍스트의 중첩된 주석을 제거한 후 하나의 주석으로 묶습니다.">
+<!ENTITY insertText "텍스트 삽입">
+<!ENTITY insertTextTip1 "스타일에 텍스트 삽입">
+<!ENTITY insertTextTip2 "옵션 &gt; 텍스트에서 설정">
+<!ENTITY UndoLast "되돌리기(마지막 저장)">
+<!ENTITY UndoLastTip "스타일을 마지막 저장 상태로 되돌립니다.">
+<!ENTITY UndoAll "되돌리기(원본)">
+<!ENTITY UndoAllTip "스타일을 원본 상태로 되돌립니다.">
+<!ENTITY CloseTip "스타일을 저장하지 않고 닫습니다.">
+<!ENTITY ColorTip "스타일에 색상 삽입">
+<!ENTITY UpdateCheck "업데이트">
+<!ENTITY UpdateCheckTip "스타일의 업데이트 확인 허용">
+<!ENTITY SaveEnabled "저장 사용함">
+<!ENTITY SaveDisabled "저장 사용 안 함">
+<!ENTITY EnableTip "스타일을 저장할 때 스타일 사용함 또는 사용 안 함">
+<!ENTITY EnableCloseTip "스타일을 활성화한 후 저장하고 닫습니다.">
+<!ENTITY DisableCloseTip "스타일을 비활성화한 후 저장하고 닫습니다.">
+<!ENTITY Customize "사용자 정의">
+<!ENTITY ReplaceTip "검색된 텍스트를 바꿉니다.">
+<!ENTITY Replace "바꾸기">
+<!ENTITY ReplaceOnce "한 번">
+<!ENTITY ReplaceAll "모두">
+<!ENTITY ReplaceOnceTip "처음 검색된 텍스트를 바꿉니다.">
+<!ENTITY ReplaceAllTip "검색된 모든 텍스트를 바꿉니다.">
+<!ENTITY Find "찾기">
+<!ENTITY Color "색상 삽입">
+<!ENTITY pickcolorrainbowpicker "색상 선택기">
+<!ENTITY Bottom "하단">
+<!ENTITY ToggleScratchPad "임시 메모">
+<!ENTITY ToggleScratchPadTip "임시 메모장을 토글합니다.">
+<!ENTITY ScratchPadTip "임시 메모장 (편집 창을 닫으면 지워짐)(옵션&lt;텍스트에서 높이 조정)">
+<!ENTITY ScratchPad "임시 메모장">
+<!ENTITY ClearSearch "검색어 지우기">
+<!ENTITY ClearSearchTip "검색 상자에서 텍스트를 지웁니다.">
+<!ENTITY ClearScratchPad "임시 메모 지우기">
+<!ENTITY ClearScratchPadTip "임시 메모장의 내용을 지웁니다.">
+<!ENTITY LineNumber "줄 번호 :">
+<!ENTITY LineNumberTip "코드를 클릭하면 줄 번호가 표시됩니다.">
+<!ENTITY LineNumberSearch "줄 번호">
+<!ENTITY LineNumberSearchTip "줄 번호(5) 또는 열(5:12)로 이동. 마우스로 끌어서 놓을 수 있습니다.">
+<!ENTITY ExportStyle "스타일 내보내기">
+<!ENTITY ExportStyleTip "스타일을 파일로 내보내기">
+<!ENTITY CloneStyle "스타일 복제">
+<!ENTITY CloneStyleTip "같은 코드를 가진 새 스타일 만들기">
+<!ENTITY Url "URL">
+<!ENTITY Url.k "U">
+<!ENTITY Tags "태그">
+<!ENTITY Tags.k "T">
+<!ENTITY Name.k "N">
+<!ENTITY wraplines "자동 줄 바꿈">
+<!ENTITY wraplinesTip "자동 줄 바꿈">
+<!ENTITY switchtoinstall "설치로 전환">
+<!ENTITY switchtoinstallTip "편집창과 설치창 전환">
+<!ENTITY Insert "삽입">
+<!ENTITY InsertTip "텍스트, 색상 등을 삽입할 수 있습니다.">
+<!ENTITY Insert.k "I">
+<!ENTITY dataURI "데이터 URI">
+<!ENTITY dataURITip "현재 커서 위치에 데이터 URI 형식으로 삽입할 파일을 선택합니다.">
+<!ENTITY dataURI.ak "D">
+<!ENTITY chromefolder "크롬 폴더 경로">
+<!ENTITY chromefolderTip "현재 커서 위치에 크롬 폴더 경로 삽입">
+<!ENTITY chromefolder.ak "C">
+<!ENTITY htmlnamespace "HTML 이름공간 선언">
+<!ENTITY htmlnamespaceTip "HTML 이름공간을 삽입합니다.">
+<!ENTITY htmlnamespace.ak "H">
+<!ENTITY xulnamespace "XUL 이름공간 선언">
+<!ENTITY xulnamespaceTip "XUL 이름공간을 삽입합니다.">
+<!ENTITY xulnamespace.ak "X">
+<!ENTITY openintexternaleditor "외부 편집기">
+<!ENTITY openintexternaleditorTip "외부 편집기에서 CSS 파일 형식으로 편집합니다.">
+<!ENTITY openintexternaleditor.ak "O">
+<!ENTITY Bracket "까치발">
+<!ENTITY BracketTip "추가하거나 선택한 텍스트의 외부에서 [] 제거">
+<!ENTITY CurlyBracket "중괄호">
+<!ENTITY CurlyBracketTip "추가하거나 선택한 텍스트의 외부에서 제거합니다 {}">
+<!ENTITY Undo "끄르다">
+<!ENTITY UndoTip "마지막 변경을 취소">
+<!ENTITY Redo "다시 하다">
+<!ENTITY RedoTip "마지막 실행 취소 다시 실행">
+<!ENTITY Class "Class">
+<!ENTITY ClassTip "[class=&quot;example&quot;] to .example (or back)">
+<!ENTITY ID "ID">
+<!ENTITY IDTip "[id=&quot;example&quot;] to #example (or back)">
+<!ENTITY ToggleBars "토글 바">
+<!ENTITY ToggleBarsTip "토글 도구 모음 (옵션에서 그들을 선택&gt; 토글&gt; 도구 모음 전환)">
+<!ENTITY StyleId "스타일 ID">
+<!ENTITY StyleIdTip "stylish.sqlite database로부터 스타일 ID를 보여줍니다">
+<!ENTITY RemoveXUL "xul:을 제거합니다 ">
+<!ENTITY RemoveXULTip "복사 된 코드에서 xul: 제거  (&quot;xul:hbox &gt; xul:scrollbox&quot; to &quot;hbox &gt; scrollbox&quot;)">

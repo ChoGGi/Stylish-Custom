@@ -1,0 +1,9 @@
+<!ENTITY urltype "Exactamente">
+<!ENTITY urlprefixtype "Comienza con">
+<!ENTITY domaintype "En dominio">
+<!ENTITY add "Agregar">
+<!ENTITY delete "Borrar">
+<!ENTITY type "tipo">
+<!ENTITY site "sitio">
+<!ENTITY specifySites "Especificar sitios">
+<!ENTITY regexptype "RegExp">

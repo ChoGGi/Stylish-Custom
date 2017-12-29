@@ -1,0 +1,6 @@
+<!ENTITY DeleteStyle "스타일 제거">
+<!ENTITY DeleteStyleTip "경고 : 선택한 스타일을 영구히 삭제하십시오!">
+<!ENTITY DeleteStyleText "예 : 24,443,122">
+<!ENTITY RefreshStyleList "스타일 목록 다시 불러오기">
+<!ENTITY RefreshStyleListTip "찾은 결과를 유지하고, 스타일 목록을 새로 불러옵니다.">
+<!ENTITY DeleteStyleAskTip "스타일 삭제 확인">

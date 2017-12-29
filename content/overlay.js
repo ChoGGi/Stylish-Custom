@@ -1,6 +1,8 @@
 "use strict";
 /* jshint ignore:start */
-if (typeof Cu === "undefined") var Cu = Components.utils;
+
+if (typeof (Cu) === "undefined")
+  var Cu = Components.utils;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
 Cu.import("resource://gre/modules/NetUtil.jsm");
@@ -289,7 +291,7 @@ var scOverlay = {
         }
       }
       //add text to style with a comment for people to know about
-      if (text && text != "" && typeof text != "undefined")
+      if (text && text != "" && typeof (text) !== "undefined")
         styleArray.push(url + "|||" + text);
     }
     //no styles
@@ -312,7 +314,7 @@ var scOverlay = {
 
   onPageLoad: function(event)
   {
-    if (typeof gBrowser !== "undefined")//Thunderbird
+    if (typeof (gBrowser) !== "undefined")//Thunderbird
       return;
 
     let t = scCommon.prefs.getIntPref("custom.styletoggle");
@@ -640,11 +642,11 @@ var scOverlay = {
       //standalone
       case 1: //middle
         //from Stylish v2.0.4
-        if (typeof window.BrowserOpenAddonsMgr !== "undefined")
+        if (typeof (window.BrowserOpenAddonsMgr) !== "undefined")
           BrowserOpenAddonsMgr("addons://list/userstyle");
-        else if (typeof window.toEM !== "undefined")
+        else if (typeof (window.toEM) !== "undefined")
           toEM("addons://list/userstyle");
-        else if (typeof window.openAddonsMgr !== "undefined")
+        else if (typeof (window.openAddonsMgr) !== "undefined")
           openAddonsMgr("addons://list/userstyle");
         else
           scCommon.addonsManagerWindow(window);

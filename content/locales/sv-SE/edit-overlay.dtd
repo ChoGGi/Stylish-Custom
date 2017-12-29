@@ -1,0 +1,115 @@
+<!ENTITY PageTip1 "vänsterklicka för att gå till formatmallssidan">
+<!ENTITY PageTip2 "mittenklicka för att gå till redigeringssidan">
+<!ENTITY PageTip3 "högerklicka för att gå till redigeringssidan och klistra in kod">
+<!ENTITY AutoImportant "Auto!important">
+<!ENTITY AutoImportantTextTip "Ange ett kortkommando att använda för auto!important">
+<!ENTITY AutoImportantToggleTip "Byt auto!important-kortkommando">
+<!ENTITY Important "!important">
+<!ENTITY ImportantTip "Infogar automatiskt deklarationen !important">
+<!ENTITY SiteRules "Webbplatsregler...">
+<!ENTITY SiteRulesTip "Infoga @-moz-doc-avsnitt">
+<!ENTITY SiteRules.ak "z">
+<!ENTITY CommentText "Kommentera text">
+<!ENTITY CommentTextTip "Markera text och klicka här för att lägga till eller ta bort kommentarer runt den: /* */">
+<!ENTITY MergeLines "Slå samman">
+<!ENTITY MergeLinesTip "Slå samman flera rader av kod till en enda rad genom att ta bort radbrytningar (Ctrl+Z för att ångra)">
+<!ENTITY ExternalEditTip1 "Redigera formatmall som CSS-fil i ett externt redigeringsprogram">
+<!ENTITY ExternalEditTip2 "Högerklicka för att stoppa kontrollen av filen">
+<!ENTITY DisablePreview "Stäng förh.gr.">
+<!ENTITY DisablePreviewTip "Avsluta förhandsgranskningen och återgå till föregående läge">
+<!ENTITY SaveClose "Spara &amp; stäng">
+<!ENTITY SaveCloseTip "Spara och stäng dialogen">
+<!ENTITY SaveTip "Spara utan att stänga dialogen">
+<!ENTITY MenuSaveTip "Spara eller återställ">
+<!ENTITY PreviewTip "Förhandsgranska formatmallen utan att spara den">
+<!ENTITY SearchToggleTip "Används för att växla mellan sök- och ersättområdena (Ctrl+F / Ctrl+R)">
+<!ENTITY CommentGroup "Kommentera grupp">
+<!ENTITY CommentGroupTip "Tar bort kommentarer och kommenterar sedan markerad text igen">
+<!ENTITY insertText "Infoga text">
+<!ENTITY insertTextTip1 "Infoga text i formatmall">
+<!ENTITY insertTextTip2 "Inställningar &gt; Text att ändra">
+<!ENTITY UndoLast "Återställ (senast sparade)">
+<!ENTITY UndoLastTip "Återställ formatmallen till det senast sparade läget">
+<!ENTITY UndoAll "Återställ (original)">
+<!ENTITY UndoAllTip "Återställ formatmallen till originalläget">
+<!ENTITY CloseTip "Stäng utan att spara formatmallen">
+<!ENTITY ColorTip "Infoga en färg i formatmallen">
+<!ENTITY UpdateCheck "Uppdatera">
+<!ENTITY UpdateCheckTip "Tillåt denna formatmall att söka efter uppdateringar">
+<!ENTITY SaveEnabled "Spara aktiverad">
+<!ENTITY SaveDisabled "Spara inaktiverad">
+<!ENTITY EnableTip "Aktivera eller inaktivera formatmallen när du sparar den">
+<!ENTITY EnableCloseTip "Aktivera, spara och stäng formatmallen">
+<!ENTITY DisableCloseTip "Inaktivera, spara och stäng formatmallen">
+<!ENTITY Customize "Anpassa...">
+<!ENTITY ReplaceTip "Text som skall ersätta söktexten">
+<!ENTITY Replace "Ersätt...">
+<!ENTITY ReplaceOnce "En gång">
+<!ENTITY ReplaceAll "Alla">
+<!ENTITY ReplaceOnceTip "Ersätt första förekomsten av söktexten">
+<!ENTITY ReplaceAllTip "Ersätt alla förekomster av söktexten">
+<!ENTITY Find "Sök">
+<!ENTITY Color "Infoga färg">
+<!ENTITY pickcolorrainbowpicker "Färgväljare">
+<!ENTITY Bottom "Sidans nederkant">
+<!ENTITY ToggleScratchPad "Växla anteckningsblocket">
+<!ENTITY ToggleScratchPadTip "Växlar anteckningsblocket">
+<!ENTITY ScratchPadTip "Placera text som du vill behålla här, rensas när du stänger dialogen (Justera höjd i Val&gt;Text)">
+<!ENTITY ScratchPad "Anteckningsblock">
+<!ENTITY ClearSearch "Rensa sökning">
+<!ENTITY ClearSearchTip "Rensa söktext">
+<!ENTITY ClearScratchPad "Rensa anteckningsblock">
+<!ENTITY ClearScratchPadTip "Rensar anteckningsblocket">
+<!ENTITY LineNumber "Radnummer:">
+<!ENTITY LineNumberTip "Visar radnummer när kod klickas">
+<!ENTITY LineNumberSearch "Rad#">
+<!ENTITY LineNumberSearchTip "Går till radnummer (5) eller kolumn (5:12), du kan dra och släppa">
+<!ENTITY ExportStyle "Exportera formatmall">
+<!ENTITY ExportStyleTip "Exporterar formatmallen till en fil">
+<!ENTITY CloneStyle "Klona formatmall">
+<!ENTITY CloneStyleTip "Skapar en ny formatmall med samma kod">
+<!ENTITY Url "URL">
+<!ENTITY Url.k "U">
+<!ENTITY Tags "Taggar">
+<!ENTITY Tags.k "T">
+<!ENTITY Name.k "N">
+<!ENTITY wraplines "Radbryt rader">
+<!ENTITY wraplinesTip "Radbryt långa rader">
+<!ENTITY switchtoinstall "Byt till Installera">
+<!ENTITY switchtoinstallTip "Växla mellan redigerings- och installationsdialogerna">
+<!ENTITY Insert "Infoga">
+<!ENTITY InsertTip "Låter dig infoga text, färger, o.s.v...">
+<!ENTITY Insert.k "I">
+<!ENTITY dataURI "Data-URI...">
+<!ENTITY dataURITip "Välj en fil och infoga som data-URI vid textmarkörens position">
+<!ENTITY dataURI.ak "D">
+<!ENTITY chromefolder "Chrome-mappsökväg">
+<!ENTITY chromefolderTip "Infoga chrome-mappsökvägen vid textmarkörens position">
+<!ENTITY chromefolder.ak "C">
+<!ENTITY htmlnamespace "HTML-namnrymd som standard">
+<!ENTITY htmlnamespaceTip "Infoga HTML-namnrymd vid textmarkörens position">
+<!ENTITY htmlnamespace.ak "H">
+<!ENTITY xulnamespace "XUL-namnrymd som standard">
+<!ENTITY xulnamespaceTip "Infoga XUL-namnrymd vid textmarkörens position">
+<!ENTITY xulnamespace.ak "X">
+<!ENTITY openintexternaleditor "Öppna ext.">
+<!ENTITY openintexternaleditorTip "Redigera formatmall som CSS-fil i ett externt redigeringsprogram">
+<!ENTITY openintexternaleditor.ak "Ö">
+<!ENTITY Bracket "Hakparentes">
+<!ENTITY BracketTip "Lägger till eller tar bort [] från utsidan av markerad text">
+<!ENTITY CurlyBracket "Klammerparentes">
+<!ENTITY CurlyBracketTip "Lägger till eller tar bort {} från utsidan av markerad text">
+<!ENTITY Undo "Ångra">
+<!ENTITY UndoTip "Ångra senaste åtgärd">
+<!ENTITY Redo "Gör om">
+<!ENTITY RedoTip "Gör om senast ångrade åtgärd">
+<!ENTITY Class "Klass">
+<!ENTITY ClassTip "[class=&quot;exempel&quot;]   till   .exempel   (eller vice versa)">
+<!ENTITY ID "ID">
+<!ENTITY IDTip "[id=&quot;exempel&quot;]   till   #exempel   (eller vice versa)">
+<!ENTITY ToggleBars "VäxlaVerktyg">
+<!ENTITY ToggleBarsTip "Växlar verktygsfält (välj vilka i Inställningar &gt; Växling &gt; Verktygsfältsväxling)">
+<!ENTITY StyleId "Formatmalls-ID">
+<!ENTITY StyleIdTip "Visar formatmalls-ID:t från databasen stylish.sqlite">
+<!ENTITY RemoveXUL "Ta bort XUL:">
+<!ENTITY RemoveXULTip "Ta xul: från kopierade koden (&quot;xul:hbox &gt; xul:scrollbox&quot; to &quot;hbox &gt; scrollbox&quot;)">

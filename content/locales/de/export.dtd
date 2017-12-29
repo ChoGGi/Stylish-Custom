@@ -1,0 +1,17 @@
+<!ENTITY ExportStyles "Stile exportieren">
+<!ENTITY ImportStyles "Stile importieren">
+<!ENTITY StyleInfo "Stil-Informationen">
+<!ENTITY Export "Exportieren">
+<!ENTITY Import "Importieren">
+<!ENTITY LocationTip "Speichern, um den Pfad zu verwenden bzw. das Auswählen eines Pfades zu deaktivieren (und den gespeicherten Pfad zurückzusetzen)">
+<!ENTITY BrowseTip "Zu verwendenden Pfad auswählen">
+<!ENTITY overWrite "Überschreiben">
+<!ENTITY OverwriteStyles "Stile überschreiben">
+<!ENTITY OverwriteFiles "Dateien überschreiben">
+<!ENTITY ExportXML "Als XML exportieren">
+<!ENTITY ExampleXML "Name der XML-Datei">
+<!ENTITY ExampleXMLTip "Einen Namen für die Stil-Datei wählen">
+<!ENTITY ExportXMLTip "XML zum Sichern von Stilen verwenden (behält den ursprünglichen Namen, die URL und den Aktivierungszustand bei)">
+<!ENTITY GroupXML "Zusammenfassen">
+<!ENTITY GroupXMLTip "Fasst Stile in einer einzigen XML-Datei zusammen">
+<!ENTITY xmlBrowseTip "Zu verwendende Datei auswählen">

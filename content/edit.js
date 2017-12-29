@@ -105,7 +105,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
     }
 
     if (window.arguments[0] &&
-              typeof window.arguments != "undefined" &&
+              typeof (window.arguments) != "undefined" &&
               "id" in window.arguments[0] ||
               "style" in window.arguments[0]) {
       if ("id" in window.arguments[0]) {

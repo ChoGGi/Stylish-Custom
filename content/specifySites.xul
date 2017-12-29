@@ -31,6 +31,7 @@ the below is from Stylish v1.4.3/2.0.4, so different license applies
     <radio id="url-type" selected="true" label="&urltype;" value="url"/>
     <radio id="url-prefix-type" label="&urlprefixtype;" value="url-prefix"/>
     <radio id="domain-type" label="&domaintype;" value="domain"/>
+    <radio id="regexp-type" label="&regexptype;" value="regexp"/>
   </radiogroup>
 
   <box>

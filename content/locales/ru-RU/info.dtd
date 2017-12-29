@@ -1,0 +1,6 @@
+<!ENTITY DeleteStyle "Удалить стиль(и)">
+<!ENTITY DeleteStyleTip "Выберите стиль или введите ID списка стилей; затем нажмите кнопку">
+<!ENTITY DeleteStyleText "Пример: 24,443,122">
+<!ENTITY RefreshStyleList "Обновить список стилей">
+<!ENTITY RefreshStyleListTip "Обновить список и сохранить результаты поиска">
+<!ENTITY DeleteStyleAskTip "Подтверждать удаление стилей">

@@ -1,8 +1,10 @@
 "use strict";
 //the below is from Stylish v1.4.3/2.0.4, so different license applies
 /* jshint ignore:start */
-if (typeof Cu === "undefined") var Cu = Components.utils;
-if (typeof Cc === "undefined") var Cc = Components.classes;
+if (typeof (Cu) === "undefined")
+  var Cu = Components.utils;
+if (typeof (Cc) === "undefined")
+  var Cc = Components.classes;
 Cu.import("chrome://stylish-custom/content/common.jsm");
 /* jshint ignore:end */
 //cbCommon.dump();

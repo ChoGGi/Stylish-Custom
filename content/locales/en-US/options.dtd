@@ -1,0 +1,108 @@
+<!ENTITY changedomains "Change allowed domains">
+<!ENTITY changedomainsTip "Enter a list of domains allowed to install styles (space to separate)">
+<!ENTITY Sidebar "Sidebar">
+<!ENTITY Standalone "Standalone">
+<!ENTITY Addons "Add-ons">
+<!ENTITY Manageview "Manage view">
+<!ENTITY ManageviewTip "Allows you to choose which window Manage Styles will open with">
+<!ENTITY General "General">
+<!ENTITY Text "Text">
+<!ENTITY MenuItems "Menu Items">
+<!ENTITY Toggle "Toggle">
+<!ENTITY Buttons "Buttons">
+<!ENTITY BottomArea "Bottom Style Edit Area">
+<!ENTITY BottomAreaTip "Select buttons for bottom style edit area">
+<!ENTITY StyleMenu "Change right-click action for style menuitems">
+<!ENTITY StyleMenuTip "Choose between showing the menu and editing the style">
+<!ENTITY SaveMenu "Save Menu">
+<!ENTITY SaveMenuTip "A menu with save&amp;Revert">
+<!ENTITY SaveButton "Save Menu (Button)">
+<!ENTITY SaveButtonTip "Has a button for save and a menu for the rest">
+
+<!ENTITY switchtoinstallTip "Show switch to install for new styles">
+<!ENTITY ExportSettings "Export Settings">
+<!ENTITY ExportSettingsTip "Exports Stylish-Custom settings to a file">
+<!ENTITY ImportSettings "Import Settings">
+<!ENTITY ImportSettingsTip "Import Stylish-Custom settings from a file">
+<!ENTITY StyleToggle0 "Toggle for page loaded / tab switched">
+<!ENTITY StyleToggle1 "Only tab switched">
+<!ENTITY StyleToggle2 "Only page loaded">
+<!ENTITY StyleToggle3 "None (ignore tags)">
+<!ENTITY StyleToggle "Style Toggling">
+<!ENTITY StyleToggleTip "Choose how it toggles styles">
+<!ENTITY StyleToggleHelp1 "You can use tags to toggle styles (see Guide\Edit Dialog\#15 for more help)">
+<!ENTITY StyleToggleHelp2 "example: ">
+<!ENTITY ExternalEditor "External Editor">
+<!ENTITY ExternalEditorTip "Path to executable to use">
+<!ENTITY WhichEditor "Which method to use">
+<!ENTITY WhichEditorTip "Pick method to use for external editing">
+<!ENTITY EditorTime "Delay between style updates (ms)">
+<!ENTITY EditorTimeTip "Length of time before Stylish-Custom checks the file for changes">
+
+<!ENTITY RemoveCSS "Remove CSS files (see tooltip)">
+<!ENTITY RemoveCSSTip "This will remove any open files!">
+<!ENTITY RemoveCSSAuto "Auto-remove old css files">
+<!ENTITY RemoveCSSAutoTip "automatically remove stylishCustom*.css from temp dir when firefox starts">
+<!ENTITY ChangeGlobalColour "Global styles color">
+<!ENTITY ChangeGlobalColourTip "Changes color of global styles in Stylish menu">
+<!ENTITY ChangeSiteColour "Site styles color">
+<!ENTITY ChangeSiteColourTip "Changes color of site styles in Stylish menu">
+<!ENTITY ChangeGlobalSiteColour "Global/Site styles color">
+<!ENTITY ChangeGlobalSiteColourTip "Changes color of global/site styles in Stylish menu">
+<!ENTITY StatusBar "Statusbar Icon">
+<!ENTITY StatusBarTip "Show/hide Stylish-Custom statusbar icon">
+<!ENTITY ToggleIcons "Toggle icons">
+<!ENTITY ToggleIconsTip "If you want to hide menu/button icons">
+<!ENTITY ToolMenu "Tools Menuitem">
+<!ENTITY ToolMenuTip "Show/hide stylish manage in the tools menu">
+<!ENTITY AskToSave "Ask to Save Style">
+<!ENTITY AskToSaveTip "If you haven't saved the style it will ask if you want to">
+<!ENTITY AppTitleTip "Shows the app (ff,tb,sb) in the style editor title bar">
+
+<!ENTITY InsertTextCaption "Insert text">
+<!ENTITY InsertTextTip "What shows up for Insert menu&gt;Insert Text (,, to separate)">
+<!ENTITY AutoImportantCaption "Auto!important text">
+<!ENTITY AutoImportantTip "What gets filled in after you press the auto!important key">
+<!ENTITY ChangeFontCaption "Change edit area font">
+<!ENTITY ChangeFontTip "Used to pick font-family/font-size/color">
+<!ENTITY ExImportLocation "Ex/Import menuitem location">
+<!ENTITY ExImportLocationTip "Show ex/import menuitems in stylish or Stylish-Custom">
+<!ENTITY ToggleRulesLocation "Toggle styles menuitem location">
+<!ENTITY ToggleRulesLocationTip "Show dis/enable styles menuitems in stylish or Stylish-Custom">
+<!ENTITY StyleInfoLocation "Style Info menuitem location">
+<!ENTITY StyleInfoLocationTip "Show styleinfo menuitem in stylish or Stylish-Custom">
+<!ENTITY ChangeInsertSepCaption "Change insert text separator">
+<!ENTITY ChangeInsertSepTip "Allows you to pick another separator (,,) to use">
+<!ENTITY ToolbarToggle "Toolbar Toggle">
+<!ENTITY ToolbarToggleTip "Toolbars to toggle in edit dialog">
+<!ENTITY IAT "It's All Text!">
+<!ENTITY AppTitle "App Title">
+<!ENTITY StyleMenusTip "Shows menus with different lists of styles (App/Enabled/Disabled)">
+
+<!ENTITY GetStyleSheetsMenu "&quot;Get StyleSheets&quot; menuitem">
+<!ENTITY GetStyleSheetsMenuTip "Show &quot;Get StyleSheets&quot; in content menu">
+<!ENTITY ShowAppStyles "Show &quot;App&quot; styles in stylish menu">
+<!ENTITY ShowAppStylesTip "Since you can see them in the &quot;App Styles&quot; submenu">
+<!ENTITY SaveText "Save search text">
+<!ENTITY SaveTextTip "When closing style dialog save text in searchbox">
+<!ENTITY ResizeStyleDialog "Resize style dialog">
+<!ENTITY ResizeStyleDialogTip "Set the size of dialogs opened from Addons Manager">
+<!ENTITY ScratchpadHeightCaption "Set height of scratchpad">
+<!ENTITY ScratchpadHeightTip "Allows you to adjust the height of the scratchpad in the style editor">
+<!ENTITY Nothing "Nothing">
+<!ENTITY Initials "Initials">
+<!ENTITY FullTitle "Full Title">
+<!ENTITY reloadStyles "Reload Styles">
+<!ENTITY reloadStylesTip1 "Disables then enables styles (for updating styles with @import directives)">
+<!ENTITY reloadStylesTip2 "Use commas (,) to separate styles (34,28,115) or leave blank to reload all">
+<!ENTITY reloadStylesTip3 "in the main firefox window press ctrl+alt+s">
+<!ENTITY reloadStylesKey "Reload Styles Key">
+<!ENTITY reloadStylesKeyTip "Default is s (ctrl+alt+s) or if you want to change the letter">
+<!ENTITY StyleMenus "StyleList menu location">
+<!ENTITY MenuitemLocations "Menuitem locations">
+<!ENTITY MoveErrorBox "Move error box">
+<!ENTITY MoveErrorBoxTip "Error reporting area: below the code area (default) or below everything">
+<!ENTITY SearchBar "Which search to use?">
+<!ENTITY SearchBarTip "choose between new search and Mikado's search">
+<!ENTITY StyleMenuOverride "Toggle Overriding menuitems for Stylish Toolbar button">
+<!ENTITY StyleMenuOverrideTip "Choose between opening in Stylish-Custom or Stylish">

@@ -1,0 +1,104 @@
+<!ENTITY changedomains "Erlaubte Domains ändern">
+<!ENTITY changedomainsTip "Liste von Domains eingeben, die Stile installieren dürfen (getrennt durch Leerzeichen)">
+<!ENTITY Sidebar "in Sidebar">
+<!ENTITY Standalone "in eigenem Fenster">
+<!ENTITY Addons "im Add-ons-Manager">
+<!ENTITY Manageview "Anzeigen">
+<!ENTITY ManageviewTip "Auswählen, in welchem Fenstermodus die Stil-Verwaltung geöffnet werden soll">
+<!ENTITY General "Allgemein">
+<!ENTITY Text "Text">
+<!ENTITY MenuItems "Menüs">
+<!ENTITY Toggle "Umschalten">
+<!ENTITY Buttons "Schaltflächen">
+<!ENTITY BottomArea "Untere Stilbearbeitungsfläche">
+<!ENTITY BottomAreaTip "Schaltfächen auswählen, für untere Stilbearbeitungsfläche">
+<!ENTITY StyleMenu "Rechtsklick-Aktion für Stil-Menüeinträge ändern">
+<!ENTITY StyleMenuTip "Wählen Sie zwischen Anzeigen des Menüs und Bearbeiten des Stils">
+<!ENTITY SaveMenu "Menü speichern">
+<!ENTITY SaveMenuTip "Ein Menü mit Speichern &amp; Wiederherstellen">
+<!ENTITY SaveButton "Menü Speichern (Schaltfläche)">
+<!ENTITY SaveButtonTip "Verfügt über eine Schaltfläche zum Speichern und ein Menü für den Rest.">
+<!ENTITY switchtoinstallTip "Für neue Stile Wechsel zur Installation zeigen">
+<!ENTITY ExportSettings "Einstellungen exportieren">
+<!ENTITY ExportSettingsTip "Exportiert die Stylish-Custom-Einstellungen in eine Datei">
+<!ENTITY ImportSettings "Einstellungen importieren">
+<!ENTITY ImportSettingsTip "Stylish-Custom Einstellungen aus Datei importieren">
+<!ENTITY StyleToggle0 "Umschalten bei geladener Seite / gewechselten Tab">
+<!ENTITY StyleToggle1 "Nur bei Tabwechsel">
+<!ENTITY StyleToggle2 "Nur bei geladener Seite">
+<!ENTITY StyleToggle3 "Keine (Schlagwörter ignorieren)">
+<!ENTITY StyleToggle "Stilumschaltung">
+<!ENTITY StyleToggleTip "Auswählen wie Stile umgeschaltet werden sollen">
+<!ENTITY StyleToggleHelp1 "Verwenden Sie Schlagwörter, um Stile umzuschalten (für weitere Hilfe schauen Sie unter Anleitung\Dialog bearbeiten\#15)">
+<!ENTITY StyleToggleHelp2 "Beispiel: ">
+<!ENTITY ExternalEditor "Externer Editor">
+<!ENTITY ExternalEditorTip "Pfad zur ausführbaren Programmdatei">
+<!ENTITY WhichEditor "Zu verwendende Methode">
+<!ENTITY WhichEditorTip "Wählen Sie eine Methode zum externen Bearbeiten">
+<!ENTITY EditorTime "Zeitverzögerung zwischen Stil-Aktualisierungen (ms)">
+<!ENTITY EditorTimeTip "Zeitspanne bevor Stylish-Custom die Datei auf Veränderungen überprüft">
+<!ENTITY RemoveCSS "CSS-Dateien entfernen (siehe Quickinfo)">
+<!ENTITY RemoveCSSTip "Dadurch werden alle geöffneten Dateien entfernt!">
+<!ENTITY RemoveCSSAuto "Automatische Entfernung alter CSS-Dateien">
+<!ENTITY RemoveCSSAutoTip "Beim Starten von Firefox die Datei stylishCustom*.css automatisch aus dem temporärem Verzeichnis löschen.">
+<!ENTITY ChangeGlobalColour "Globale Stilfarbe">
+<!ENTITY ChangeGlobalColourTip "Globale Stilfarbe im Stylish-Menü ändern">
+<!ENTITY ChangeSiteColour "Seitenstilfarbe">
+<!ENTITY ChangeSiteColourTip "Ändert die Seitenstilfarbe im Stylish-Menü">
+<!ENTITY ChangeGlobalSiteColour "Globale Seitenstilfarbe">
+<!ENTITY ChangeGlobalSiteColourTip "Ändert die globale Seitenstilfarbe im Stylish-Menü">
+<!ENTITY StatusBar "Statusleisten-Symbol">
+<!ENTITY StatusBarTip "Stylish-Custom-Symbol in der Status-/Add-on-Leiste anzeigen/verbergen">
+<!ENTITY ToggleIcons "Symbole anzeigen/verbergen">
+<!ENTITY ToggleIconsTip "Wenn Sie die Symbole vonn Menüs und Schaltflächen anzeigen/verbergen wollen">
+<!ENTITY ToolMenu "Stylish-Eintrag im Menü &quot;Extras&quot;">
+<!ENTITY ToolMenuTip "Menüpunkt &quot;Stylish&quot; im Menü Extras anzeigen/verbergen">
+<!ENTITY AskToSave "Auffordern, den Stil zu speichern">
+<!ENTITY AskToSaveTip "Sollten Sie den Stil noch nicht gespeichert haben, werden Sie dazu aufgefordert.">
+<!ENTITY AppTitleTip "Zeigt den Anwendungsnamen (Fx,Tb,Sb) in der Titeleiste des Stileditors an">
+<!ENTITY InsertTextCaption "Text einfügen">
+<!ENTITY InsertTextTip "Was im Menü Einfügen&gt;Text einfügen angezeigt wird (mit „,,“ trennen)">
+<!ENTITY AutoImportantCaption "Text für Auto!important">
+<!ENTITY AutoImportantTip "Was soll eingefügt werden, nachdem Sie die Taste für auto!important gedrückt haben.">
+<!ENTITY ChangeFontCaption "Schriftart für Bearbeitungsfeld">
+<!ENTITY ChangeFontTip "Schriftart, Schriftgröße und Schriftfarbe angeben">
+<!ENTITY ExImportLocation "Menüpunkt Export/Import anzeigen in">
+<!ENTITY ExImportLocationTip "Menüpunkt Export/Import in Stylish oder Stylish-Custom anzeigen">
+<!ENTITY ToggleRulesLocation "Menüpunkt Stil umschalten anzeigen in">
+<!ENTITY ToggleRulesLocationTip "Menüpunkt Stil aktivieren/deaktivieren in Stylish oder Stylish-Custom anzeigen">
+<!ENTITY StyleInfoLocation "Menüpunkt Stil-Info anzeigen in">
+<!ENTITY StyleInfoLocationTip "Menüpunkt Stil-Info in Stylish oder Stylish-Custom anzeigen">
+<!ENTITY ChangeInsertSepCaption "Trennzeichen zum Einfügen von Text ändern">
+<!ENTITY ChangeInsertSepTip "Ermöglicht Ihnen das Verwenden eines anderen Trennzeichens(,,)">
+<!ENTITY ToolbarToggle "Folgende Werkzeugleisten ein-/ausblenden">
+<!ENTITY ToolbarToggleTip "Werkzeugleisten, die im Bearbeiten-Dialog ein-/ausblendbar sein sollen">
+<!ENTITY IAT "It's All Text!">
+<!ENTITY AppTitle "Anwendungsname">
+<!ENTITY StyleMenusTip "Zeigt Menüs mit unterschiedlichen Stil-Listen(Anwendung/Aktiviert/Deaktiviert)">
+<!ENTITY GetStyleSheetsMenu "Menüpunkt &quot;Stilvorlagen einfügen&quot;">
+<!ENTITY GetStyleSheetsMenuTip "&quot;Stilvorlagen einfügen&quot; im Inhaltsmenü anzeigen">
+<!ENTITY ShowAppStyles "&quot;Anwendugsstile&quot; im Stylish-Menü anzeigen">
+<!ENTITY ShowAppStylesTip "Ob Sie diese auch im Untermenü &quot;Anwendugsstile&quot; sehen">
+<!ENTITY SaveText "Suchtext speichern">
+<!ENTITY SaveTextTip "Beim Schließen des Stil-Dialogs Text in Suchfeld speichern.">
+<!ENTITY ResizeStyleDialog "Größe des Stil-Dialogs ändern">
+<!ENTITY ResizeStyleDialogTip "Größe der vom Addon-Manager geöffneten Dialoge einstellen">
+<!ENTITY ScratchpadHeightCaption "Höhe des Notizblocks einstellen">
+<!ENTITY ScratchpadHeightTip "Ermöglicht das Anpassen der Notizblockhöhe im Stileditor.">
+<!ENTITY Nothing "Keiner">
+<!ENTITY Initials "Anfangsbuchstaben">
+<!ENTITY FullTitle "Voller Name">
+<!ENTITY reloadStyles "Stile neu laden">
+<!ENTITY reloadStylesTip1 "Deaktiviert und aktiviert dann Stile (für die Aktualisierung von Stilen mit @import-Anweisungen)">
+<!ENTITY reloadStylesTip2 "Kommas (,) zum Trennen von Stilen verwenden (34,28,115) oder leer lassen zum Neuladen aller Stile.">
+<!ENTITY reloadStylesTip3 "Im Hauptfenster von Firefox, Strg+Alt+s drücken">
+<!ENTITY reloadStylesKey "Tastenkürzel zum Neuladen der Stile">
+<!ENTITY reloadStylesKeyTip "Standard ist s (Strg+Alt+s), Sie können auch einen anderen Buchstaben verwenden.">
+<!ENTITY StyleMenus "Menüposition für Stil-Liste">
+<!ENTITY MenuitemLocations "Menuitem Position">
+<!ENTITY MoveErrorBox "Fehlermeldung verschieben">
+<!ENTITY MoveErrorBoxTip "Bereich für die Fehlerberichterstattung: unter dem Codebereich (Standard) oder unter allem">
+<!ENTITY SearchBar "Zu verwendende Suche">
+<!ENTITY SearchBarTip "Zwischen neuer und alter Suche wählen">
+<!ENTITY StyleMenuOverride "Toggle Übersteuern Menüpunkt für stilvolle Werkzeugleistenknopf">
+<!ENTITY StyleMenuOverrideTip "Wählen Sie zwischen dem Öffnen in &quot;Stylish-Custom&quot; oder &quot;Stylish&quot;">

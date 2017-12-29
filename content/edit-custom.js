@@ -49,7 +49,7 @@ var scEdit = {
 
     //move the cloned dialog down a bit
     if ("arguments" in window &&
-        typeof window.arguments[1] != "undefined" &&
+        typeof (window.arguments[1]) != "undefined" &&
         window.arguments[1] == "Cloned") {
       window.moveTo(window.arguments[4],window.arguments[3]+30);
       //window.moveBy(0,30);
@@ -134,19 +134,6 @@ var scEdit = {
 
     //for switch to install
     let style;
-    //from Stylish v1.0.2
-    /*
-    if (typeof window.arguments[0] != '"undefined"') {
-      if ("id" in window.arguments[0] || "style" in window.arguments[0]) {
-        if ("id" in window.arguments[0]) {
-          style = service.find(window.arguments[0].id,service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE);
-        } else if ("style" in window.arguments[0]) {
-          style = window.arguments[0].style;
-          style.mode = service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE;
-        }
-      }
-    }
-    */
     let toggleE = document.getElementById("ToggleEnabled");
 
     if (this.styleId)
@@ -173,7 +160,7 @@ var scEdit = {
     if (toggleE) {
       if (style.enabled == true)
         toggleE.checked = true;
-      if ("arguments" in window && typeof window.arguments[2] != "undefined" &&
+      if ("arguments" in window && typeof (window.arguments[2]) != "undefined" &&
           window.arguments[2] == false) {//cloned disabled style
         toggleE.checked = false;
       }
@@ -385,7 +372,7 @@ var scEdit = {
 
   openFile: function(file)
   {
-    if (typeof FileUtils.File !== "undefined")
+    if (typeof (FileUtils.File) !== "undefined")
       return new FileUtils.File(file);
     else {
       let temp = Cc["@mozilla.org/file/local;1"]
@@ -1388,7 +1375,7 @@ var scEdit = {
   //used for adding style code to /edit page
   onPageLoad: function(event)
   {
-    if (typeof scCommon == "undefined")
+    if (typeof (scCommon) == "undefined")
       return;
 
     let mainWin = scCommon.getMainWindow(),
@@ -1692,7 +1679,7 @@ var scEdit = {
     findbar = document.getElementById("findbar");
 
     if (searchBox && searchBox.style.display != "none" &&
-        typeof searchBox.inputField != "undefined")
+        typeof (searchBox.inputField) != "undefined")
       fireKeyEvent(searchBox);
 
     if (findbar && findbar.style.display != "none") {
@@ -1963,7 +1950,7 @@ var scEdit = {
         if (comments[i] == "")
           continue;
         //if we don't have an id & if it isn't the right id
-        if (typeof commentId != "undefined" &&
+        if (typeof (commentId) !== "undefined" &&
                     comments[i].indexOf(commentId) == -1) {
           continue;
         }
@@ -2394,7 +2381,7 @@ var scEdit = {
     style.removeAllMeta("tag");
 
     //added for customize
-    if (typeof tagsE.value != "undefined") {
+    if (typeof (tagsE.value) !== "undefined") {
       if (scCommon.cleanTags) {
         scCommon.cleanTags(tagsE.value).forEach(function(v) {
           style.addMeta("tag",v);
@@ -2416,9 +2403,9 @@ var scEdit = {
       }
     }
 
-    if (typeof updateUrlE.value != "undefined")
+    if (typeof (updateUrlE.value) !== "undefined")
       style.updateUrl = updateUrlE.value;
-    if (typeof tagsE.value != "undefined" && !scCommon.cleanTags)
+    if (typeof (tagsE.value) != "undefined" && !scCommon.cleanTags)
       uniqueTags.forEach(function(v) {style.addMeta("tag",v);});
 
     newStyle = !style.id;

@@ -1,0 +1,6 @@
+<!ENTITY DeleteStyle "Stile löschen">
+<!ENTITY DeleteStyleTip "WARNUNG: Ausgewählte Stile dauerhaft löschen!">
+<!ENTITY DeleteStyleText "Beispiel: 24,443,12">
+<!ENTITY RefreshStyleList "Stil-Liste neu laden">
+<!ENTITY RefreshStyleListTip "Stil-Liste neu laden und Suchergebnisse beibehalten">
+<!ENTITY DeleteStyleAskTip "Bestätigen Sie das Löschen von Stilen">

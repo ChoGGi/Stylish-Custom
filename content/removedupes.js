@@ -24,7 +24,7 @@ styleAmount: null,
     this.styleListE = document.getElementById("StyleList");
 
     //used to refresh by sorting method
-    if (sortBy != "Refresh" && typeof sortBy != "undefined")
+    if (sortBy != "Refresh" && typeof (sortBy) != "undefined")
       this.stylesSort = sortBy;
     if (sortBy == "Refresh" && this.stylesSort != null)
       sortBy = this.stylesSort;

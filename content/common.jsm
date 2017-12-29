@@ -73,7 +73,7 @@ var scCommon = {
   regexEscape: function(str)
   {
     //make sure it is a string
-    if (typeof str != "string")
+    if (typeof (str) !== "string")
       str = str.toString();
     //https://stackoverflow.com/questions/3561493
     //also replaces chars windows filenames dont like  <>:"
@@ -242,11 +242,11 @@ var scCommon = {
       break;
       case 0: // add-ons
         //from Stylish v2.0.4
-        if (typeof win.BrowserOpenAddonsMgr !== "undefined")
+        if (typeof (win.BrowserOpenAddonsMgr) !== "undefined")
           win.BrowserOpenAddonsMgr("addons://list/userstyle");
-        else if (typeof win.toEM !== "undefined")
+        else if (typeof (win.toEM) !== "undefined")
           win.toEM("addons://list/userstyle");
-        else if (typeof win.openAddonsMgr !== "undefined")
+        else if (typeof (win.openAddonsMgr) !== "undefined")
           win.openAddonsMgr("addons://list/userstyle");
         else
           this.addonsManagerWindow(win);
@@ -261,7 +261,7 @@ var scCommon = {
 
     function toggleSB(w)
     {
-      if (typeof win.SidebarUI === "undefined"){
+      if (typeof (win.SidebarUI) === "undefined"){
         if (w)
           win.toggleSidebar("viewStylishSidebar",true);
         else
@@ -418,7 +418,7 @@ var scCommon = {
   {
     if (!this.service){
       let win = this.getMainWindow();
-      if (typeof win.SidebarUI === "undefined"){
+      if (typeof (win.SidebarUI) === "undefined"){
         win.toggleSidebar("viewStylishSidebar");
         win.toggleSidebar("viewStylishSidebar");
       } else {
@@ -446,7 +446,7 @@ var scCommon = {
             domain:styleDomain, url:styleUrl, urlprefix:styleUrlPrefix});
       }
     );
-    if (typeof sortBy == "undefined") {
+    if (typeof (sortBy) == "undefined") {
       treeList.sort(this.sortByName);
       return;
     }
@@ -729,7 +729,7 @@ var scCommon = {
   },
 
 	addSite: function(stylishOverlay) {
-    if (typeof gBrowser == "undefined")//Thunderbird
+    if (typeof (gBrowser) == "undefined")//Thunderbird
       return;
 
 		stylishOverlay.getFromContent("stylish:page-info", function(message) {

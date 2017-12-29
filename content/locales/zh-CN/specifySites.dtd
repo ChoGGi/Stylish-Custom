@@ -1,0 +1,9 @@
+<!ENTITY urltype "精确地">
+<!ENTITY urlprefixtype "开始于">
+<!ENTITY domaintype "域名">
+<!ENTITY add "添加">
+<!ENTITY delete "删除">
+<!ENTITY type "类型">
+<!ENTITY site "站点">
+<!ENTITY specifySites "指定站点">
+<!ENTITY regexptype "RegExp">

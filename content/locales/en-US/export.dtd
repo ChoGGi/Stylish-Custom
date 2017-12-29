@@ -1,0 +1,17 @@
+<!ENTITY ExportStyles "Export Styles">
+<!ENTITY ImportStyles "Import Styles">
+<!ENTITY StyleInfo "Style Info">
+<!ENTITY Export "Export">
+<!ENTITY Import "Import">
+<!ENTITY LocationTip "Save to use path / disable to choose path (and reset saved path)">
+<!ENTITY BrowseTip "Select a path to use">
+<!ENTITY overWrite "Overwrite">
+<!ENTITY OverwriteStyles "Overwrite Styles">
+<!ENTITY OverwriteFiles "Overwrite Files">
+<!ENTITY ExportXML "Export as XML">
+<!ENTITY ExampleXML "Name for XML file">
+<!ENTITY ExampleXMLTip "Pick a name for the styles file">
+<!ENTITY ExportXMLTip "Use XML to store styles (keeps original name,url,enabled)">
+<!ENTITY GroupXML "Group">
+<!ENTITY GroupXMLTip "Group styles into a single XML file">
+<!ENTITY xmlBrowseTip "Select a file to use">

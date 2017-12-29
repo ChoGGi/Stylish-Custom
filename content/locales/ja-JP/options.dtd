@@ -1,0 +1,104 @@
+<!ENTITY changedomains "インストール可能ドメインを変更">
+<!ENTITY changedomainsTip "スタイルをインストール可能なドメインを羅列する（スペースで分ける）">
+<!ENTITY Sidebar "サイドバー">
+<!ENTITY Standalone "スタンドアロン">
+<!ENTITY Addons "アドオン">
+<!ENTITY Manageview "管理画面">
+<!ENTITY ManageviewTip "管理画面を選ぶ">
+<!ENTITY General "全般">
+<!ENTITY Text "テキスト">
+<!ENTITY MenuItems "メニュー項目">
+<!ENTITY Toggle "切り替え">
+<!ENTITY Buttons "ボタン">
+<!ENTITY BottomArea "ボトムのスタイル編集エリア">
+<!ENTITY BottomAreaTip "ボトムのスタイル編集エリア用のボタンを選択">
+<!ENTITY StyleMenu "メニューアイテム右クリック時の動作を変更">
+<!ENTITY StyleMenuTip "メニュー表示もしくは編集を選択">
+<!ENTITY SaveMenu "メニューを保存">
+<!ENTITY SaveMenuTip "保存／戻す付きメニュー">
+<!ENTITY SaveButton "メニューを保存（ボタン）">
+<!ENTITY SaveButtonTip "保存するにはボタンを、他はメニューを使う">
+<!ENTITY switchtoinstallTip "新しいスタイルをインストールするスイッチを表示">
+<!ENTITY ExportSettings "設定をエクスポート">
+<!ENTITY ExportSettingsTip "Stylish-Custom の設定をファイルに保存">
+<!ENTITY ImportSettings "設定をインポート">
+<!ENTITY ImportSettingsTip "ファイルから Stylish-Custom 設定をインポート">
+<!ENTITY StyleToggle0 "読み込まれたページ／スイッチしたタブ の切り替え">
+<!ENTITY StyleToggle1 "スイッチしたタブ のみ">
+<!ENTITY StyleToggle2 "読み込まれたページ のみ">
+<!ENTITY StyleToggle3 "なし（タグを無視）">
+<!ENTITY StyleToggle "スタイル切り替え">
+<!ENTITY StyleToggleTip "どのようにスタイルを切り替えるか選択">
+<!ENTITY StyleToggleHelp1 "スタイル切り替えにタグを使うことができます（詳しくは Guide\Edit Dialog\#15 を参照）">
+<!ENTITY StyleToggleHelp2 "例:">
+<!ENTITY ExternalEditor "外部エディタ">
+<!ENTITY ExternalEditorTip "使用する実行ファイルへのパス">
+<!ENTITY WhichEditor "どの方法を使うか">
+<!ENTITY WhichEditorTip "外部エディタを使う方法を選択">
+<!ENTITY EditorTime "スタイル更新間隔">
+<!ENTITY EditorTimeTip "Stylish-Custom がファイル更新を監視する間隔">
+<!ENTITY RemoveCSS "CSS を削除（ツールチップ参照）">
+<!ENTITY RemoveCSSTip "開いているファイルを削除します！">
+<!ENTITY RemoveCSSAuto "古い CSS ファイルを自動削除">
+<!ENTITY RemoveCSSAutoTip "Firefox 起動時に temp ディレクトリから stylishCustom*.css を自動削除する">
+<!ENTITY ChangeGlobalColour "グローバルスタイルの色">
+<!ENTITY ChangeGlobalColourTip "スタイリッシュメニューのグローバルスタイル色を変更">
+<!ENTITY ChangeSiteColour "サイトスタイルの色">
+<!ENTITY ChangeSiteColourTip "スタイリッシュメニューのサイトスタイル色を変更">
+<!ENTITY ChangeGlobalSiteColour "グローバル／サイト スタイルの色">
+<!ENTITY ChangeGlobalSiteColourTip "スタイリッシュメニューのグローバル／サイト スタイルの色を変更">
+<!ENTITY StatusBar "ステータスバーアイコン表示">
+<!ENTITY StatusBarTip "Stylish-Custom ステータスバーアイコンを表示／隠す">
+<!ENTITY SearchBar "どの検索を使うか">
+<!ENTITY SearchBarTip "新／オリジナルから選択">
+<!ENTITY ToggleIcons "アイコン表示切り替え">
+<!ENTITY ToggleIconsTip "メニュー／ボタンのアイコン表示を選択">
+<!ENTITY ToolMenu "ツールメニュー表示">
+<!ENTITY ToolMenuTip "ツールメニュー内の stylish manage を表示／隠す">
+<!ENTITY AskToSave "スタイルを保存するか確認">
+<!ENTITY AskToSaveTip "スタイルをまだ保存してなければ保存するか確認する">
+<!ENTITY AppTitleTip "スタイルエディタのタイトルバーにアプリ名を簡易表示（ff,tb,sb）">
+<!ENTITY InsertTextCaption "テキストを挿入">
+<!ENTITY InsertTextTip "挿入&gt;テキストを挿入で表示されるテキスト（,, で分ける）">
+<!ENTITY AutoImportantCaption "自動 !important">
+<!ENTITY AutoImportantTip "自動 !important キーを押して何が挿入されるか">
+<!ENTITY ChangeFontCaption "編集エリアの文字を変更">
+<!ENTITY ChangeFontTip "フォントファミリー／フォントサイズ／色の選択に使用">
+<!ENTITY ExImportLocation "インポート／エクスポート メニューの場所">
+<!ENTITY ExImportLocationTip "stylish と Stylish-Custom のどちらに インポート／エクスポート メニューを表示するか">
+<!ENTITY ToggleRulesLocation "スタイル切り替え メニューの場所">
+<!ENTITY ToggleRulesLocationTip "stylish と Stylish-Custom のどちらに 有効／無効 メニューを表示するか">
+<!ENTITY StyleInfoLocation "スタイル情報 メニューの場所">
+<!ENTITY StyleInfoLocationTip "stylish と Stylish-Custom のどちらに スタイル情報 メニューを表示するか">
+<!ENTITY ChangeInsertSepCaption "挿入テキストのセパレータを変更">
+<!ENTITY ChangeInsertSepTip "（,,）以外のセパレータを選ぶことができる">
+<!ENTITY ToolbarToggle "ツールバー切り替え">
+<!ENTITY ToolbarToggleTip "編集ウィンドウのツールバーを切り替える">
+<!ENTITY IAT "It's All Text!（IAT）">
+<!ENTITY AppTitle "アプリ名のタイトル表示">
+<!ENTITY Nothing "なし">
+<!ENTITY Initials "イニシャル">
+<!ENTITY FullTitle "タイトル全文">
+<!ENTITY reloadStyles "スタイルを再読込">
+<!ENTITY reloadStylesTip1 "スタイルを無効にした後、再度有効にする（@import 命令を含むスタイルを更新するため）">
+<!ENTITY reloadStylesTip2 "羅列するにはカンマ（,）を使う（34,28,115）。空白にすると全リロード">
+<!ENTITY reloadStylesTip3 "Firefox のメインウィンドウで CTRL + ALT + S">
+<!ENTITY reloadStylesKey "スタイルをリロードするキー">
+<!ENTITY reloadStylesKeyTip "デフォルトは s （CTRL + ALT + S）">
+<!ENTITY ScratchpadHeightCaption "メモ帳の高さを設定">
+<!ENTITY ScratchpadHeightTip "スタイルエディタでメモ帳の高さを調整">
+<!ENTITY StyleMenus "メニューの場所">
+<!ENTITY StyleMenusTip "スタイルの別（アプリ／有効／無効）リストでメニューを表示">
+<!ENTITY GetStyleSheetsMenu "&quot;スタイルシートを取得&quot; メニュー項目">
+<!ENTITY GetStyleSheetsMenuTip "&quot;スタイルシートを取得&quot; をコンテキストメニューに表示">
+<!ENTITY ShowAppStyles "Stylish メニューに &quot;アプリ&quot; スタイルを表示">
+<!ENTITY ShowAppStylesTip "&quot;アプリ用スタイル&quot; サブメニューで表示される">
+<!ENTITY SaveText "検索テキストを保存">
+<!ENTITY SaveTextTip "スタイルウィンドウを閉じるとき、検索ボックスのテキストを保存">
+<!ENTITY ResizeStyleDialog "スタイルウィンドウをリサイズ">
+<!ENTITY ResizeStyleDialogTip "アドオンマネージャーで開いたウィンドウのサイズを設定">
+<!ENTITY MenuitemLocations "メニュー項目の場所">
+<!ENTITY MoveErrorBox "移動エラーボックス">
+<!ENTITY MoveErrorBoxTip "エラー報告エリア：コード領域の下（デフォルト）またはすべて以下">
+<!ENTITY StyleMenuOverride "スタイリッシュなツールバーボタンのトグルオーバーライドメニュー項目">
+<!ENTITY StyleMenuOverrideTip "「スタイリッシュ・カスタム」または「スタイリッシュ」の開口部の間で選択します">

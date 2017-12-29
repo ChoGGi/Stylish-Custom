@@ -55,6 +55,10 @@ var scSpecifySites = {
         if (url.indexOf("://") == -1)
           url = "http://" + url;
       break;
+      case "regexp":
+        //validate? Pah!
+        url = '"' + url + '"';
+      break;
       case "domain":
         //The user might have mistakenly included the protocol. Let's strip it.
         let position = url.indexOf("://");

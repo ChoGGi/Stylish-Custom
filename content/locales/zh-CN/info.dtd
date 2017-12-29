@@ -1,0 +1,6 @@
+<!ENTITY DeleteStyle "删除样式">
+<!ENTITY DeleteStyleTip "警告：永久删除所选样式！">
+<!ENTITY DeleteStyleText "例如：24,443,122">
+<!ENTITY RefreshStyleList "刷新样式列表">
+<!ENTITY RefreshStyleListTip "刷新列表并保持搜索结果">
+<!ENTITY DeleteStyleAskTip "确认样式的删除">

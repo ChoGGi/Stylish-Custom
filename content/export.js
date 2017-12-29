@@ -47,7 +47,7 @@ scExport = {
     this.styleAmountDisabled = 0;
 
     //used to refresh by sorting method
-    if (sortBy != "Refresh" && typeof sortBy != "undefined")
+    if (sortBy != "Refresh" && typeof (sortBy) != "undefined")
       this.stylesSort = sortBy;
     if (sortBy == "Refresh" && this.stylesSort != null)
       sortBy = this.stylesSort;
@@ -460,7 +460,7 @@ scExport = {
 
     function cleanUp(which,name)
     {
-      if (typeof which !== "undefined" && which != null)
+      if (typeof (which) !== "undefined" && which != null)
         aStyle.setAttribute(name,which);
       else
         aStyle.setAttribute(name,"");

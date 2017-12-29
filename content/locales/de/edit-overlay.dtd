@@ -1,0 +1,115 @@
+<!ENTITY PageTip1 "Linksklick, um die Webseite der Stilvorlage aufzurufen">
+<!ENTITY PageTip2 "Mittelklick, um die Webseite zur Online-Bearbeitung des Stils aufzurufen">
+<!ENTITY PageTip3 "Rechtsklick, um die Webseite zur Online-Bearbeitung des Stils aufzurufen und den Code einzufügen">
+<!ENTITY AutoImportant "Auto-!important">
+<!ENTITY AutoImportantTextTip "Tastenkürzel für automatisches !important einfügen">
+<!ENTITY AutoImportantToggleTip "Tastenkürzel für automatisches !important aktivieren/deaktivieren">
+<!ENTITY Important "!important">
+<!ENTITY ImportantTip "&quot;Automagisches&quot; Einfügen von !important">
+<!ENTITY SiteRules "Website-Regeln...">
+<!ENTITY SiteRulesTip "@-moz-doc-Abschnitt einfügen">
+<!ENTITY SiteRules.ak "W">
+<!ENTITY CommentText "Auskommentieren">
+<!ENTITY CommentTextTip "Hier klicken, um ausgewählten Text auszukommentieren oder die Auskommentierung zu entfernen: /* */">
+<!ENTITY MergeLines "Verschmelzen">
+<!ENTITY MergeLinesTip "Verschmelzen von Codezeilen zu einer Zeile und dabei Zeilenumbrüche entfernen (Rückgängig mit Strg+z)">
+<!ENTITY ExternalEditTip1 "Stil in externem Editor als CSS-Datei bearbeiten.">
+<!ENTITY ExternalEditTip2 "Rechtsklick stoppt die Dateiüberprüfung">
+<!ENTITY DisablePreview "Vorschau abstellen">
+<!ENTITY DisablePreviewTip "Vorschau verwerfen und zum vorherigen Zustand zurückkehren.">
+<!ENTITY SaveClose "Speichern &amp; Schließen">
+<!ENTITY SaveCloseTip "Speichern und Dialog schließen">
+<!ENTITY SaveTip "Speichern ohne Dialog zu schließen">
+<!ENTITY MenuSaveTip "Speichern oder Wiederherstellen">
+<!ENTITY PreviewTip "Stilvorschau ohne zu speichern">
+<!ENTITY SearchToggleTip "Zum Ein-/Ausblenden des Suchen/Ersetzen-Feldes (Strg+f / Strg+r)">
+<!ENTITY CommentGroup "Gruppenkommentierung">
+<!ENTITY CommentGroupTip "Entfernt Kommentierung, anschließend wird ausgewählter Text neu kommentiert.">
+<!ENTITY insertText "Text einfügen">
+<!ENTITY insertTextTip1 "Text in Stil einfügen">
+<!ENTITY insertTextTip2 "Einstellungen &gt; Text &gt; Textvorlage einfügen">
+<!ENTITY UndoLast "Wiederherstellen (zuletzt gespeichert)">
+<!ENTITY UndoLastTip "Zurücksetzen des Stils auf letzte gespeicherten Version">
+<!ENTITY UndoAll "Wiederherstellen (Original)">
+<!ENTITY UndoAllTip "Zurücksetzen des Stils auf Original-Version">
+<!ENTITY CloseTip "Schließen, ohne Stil zu speichern">
+<!ENTITY ColorTip "Farbe in Stil einfügen">
+<!ENTITY UpdateCheck "Automatisches Update">
+<!ENTITY UpdateCheckTip "Automatische Überprüfung auf Updates für diesen Stil erlauben">
+<!ENTITY SaveEnabled "Speichern aktiviert">
+<!ENTITY SaveDisabled "Speichern deaktiviert">
+<!ENTITY EnableTip "Beim Speichern Stil aktivieren oder deaktivieren">
+<!ENTITY EnableCloseTip "Stil aktivieren, speichern und schließen.">
+<!ENTITY DisableCloseTip "Stil deaktivieren, speichern und schließen.">
+<!ENTITY Customize "Anpassen...">
+<!ENTITY ReplaceTip "Text zum Ersetzen von &quot;Suchtext&quot;">
+<!ENTITY Replace "Ersetzen...">
+<!ENTITY ReplaceOnce "Einmal">
+<!ENTITY ReplaceAll "Alle">
+<!ENTITY ReplaceOnceTip "Ersetzt das erste Vorkommen des &quot;Suchtextes&quot;">
+<!ENTITY ReplaceAllTip "Ersetzt alle Vorkommen des &quot;Suchtextes&quot;">
+<!ENTITY Find "Suchen">
+<!ENTITY Color "Farbe einfügen">
+<!ENTITY pickcolorrainbowpicker "Farbpalette">
+<!ENTITY Bottom "Unten">
+<!ENTITY ToggleScratchPad "Notizblock ein-/ausblenden">
+<!ENTITY ToggleScratchPadTip "Blendet den Notizblock ein bzw. aus">
+<!ENTITY ScratchPadTip "Ablage für Text, der beim Schließen des Dialogs gelöscht wird (Höhe anpassen in Optionen&gt;Text)">
+<!ENTITY ScratchPad "Notizblock">
+<!ENTITY ClearSearch "Suche löschen">
+<!ENTITY ClearSearchTip "Suchtext löschen">
+<!ENTITY ClearScratchPad "Notizblock leeren">
+<!ENTITY ClearScratchPadTip "Löscht den Inhalt des Notizblocks">
+<!ENTITY LineNumber "Zeilennummer:">
+<!ENTITY LineNumberTip "Zeigt bei angeklicktem Code Zeilennummer an">
+<!ENTITY LineNumberSearch "Zeile Nr.">
+<!ENTITY LineNumberSearchTip "Geht zur Zeile Nummer (5) oder Spalte (5:12), Sie können auch ziehen und ablegen">
+<!ENTITY ExportStyle "Stil exportieren">
+<!ENTITY ExportStyleTip "Stil wird in eine Datei exportiert">
+<!ENTITY CloneStyle "Stil klonen">
+<!ENTITY CloneStyleTip "Erstellt einen neuen Stil mit identischem Code">
+<!ENTITY Url "Url">
+<!ENTITY Url.k "U">
+<!ENTITY Tags "Tags">
+<!ENTITY Tags.k "T">
+<!ENTITY Name.k "N">
+<!ENTITY wraplines "Zeilen umbrechen">
+<!ENTITY wraplinesTip "Umbruch für lange Zeilen aktivieren">
+<!ENTITY switchtoinstall "Zur Installation wechseln">
+<!ENTITY switchtoinstallTip "Zwischen Editor und Installationsdialog wechseln">
+<!ENTITY Insert "Einfügen">
+<!ENTITY InsertTip "Ermöglicht das Einfügen von Text, Farben usw...">
+<!ENTITY Insert.k "I">
+<!ENTITY dataURI "Daten-URI...">
+<!ENTITY dataURITip "Einen Daten-URI für die angegebene Datei an der Cursorposition einfügen">
+<!ENTITY dataURI.ak "D">
+<!ENTITY chromefolder "Pfad zum Chrome-Ordner">
+<!ENTITY chromefolderTip "Pfad zum Chrome-Ordner an Cursorposition einfügen">
+<!ENTITY chromefolder.ak "C">
+<!ENTITY htmlnamespace "HTML-Namensraum als Vorgabe">
+<!ENTITY htmlnamespaceTip "HTML-Namensraum an Cursorposition einfügen">
+<!ENTITY htmlnamespace.ak "H">
+<!ENTITY xulnamespace "XUL-Namensraum als Vorgabe">
+<!ENTITY xulnamespaceTip "XUL-Namensraum an Cursorposition einfügen">
+<!ENTITY xulnamespace.ak "X">
+<!ENTITY openintexternaleditor "Extern">
+<!ENTITY openintexternaleditorTip "Stil in externem Editor als CSS-Datei bearbeiten">
+<!ENTITY openintexternaleditor.ak "O">
+<!ENTITY Bracket "Eckige Klammern">
+<!ENTITY BracketTip "Bei markiertem Text eckige Klammern [] hinzufügen oder entfernen">
+<!ENTITY CurlyBracket "Geschwungene Klammern">
+<!ENTITY CurlyBracketTip "Bei markiertem Text geschwungener Klammern {} hinzufügen oder entfernen">
+<!ENTITY Undo "Rückgängig">
+<!ENTITY UndoTip "Letzte Änderung rückgängig machen">
+<!ENTITY Redo "Wiederholen">
+<!ENTITY RedoTip "Letzte Änderung wiederholen">
+<!ENTITY Class "Klasse">
+<!ENTITY ClassTip "[class=&quot;Beispiel&quot;] zu .Beispiel (oder umgekehrt)">
+<!ENTITY ID "ID">
+<!ENTITY IDTip "[id=&quot;Beispiel&quot;] zu #Beispiel (oder umgekehrt)">
+<!ENTITY ToggleBars "Symbolleisten ein-/ausblenden">
+<!ENTITY ToggleBarsTip "Symbolleisten ein-/ausblenden (Auswählen unter Einstellungen&gt;Ein-/Ausblenden&gt;Symbolleisten ein-/ausblenden)">
+<!ENTITY StyleId "Stil-ID">
+<!ENTITY StyleIdTip "Zeigt Stil-ID aus der stylish.sqlite Datenbank an">
+<!ENTITY RemoveXUL "XUL entfernen:">
+<!ENTITY RemoveXULTip "xul entfernen: aus kopiertem Code (&quot;xul:hbox &gt; xul:scrollbox&quot; zu &quot;hbox &gt; scrollbox&quot;)">

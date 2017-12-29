@@ -231,7 +231,7 @@ var scOptions = {
       else
         el.style.display = "none";
     }
-    switch (typeof value) {
+    switch (typeof (value)) {
       case "boolean":
         scCommon.prefs.setBoolPref("custom." + pref,value);
         switch (pref) {
