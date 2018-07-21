@@ -1,5 +1,5 @@
 # Stylish-Custom
-Stylish v2.0.* and up (not tested nor supported on older versions)
+Stylish v2.0.7 and up, or Stylem v2.2.1 and up (not tested nor supported on older versions).
 
 * [Changelog](https://choggi.org/misc/Stylish-Custom/change.log)
 * [Stylish-Custom Guide](https://choggi.org/guide)
