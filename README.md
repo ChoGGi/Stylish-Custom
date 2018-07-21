@@ -4,7 +4,8 @@ Stylish v2.0.7 and up, or Stylem v2.2.1 and up (not tested nor supported on olde
 * [Changelog](https://choggi.org/misc/Stylish-Custom/change.log)
 * [Stylish-Custom Guide](https://choggi.org/guide)
 * [Forum Thread](https://forum.userstyles.org/discussion/2799/stylish-custom/p1)
-* for a signed extension see [here](https://choggi.org/misc/Stylish-Custom/), or [Releases](https://github.com/ChoGGi/Stylish-Custom/releases) (the point releases will have a different ID then the release versions)
+* for a packed extension see [here](https://choggi.org/misc/Stylish-Custom/), or [Releases](https://github.com/ChoGGi/Stylish-Custom/releases)
+* Also available at [addons.palemoon.org](https://addons.palemoon.org/addon/stylish-custom/)
 
 ### Some features:
 ```
