@@ -4,7 +4,7 @@ const {classes: Cc,Constructor: CCon, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/Services.jsm");
 const EXPORTED_SYMBOLS = ["scCommon"];
 /* jshint ignore:end */
-//cbCommon.dump();
+//scCommon.dump();
 
 var scCommon = {
 
@@ -13,20 +13,37 @@ var scCommon = {
   prompt: Services.prompt,
   getWin: Services.wm.getMostRecentWindow,
   appInfo: Services.appinfo,
-  service: null,
 
+  style: null,
+  service: null,
+  name: null,
+  prefsExt: null,
   tryService: function()
   {
+    let style = null;
     let service = null;
+    let name = null;
     try {
-      service = Cc["@userstyles.org/style;1"].getService(Ci.stylishStyle);
+      try {
+        style = Cc["@stylem.ext/style;1"];
+        service = style.getService(Ci.stylishStyle);
+        name = "stylem";
+      } catch (e){}
+      try {
+        style = Cc["@userstyles.org/style;1"];
+        service = style.getService(Ci.stylishStyle);
+        name = "stylish";
+      } catch (e){}
     } catch (e) {
       this.catchError(e);
       this.dump("Stylish not detected, please install/enable");
     }
 
     if (service) {
+      this.style = style;
       this.service = service;
+      this.name = name;
+      this.prefsExt = Services.prefs.getBranch("extensions.".concat(name,"."));
       return service;
     }
   },
@@ -44,8 +61,9 @@ var scCommon = {
   {
     //http://blogger.ziesemer.com/2007/10/javascript-debugging-in-firefox.html
     try {
-      if (e.stack)
+      if (e.stack) {
         Cu.reportError(e.stack);
+      }
     } finally {
       //throw e;
       return null;
@@ -55,8 +73,9 @@ var scCommon = {
   applyStyle: function(uri,enable,link)
   {
     //convert a link to a uri
-    if (link == true)
+    if (link == true) {
       uri = Services.io.newURI(uri,null,null);
+    }
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"]
             .getService(Ci.nsIStyleSheetService);
 
@@ -123,10 +142,11 @@ var scCommon = {
       document = this.getMainWindow().document;
 
     //"Edit" menuitem
-    let editContext = document.getElementById("stylish-style-context-edit"),
+    let editContext = document
+                      .getElementById(this.name.concat("-style-context-edit"));
     //write new style popup
-    newStylePop = document
-                    .getElementById("stylish-write-style-menu").firstChild;
+    let newStylePop = document
+            .getElementById(this.name.concat("-write-style-menu")).firstChild;
 
     if (which == true){
       editContext.removeAttribute("oncommand");
@@ -720,7 +740,7 @@ var scCommon = {
   styleInit: function(styleUrl,idUrl,updateUrl,md5Url,
                       name,code,enabled,origCode,origMd5,backgroundUpdates)
   {
-    let style = Cc["@userstyles.org/style;1"].createInstance(Ci.stylishStyle);
+    let style = scCommon.style.createInstance(Ci.stylishStyle);
     style.mode = style.CALCULATE_META | style.REGISTER_STYLE_ON_CHANGE;
 
     style.init(styleUrl,idUrl,updateUrl,md5Url,name,
@@ -729,7 +749,8 @@ var scCommon = {
   },
 
 	addSite: function(stylishOverlay) {
-    if (typeof (gBrowser) == "undefined")//Thunderbird
+    //Thunderbird
+    if (typeof (gBrowser) == "undefined")
       return;
 
 		stylishOverlay.getFromContent("stylish:page-info", function(message) {

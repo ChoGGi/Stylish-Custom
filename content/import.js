@@ -4,7 +4,7 @@ const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/FileUtils.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
 /* jshint ignore:end */
-//cbCommon.dump();
+//scCommon.dump();
 
 var locationE,treeList,service,
 scImport = {
@@ -93,7 +93,7 @@ scImport = {
 
   onSelect: function(event)
   {
-    let row = { },col = { },child = { };
+    let row = {},col = {},child = {};
     this.stylesTree.treeBoxObject
                         .getCellAt(event.clientX,event.clientY,row,col,child);
     this.selected = row.value;
@@ -126,12 +126,12 @@ scImport = {
     if (!this.styleListE.hasChildNodes())
       return;
     let importE = document.getElementById("save"),
-    styleReg = scCommon.prefs.getBoolPref("styleRegistrationEnabled");
+    styleReg = scCommon.prefsExt.getBoolPref("styleRegistrationEnabled");
     //disable the import button till we finish
     importE.setAttribute("disabled",true);
     //disable style registration (imports faster with styles disabled...)
     if (styleReg == true)
-      scCommon.prefs.setBoolPref("styleRegistrationEnabled",false);
+      scCommon.prefsExt.setBoolPref("styleRegistrationEnabled",false);
 
     let children = this.styleListE.childNodes,
     i1,i2,i3,iT,
@@ -263,7 +263,7 @@ scImport = {
 
     //turn style reg back on
     if (styleReg == true)
-      scCommon.prefs.setBoolPref("styleRegistrationEnabled",true);
+      scCommon.prefsExt.setBoolPref("styleRegistrationEnabled",true);
     //re-enable import button
     importE.removeAttribute("disabled");
     //give a tooltip to say when we're done

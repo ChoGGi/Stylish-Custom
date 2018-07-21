@@ -3,7 +3,7 @@
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("chrome://stylish-custom/content/common.jsm");
 /* jshint ignore:end */
-//cbCommon.dump();
+//scCommon.dump();
 
 var locationE,treeList,service,
 scExport = {
@@ -159,7 +159,7 @@ scExport = {
 
   onSelect: function(event)
   {
-    let row = { },col = { },child = { };
+    let row = {},col = {},child = {};
     this.stylesTree.treeBoxObject
                         .getCellAt(event.clientX,event.clientY,row,col,child);
     this.selected = row.value;

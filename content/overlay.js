@@ -115,7 +115,7 @@ var scOverlay = {
       browser.addEventListener("DOMContentLoaded",scOverlay.onPageLoad,true);
 
     //change stylish manage to be able to open style info
-    let manage = document.getElementById("stylish-manage");
+    let manage = document.getElementById(scCommon.name.concat("-manage"));
     if (manage) {
       manage.removeAttribute("oncommand");
       manage.addEventListener("command",function(event) {
@@ -425,7 +425,7 @@ var scOverlay = {
     //only toggle on left mouse
     if (e.button != 0)
       return;
-    let popup = document.getElementById("stylish-popup");
+    let popup = document.getElementById(scCommon.name.concat("-popup"));
     if (!this.toggleToolsPopupWhich) {
       popup.openPopup(that,"end_before",0,0,false,false);
       this.toggleToolsPopupWhich = true;
@@ -501,8 +501,9 @@ var scOverlay = {
       return;
     scCommon.openEditForId(style.id);
     //close the menu
-    document.getElementById("stylish-popup").hidePopup();
-    document.getElementById("stylish-custom-popup").hidePopup();
+
+    document.getElementById(scCommon.name.concat("-popup")).hidePopup();
+    document.getElementById(scCommon.name.concat("-custom-popup")).hidePopup();
     event.stopPropagation();
   },
   //^ stylish v0.5.9 ^
@@ -566,9 +567,11 @@ var scOverlay = {
     let i;
     //change rightclick action
     if (scCommon.prefs.getIntPref("custom.stylemenuitem") == 1) {
-      let styleList = document.getElementById("stylish-popup").childNodes;
+
+      let styleList = document.getElementById(scCommon.name.concat("-popup")).childNodes;
+
       for (i = 0; i < styleList.length; i++) {
-        if (styleList[i].getAttribute("context") == "stylish-style-context") {
+        if (styleList[i].getAttribute("context") == scCommon.name.concat("-style-context")) {
           styleList[i].addEventListener("click",function(event) {// jshint ignore:line
             scOverlay.handleStyleMenuItemClick(event,this.stylishStyle);
           },false);
@@ -578,8 +581,8 @@ var scOverlay = {
     }
 
     //change colour of global styles
-    let children = document.getElementById("stylish-find-styles")
-                                          .parentNode.childNodes;
+    let children = document.getElementById(scCommon.name.concat("-find-styles")).parentNode.childNodes;
+
     for (i = 0; i < children.length; i++) {
       let styleType = children[i].getAttribute("style-type");
 

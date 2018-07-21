@@ -5,7 +5,7 @@ const Cu = Components.utils;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
 /* jshint ignore:end */
-//cbCommon.dump();
+//scCommon.dump();
 
 var scSpecifySites = {
 

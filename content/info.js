@@ -4,7 +4,7 @@ const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
 /* jshint ignore:end */
-//cbCommon.dump();
+//scCommon.dump();
 //scInfo.stylesTree.treeBoxObject scInfo.stylesTree.contentView scInfo.stylesTree.view
 
 var service,
@@ -163,6 +163,7 @@ scInfo = {
     scCommon.addCode();
   },
 
+  //show list of styles to be deleted with ok/cancel buttons (or just delete without asking)
   deleteStyle: function()
   {
     let tree = this.stylesTree,
@@ -217,6 +218,7 @@ scInfo = {
   openStyle: function()
   {
     let sel = this.stylesTree.currentIndex;
+    //nothing selected
     if (sel == -1)
       return;
     let treeChildren = document.getElementById("StyleList").childNodes;
@@ -225,14 +227,18 @@ scInfo = {
 
   onTreeClicked: function(event)
   {
-    let row = { },col = { },child = { };
+    let row = {},col = {},child = {};
     this.stylesTree.treeBoxObject
                         .getCellAt(event.clientX,event.clientY,row,col,child);
-    if (row.value == -1) {//-1 means nothing selected
-      if (event.type != "click")
+    //-1 means nothing selected
+    if (row.value == -1) {
+      //it's a dblclick; so open new style
+      if (event.type == "dblclick")
         this.newStyle();
+      //ignore single clicks
       return;
     }
+    //it's a selected style so get a style object
     let style = service.find (
                 this.stylesTree.view.getItemAtIndex(row.value).id,
                 service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE
@@ -256,10 +262,10 @@ scInfo = {
       this.updateChangedStyleAttr(style.id);
       return;
     }
-    //dblclick
-    if (event.button != 2) {//dbl left/middle click to open style
-      let sel = this.stylesTree.currentIndex,
-      treeChildren = document.getElementById("StyleList").childNodes;
+    //dblclick left/middle click to open style
+    if (event.button != 2) {
+      let sel = this.stylesTree.currentIndex;
+      let treeChildren = document.getElementById("StyleList").childNodes;
       scCommon.openEditForId(treeChildren[sel].id);
       return;
     }
@@ -286,10 +292,11 @@ scInfo = {
     }
   },
 
+  //allows us to update style info in edit dialog
   updateChangedStyleAttr: function(id)
   {
-    //allows us to update style info in edit dialog
     let win = scCommon.getMainWindow().document.firstElementChild;
     win.setAttribute("stylish-custom-id-edit",id);
   }
+
 };

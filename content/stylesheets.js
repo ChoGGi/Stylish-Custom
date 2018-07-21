@@ -1,6 +1,6 @@
 "use strict";
 Components.utils.import("chrome://stylish-custom/content/common.jsm");
-//cbCommon.dump();
+//scCommon.dump();
 
 var scStylesheets = {
 

@@ -6,7 +6,7 @@ Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
 /* jshint ignore:end */
-//cbCommon.dump();
+//scCommon.dump();
 
 let saved = false,
 style = null,
@@ -124,7 +124,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
     } else {//new style
       if (code == null)
         code = "";
-      style = Cc["@userstyles.org/style;1"].createInstance(Ci.stylishStyle);
+      style = scCommon.style.createInstance(Ci.stylishStyle);
       style.mode = style.CALCULATE_META | style.REGISTER_STYLE_ON_CHANGE;
       style.init(null, null, null, null, null, code, false, null, null, null);
     }
@@ -138,7 +138,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
         tagsE.value = style.getMeta("tag", {}).join(" ");
       //updateTitle();
     } else {
-      style = Cc["@userstyles.org/style;1"].createInstance(Ci.stylishStyle);
+      style = scCommon.style.createInstance(Ci.stylishStyle);
     }
   }
 

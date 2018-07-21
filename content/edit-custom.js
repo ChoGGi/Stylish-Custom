@@ -7,7 +7,7 @@ Cu.import("resource://gre/modules/FileUtils.jsm");
 Cu.import("resource://gre/modules/NetUtil.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
 /* jshint ignore:end */
-//cbCommon.dump();
+//scCommon.dump();
 
 var scEdit = {
 
@@ -141,7 +141,7 @@ var scEdit = {
 
     //for switch to install
     if (!style)
-      style = Cc["@userstyles.org/style;1"].createInstance(Ci.stylishStyle);
+      style = scCommon.style.createInstance(Ci.stylishStyle);
 
     if (style.id == "0") {
       if (toggleE)
@@ -1503,7 +1503,7 @@ var scEdit = {
       return;
 
     let errorsArea = document.getElementById("errorsArea"),
-    styleReg = scCommon.prefs.getBoolPref("styleRegistrationEnabled"),
+    styleReg = scCommon.prefsExt.getBoolPref("styleRegistrationEnabled"),
     uri;
 
     if (styleReg == false) {

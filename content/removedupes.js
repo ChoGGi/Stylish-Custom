@@ -1,6 +1,6 @@
 "use strict";
 Components.utils.import("chrome://stylish-custom/content/common.jsm");
-//cbCommon.dump();
+//scCommon.dump();
 
 var treeList,service,
 scRemovedupes = {
@@ -137,7 +137,7 @@ styleAmount: null,
 /*
   onSelect: function(event)
   {
-    let row = { },col = { },child = { };
+    let row = {},col = {},child = {};
     this.stylesTree.treeBoxObject.getCellAt(event.clientX,event.clientY,row,col,child);
     this.selected = row.value;
   },

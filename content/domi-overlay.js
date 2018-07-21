@@ -7,7 +7,7 @@ if (typeof (Cc) === "undefined")
   var Cc = Components.classes;
 Cu.import("chrome://stylish-custom/content/common.jsm");
 /* jshint ignore:end */
-//cbCommon.dump();
+//scCommon.dump();
 
 var scDomi = {
 
@@ -38,8 +38,7 @@ var scDomi = {
     let menuitem = document.createElement("menuitem");
     popup.appendChild(menuitem);
     menuitem.setAttribute("label",selector);
-    menuitem.addEventListener("command",function(event)
-    {
+    menuitem.addEventListener("command",function(event) {
       scDomi.copySelectorToClipboard(event);
     },false);
   },

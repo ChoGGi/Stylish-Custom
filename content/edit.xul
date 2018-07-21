@@ -30,6 +30,7 @@
     <stringbundle id="stringsEdit" src="chrome://stylish-custom/locale/edit.properties"/>
 
   <scriptset id="scScriptset">
+    <script type="application/x-javascript" src="chrome://stylem/content/common.js"/>
     <script type="application/x-javascript" src="chrome://stylish/content/common.js"/>
     <script type="application/x-javascript" src="chrome://stylish-custom/content/edit.js"/>
     <script type="application/x-javascript" src="chrome://stylish-custom/content/edit-custom.js"/>
