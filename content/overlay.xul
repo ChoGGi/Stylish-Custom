@@ -74,7 +74,6 @@
   <menuitem position="3" id="StylishInfo" label="&StylishInfo;" tooltiptext="&StylishInfoTip;" oncommand="scCommon.openDialog('Info')" hidden="true"/>
   <menuitem position="4" id="StylishImport" label="&ImportStyles;" tooltiptext="&ImportStylesTip;" oncommand="scCommon.openDialog('Import')" hidden="true"/>
   <menuitem position="5" id="StylishExport" label="&ExportStyles;" tooltiptext="&ExportStylesTip;" oncommand="scCommon.openDialog('Export')" hidden="true"/>
-  <menuseparator position="14"/>
   <menuitem id="StylishNewStyle" label="&NewStyle;" oncommand="scCommon.addCode()" hidden="true"/>
   <menu position="15" id="StylishAppStyles" label="&AppStyles;" hidden="true">
     <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
