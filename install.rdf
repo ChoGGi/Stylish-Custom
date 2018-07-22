@@ -4,16 +4,15 @@
   xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description rdf:about="urn:mozilla:install-manifest">
 
-    <em:name>Stylish-Custom_TEST</em:name>
-    <em:id>Stylish-Custom@ChoGGi</em:id>
-    <em:version>0.9.4.3</em:version>
+    <em:name>Stylish-Custom</em:name>
+    <em:version>0.9.4</em:version>
 
 <!--
     <em:name>Stylish-Custom_TEST</em:name>
-    <em:id>Stylish-Custom@ChoGGi_TEST</em:id>
     <em:version>0.9.5.0</em:version>
 -->
 
+    <em:id>Stylish-Custom@ChoGGi</em:id>
     <em:creator>ChoGGi</em:creator>
     <em:homepageURL>https://choggi.org/misc/Stylish-Custom/</em:homepageURL>
     <em:iconURL>chrome://stylish-custom/skin/icon-32.png</em:iconURL>
