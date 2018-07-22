@@ -14,7 +14,14 @@ var scOptions = {
   {
     let win = this.mainWin;
     //since Mozilla removed support for "requires" in install.rdf, this checks if Stylish is enabled
-    if (!scCommon.tryService()){
+    let service = null;
+    if (scCommon.service) {
+      service = scCommon.service;
+    } else {
+      service = scCommon.tryService();
+    }
+
+    if (!service) {
       win.alert("Stylish not detected, please install/enable");
       scCommon.getWin("stylishCustomOptions").close();
       return;

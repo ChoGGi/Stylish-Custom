@@ -44,6 +44,8 @@ menuitem[id^="StylishExport"],
 #new-style,
 #new-style>.button-box>.button-icon,
 #stylishCustom_ClearSearchText,
+#stylem-popup>menu:not([id]).style-menu-item,
+#stylish-popup>menu:not([id]).style-menu-item,
 #stylish-toolmenu
 {list-style-image:none!important;-moz-image-region:auto!important}
 

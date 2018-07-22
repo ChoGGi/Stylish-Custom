@@ -46,23 +46,44 @@
   </popupset>
 
   <!-- attaches to stylish popup -->
-  <menupopup id="stylish-popup" onpopupshowing="stylishOverlay.popupShowing(event); scOverlay.popupshowing(event);" >
-    <menuitem position="2" id="StylishOptions" label="&Options;" tooltiptext="&OptionsTip;" oncommand="scCommon.openDialog('Options')"/>
-    <menuitem position="3" id="StylishInfo" label="&StylishInfo;" tooltiptext="&StylishInfoTip;" oncommand="scCommon.openDialog('Info')" hidden="true"/>
-    <menuitem position="4" id="StylishImport" label="&ImportStyles;" tooltiptext="&ImportStylesTip;" oncommand="scCommon.openDialog('Import')" hidden="true"/>
-    <menuitem position="5" id="StylishExport" label="&ExportStyles;" tooltiptext="&ExportStylesTip;" oncommand="scCommon.openDialog('Export')" hidden="true"/>
+  <menupopup id="stylish-popup" onpopupshowing="stylishOverlay.popupShowing(event); scOverlay.popupshowing(event);">
+    <menuitem id="StylishOptions"/>
+    <menuitem id="StylishInfo"/>
+    <menuitem id="StylishImport"/>
+    <menuitem id="StylishExport"/>
     <menuseparator position="14"/>
-    <menuitem id="StylishNewStyle" label="&NewStyle;" oncommand="scCommon.addCode()" hidden="true"/>
-    <menu position="15" id="StylishAppStyles" label="&AppStyles;" hidden="true">
-      <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
-    </menu>
-    <menu position="16" id="StylishEnabledStyles" label="&EnabledStyles;" hidden="true">
-      <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
-    </menu>
-    <menu position="17" id="StylishDisabledStyles" label="&DisabledStyles;" hidden="true">
-      <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
-    </menu>
+    <menuitem id="StylishNewStyle"/>
+    <menu id="StylishAppStyles"/>
+    <menu id="StylishEnabledStyles"/>
+    <menu id="StylishDisabledStyles"/>
   </menupopup>
+  <menupopup id="stylem-popup" onpopupshowing="stylishOverlay.popupShowing(event); scOverlay.popupshowing(event);">
+    <menuitem id="StylishOptions"/>
+    <menuitem id="StylishInfo"/>
+    <menuitem id="StylishImport"/>
+    <menuitem id="StylishExport"/>
+    <menuseparator position="14"/>
+    <menuitem id="StylishNewStyle"/>
+    <menu id="StylishAppStyles"/>
+    <menu id="StylishEnabledStyles"/>
+    <menu id="StylishDisabledStyles"/>
+  </menupopup>
+
+  <menuitem position="2" id="StylishOptions" label="&Options;" tooltiptext="&OptionsTip;" oncommand="scCommon.openDialog('Options')"/>
+  <menuitem position="3" id="StylishInfo" label="&StylishInfo;" tooltiptext="&StylishInfoTip;" oncommand="scCommon.openDialog('Info')" hidden="true"/>
+  <menuitem position="4" id="StylishImport" label="&ImportStyles;" tooltiptext="&ImportStylesTip;" oncommand="scCommon.openDialog('Import')" hidden="true"/>
+  <menuitem position="5" id="StylishExport" label="&ExportStyles;" tooltiptext="&ExportStylesTip;" oncommand="scCommon.openDialog('Export')" hidden="true"/>
+  <menuseparator position="14"/>
+  <menuitem id="StylishNewStyle" label="&NewStyle;" oncommand="scCommon.addCode()" hidden="true"/>
+  <menu position="15" id="StylishAppStyles" label="&AppStyles;" hidden="true">
+    <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
+  </menu>
+  <menu position="16" id="StylishEnabledStyles" label="&EnabledStyles;" hidden="true">
+    <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
+  </menu>
+  <menu position="17" id="StylishDisabledStyles" label="&DisabledStyles;" hidden="true">
+    <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
+  </menu>
 
   <!-- "Get Stylesheets" menuitem -->
   <popup id="contentAreaContextMenu">

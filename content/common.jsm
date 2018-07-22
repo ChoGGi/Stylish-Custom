@@ -18,25 +18,31 @@ var scCommon = {
   service: null,
   name: null,
   prefsExt: null,
+
+  // check if stylish/stylem is enabled (since I only added this because of amo bitching, remove it?)
   tryService: function()
   {
     let style = null;
     let service = null;
     let name = null;
+
+    // try for Stylem first
     try {
-      try {
-        style = Cc["@stylem.ext/style;1"];
-        service = style.getService(Ci.stylishStyle);
-        name = "stylem";
-      } catch (e){}
+      style = Cc["@stylem.ext/style;1"];
+      service = style.getService(Ci.stylishStyle);
+      name = "stylem";
+    } catch (e) {
+      this.catchError(e);
+    }
+    // if not then see if Stylish is installed
+    if (!service) {
       try {
         style = Cc["@userstyles.org/style;1"];
         service = style.getService(Ci.stylishStyle);
         name = "stylish";
-      } catch (e){}
-    } catch (e) {
-      this.catchError(e);
-      this.dump("Stylish not detected, please install/enable");
+      } catch (e){
+        this.catchError(e);
+      }
     }
 
     if (service) {
@@ -45,13 +51,15 @@ var scCommon = {
       this.name = name;
       this.prefsExt = Services.prefs.getBranch("extensions.".concat(name,"."));
       return service;
+    } else {
+      this.dump("Stylish not detected, please install/enable");
     }
   },
 
-  dump: function(aString)
+  dump: function(sMsg)
   {
     try {
-      Services.console.logStringMessage("Stylish-Custom:\n " + aString);
+      Services.console.logStringMessage("Stylish-Custom:\n " + sMsg);
     } catch(e) {
       this.catchError(e);
     }
@@ -59,7 +67,7 @@ var scCommon = {
 
   catchError: function(e)
   {
-    //http://blogger.ziesemer.com/2007/10/javascript-debugging-in-firefox.html
+    // http://blogger.ziesemer.com/2007/10/javascript-debugging-in-firefox.html
     try {
       if (e.stack) {
         Cu.reportError(e.stack);
@@ -81,6 +89,7 @@ var scCommon = {
 
     //AGENT_SHEET AUTHOR_SHEET USER_SHEET
     if (enable == true) {
+      // only enable if style isn't already enabled
       if (!sss.sheetRegistered(uri,sss.AGENT_SHEET))
         sss.loadAndRegisterSheet(uri,sss.AGENT_SHEET);
     } else {
@@ -91,19 +100,20 @@ var scCommon = {
 
   regexEscape: function(str)
   {
-    //make sure it is a string
-    if (typeof (str) !== "string")
+    //make sure it's a string
+    if (typeof(str) !== "string") {
       str = str.toString();
+    }
     //https://stackoverflow.com/questions/3561493
     //also replaces chars windows filenames dont like  <>:"
     return str.replace(/[-\/\\^$*+?.()|[\]{}<>:"]/g,"\\$&");
   },
 
-  getMsg: function(aString)
+  getMsg: function(str)
   {
     return Services.strings
-              .createBundle("chrome://stylish-custom/locale/common.properties")
-              .GetStringFromName(aString);
+      .createBundle("chrome://stylish-custom/locale/common.properties")
+      .GetStringFromName(str);
   },
 
   getStyle: function(element,win)
@@ -113,8 +123,9 @@ var scCommon = {
 
   removeChild: function(element)
   {
-    if (!element || element.childNodes.length < 1)
+    if (!element || element.childNodes.length < 1) {
       return;
+    }
     while (element.firstChild) {
       element.removeChild(element.firstChild);
     }
@@ -142,28 +153,40 @@ var scCommon = {
       document = this.getMainWindow().document;
 
     //"Edit" menuitem
-    let editContext = document
-                      .getElementById(this.name.concat("-style-context-edit"));
+    let editContext = document.getElementById(
+      this.name.concat("-style-context-edit")
+    );
     //write new style popup
-    let newStylePop = document
-            .getElementById(this.name.concat("-write-style-menu")).firstChild;
+    let newStylePop = document.getElementById(
+      this.name.concat("-write-style-menu")
+    ).firstChild;
 
-    if (which == true){
+    if (which == true) {
       editContext.removeAttribute("oncommand");
       editContext.addEventListener(
-                    "command",scCommon.editContextOverrideFunc,false);
+        "command",
+        scCommon.editContextOverrideFunc,
+        false
+      );
       newStylePop.removeAttribute("onpopupshowing");
       newStylePop.addEventListener(
-                    "popupshowing",scCommon.newStylePopFunc,false);
+        "popupshowing",
+        scCommon.newStylePopFunc,
+        false
+      );
     } else {
       editContext.removeEventListener(
-                    "command",scCommon.editContextOverrideFunc);
+        "command",
+        scCommon.editContextOverrideFunc
+      );
       //Note to reviewer: Fails if I use addEventListener (or I'm just doing it wrong)
       editContext.setAttribute("oncommand","stylishOverlay.contextEdit()");
       newStylePop.removeEventListener("popupshowing",scCommon.newStylePopFunc);
       //Note to reviewer: Fails if I use addEventListener (or I'm just doing it wrong)
-      newStylePop.setAttribute("onpopupshowing",
-                              "stylishOverlay.writeStylePopupShowing(event)");
+      newStylePop.setAttribute(
+        "onpopupshowing",
+        "stylishOverlay.writeStylePopupShowing(event)"
+      );
     }
 
   },
@@ -184,16 +207,19 @@ var scCommon = {
   {
     let service = scCommon.service;
     service.list(service.CALCULATE_META | service.REGISTER_STYLE_ON_CHANGE,
-                                                                  {}).forEach(
+        {}).forEach(
       function(style) {
         style.checkForUpdates(null);
         style.applyUpdate(null);
       }
     );
+
     if (what == "Info") {
-      this.prompt.alert(null,
-                        this.getMsg("StylesUpdated"),
-                        this.getMsg("StylesUpdated"));
+      this.prompt.alert(
+        null,
+        this.getMsg("StylesUpdated"),
+        this.getMsg("StylesUpdated")
+      );
     }
   },
 
@@ -222,9 +248,11 @@ var scCommon = {
     this.tooltipEl.removeAttribute("hidden");
     this.tooltipEl.label = this.getMsg(msg);
     //be nice to makondo and stick it in the middle
-    this.tooltipEl.openPopup(doc.getElementById(that),"overlap",
-                            doc.defaultView.innerWidth / 2,
-                            doc.defaultView.innerHeight / 4
+    this.tooltipEl.openPopup(
+      doc.getElementById(that),
+      "overlap",
+      doc.defaultView.innerWidth / 2,
+      doc.defaultView.innerHeight / 4
     );
     //make the timer
     let observer = {
@@ -317,12 +345,14 @@ var scCommon = {
       win = this.getMainWindow();
 
     let addonWin = this.focusAddons();
-    if (!addonWin)
+    if (!addonWin) {
       win.openDialog(
-      "chrome://mozapps/content/extensions/extensions.xul?NoSidebar","",
-                            "chrome,menubar,extra-chrome,toolbar,dialog=no," +
-                            "resizable,centerscreen,width=1000,height=500"
-    );
+        "chrome://mozapps/content/extensions/extensions.xul?NoSidebar",
+        "",
+        "chrome,menubar,extra-chrome,toolbar,dialog=no," +
+        "resizable,centerscreen,width=1000,height=500"
+      );
+    }
 
     win.setTimeout(function(){
       scCommon.focusAddons(addonWin);
@@ -355,8 +385,9 @@ var scCommon = {
       if (dialog) {
         dialog.focus();
       } else {
-        if (!window)
+        if (!window) {
           var window = scCommon.getMainWindow();
+        }
         window.openDialog("chrome://stylish-custom/content/" + xul);
       }
     }
@@ -386,27 +417,31 @@ var scCommon = {
     let locationE = doc.getElementById("Location"),
     winEl;
 
-    if (which == "Export")
+    if (which == "Export") {
       winEl = this.getWin("stylishCustomExport");
-    else if (which == "Import")
+    } else if (which == "Import") {
       winEl = this.getWin("stylishCustomImport");
+    }
 
     //import/export?
     const nsIFilePicker = Ci.nsIFilePicker;
     let fp = Cc["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
 
-    if (which == "Export")
+    if (which == "Export") {
       fp.init(winEl,this.getMsg("ExportTitle"),nsIFilePicker.modeGetFolder);
-    else if (which == "Import")
+    } else if (which == "Import") {
       fp.init(winEl,this.getMsg("ImportTitle"),nsIFilePicker.modeGetFolder);
+    }
 
-    if (fp.show() == nsIFilePicker.returnCancel)
+    if (fp.show() == nsIFilePicker.returnCancel) {
       return;
+    }
     locationE.value = fp.file.path;
-    if (which == "Export")
+    if (which == "Export") {
       this.prefs.setCharPref("custom.exportpath",fp.file.path);
-    else if (which == "Import")
+    } else if (which == "Import") {
       this.prefs.setCharPref("custom.importpath",fp.file.path);
+    }
 
     this.removeChild(doc.getElementById("StyleList"));
     dialog.init();
@@ -423,9 +458,9 @@ var scCommon = {
 
     for (let i = 0; i < children.length; i++) {
       treecell = children[i].firstChild.firstChild.nextSibling;
-      if (!treecell.hasAttribute("value"))
+      if (!treecell.hasAttribute("value")) {
         treecell.setAttribute("value",true);
-      else {
+      } else {
         if (treecell.getAttribute("value") == "true")
           treecell.setAttribute("value",false);
         else
@@ -436,7 +471,7 @@ var scCommon = {
 
   createStyleArray: function(treeList,sortBy)
   {
-    if (!this.service){
+    if (!this.service) {
       let win = this.getMainWindow();
       if (typeof (win.SidebarUI) === "undefined"){
         win.toggleSidebar("viewStylishSidebar");
@@ -655,10 +690,10 @@ var scCommon = {
       return null;
     }
 
-    if (type != "Text")
-      return req.responseXML;
-    else
+    if (type == "Text")
       return req.responseText;
+    else
+      return req.responseXML;
   },
 
   newStyle: function(code)
@@ -743,14 +778,16 @@ var scCommon = {
     let style = scCommon.style.createInstance(Ci.stylishStyle);
     style.mode = style.CALCULATE_META | style.REGISTER_STYLE_ON_CHANGE;
 
-    style.init(styleUrl,idUrl,updateUrl,md5Url,name,
-              code,enabled,origCode,origMd5,backgroundUpdates);
+    style.init(
+      styleUrl,idUrl,updateUrl,md5Url,name,
+      code,enabled,origCode,origMd5,backgroundUpdates
+    );
     return style;
   },
 
 	addSite: function(stylishOverlay) {
     //Thunderbird
-    if (typeof (gBrowser) == "undefined")
+    if (!gBrowser)
       return;
 
 		stylishOverlay.getFromContent("stylish:page-info", function(message) {
@@ -762,7 +799,7 @@ var scCommon = {
 
 	addDomain: function(domain) {
 		let code = "@namespace url(http://www.w3.org/1999/xhtml);\n" +
-                                                  "@-moz-document domain(\"" +
+               "@-moz-document domain(\"" +
                 domain + "\") {\n\n}";
 		scCommon.addCode(code,domain);
 	},
@@ -775,8 +812,9 @@ var scCommon = {
     if (!code)
       code = "";
 
-    let style = scCommon
-                  .styleInit(null,null,null,null,name,code,null,null,null);
+    let style = scCommon.styleInit(
+      null,null,null,null,name,code,null,null,null
+    );
     scCommon.openEdit(win,{style: style});
 	},
 
@@ -786,14 +824,17 @@ var scCommon = {
       return;
     params.windowType = name;
     return this.getMainWindow().openDialog(
-                                  "chrome://stylish-custom/content/edit.xul",
-                                  name,
-                                  "chrome,resizable,dialog=no",params);
+      "chrome://stylish-custom/content/edit.xul",
+      name,
+      "chrome,resizable,dialog=no",
+      params
+    );
   },
 
 	openEditForId: function(id) {
 		return this.openEdit(
-          this.getWindowName("stylishEdit", id), {id: id},this.getMainWindow()
+      this.getWindowName("stylishEdit", id),
+      {id: id},this.getMainWindow()
     );
 	},
 

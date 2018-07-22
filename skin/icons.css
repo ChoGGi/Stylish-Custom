@@ -86,7 +86,7 @@ menuitem[id^="StylishImport"]{-moz-image-region:rect(0 160px 16px 144px);list-st
 #stylish-add-file,#stylem-add-file{-moz-image-region:rect(0 64px 16px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
 #StylishOptionsMain,#StylishOptions{-moz-image-region:rect(16px 64px 32px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
 #StylishGuide{-moz-image-region:rect(0 144px 16px 128px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
-#checkUpdatesAllButton{-moz-image-region:rect(48px 64px 64px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
+#stylem-popup>menu:not([id]).style-menu-item,#stylish-popup>menu:not([id]).style-menu-item,#checkUpdatesAllButton{-moz-image-region:rect(48px 64px 64px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
 #stylishCustom_ClearSearchText{-moz-image-region:rect(16px 80px 32px 64px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
 #copy-style-info{-moz-image-region:rect(32px 64px 48px 48px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}
 [id^="StylishAppStyles"]{-moz-image-region:rect(0 112px 16px 96px);list-style-image:url("chrome://stylish-custom/skin/mosaic.png")}

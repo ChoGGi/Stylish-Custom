@@ -29,7 +29,13 @@ var scOverlay = {
     }
 
     //since Mozilla removed support for "requires" in install.rdf, this checks if Stylish is enabled
-    let service = scCommon.tryService();
+    let service = null;
+    if (scCommon.service) {
+      service = scCommon.service;
+    } else {
+      service = scCommon.tryService();
+    }
+
     if (!service) {
       //Stylish not installed
       dBox("stylish-toolmenu",true);
@@ -493,33 +499,38 @@ var scOverlay = {
       menuitem.setAttribute("enabled",false);
   },
 
-  //from stylish v0.5.9
+  // from stylish v0.5.9
   handleStyleMenuItemClick: function(event,style)
   {
     //right-click opens edit window
-    if (event.button != 2)
+    if (event.button != 2) {
       return;
+    }
     scCommon.openEditForId(style.id);
-    //close the menu
 
+    //close the menu
     document.getElementById(scCommon.name.concat("-popup")).hidePopup();
     document.getElementById(scCommon.name.concat("-custom-popup")).hidePopup();
     event.stopPropagation();
   },
-  //^ stylish v0.5.9 ^
+  // ^ stylish v0.5.9 ^
 
-  //from Stylish v2.0.7
+  // from Stylish v2.0.7
+  // -write-style-menu
 	writeStylePopupShowing: function(event) {
     if (!document)
       var document = scCommon.getMainWindow().document;
 
-		let popup = event.target,
-		addSite = document.createElementNS(stylishCommon.XULNS, "menuitem");
-
-		addSite.setAttribute("label",stylishOverlay
-                        .STRINGS.getString("writeforsite"));
-		addSite.setAttribute("accesskey",stylishOverlay
-                        .STRINGS.getString("writeforsiteaccesskey"));
+		let popup = event.target;
+		let addSite = document.createElementNS(stylishCommon.XULNS, "menuitem");
+		addSite.setAttribute(
+      "label",
+      stylishOverlay.STRINGS.getString("writeforsite")
+    );
+		addSite.setAttribute(
+      "accesskey",
+      stylishOverlay.STRINGS.getString("writeforsiteaccesskey")
+    );
 		//addSite.addEventListener("command", scCommon.addSite, false);
 		addSite.addEventListener("command", function() {
       scCommon.addSite(stylishOverlay);
@@ -530,12 +541,12 @@ var scOverlay = {
 		try {
 			domain = gBrowser.currentURI.host;
 		} catch (e) {}
-		if (domain) {
-			let domains = [];
-			stylishOverlay.getDomainList(domain, domains);
-			for (let i = 0; i < domains.length; i++) {
-				popup.appendChild(this.getDomainMenuItem(domains[i]));
-			}
+      if (domain) {
+        let domains = [];
+        stylishOverlay.getDomainList(domain, domains);
+        for (let i = 0; i < domains.length; i++) {
+          popup.appendChild(this.getDomainMenuItem(domains[i]));
+        }
 		}
 
 		addSite = document.createElementNS(stylishCommon.XULNS, "menuitem");
@@ -558,7 +569,7 @@ var scOverlay = {
     }, false);
 		return addSite;
 	},
-  //^ Stylish v2.0.7 ^
+  // ^ Stylish v2.0.7 ^
 
   //for stylish toolbar menu
   //popupshowing: function(event)
