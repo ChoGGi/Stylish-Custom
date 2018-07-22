@@ -4,6 +4,7 @@
 const Cu = Components.utils;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
+Cu.import("chrome://".concat(scCommon.name,"/content/common.js"));
 /* jshint ignore:end */
 //scCommon.dump();
 

@@ -4,22 +4,33 @@
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
+Cu.import("resource://gre/modules/AddonManager.jsm");
+Cu.import("resource://gre/modules/FileUtils.jsm");
+Cu.import("resource://gre/modules/NetUtil.jsm");
+
 Cu.import("chrome://stylish-custom/content/common.jsm");
+Cu.import("chrome://".concat(scCommon.name,"/content/common.js"));
+// get rid of "No chrome package" msg
+AddonManager.getAddonByID("itsalltext@docwhat.gerf.org",function(addon)
+{
+  if (addon && addon.isActive == true) {
+    Cu.import("chrome://itsalltext/content/API.js");
+  }
+});
 /* jshint ignore:end */
 //scCommon.dump();
 
-let saved = false,
-style = null,
-strings = null,
-codeE, nameE, tagsE, updateUrlE,
+let saved = false;
+let style = null;
+let strings = null;
+let codeE, nameE, tagsE, updateUrlE;
 //because some editors can have different CRLF settings than what we've saved
 //as, we'll only save if the code in the editor has changed. this will prevent
 //update notifications when there are none
-initialCode,
-prefs = Services.prefs.getBranch("extensions.stylish.");
+let initialCode;
+let prefs = Services.prefs.getBranch("extensions.stylish.");
 
-const CSSXULNS = "@namespace url" +
-          "(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);";
+const CSSXULNS = "@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);";
 const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
 
 // Because the edit windows have different URL, we need to do this ourselves to persist the position for all edit windows.

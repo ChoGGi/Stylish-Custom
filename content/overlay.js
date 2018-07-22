@@ -67,8 +67,9 @@ var scOverlay = {
         try {
           if (file.isFile() &&
               file.leafName.indexOf("Stylish-Custom") != -1 &&
-              file.leafName.search(/\.css$/i) != -1)
+              file.leafName.search(/\.css$/i) != -1) {
             file.remove(false);
+          }
         } catch(e) {/*fails on locked files, or at least pagefile.sys on windows*/}
       }
     }

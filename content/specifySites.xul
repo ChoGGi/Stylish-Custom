@@ -19,8 +19,6 @@ the below is from Stylish v1.4.3/2.0.4, so different license applies
   ondialogaccept="return scSpecifySites.close()">
 
     <scriptset>
-      <script type="application/x-javascript" src="chrome://stylem/content/common.js"/>
-      <script type="application/x-javascript" src="chrome://stylish/content/common.js"/>
       <script type="application/x-javascript" src="chrome://stylish-custom/content/specifySites.js"/>
     </scriptset>
 

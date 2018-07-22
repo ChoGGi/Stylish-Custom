@@ -27,8 +27,6 @@
 
   <scriptset>
     <script type="application/x-javascript" src="chrome://stylish-custom/content/export.js"/>
-    <script type="application/x-javascript" src="chrome://stylem/content/common.js"/>
-    <script type="application/x-javascript" src="chrome://stylish/content/common.js"/>
   </scriptset>
 
   <keyset>

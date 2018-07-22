@@ -11,16 +11,15 @@
 
   <script type="application/x-javascript" src="chrome://stylish-custom/content/overlay.js"/>
 
-        <!-- Sidebar -->
+  <!-- Sidebar -->
   <broadcasterset id="mainBroadcasterSet">
     <broadcaster id="viewStylishSidebar" autoCheck="false" label="&Stylish;" type="checkbox" group="sidebar" sidebarurl="chrome://stylish-custom/content/info.xul" sidebartitle="&Stylish;" oncommand="toggleSidebar('viewStylishSidebar');"/>
   </broadcasterset>
-
   <menupopup id="viewSidebarMenu">
     <menuitem id="stylish-view-sidebar" observes="viewStylishSidebar"/>
   </menupopup>
 
-<popupset id="mainPopupSet">
+  <popupset id="mainPopupSet">
     <menupopup id="stylish-custom-popup">
       <menu id="StylishAppStylesMain" label="&AppStyles;">
         <menupopup onpopupshowing="scOverlay.createMenu(this.parentNode.id,event)"/>
@@ -45,7 +44,7 @@
     </menupopup>
   </popupset>
 
-  <!-- attaches to stylish popup -->
+  <!-- attaches to stylish menu popup -->
   <menupopup id="stylish-popup" onpopupshowing="stylishOverlay.popupShowing(event); scOverlay.popupshowing(event);">
     <menuitem id="StylishOptions"/>
     <menuitem id="StylishInfo"/>
@@ -57,6 +56,7 @@
     <menu id="StylishEnabledStyles"/>
     <menu id="StylishDisabledStyles"/>
   </menupopup>
+  <!-- attaches to stylem menu popup -->
   <menupopup id="stylem-popup" onpopupshowing="stylishOverlay.popupShowing(event); scOverlay.popupshowing(event);">
     <menuitem id="StylishOptions"/>
     <menuitem id="StylishInfo"/>
@@ -69,6 +69,7 @@
     <menu id="StylishDisabledStyles"/>
   </menupopup>
 
+  <!-- added to whichever popup is active -->
   <menuitem position="2" id="StylishOptions" label="&Options;" tooltiptext="&OptionsTip;" oncommand="scCommon.openDialog('Options')"/>
   <menuitem position="3" id="StylishInfo" label="&StylishInfo;" tooltiptext="&StylishInfoTip;" oncommand="scCommon.openDialog('Info')" hidden="true"/>
   <menuitem position="4" id="StylishImport" label="&ImportStyles;" tooltiptext="&ImportStylesTip;" oncommand="scCommon.openDialog('Import')" hidden="true"/>
@@ -95,12 +96,10 @@
     <key id="key_stylishCustom-openManage"/>
     <key id="key_stylishCustom-reloadStyles"/>
   </keyset>
-
   <toolbarpalette id="BrowserToolbarPalette">
     <toolbarbutton id="stylish-custom-toolbar-button"/>
     <toolbarbutton id="stylish-custom-toolbar-manage"/>
   </toolbarpalette>
-
   <menupopup id="menu_ToolsPopup">
     <menu id="stylish-toolmenu" insertbefore="webDeveloperMenu"/>
   </menupopup>
@@ -110,17 +109,15 @@
     <key id="key_stylishCustom-openManage"/>
     <key id="key_stylishCustom-reloadStyles"/>
   </keyset>
-
   <toolbarpalette id="MailToolbarPalette">
     <toolbarbutton id="stylish-custom-toolbar-button"/>
     <toolbarbutton id="stylish-custom-toolbar-manage"/>
   </toolbarpalette>
-
   <menupopup id="taskPopup">
     <menu id="stylish-toolmenu" insertbefore="javascriptConsole"/>
   </menupopup>
 
-  <!-- added above -->
+  <!-- Firefox/Thunderbird -->
   <menu id="stylish-toolmenu" label="&Stylish;" hidden="true" onclick="scOverlay.toggleToolsPopup(this,event)"/>
   <toolbarbutton id="stylish-custom-toolbar-button" class="toolbarbutton-1" label="&StylishCustom;" onclick="event.preventDefault();scOverlay.clickHandler(event)" type="menu-button" context=""/>
   <toolbarbutton id="stylish-custom-toolbar-manage" class="toolbarbutton-1" label="&StylishManage;" onclick="event.preventDefault();scOverlay.clickHandlerManage(event.button)" tooltiptext="&StylishManageTip;"/>

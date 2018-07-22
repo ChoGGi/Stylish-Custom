@@ -1,15 +1,18 @@
 "use strict";
-Components.utils.import("chrome://stylish-custom/content/common.jsm");
+let Cu = Components.utils;
+Cu.import("chrome://stylish-custom/content/common.jsm");
+Cu.import("chrome://".concat(scCommon.name,"/content/common.js"));
 //scCommon.dump();
 
-var treeList,service,
-scRemovedupes = {
+var treeList,service;
 
-stylesTree: null,
-selected: null,
-styleListE: null,
-stylesSort: null,
-styleAmount: null,
+var scRemovedupes = {
+
+  stylesTree: null,
+  selected: null,
+  styleListE: null,
+  stylesSort: null,
+  styleAmount: null,
 
   init: function()
   {

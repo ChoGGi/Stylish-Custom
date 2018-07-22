@@ -9,8 +9,7 @@
 the below is from Stylish v1.4.3/2.0.4, so different license applies
 -->
 
-<overlay id="stylishCustom"
-          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<overlay id="stylishCustom" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <script type="application/x-javascript" src="chrome://stylish-custom/content/domi-overlay.js"/>
 

@@ -1,12 +1,4 @@
 "use strict";
-/*global initialCode:true */
-/* jshint ignore:start */
-Cu.import("resource://gre/modules/Services.jsm");
-Cu.import("resource://gre/modules/AddonManager.jsm");
-Cu.import("resource://gre/modules/FileUtils.jsm");
-Cu.import("resource://gre/modules/NetUtil.jsm");
-Cu.import("chrome://stylish-custom/content/common.jsm");
-/* jshint ignore:end */
 //scCommon.dump();
 
 var scEdit = {
