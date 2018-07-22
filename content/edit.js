@@ -18,7 +18,7 @@ AddonManager.getAddonByID("itsalltext@docwhat.gerf.org",function(addon)
   }
 });
 /* jshint ignore:end */
-//scCommon.dump();
+//~ scCommon.dump("XXX");
 
 let saved = false;
 let style = null;
@@ -28,7 +28,8 @@ let codeE, nameE, tagsE, updateUrlE;
 //as, we'll only save if the code in the editor has changed. this will prevent
 //update notifications when there are none
 let initialCode;
-let prefs = Services.prefs.getBranch("extensions.stylish.");
+let prefs = scCommon.prefs;
+let prefsExt = scCommon.prefsExt;
 
 const CSSXULNS = "@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);";
 const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
@@ -37,7 +38,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
 // Only do this if we're opened with openDialog, in which case window.opener is set
 /*
   if (window.opener) {
-    let windowPersist = JSON.parse(prefs.getCharPref("editorWindowPersist"));
+    let windowPersist = JSON.parse(prefsExt.getCharPref("editorWindowPersist"));
     window.moveTo(windowPersist.screenX, windowPersist.screenY);
     window.resizeTo(windowPersist.width, windowPersist.height);
     if (windowPersist.windowState == 1) {
@@ -73,7 +74,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
       }
       windowPersist.windowState = ws;
 
-      prefs.setCharPref("editorWindowPersist", JSON.stringify(windowPersist));
+      prefsExt.setCharPref("editorWindowPersist", JSON.stringify(windowPersist));
     });
   }
 */
@@ -155,7 +156,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
 
   function init2()
   {
-    let wrapLines = prefs.getBoolPref("wrap_lines");
+    let wrapLines = prefsExt.getBoolPref("wrap_lines");
     refreshWordWrap(wrapLines);
     let wrapLinesE = document.getElementById("wrap-lines");
     if (wrapLinesE) {
@@ -338,8 +339,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
 
   function changeWordWrap(on)
   {
-    prefs = Services.prefs.getBranch("extensions.stylish.");
-    prefs.setBoolPref("wrap_lines", on);
+    prefsExt.setBoolPref("wrap_lines", on);
     refreshWordWrap(on);
   }
 
@@ -594,7 +594,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
   {
     let findBar = document.getElementById("findbar");
     //if findbar gone or not using new search
-    let pref = scCommon.prefs.getBoolPref("custom.newsearch");
+    let pref = prefs.getBoolPref("newsearch");
     //don't add findbar unless using new search
     if (!findBar && pref == true) {
       let findTemp = document.createElement("findbar");

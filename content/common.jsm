@@ -4,11 +4,11 @@ const {classes: Cc,Constructor: CCon, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/Services.jsm");
 const EXPORTED_SYMBOLS = ["scCommon"];
 /* jshint ignore:end */
-//scCommon.dump();
+//~ scCommon.dump("XXX");
 
 var scCommon = {
 
-  prefs: Services.prefs.getBranch("extensions.stylish."),
+  prefs: Services.prefs.getBranch("extensions.Stylish-Custom."),
   prefService: Services.prefs,
   prompt: Services.prompt,
   getWin: Services.wm.getMostRecentWindow,
@@ -270,7 +270,7 @@ var scCommon = {
 
   openStyleManager: function(win)
   {
-    let manageView = this.prefs.getIntPref("custom.manageview");
+    let manageView = this.prefs.getIntPref("manageview");
     if (!win)
       win = this.getMainWindow();
 
@@ -438,9 +438,9 @@ var scCommon = {
     }
     locationE.value = fp.file.path;
     if (which == "Export") {
-      this.prefs.setCharPref("custom.exportpath",fp.file.path);
+      this.prefs.setCharPref("exportpath",fp.file.path);
     } else if (which == "Import") {
-      this.prefs.setCharPref("custom.importpath",fp.file.path);
+      this.prefs.setCharPref("importpath",fp.file.path);
     }
 
     this.removeChild(doc.getElementById("StyleList"));

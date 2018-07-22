@@ -8,8 +8,9 @@ Cu.import("chrome://".concat(scCommon.name,"/content/common.js"));
 //scCommon.dump();
 //scInfo.stylesTree.treeBoxObject scInfo.stylesTree.contentView scInfo.stylesTree.view
 
-var service,
-scInfo = {
+let service = scCommon.service;
+
+var scInfo = {
 
   stylesTree: null,
   stylesSort: null,
@@ -22,7 +23,6 @@ scInfo = {
 
   init: function()
   {
-    service = scCommon.service;
     this.stylesTree = document.getElementById("style-tree-list");
     this.createStyleList();
 

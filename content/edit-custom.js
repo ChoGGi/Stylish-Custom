@@ -1,12 +1,15 @@
 "use strict";
-//scCommon.dump();
+//~ scCommon.dump("XXX");
+
+let prefs = scCommon.prefs;
+let prefsExt = scCommon.prefsExt;
 
 var scEdit = {
 
   beforePaint: function()
   {
     //remove findbar if it isn't being used
-    if (scCommon.prefs.getBoolPref("custom.newsearch") == false) {
+    if (prefs.getBoolPref("newsearch") == false) {
       let findbar = document.getElementById("findbar");
       if (findbar)
         findbar.parentNode.removeChild(findbar);
@@ -22,7 +25,7 @@ var scEdit = {
     this.styleId = document.getElementById("stylish").getAttribute("styleId");
 
     //move error box below the save/close buttons
-    if (scCommon.prefs.getIntPref("custom.errorboxplacement") == 1) {
+    if (prefs.getIntPref("errorboxplacement") == 1) {
       //clone and remove old error area
       let toolbox = document.getElementById("stylishCustomToolbox"),
       errorsArea = document.getElementById("errorsArea"),
@@ -35,7 +38,7 @@ var scEdit = {
     //set height of scratchpad
     let scratchPad = document.getElementById("ScratchPad");
     if (scratchPad) {
-      let height = scCommon.prefs.getIntPref("custom.scratchpadheight");
+      let height = prefs.getIntPref("scratchpadheight");
       scratchPad.setAttribute("rows",height);
     }
 
@@ -94,7 +97,7 @@ var scEdit = {
     }
 
     //change font for edit area
-    let editfont = scCommon.prefs.getCharPref("custom.editfont").split(":");
+    let editfont = prefs.getCharPref("editfont").split(":");
     if (editfont[2]) {
       codeE.style.fontFamily = editfont[0];
       codeE.style.fontSize = editfont[1];
@@ -168,7 +171,7 @@ var scEdit = {
 
         //toggle scratchpad
         let ScratchPadSplitter = document.getElementById("ScratchPadSplitter"),
-        showPad = scCommon.prefs.getBoolPref("custom.editorscratchpad");
+        showPad = prefs.getBoolPref("editorscratchpad");
         if (scratchPad) {
           scratchPad.setAttribute("collapsed",showPad);
           if (showPad == true)
@@ -186,7 +189,7 @@ var scEdit = {
         }
 
         //add app name to title
-        let whichTitle = scCommon.prefs.getIntPref("custom.editorapptitle");
+        let whichTitle = prefs.getIntPref("editorapptitle");
         function setTitle(appName)
         {
           let nameEl = document.getElementById("name");
@@ -255,8 +258,8 @@ var scEdit = {
           }
         }
 
-        let newSearch = scCommon.prefs.getBoolPref("custom.newsearch"),
-        saveSearch = scCommon.prefs.getBoolPref("custom.searchtextsave");
+        let newSearch = prefs.getBoolPref("newsearch"),
+        saveSearch = prefs.getBoolPref("searchtextsave");
         //which search box to use
         let whichSearch;
         if (newSearch == true)
@@ -265,7 +268,7 @@ var scEdit = {
           whichSearch = document.getElementById("SearchBox");
         //saved text?
         if (saveSearch == true)
-          setSearchText(whichSearch,scCommon.prefs.getCharPref("custom.searchtext"));
+          setSearchText(whichSearch,prefs.getCharPref("searchtext"));
         else
           setSearchText(whichSearch,"");
       }
@@ -296,7 +299,7 @@ var scEdit = {
     let searchAreaOld = document.getElementById("SearchAreaOld"),
     findbar = document.getElementById("findbar");
 
-    if (scCommon.prefs.getBoolPref("custom.newsearch") == false) {
+    if (prefs.getBoolPref("newsearch") == false) {
       if (searchAreaOld)
         searchAreaOld.style.display = "-moz-box";
       if (findbar)
@@ -348,7 +351,7 @@ var scEdit = {
         if (itsalltext)
           itsalltext.style.display = "none";
       } else {//go by pref
-        if (scCommon.prefs.getIntPref("custom.editorwhich") == 1) {//ExternalEdit
+        if (prefs.getIntPref("editorwhich") == 1) {//ExternalEdit
           scEdit.externalEditButton(externalEdit);
           if (itsalltext)
             itsalltext.style.display = "none";
@@ -378,7 +381,7 @@ var scEdit = {
   {
     if (!button)
       return;
-    let fileName = scCommon.prefs.getCharPref("custom.editor");
+    let fileName = prefs.getCharPref("editor");
 
     //if no editor path then hide
     //if (fileName == "") {
@@ -426,11 +429,11 @@ var scEdit = {
         }
       };
       scEdit.intervalID.init (
-        observer,scCommon.prefs.getIntPref("custom.editortimeout"),
+        observer,prefs.getIntPref("editortimeout"),
         Ci.nsITimer.TYPE_REPEATING_SLACK
       );
     }
-    let editorPath = scCommon.prefs.getCharPref("custom.editor");
+    let editorPath = prefs.getCharPref("editor");
     //for OSX and .app: use /usr/bin/open -a /path/to/some.app
     if (Services.appinfo.OS == "Darwin" &&
         editorPath.slice(editorPath.length-4) == ".app") {
@@ -747,8 +750,9 @@ var scEdit = {
       if (scEdit.toolbarAutoimportant) {
         importantText.value = scEdit.toolbarAutoimportant;
       } else {
-        importantText.value = String
-            .fromCharCode(scCommon.prefs.getCharPref("autoimportant.key"));
+        importantText.value = String.fromCharCode(
+          prefs.getCharPref("autoimportant.key")
+        );
       }
     }
 
@@ -771,12 +775,15 @@ var scEdit = {
         if (value)
           el.checked = value;
         else
-          el.checked = scCommon.prefs.getBoolPref(pref);
+          el.checked = prefs.getBoolPref(pref);
       }
     }
     restoreCheck("wrap-lines",scEdit.toolbarWrapLines,"wrap_lines");
-    restoreCheck("ImportantEnabled",
-                scEdit.toolbarImportantEnabled,"autoimportant.enabled");
+    restoreCheck(
+      "ImportantEnabled",
+      scEdit.toolbarImportantEnabled,
+      "autoimportant.enabled"
+    );
 
     let toggleEnabled = document.getElementById("ToggleEnabled");
     if (toggleEnabled) {
@@ -812,8 +819,8 @@ var scEdit = {
     //from Stylish v1.0.2
     let bottomSwitchToInstall = document.getElementById("Bottom_SwitchToInstall");
     if (bottomSwitchToInstall) {
-      if (document.getElementById("stylish").getAttribute("windowtype")
-                                                          .search(/tp/) > 0) {
+      if (document.getElementById("stylish")
+            .getAttribute("windowtype").search(/tp/) > 0) {
         bottomSwitchToInstall.style.display = "-moz-box";//new style
       } else {
         bottomSwitchToInstall.style.display = "none";//old style
@@ -834,7 +841,7 @@ var scEdit = {
     if (!scEdit.customizeSheet)
       window.focus();
 
-    if (scCommon.prefs.getBoolPref("custom.newsearch") == false)
+    if (prefs.getBoolPref("newsearch") == false)
       return;
 
     //hide old search because we have to use it instead of findbar (findbar likes to randomly hide itself)
@@ -961,7 +968,7 @@ var scEdit = {
 
   updateTitlebar: function(name)
   {
-    let changeTitle = scCommon.prefs.getIntPref("custom.editorapptitle");
+    let changeTitle = prefs.getIntPref("editorapptitle");
 
     function title(window,appName)
     {
@@ -991,7 +998,7 @@ var scEdit = {
 
   populateInsertTextMenu: function()
   {
-    let textList = prefs.getCharPref("custom.inserttext");
+    let textList = prefs.getCharPref("inserttext");
 
     //create insert text menu
     //if (textList == "") {
@@ -1004,8 +1011,8 @@ var scEdit = {
         Bottom_InsertText.style.display = "none";
       return;
     }
-    textList = textList.split(scCommon.prefs
-                              .getCharPref("custom.inserttextsep"));
+    textList = textList.split(prefs
+                              .getCharPref("inserttextsep"));
     let popup = document.getElementById("insertTextPopup");
     if (!popup)
       return;
@@ -1116,7 +1123,7 @@ var scEdit = {
     //save scroll position
     this.beforeChange();
     //don't ask to undo
-    if (scCommon.prefs.getBoolPref("custom.asktorevert") == false) {
+    if (prefs.getBoolPref("asktorevert") == false) {
       this.revertStyle(which);
       this.afterChange();
       return;
@@ -1130,7 +1137,7 @@ var scEdit = {
     if (result == false)
       return;
     if (check.value == true)
-      scCommon.prefs.setBoolPref("custom.asktorevert",false);
+      prefs.setBoolPref("asktorevert",false);
     this.revertStyle(which);
     //restore scroll position
     this.afterChange();
@@ -1420,13 +1427,13 @@ var scEdit = {
   //for auto!important checkbox
   changeImportantEnabled: function(checked)
   {
-    scCommon.prefs.setBoolPref("autoimportant.enabled",checked);
+    prefs.setBoolPref("autoimportant.enabled",checked);
 
     if (!checked)
       return;
     this.insertImportantEvent = function(event)
     {
-      if (event.which == scCommon.prefs.getCharPref("autoimportant.key")) {
+      if (event.which == prefs.getCharPref("autoimportant.key")) {
         event.preventDefault();
         scEdit.insertImportant();
       }
@@ -1442,7 +1449,7 @@ var scEdit = {
       alert(scCommon.getMsg("InvalidKey"));
       return;
     }
-    scCommon.prefs.setCharPref("autoimportant.key",eventkey);
+    prefs.setCharPref("autoimportant.key",eventkey);
     codeE.removeEventListener("keypress",scEdit.insertImportantEvent,false);
     this.insertImportantEvent = function(event)
     {
@@ -1461,7 +1468,7 @@ var scEdit = {
     this.beforeChange();
 
     //insert Important
-    insertCodeAtCaret(scCommon.prefs.getCharPref("autoimportant.text"));
+    insertCodeAtCaret(prefs.getCharPref("autoimportant.text"));
     //send right arrow to move caret to the end of inserted text
     let evt = document.createEvent("KeyboardEvent");
     evt.initKeyEvent("keypress",true,true,null,false,false,false,false,39,0);
@@ -1494,9 +1501,9 @@ var scEdit = {
     if (!unPreview)
       return;
 
-    let errorsArea = document.getElementById("errorsArea"),
-    styleReg = scCommon.prefsExt.getBoolPref("styleRegistrationEnabled"),
-    uri;
+    let errorsArea = document.getElementById("errorsArea");
+    let styleReg = prefsExt.getBoolPref("styleRegistrationEnabled");
+    let uri;
 
     if (styleReg == false) {
       if (this.oldPreview)
@@ -1576,7 +1583,7 @@ var scEdit = {
     let searchToggle = document.getElementById("SearchToggle"),
     searchArea;
 
-    if (scCommon.prefs.getBoolPref("custom.newsearch") == true) {
+    if (prefs.getBoolPref("newsearch") == true) {
       searchArea = document.getElementById("findbar");
       if (!searchArea)//stylish 1.0.5 or less has no new search so we'll use old search
         searchArea = document.getElementById("SearchAreaOld");
@@ -1692,7 +1699,7 @@ var scEdit = {
     selected,
     styleCode;
 
-    if (scCommon.prefs.getBoolPref("custom.newsearch") == true && findbar)
+    if (prefs.getBoolPref("newsearch") == true && findbar)
       searchBox = findbar.getElement("findbar-textbox");
     else
       searchBox = document.getElementById("SearchBox");
@@ -1824,7 +1831,7 @@ var scEdit = {
   ToggleBars: function()
   {
     //get the list of bars to toggle
-    let barList = scCommon.prefs.getCharPref("custom.togglebars").split(",");
+    let barList = prefs.getCharPref("togglebars").split(",");
     //loop the bars
     for (let i = 0; i < barList.length; i++) {
       let name = document.getElementById(barList[i]);
@@ -2273,7 +2280,7 @@ var scEdit = {
   {
     //which search box to use
     let searchBox;
-    if (prefs.getBoolPref("custom.newsearch") == true)
+    if (prefs.getBoolPref("newsearch") == true)
       searchBox = document.getElementById("findbar");
     else
       searchBox = document.getElementById("SearchBox");
@@ -2281,10 +2288,10 @@ var scEdit = {
     if (!searchBox)
       return;
     if (searchBox.hasAttribute("browserid"))//new search
-      prefs.setCharPref("custom.searchtext",searchBox
+      prefs.setCharPref("searchtext",searchBox
                                           .getElement("findbar-textbox").value);
     else //old search
-      prefs.setCharPref("custom.searchtext",searchBox.value);
+      prefs.setCharPref("searchtext",searchBox.value);
   },
 
   cloneStyle: function()
@@ -2424,8 +2431,8 @@ var scEdit = {
   onExit: function()
   {
     //save search text
-    if (scCommon.prefs.getBoolPref("custom.searchtextsave") == true)
-      this.saveSearchText(scCommon.prefs);
+    if (prefs.getBoolPref("searchtextsave") == true)
+      this.saveSearchText(prefs);
     //stop external file check
     this.checkFileStop();
     //stylish unload
@@ -2440,12 +2447,12 @@ var scEdit = {
     //save scratchpad view
     let scratchPad = document.getElementById("ScratchPad");
     if (scratchPad && scratchPad.getAttribute("collapsed") == "true")
-      scCommon.prefs.setBoolPref("custom.editorscratchpad",true);
+      prefs.setBoolPref("editorscratchpad",true);
     else
-      scCommon.prefs.setBoolPref("custom.editorscratchpad",false);
+      prefs.setBoolPref("editorscratchpad",false);
 
     //don't ask to save | not changed
-    if (scCommon.prefs.getBoolPref("custom.asktosave") == false ||
+    if (prefs.getBoolPref("asktosave") == false ||
                                       codeE.value == style.code) {
       return true;
     }

@@ -4,7 +4,10 @@ const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
 /* jshint ignore:end */
-//scCommon.dump();
+//~ scCommon.dump("XXX");
+
+let prefs = scCommon.prefs;
+let prefsExt = scCommon.prefsExt;
 
 var scOptions = {
 
@@ -31,58 +34,60 @@ var scOptions = {
     {
       switch (which) {
         case "s":
-          document.getElementById(id).value = scCommon.prefs.getCharPref(pref);
+          document.getElementById(id).value = prefs.getCharPref(pref);
         break;
         case "i":
-          document.getElementById(id).value = scCommon.prefs.getIntPref(pref);
+          document.getElementById(id).value = prefs.getIntPref(pref);
         break;
         case "b":
           let idTmp = document.getElementById(id);
-          if (scCommon.prefs.getBoolPref(pref) == true)
+          if (prefs.getBoolPref(pref) == true)
             idTmp.value = 1;
           else
             idTmp.value = 0;
         break;
       }
     }
+
+    document.getElementById("ChangeDomainsText").value = prefsExt.getCharPref("install.allowedDomains");
+
     set("AutoImportantText","autoimportant.text","s");
-    set("ChangeDomainsText","install.allowedDomains","s");
-    set("ChangeFontText","custom.editfont","s");
-    set("InsertTextText","custom.inserttext","s");
-    set("ExternalEditorText","custom.editor","s");
-    set("ChangeGlobalColourText","custom.globalstyle","s");
-    set("ChangeSiteColourText","custom.sitestyle","s");
-    set("ChangeGlobalSiteColourText","custom.globalsitestyle","s");
-    set("ChangeInsertSepText","custom.inserttextsep","s");
-    set("ToolbarToggleText","custom.togglebars","s");
-    set("reloadStylesText","custom.reloadstyles","s");
-    set("reloadStylesKeyText","custom.reloadstyleskey","s");
+    set("ChangeFontText","editfont","s");
+    set("InsertTextText","inserttext","s");
+    set("ExternalEditorText","editor","s");
+    set("ChangeGlobalColourText","globalstyle","s");
+    set("ChangeSiteColourText","sitestyle","s");
+    set("ChangeGlobalSiteColourText","globalsitestyle","s");
+    set("ChangeInsertSepText","inserttextsep","s");
+    set("ToolbarToggleText","togglebars","s");
+    set("reloadStylesText","reloadstyles","s");
+    set("reloadStylesKeyText","reloadstyleskey","s");
 
-    set("StyleToggleRadio","custom.styletoggle","i");
-    set("ManageRadio","custom.manageview","i");
-    set("ExImportRadio","custom.eximportlocation","i");
-    set("StyleInfoRadio","custom.infolocation","i");
-    set("StyleMenuRadio","custom.stylemenuitem","i");
-    set("WhichEditorRadio","custom.editorwhich","i");
-    set("EditorTimeText","custom.editortimeout","i");
-    set("AppTitleRadio","custom.editorapptitle","i");
-    set("StyleMenusRadio","custom.stylemenulocation","i");
-    set("MoveErrorBoxRadio","custom.errorboxplacement","i");
-    set("NewStyleRadio","custom.newstylelocation","i");
+    set("StyleToggleRadio","styletoggle","i");
+    set("ManageRadio","manageview","i");
+    set("ExImportRadio","eximportlocation","i");
+    set("StyleInfoRadio","infolocation","i");
+    set("StyleMenuRadio","stylemenuitem","i");
+    set("WhichEditorRadio","editorwhich","i");
+    set("EditorTimeText","editortimeout","i");
+    set("AppTitleRadio","editorapptitle","i");
+    set("StyleMenusRadio","stylemenulocation","i");
+    set("MoveErrorBoxRadio","errorboxplacement","i");
+    set("NewStyleRadio","newstylelocation","i");
 
-    set("StyleMenuOverrideRadio","custom.stylemenuoverride","b");
-    set("RemoveCSSRadio","custom.removecss","b");
-    set("SearchBarRadio","custom.newsearch","b");
-    set("AskToSaveRadio","custom.asktosave","b");
-    set("ToolMenuRadio","custom.toolbar","b");
-    set("ToggleIconsRadio","custom.showicons","b");
-    set("GetStyleSheetsRadio","custom.stylesheetmenuitem","b");
-    //set("ShowAppStylesRadio","custom.showappstyles","b");
-    set("SaveTextRadio","custom.searchtextsave","b");
+    set("StyleMenuOverrideRadio","stylemenuoverride","b");
+    set("RemoveCSSRadio","removecss","b");
+    set("SearchBarRadio","newsearch","b");
+    set("AskToSaveRadio","asktosave","b");
+    set("ToolMenuRadio","toolbar","b");
+    set("ToggleIconsRadio","showicons","b");
+    set("GetStyleSheetsRadio","stylesheetmenuitem","b");
+    //set("ShowAppStylesRadio","showappstyles","b");
+    set("SaveTextRadio","searchtextsave","b");
 
     //get scratchpad height
     document.getElementById("ScratchpadHeightText").inputField.value =
-                          scCommon.prefs.getIntPref("custom.scratchpadheight");
+                          prefs.getIntPref("scratchpadheight");
 
     //hide view sidebar option on thunderbird
     if (!win.document.getElementById("sidebar"))
@@ -132,7 +137,7 @@ var scOptions = {
   //when you press a radio for change ex/import location
   exImport: function(i)
   {
-    scCommon.prefs.setIntPref("custom.eximportlocation",i);
+    prefs.setIntPref("eximportlocation",i);
     let doc = this.mainWin.document,
     StylishImport = doc.getElementById("StylishImport"),
     StylishImportMain = doc.getElementById("StylishImportMain"),
@@ -157,7 +162,7 @@ var scOptions = {
 
   styleMenus: function(i)
   {
-    scCommon.prefs.setIntPref("custom.stylemenulocation",i);
+    prefs.setIntPref("stylemenulocation",i);
     let doc = this.mainWin.document,
     AppStyles = doc.getElementById("StylishAppStyles"),
     EnabledStyles = doc.getElementById("StylishEnabledStyles"),
@@ -188,7 +193,7 @@ var scOptions = {
 
   styleInfo: function(i)
   {
-    scCommon.prefs.setIntPref("custom.infolocation",i);
+    prefs.setIntPref("infolocation",i);
     let doc = this.mainWin.document,
     menuitem = doc.getElementById("StylishInfo"),
     menuitemMain = doc.getElementById("StylishInfoMain");
@@ -206,7 +211,7 @@ var scOptions = {
 
   newStyle: function(i)
   {
-    scCommon.prefs.setIntPref("custom.newstylelocation",i);
+    prefs.setIntPref("newstylelocation",i);
     let doc = this.mainWin.document,
     menuitem = doc.getElementById("StylishNewStyle"),
     menuitemMain = doc.getElementById("StylishNewStyleMain");
@@ -240,7 +245,7 @@ var scOptions = {
     }
     switch (typeof (value)) {
       case "boolean":
-        scCommon.prefs.setBoolPref("custom." + pref,value);
+        prefs.setBoolPref(pref,value);
         switch (pref) {
           case "stylemenuoverride":
             scCommon.toggleStyleMenuOverride(value);
@@ -263,7 +268,7 @@ var scOptions = {
         }
       break;
       case "number":
-        scCommon.prefs.setIntPref("custom." + pref,value);
+        prefs.setIntPref(pref,value);
       break;
     }
   },
@@ -273,7 +278,7 @@ var scOptions = {
   {
     function setPref(pref,setting)
     {
-      scCommon.prefs.setCharPref(pref,document.getElementById(setting).value);
+      prefs.setCharPref(pref,document.getElementById(setting).value);
     }
 
     switch (which) {
@@ -284,43 +289,43 @@ var scOptions = {
         setPref("install.allowedDomains","ChangeDomainsText");
       break;
       case "Font":
-        setPref("custom.editfont","ChangeFontText");
+        setPref("editfont","ChangeFontText");
       break;
       case "InsertText":
-        setPref("custom.inserttext","InsertTextText");
+        setPref("inserttext","InsertTextText");
       break;
       case "GlobalColour":
-        setPref("custom.globalstyle","ChangeGlobalColourText");
+        setPref("globalstyle","ChangeGlobalColourText");
       break;
       case "SiteColour":
-        setPref("custom.sitestyle","ChangeSiteColourText");
+        setPref("sitestyle","ChangeSiteColourText");
       break;
       case "GlobalSiteColour":
-        setPref("custom.globalsitestyle","ChangeGlobalSiteColourText");
+        setPref("globalsitestyle","ChangeGlobalSiteColourText");
       break;
       case "ExternalEditor":
-        setPref("custom.editor","ExternalEditorText");
+        setPref("editor","ExternalEditorText");
       break;
       case "ToolbarToggle":
-        setPref("custom.togglebars","ToolbarToggleText");
+        setPref("togglebars","ToolbarToggleText");
       break;
       case "reloadStyles":
-        setPref("custom.reloadstyles","reloadStylesText");
+        setPref("reloadstyles","reloadStylesText");
       break;
       case "reloadStylesKey":
-        setPref("custom.reloadstyleskey","reloadStylesKeyText");
+        setPref("reloadstyleskey","reloadStylesKeyText");
       break;
       case "InsertSep":
-        setPref("custom.inserttextsep","ChangeInsertSepText");
+        setPref("inserttextsep","ChangeInsertSepText");
       break;
       case "EditorTime":
-        scCommon.prefs.setIntPref("custom.editortimeout",
+        prefs.setIntPref("editortimeout",
                               document.getElementById("EditorTimeText").value);
       break;
       case "ScratchpadHeight":
         let height = document.getElementById("ScratchpadHeightText")
                                             .inputField.value;
-        scCommon.prefs.setIntPref("custom.scratchpadheight",height);
+        prefs.setIntPref("scratchpadheight",height);
       break;
     }
   },
@@ -343,13 +348,13 @@ var scOptions = {
     fp.appendFilter("XML (*.xml)","*.xml");
     if (fp.show() == nsIFilePicker.returnCancel)
       return;
-    let file = fp.file,
+    let file = fp.file;
 
     //create xml doc
-    doc = document.implementation.createDocument("","",null),
-    docRoot = doc.createElement("prefs"),
-    aPref,
-    prefType;
+    let doc = document.implementation.createDocument("","",null);
+    let docRoot = doc.createElement("prefs");
+    let aPref;
+    let prefType;
 
     function createPrefs(prefs,array,path)
     {
@@ -383,12 +388,12 @@ var scOptions = {
 
     function makePref(prefsText,path)
     {
-      let prefs = Services.prefs.getBranch(prefsText),
-      array = prefs.getChildList("",{});
+      let prefs = Services.prefs.getBranch(prefsText);
+      let array = prefs.getChildList("",{});
       createPrefs(prefs,array,path);
     }
-    makePref("extensions.stylish.custom.","custom.");
-    makePref("extensions.stylish.autoimportant.","autoimportant.");
+    makePref("extensions.StylishCustom.","StylishCustom.");
+    //~ makePref("extensions.stylish.autoimportant.","autoimportant.");
 
     doc.appendChild(docRoot);
 
@@ -438,13 +443,15 @@ var scOptions = {
       if (children[i] != "[object Element]" ||
           !children[i].hasAttribute("name"))
         continue;
-      let name = children[i].getAttribute("name"),
-      //is new settings
-      prefs = Services.prefs.getBranch("extensions.stylish.");
-      //or old
-      if (name.indexOf("custom.") == -1 &&
-          name.indexOf("autoimportant.") == -1)
-        prefs = Services.prefs.getBranch("extensions.stylish.custom.");
+      let name = children[i].getAttribute("name");
+      //~ //is new settings
+      //~ let prefs = Services.prefs.getBranch("extensions.stylish.");
+      //~ //or old
+      //~ if (name.indexOf("custom.") == -1 &&
+          //~ name.indexOf("autoimportant.") == -1) {
+        //~ prefs = Services.prefs.getBranch("extensions.stylish.custom.");
+      //~ }
+
       if (prefs.getPrefType(name) < 1)
         continue;
       let type = children[i].getAttribute("type"),

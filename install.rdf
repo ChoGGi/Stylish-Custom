@@ -4,9 +4,9 @@
   xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description rdf:about="urn:mozilla:install-manifest">
 
+    <em:name>Stylish-Custom_TEST</em:name>
     <em:id>Stylish-Custom@ChoGGi</em:id>
-    <em:name>Stylish-Custom</em:name>
-    <em:version>0.9.4.1</em:version>
+    <em:version>0.9.4.3</em:version>
 
 <!--
     <em:name>Stylish-Custom_TEST</em:name>

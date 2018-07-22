@@ -20,7 +20,7 @@ scImport = {
     service = scCommon.service;
     this.styleListE = document.getElementById("StyleList");
     locationE = document.getElementById("Location");
-    locationE.value = scCommon.prefs.getCharPref("custom.importpath");
+    locationE.value = scCommon.prefs.getCharPref("importpath");
 
     this.stylesTree = document.getElementById("style-tree-list");
     this.createStyleList();
@@ -38,7 +38,7 @@ scImport = {
     //saved path or user choice
     let PickOrUsePath = false,
     fp;
-    if (scCommon.prefs.prefHasUserValue("custom.importpath") ||
+    if (scCommon.prefs.prefHasUserValue("importpath") ||
         locationE.value != "") {//if location entered
       PickOrUsePath = "Path";
     } else {
@@ -275,7 +275,7 @@ scImport = {
   unload: function()
   {
     let locValue = document.getElementById("Location").value;
-    scCommon.prefs.setCharPref("custom.importpath",locValue);
+    scCommon.prefs.setCharPref("importpath",locValue);
   }
 
 };

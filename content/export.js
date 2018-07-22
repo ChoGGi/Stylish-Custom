@@ -22,12 +22,12 @@ scExport = {
     service = scCommon.service;
     this.styleListE = document.getElementById("StyleList");
     locationE = document.getElementById("Location");
-    locationE.value = scCommon.prefs.getCharPref("custom.exportpath");
+    locationE.value = scCommon.prefs.getCharPref("exportpath");
     let XMLName = document.getElementById("XMLName");
-    XMLName.value = scCommon.prefs.getCharPref("custom.xmlname");
+    XMLName.value = scCommon.prefs.getCharPref("xmlname");
 
     //if we export XML
-    if (scCommon.prefs.getIntPref("custom.exporttype") == 1) {
+    if (scCommon.prefs.getIntPref("exporttype") == 1) {
       document.getElementById("ExportXML").checked = true;
       XMLName.disabled = false;
       document.getElementById("GroupXML").disabled = false;
@@ -218,9 +218,9 @@ scExport = {
 
     //save export as option
     if (exportXML.checked == true)
-      scCommon.prefs.setIntPref("custom.exporttype",1);
+      scCommon.prefs.setIntPref("exporttype",1);
     else
-      scCommon.prefs.setIntPref("custom.exporttype",0);
+      scCommon.prefs.setIntPref("exporttype",0);
 
     if (which == "Group") {
       XMLName.disabled = !groupXML.checked;
@@ -243,7 +243,7 @@ scExport = {
     fp;
 
     //saved path
-    if (scCommon.prefs.prefHasUserValue("custom.exportpath" ||
+    if (scCommon.prefs.prefHasUserValue("exportpath" ||
         locationE.value != "")) {
       PickOrUsePath = "Path";
     } else {
@@ -500,10 +500,10 @@ scExport = {
   {
     //save path
     let locValue = document.getElementById("Location").value;
-    scCommon.prefs.setCharPref("custom.exportpath",locValue);
+    scCommon.prefs.setCharPref("exportpath",locValue);
     //save xml filename
     let XMLName = document.getElementById("XMLName").value;
-    scCommon.prefs.setCharPref("custom.xmlname",XMLName);
+    scCommon.prefs.setCharPref("xmlname",XMLName);
   }
 
 };

@@ -2,14 +2,14 @@ content stylish-custom content/
 skin stylish-custom classic/1.0 skin/
 
 #locales
-locale stylish-custom en-US   jar:content/locales.zip!/en-US/
-locale stylish-custom ko-KR   jar:content/locales.zip!/ko-KR/
-locale stylish-custom zh-CN   jar:content/locales.zip!/zh-CN/
-locale stylish-custom es      jar:content/locales.zip!/es/
-locale stylish-custom sv-SE   jar:content/locales.zip!/sv-SE/
-locale stylish-custom ja-JP   jar:content/locales.zip!/ja-JP/
-locale stylish-custom de      jar:content/locales.zip!/de/
-locale stylish-custom ru-RU   jar:content/locales.zip!/ru-RU/
+locale stylish-custom en-US   jar:content/locales.zip!/locales/en-US/
+locale stylish-custom ko-KR   jar:content/locales.zip!/locales/ko-KR/
+locale stylish-custom zh-CN   jar:content/locales.zip!/locales/zh-CN/
+locale stylish-custom es      jar:content/locales.zip!/locales/es/
+locale stylish-custom sv-SE   jar:content/locales.zip!/locales/sv-SE/
+locale stylish-custom ja-JP   jar:content/locales.zip!/locales/ja-JP/
+locale stylish-custom de      jar:content/locales.zip!/locales/de/
+locale stylish-custom ru-RU   jar:content/locales.zip!/locales/ru-RU/
 
 #main overlay.xul
 overlay chrome://browser/content/browser.xul              chrome://stylish-custom/content/overlay.xul

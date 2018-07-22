@@ -74,7 +74,7 @@ var scCustomize = {
     //persistent window position
     if (document.getElementById("CustomizeToolbarWindowStylish") &&
         "arguments" in window) {//not OSX (it uses a popup with no arguments)
-      let xy = scCommon.prefs.getCharPref("custom.customizexy").split(",");
+      let xy = scCommon.prefs.getCharPref("customizexy").split(",");
       window.moveTo(xy[0],xy[1]);
     }
 
@@ -109,12 +109,12 @@ var scCustomize = {
   {
     function setScreenPos(idTmp)
     {
-      let oldPos = scCommon.prefs.getCharPref("custom.customizexy").split(","),
+      let oldPos = scCommon.prefs.getCharPref("customizexy").split(","),
       x = idTmp.boxObject.screenX-8,
       y = idTmp.boxObject.screenY-30;
 
       if (oldPos[0] != x && oldPos[1] != y)
-        scCommon.prefs.setCharPref("custom.customizexy",x + "," + y);
+        scCommon.prefs.setCharPref("customizexy",x + "," + y);
     }
 
     function eventlisteners(el) {
