@@ -22,27 +22,21 @@ var scCommon = {
   // check if stylish/stylem is enabled (since I only added this because of amo bitching, remove it?)
   tryService: function()
   {
-    let style = null;
-    let service = null;
-    let name = null;
+    let style,service,name;
 
     // try for Stylem first
     try {
       style = Cc["@stylem.ext/style;1"];
       service = style.getService(Ci.stylishStyle);
       name = "stylem";
-    } catch (e) {
-      this.catchError(e);
-    }
+    } catch (e) {}
     // if not then see if Stylish is installed
     if (!service) {
       try {
         style = Cc["@userstyles.org/style;1"];
         service = style.getService(Ci.stylishStyle);
         name = "stylish";
-      } catch (e){
-        this.catchError(e);
-      }
+      } catch (e){}
     }
 
     if (service) {
@@ -787,8 +781,9 @@ var scCommon = {
 
 	addSite: function(stylishOverlay) {
     //Thunderbird
-    if (!gBrowser)
+    if (scCommon.appInfo.ID == "{3550f703-e582-4d05-9a08-453d09bdfdc6}") {
       return;
+    }
 
 		stylishOverlay.getFromContent("stylish:page-info", function(message) {
 			let code = "@namespace url(" + message.data.namespace +

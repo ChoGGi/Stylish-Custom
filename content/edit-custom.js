@@ -1,8 +1,8 @@
 "use strict";
 //~ scCommon.dump("XXX");
 
-let prefs = scCommon.prefs;
-let prefsExt = scCommon.prefsExt;
+//~ let prefs = scCommon.prefs;
+//~ let prefsExt = scCommon.prefsExt;
 
 var scEdit = {
 
