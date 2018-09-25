@@ -58,8 +58,10 @@ scImport = {
         file = fp.file;
         locationE.value = file.path;
       } else {
-        file = Cc['@mozilla.org/file/local;1'].createInstance(Ci.nsILocalFile);
-        file.initWithPath(locationE.value);
+				file = new FileUtils.File(locationE.value);
+
+        //~ file = Cc['@mozilla.org/file/local;1'].createInstance(Ci.nsILocalFile);
+        //~ file.initWithPath(locationE.value);
       }
 
       //if no files abort

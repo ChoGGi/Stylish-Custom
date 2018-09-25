@@ -367,14 +367,7 @@ var scEdit = {
 
   openFile: function(file)
   {
-    if (typeof (FileUtils.File) !== "undefined")
-      return new FileUtils.File(file);
-    else {
-      let temp = Cc["@mozilla.org/file/local;1"]
-                .createInstance(Ci.nsILocalFile);
-      temp.initWithPath(file);
-      return temp;
-    }
+		return new FileUtils.File(file);
   },
 
   externalEditButton: function(button)

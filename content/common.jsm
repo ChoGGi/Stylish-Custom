@@ -30,6 +30,7 @@ var scCommon = {
       service = style.getService(Ci.stylishStyle);
       name = "stylem";
     } catch (e) {}
+
     // if not then see if Stylish is installed
     if (!service) {
       try {

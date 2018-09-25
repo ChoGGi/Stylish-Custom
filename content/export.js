@@ -1,6 +1,7 @@
 "use strict";
 /* jshint ignore:start */
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
+Cu.import("resource://gre/modules/FileUtils.jsm");
 Cu.import("chrome://stylish-custom/content/common.jsm");
 Cu.import("chrome://".concat(scCommon.name,"/content/common.js"));
 /* jshint ignore:end */
@@ -269,8 +270,7 @@ scExport = {
     if (PickOrUsePath == "FilePicker")
       file = fp.file;
     else {
-      file = Cc['@mozilla.org/file/local;1'].createInstance(Ci.nsILocalFile);
-      file.initWithPath(locationE.value);
+			file = new FileUtils.File(locationE.value);
     }
     //check if the folder exists or create it
     if (!file.exists() || !file.isDirectory())
@@ -305,9 +305,7 @@ scExport = {
         if (PickOrUsePath == "FilePicker")
           file = fp.file;
         else {
-          file = Cc['@mozilla.org/file/local;1']
-                                            .createInstance(Ci.nsILocalFile);
-          file.initWithPath(locationE.value);
+					file = new FileUtils.File(locationE.value);
         }
         //export as css
         if (ExportXML == false) {
@@ -340,8 +338,7 @@ scExport = {
         return;
       }
       if (XMLName.value.search(":") !== -1) {//probably a path
-        file = Cc['@mozilla.org/file/local;1'].createInstance(Ci.nsILocalFile);
-        file.initWithPath(XMLName.value);
+				file = new FileUtils.File(XMLName.value);
         try {
           if (file.exists() == "false" || file.isDirectory() == "false")
             file.create(Ci.nsIFile.NORMAL_FILE_TYPE,parseInt("0777",8));
