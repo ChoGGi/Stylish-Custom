@@ -6,7 +6,7 @@ Cu.import("chrome://stylish-custom/content/common.jsm");
 /* jshint ignore:end */
 //~ scCommon.dump("XXX");
 
-let prefs = scCommon.prefs;
+let prefsSC = scCommon.prefs;
 let prefsExt = scCommon.prefsExt;
 
 var scOptions = {
@@ -34,14 +34,14 @@ var scOptions = {
     {
       switch (which) {
         case "s":
-          document.getElementById(id).value = prefs.getCharPref(pref);
+          document.getElementById(id).value = prefsSC.getCharPref(pref);
         break;
         case "i":
-          document.getElementById(id).value = prefs.getIntPref(pref);
+          document.getElementById(id).value = prefsSC.getIntPref(pref);
         break;
         case "b":
           let idTmp = document.getElementById(id);
-          if (prefs.getBoolPref(pref) == true)
+          if (prefsSC.getBoolPref(pref) == true)
             idTmp.value = 1;
           else
             idTmp.value = 0;
@@ -87,7 +87,7 @@ var scOptions = {
 
     //get scratchpad height
     document.getElementById("ScratchpadHeightText").inputField.value =
-                          prefs.getIntPref("scratchpadheight");
+                          prefsSC.getIntPref("scratchpadheight");
 
     //hide view sidebar option on thunderbird
     if (!win.document.getElementById("sidebar"))
@@ -137,7 +137,7 @@ var scOptions = {
   //when you press a radio for change ex/import location
   exImport: function(i)
   {
-    prefs.setIntPref("eximportlocation",i);
+    prefsSC.setIntPref("eximportlocation",i);
     let doc = this.mainWin.document,
     StylishImport = doc.getElementById("StylishImport"),
     StylishImportMain = doc.getElementById("StylishImportMain"),
@@ -162,7 +162,7 @@ var scOptions = {
 
   styleMenus: function(i)
   {
-    prefs.setIntPref("stylemenulocation",i);
+    prefsSC.setIntPref("stylemenulocation",i);
     let doc = this.mainWin.document,
     AppStyles = doc.getElementById("StylishAppStyles"),
     EnabledStyles = doc.getElementById("StylishEnabledStyles"),
@@ -193,7 +193,7 @@ var scOptions = {
 
   styleInfo: function(i)
   {
-    prefs.setIntPref("infolocation",i);
+    prefsSC.setIntPref("infolocation",i);
     let doc = this.mainWin.document,
     menuitem = doc.getElementById("StylishInfo"),
     menuitemMain = doc.getElementById("StylishInfoMain");
@@ -211,7 +211,7 @@ var scOptions = {
 
   newStyle: function(i)
   {
-    prefs.setIntPref("newstylelocation",i);
+    prefsSC.setIntPref("newstylelocation",i);
     let doc = this.mainWin.document,
     menuitem = doc.getElementById("StylishNewStyle"),
     menuitemMain = doc.getElementById("StylishNewStyleMain");
@@ -245,7 +245,7 @@ var scOptions = {
     }
     switch (typeof (value)) {
       case "boolean":
-        prefs.setBoolPref(pref,value);
+        prefsSC.setBoolPref(pref,value);
         switch (pref) {
           case "stylemenuoverride":
             scCommon.toggleStyleMenuOverride(value);
@@ -268,7 +268,7 @@ var scOptions = {
         }
       break;
       case "number":
-        prefs.setIntPref(pref,value);
+        prefsSC.setIntPref(pref,value);
       break;
     }
   },
@@ -278,7 +278,7 @@ var scOptions = {
   {
     function setPref(pref,setting)
     {
-      prefs.setCharPref(pref,document.getElementById(setting).value);
+      prefsSC.setCharPref(pref,document.getElementById(setting).value);
     }
 
     switch (which) {
@@ -319,13 +319,13 @@ var scOptions = {
         setPref("inserttextsep","ChangeInsertSepText");
       break;
       case "EditorTime":
-        prefs.setIntPref("editortimeout",
+        prefsSC.setIntPref("editortimeout",
                               document.getElementById("EditorTimeText").value);
       break;
       case "ScratchpadHeight":
         let height = document.getElementById("ScratchpadHeightText")
                                             .inputField.value;
-        prefs.setIntPref("scratchpadheight",height);
+        prefsSC.setIntPref("scratchpadheight",height);
       break;
     }
   },
@@ -356,30 +356,30 @@ var scOptions = {
     let aPref;
     let prefType;
 
-    function createPrefs(prefs,array,path)
+    function createPrefs(pprefs,array,path)
     {
       for (let i = 0; i < array.length; i++) {
-        prefType = prefs.getPrefType(array[i]);
+        prefType = pprefs.getPrefType(array[i]);
         switch (prefType) {
           case 32://char
             aPref = doc.createElement("pref");
             aPref.setAttribute("name",path + array[i]);
             aPref.setAttribute("type","char");
-            aPref.setAttribute("data",prefs.getCharPref(array[i]));
+            aPref.setAttribute("data",pprefs.getCharPref(array[i]));
             docRoot.appendChild(aPref);
           break;
           case 64://int
             aPref = doc.createElement("pref");
             aPref.setAttribute("name",path + array[i]);
             aPref.setAttribute("type","int");
-            aPref.setAttribute("data",prefs.getIntPref(array[i]));
+            aPref.setAttribute("data",pprefs.getIntPref(array[i]));
             docRoot.appendChild(aPref);
           break;
           case 128://bool
             aPref = doc.createElement("pref");
             aPref.setAttribute("name",path + array[i]);
             aPref.setAttribute("type","bool");
-            aPref.setAttribute("data",prefs.getBoolPref(array[i]));
+            aPref.setAttribute("data",pprefs.getBoolPref(array[i]));
             docRoot.appendChild(aPref);
           break;
         }
@@ -388,9 +388,9 @@ var scOptions = {
 
     function makePref(prefsText,path)
     {
-      let prefs = Services.prefs.getBranch(prefsText);
-      let array = prefs.getChildList("",{});
-      createPrefs(prefs,array,path);
+      let pprefs = Services.prefs.getBranch(prefsText);
+      let array = pprefs.getChildList("",{});
+      createPrefs(pprefs,array,path);
     }
     makePref("extensions.StylishCustom.","StylishCustom.");
     //~ makePref("extensions.stylish.autoimportant.","autoimportant.");
@@ -444,30 +444,23 @@ var scOptions = {
           !children[i].hasAttribute("name"))
         continue;
       let name = children[i].getAttribute("name");
-      //~ //is new settings
-      //~ let prefs = Services.prefs.getBranch("extensions.stylish.");
-      //~ //or old
-      //~ if (name.indexOf("custom.") == -1 &&
-          //~ name.indexOf("autoimportant.") == -1) {
-        //~ prefs = Services.prefs.getBranch("extensions.stylish.custom.");
-      //~ }
 
-      if (prefs.getPrefType(name) < 1)
+      if (prefsSC.getPrefType(name) < 1)
         continue;
       let type = children[i].getAttribute("type"),
       data = children[i].getAttribute("data");
       switch (type) {
         case "int":
-          prefs.setIntPref(name,data);
+          prefsSC.setIntPref(name,data);
         break;
         case "char":
-          prefs.setCharPref(name,data);
+          prefsSC.setCharPref(name,data);
         break;
         case "bool":
           if (data == "true")
-            prefs.setBoolPref(name,true);
+            prefsSC.setBoolPref(name,true);
           else
-            prefs.setBoolPref(name,false);
+            prefsSC.setBoolPref(name,false);
         break;
       }
     }

@@ -1,7 +1,7 @@
 "use strict";
 //~ scCommon.dump("XXX");
 
-//~ let prefs = scCommon.prefs;
+//~ let prefsSC = scCommon.prefs;
 //~ let prefsExt = scCommon.prefsExt;
 
 var scEdit = {
@@ -9,7 +9,7 @@ var scEdit = {
   beforePaint: function()
   {
     //remove findbar if it isn't being used
-    if (prefs.getBoolPref("newsearch") == false) {
+    if (prefsSC.getBoolPref("newsearch") == false) {
       let findbar = document.getElementById("findbar");
       if (findbar)
         findbar.parentNode.removeChild(findbar);
@@ -25,7 +25,7 @@ var scEdit = {
     this.styleId = document.getElementById("stylish").getAttribute("styleId");
 
     //move error box below the save/close buttons
-    if (prefs.getIntPref("errorboxplacement") == 1) {
+    if (prefsSC.getIntPref("errorboxplacement") == 1) {
       //clone and remove old error area
       let toolbox = document.getElementById("stylishCustomToolbox"),
       errorsArea = document.getElementById("errorsArea"),
@@ -38,7 +38,7 @@ var scEdit = {
     //set height of scratchpad
     let scratchPad = document.getElementById("ScratchPad");
     if (scratchPad) {
-      let height = prefs.getIntPref("scratchpadheight");
+      let height = prefsSC.getIntPref("scratchpadheight");
       scratchPad.setAttribute("rows",height);
     }
 
@@ -72,8 +72,8 @@ var scEdit = {
       }
 
     //get key / enabled status from prefs
-    let ImportantKey = prefs.getCharPref("autoimportant.key"),
-    ImportantStatus = prefs.getBoolPref("autoimportant.enabled"),
+    let ImportantKey = prefsSC.getCharPref("autoimportant.key"),
+    ImportantStatus = prefsSC.getBoolPref("autoimportant.enabled"),
     importantText = document.getElementById("ImportantText"),
     importantEnabled = document.getElementById("ImportantEnabled");
 
@@ -97,7 +97,7 @@ var scEdit = {
     }
 
     //change font for edit area
-    let editfont = prefs.getCharPref("editfont").split(":");
+    let editfont = prefsSC.getCharPref("editfont").split(":");
     if (editfont[2]) {
       codeE.style.fontFamily = editfont[0];
       codeE.style.fontSize = editfont[1];
@@ -171,7 +171,7 @@ var scEdit = {
 
         //toggle scratchpad
         let ScratchPadSplitter = document.getElementById("ScratchPadSplitter"),
-        showPad = prefs.getBoolPref("editorscratchpad");
+        showPad = prefsSC.getBoolPref("editorscratchpad");
         if (scratchPad) {
           scratchPad.setAttribute("collapsed",showPad);
           if (showPad == true)
@@ -189,7 +189,7 @@ var scEdit = {
         }
 
         //add app name to title
-        let whichTitle = prefs.getIntPref("editorapptitle");
+        let whichTitle = prefsSC.getIntPref("editorapptitle");
         function setTitle(appName)
         {
           let nameEl = document.getElementById("name");
@@ -258,8 +258,8 @@ var scEdit = {
           }
         }
 
-        let newSearch = prefs.getBoolPref("newsearch"),
-        saveSearch = prefs.getBoolPref("searchtextsave");
+        let newSearch = prefsSC.getBoolPref("newsearch"),
+        saveSearch = prefsSC.getBoolPref("searchtextsave");
         //which search box to use
         let whichSearch;
         if (newSearch == true)
@@ -268,7 +268,7 @@ var scEdit = {
           whichSearch = document.getElementById("SearchBox");
         //saved text?
         if (saveSearch == true)
-          setSearchText(whichSearch,prefs.getCharPref("searchtext"));
+          setSearchText(whichSearch,prefsSC.getCharPref("searchtext"));
         else
           setSearchText(whichSearch,"");
       }
@@ -299,7 +299,7 @@ var scEdit = {
     let searchAreaOld = document.getElementById("SearchAreaOld"),
     findbar = document.getElementById("findbar");
 
-    if (prefs.getBoolPref("newsearch") == false) {
+    if (prefsSC.getBoolPref("newsearch") == false) {
       if (searchAreaOld)
         searchAreaOld.style.display = "-moz-box";
       if (findbar)
@@ -351,7 +351,7 @@ var scEdit = {
         if (itsalltext)
           itsalltext.style.display = "none";
       } else {//go by pref
-        if (prefs.getIntPref("editorwhich") == 1) {//ExternalEdit
+        if (prefsSC.getIntPref("editorwhich") == 1) {//ExternalEdit
           scEdit.externalEditButton(externalEdit);
           if (itsalltext)
             itsalltext.style.display = "none";
@@ -374,7 +374,7 @@ var scEdit = {
   {
     if (!button)
       return;
-    let fileName = prefs.getCharPref("editor");
+    let fileName = prefsSC.getCharPref("editor");
 
     //if no editor path then hide
     //if (fileName == "") {
@@ -422,7 +422,7 @@ var scEdit = {
         }
       };
       scEdit.intervalID.init (
-        observer,prefs.getIntPref("editortimeout"),
+        observer,prefsSC.getIntPref("editortimeout"),
         Ci.nsITimer.TYPE_REPEATING_SLACK
       );
     }
@@ -744,7 +744,7 @@ var scEdit = {
         importantText.value = scEdit.toolbarAutoimportant;
       } else {
         importantText.value = String.fromCharCode(
-          prefs.getCharPref("autoimportant.key")
+          prefsSC.getCharPref("autoimportant.key")
         );
       }
     }
@@ -768,7 +768,7 @@ var scEdit = {
         if (value)
           el.checked = value;
         else
-          el.checked = prefs.getBoolPref(pref);
+          el.checked = prefsSC.getBoolPref(pref);
       }
     }
     restoreCheck("wrap-lines",scEdit.toolbarWrapLines,"wrap_lines");
@@ -834,7 +834,7 @@ var scEdit = {
     if (!scEdit.customizeSheet)
       window.focus();
 
-    if (prefs.getBoolPref("newsearch") == false)
+    if (prefsSC.getBoolPref("newsearch") == false)
       return;
 
     //hide old search because we have to use it instead of findbar (findbar likes to randomly hide itself)
@@ -961,7 +961,7 @@ var scEdit = {
 
   updateTitlebar: function(name)
   {
-    let changeTitle = prefs.getIntPref("editorapptitle");
+    let changeTitle = prefsSC.getIntPref("editorapptitle");
 
     function title(window,appName)
     {
@@ -991,7 +991,7 @@ var scEdit = {
 
   populateInsertTextMenu: function()
   {
-    let textList = prefs.getCharPref("inserttext");
+    let textList = prefsSC.getCharPref("inserttext");
 
     //create insert text menu
     //if (textList == "") {
@@ -1004,7 +1004,7 @@ var scEdit = {
         Bottom_InsertText.style.display = "none";
       return;
     }
-    textList = textList.split(prefs
+    textList = textList.split(prefsSC
                               .getCharPref("inserttextsep"));
     let popup = document.getElementById("insertTextPopup");
     if (!popup)
@@ -1116,7 +1116,7 @@ var scEdit = {
     //save scroll position
     this.beforeChange();
     //don't ask to undo
-    if (prefs.getBoolPref("asktorevert") == false) {
+    if (prefsSC.getBoolPref("asktorevert") == false) {
       this.revertStyle(which);
       this.afterChange();
       return;
@@ -1130,7 +1130,7 @@ var scEdit = {
     if (result == false)
       return;
     if (check.value == true)
-      prefs.setBoolPref("asktorevert",false);
+      prefsSC.setBoolPref("asktorevert",false);
     this.revertStyle(which);
     //restore scroll position
     this.afterChange();
@@ -1420,13 +1420,13 @@ var scEdit = {
   //for auto!important checkbox
   changeImportantEnabled: function(checked)
   {
-    prefs.setBoolPref("autoimportant.enabled",checked);
+    prefsSC.setBoolPref("autoimportant.enabled",checked);
 
     if (!checked)
       return;
     this.insertImportantEvent = function(event)
     {
-      if (event.which == prefs.getCharPref("autoimportant.key")) {
+      if (event.which == prefsSC.getCharPref("autoimportant.key")) {
         event.preventDefault();
         scEdit.insertImportant();
       }
@@ -1442,7 +1442,7 @@ var scEdit = {
       alert(scCommon.getMsg("InvalidKey"));
       return;
     }
-    prefs.setCharPref("autoimportant.key",eventkey);
+    prefsSC.setCharPref("autoimportant.key",eventkey);
     codeE.removeEventListener("keypress",scEdit.insertImportantEvent,false);
     this.insertImportantEvent = function(event)
     {
@@ -1461,7 +1461,7 @@ var scEdit = {
     this.beforeChange();
 
     //insert Important
-    insertCodeAtCaret(prefs.getCharPref("autoimportant.text"));
+    insertCodeAtCaret(prefsSC.getCharPref("autoimportant.text"));
     //send right arrow to move caret to the end of inserted text
     let evt = document.createEvent("KeyboardEvent");
     evt.initKeyEvent("keypress",true,true,null,false,false,false,false,39,0);
@@ -1576,7 +1576,7 @@ var scEdit = {
     let searchToggle = document.getElementById("SearchToggle"),
     searchArea;
 
-    if (prefs.getBoolPref("newsearch") == true) {
+    if (prefsSC.getBoolPref("newsearch") == true) {
       searchArea = document.getElementById("findbar");
       if (!searchArea)//stylish 1.0.5 or less has no new search so we'll use old search
         searchArea = document.getElementById("SearchAreaOld");
@@ -1692,7 +1692,7 @@ var scEdit = {
     selected,
     styleCode;
 
-    if (prefs.getBoolPref("newsearch") == true && findbar)
+    if (prefsSC.getBoolPref("newsearch") == true && findbar)
       searchBox = findbar.getElement("findbar-textbox");
     else
       searchBox = document.getElementById("SearchBox");
@@ -1824,7 +1824,7 @@ var scEdit = {
   ToggleBars: function()
   {
     //get the list of bars to toggle
-    let barList = prefs.getCharPref("togglebars").split(",");
+    let barList = prefsSC.getCharPref("togglebars").split(",");
     //loop the bars
     for (let i = 0; i < barList.length; i++) {
       let name = document.getElementById(barList[i]);
@@ -2424,8 +2424,8 @@ var scEdit = {
   onExit: function()
   {
     //save search text
-    if (prefs.getBoolPref("searchtextsave") == true)
-      this.saveSearchText(prefs);
+    if (prefsSC.getBoolPref("searchtextsave") == true)
+      this.saveSearchText(prefsSC);
     //stop external file check
     this.checkFileStop();
     //stylish unload
@@ -2440,12 +2440,12 @@ var scEdit = {
     //save scratchpad view
     let scratchPad = document.getElementById("ScratchPad");
     if (scratchPad && scratchPad.getAttribute("collapsed") == "true")
-      prefs.setBoolPref("editorscratchpad",true);
+      prefsSC.setBoolPref("editorscratchpad",true);
     else
-      prefs.setBoolPref("editorscratchpad",false);
+      prefsSC.setBoolPref("editorscratchpad",false);
 
     //don't ask to save | not changed
-    if (prefs.getBoolPref("asktosave") == false ||
+    if (prefsSC.getBoolPref("asktosave") == false ||
                                       codeE.value == style.code) {
       return true;
     }

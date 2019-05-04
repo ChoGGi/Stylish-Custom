@@ -28,7 +28,8 @@ let codeE, nameE, tagsE, updateUrlE;
 //as, we'll only save if the code in the editor has changed. this will prevent
 //update notifications when there are none
 let initialCode;
-let prefs = scCommon.prefs;
+
+let prefsSC = scCommon.prefs;
 let prefsExt = scCommon.prefsExt;
 
 const CSSXULNS = "@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);";
@@ -594,7 +595,7 @@ const CSSHTMLNS = "@namespace url(http://www.w3.org/1999/xhtml);";
   {
     let findBar = document.getElementById("findbar");
     //if findbar gone or not using new search
-    let pref = prefs.getBoolPref("newsearch");
+    let pref = prefsSC.getBoolPref("newsearch");
     //don't add findbar unless using new search
     if (!findBar && pref == true) {
       let findTemp = document.createElement("findbar");

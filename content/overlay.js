@@ -9,14 +9,18 @@ Cu.import("resource://gre/modules/NetUtil.jsm");
 /* jshint ignore:end */
 //~ scCommon.dump("XXX");
 
-let prefs = scCommon.prefs;
+if (typeof (prefsSC) === "undefined")
+  var prefsSC = scCommon.prefs;
+//~ let prefsSC = scCommon.prefs;
 
 // since Mozilla removed support for "requires" in install.rdf, this checks if Stylish is enabled
-let service;
-if (scCommon.service) {
-  service = scCommon.service;
-} else {
-  service = scCommon.tryService();
+if (typeof (service) === "undefined") {
+	var service;
+	if (scCommon.service) {
+		service = scCommon.service;
+	} else {
+		service = scCommon.tryService();
+	}
 }
 
 var scOverlay = {
@@ -43,18 +47,18 @@ var scOverlay = {
     let array = prefsOld.getChildList("",{});
     if (array.length > 0) {
       for (let i = 0; i < array.length; i++) {
-        let prefType = prefs.getPrefType(array[i]);
+        let prefType = prefsSC.getPrefType(array[i]);
         switch (prefType) {
           case 32://char
-            prefs.setCharPref(array[i],prefsOld.getCharPref(array[i]))
+            prefsSC.setCharPref(array[i],prefsOld.getCharPref(array[i]))
             prefsOld.clearUserPref(array[i])
           break;
           case 64://int
-            prefs.setIntPref(array[i],prefsOld.getIntPref(array[i]))
+            prefsSC.setIntPref(array[i],prefsOld.getIntPref(array[i]))
             prefsOld.clearUserPref(array[i])
           break;
           case 128://bool
-            prefs.setBoolPref(array[i],prefsOld.getBoolPref(array[i]))
+            prefsSC.setBoolPref(array[i],prefsOld.getBoolPref(array[i]))
             prefsOld.clearUserPref(array[i])
           break;
         }
@@ -82,7 +86,7 @@ var scOverlay = {
       }
     );
 
-    if (prefs.getBoolPref("removecss") == true) {
+    if (prefsSC.getBoolPref("removecss") == true) {
       //remove stale css files
       let file,files = Services.dirsvc.get("TmpD",Ci.nsIFile).directoryEntries;
 
@@ -100,18 +104,18 @@ var scOverlay = {
     }
 
     //display tools menupopup
-    if (prefs.getBoolPref("toolbar") == true)
+    if (prefsSC.getBoolPref("toolbar") == true)
       dBox("stylish-toolmenu",false);
 
     //hide/show menuitems
-    if (prefs.getIntPref("eximportlocation") == 1) {
+    if (prefsSC.getIntPref("eximportlocation") == 1) {
       dBox("StylishExport",false);
       dBox("StylishImport",false);
       dBox("StylishExportMain",true);
       dBox("StylishImportMain",true);
     }
 
-    if (prefs.getIntPref("stylemenulocation") == 1) {
+    if (prefsSC.getIntPref("stylemenulocation") == 1) {
       dBox("StylishAppStyles",false);
       dBox("StylishEnabledStyles",false);
       dBox("StylishDisabledStyles",false);
@@ -120,19 +124,19 @@ var scOverlay = {
       dBox("StylishDisabledStylesMain",true);
     }
 
-    if (prefs.getIntPref("infolocation") == 1) {
+    if (prefsSC.getIntPref("infolocation") == 1) {
       dBox("StylishInfo",false);
       dBox("StylishInfoMain",true);
     }
 
-    if (prefs.getIntPref("newstylelocation") == 1) {
+    if (prefsSC.getIntPref("newstylelocation") == 1) {
       dBox("StylishNewStyle",false);
       dBox("StylishNewStyleMain",true);
     }
 
     //load a style sheet to fix the style for nasa night launch / ft deepdark
     let selSkin = Services.prefs.getCharPref("general.skins.selectedSkin");
-    let darkStyle = prefs.getBoolPref("dark")
+    let darkStyle = prefsSC.getBoolPref("dark")
     if (darkStyle == true || selSkin == "nasanightlaunch" ||
                             selSkin == "nightlaunchnext" ||
                             selSkin == "ftdeepdark") {
@@ -162,17 +166,17 @@ var scOverlay = {
         scOverlay.styleSheetsMenu();
       },false);
     }
-    if (prefs.getBoolPref("stylesheetmenuitem") == false)
+    if (prefsSC.getBoolPref("stylesheetmenuitem") == false)
       document.getElementById("StylishGetStyleSheets").hidden = true;
 
     //set the key for reloading styles
     let relStyles = document.getElementById("key_stylishCustom-reloadStyles"),
-    reloadKey = prefs.getCharPref("reloadstyleskey");
+    reloadKey = prefsSC.getCharPref("reloadstyleskey");
     if (relStyles && reloadKey != "")
       relStyles.setAttribute("key",reloadKey);
 
     //should we hide the icons
-    if (prefs.getBoolPref("showicons") == false) {
+    if (prefsSC.getBoolPref("showicons") == false) {
       scCommon.applyStyle(
         "chrome://stylish-custom/skin/iconsDisabled.css",
         true,
@@ -181,7 +185,7 @@ var scOverlay = {
     }
 
     //replace S menuitems for SC menuitems
-    if (prefs.getBoolPref("stylemenuoverride") == true)
+    if (prefsSC.getBoolPref("stylemenuoverride") == true)
       scCommon.toggleStyleMenuOverride(true,document);
 
     //for toggling styles
@@ -362,7 +366,7 @@ var scOverlay = {
 
   onPageLoadE10s: function(message)
   {
-    let t = prefs.getIntPref("styletoggle");
+    let t = prefsSC.getIntPref("styletoggle");
     if (t == 0 || t == 2) {
       scOverlay.onPageLoadTask({href: message.data});
     }
@@ -373,7 +377,7 @@ var scOverlay = {
     if (typeof(gBrowser) !== "undefined")//Thunderbird
       return;
 
-    let t = prefs.getIntPref("styletoggle");
+    let t = prefsSC.getIntPref("styletoggle");
     if (t == 0 ||
         t == 1 && event.type == "TabSelect" ||
         t == 2 && event.type == "DOMContentLoaded") {
@@ -450,7 +454,7 @@ var scOverlay = {
   //used to force styles with @import to check the css file
   reloadStyles: function()
   {
-    let list = prefs.getCharPref("reloadstyles");
+    let list = prefsSC.getCharPref("reloadstyles");
     if (list == "") {
       service.list(service.REGISTER_STYLE_ON_CHANGE,{}).forEach(
         function(style) {
@@ -630,7 +634,7 @@ var scOverlay = {
   {
     let i;
     //change rightclick action
-    if (prefs.getIntPref("stylemenuitem") == 1) {
+    if (prefsSC.getIntPref("stylemenuitem") == 1) {
 
       let styleList = document.getElementById(
         scCommon.name.concat("-popup")
@@ -656,17 +660,17 @@ var scOverlay = {
     for (i = 0; i < children.length; i++) {
       let styleType = children[i].getAttribute("style-type");
 
-      if (prefs.getBoolPref("showappstyles") == false &&
+      if (prefsSC.getBoolPref("showappstyles") == false &&
           styleType.indexOf("app") != -1) {
         children[i].setAttribute("hidden",true);
       } else if (styleType.indexOf("global site") != -1) {
-        children[i].style.color = prefs
+        children[i].style.color = prefsSC
                                   .getCharPref("globalsitestyle");
       } else if (styleType.indexOf("global") != -1) {
-        children[i].style.color = prefs
+        children[i].style.color = prefsSC
                                   .getCharPref("globalstyle");
       } else if (styleType.indexOf("site") != -1) {
-        children[i].style.color = prefs
+        children[i].style.color = prefsSC
                                   .getCharPref("sitestyle");
       }
       //add event listener here?
